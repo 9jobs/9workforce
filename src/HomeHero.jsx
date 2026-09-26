@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useNavigate, useSearchParams} from 'react-router-dom';
-import {ArrowRight, ChevronDown, Search, ShieldCheck, Users, MapPin} from 'lucide-react';
+import {ArrowRight, ChevronDown, Search, MapPin} from 'lucide-react';
 import './home-hero.css';
 
 const industries = ['Construction', 'Traffic Management', 'Civil Construction', 'Warehousing', 'Trade Assistants', 'General Labour'];
@@ -57,8 +57,6 @@ function HeroArtwork() {
     <svg className="home-hero-orbit home-hero-orbit-back" viewBox="0 0 620 500" aria-hidden="true"><path d="M 466 202 C 591 199 614 245 545 290 C 459 345 301 394 166 399 C 61 403 23 379 54 335 C 76 302 127 278 178 257"/></svg>
     <img className="home-hero-worker" src="/assets/hero-worker-transparent.png" alt="Construction worker wearing a hard hat and high-visibility workwear" width="1536" height="1024" fetchPriority="high"/>
     <svg className="home-hero-orbit home-hero-orbit-front" viewBox="0 0 620 500" aria-hidden="true"><defs><radialGradient id="hero-orbit-glow"><stop stopColor="#ffb45b"/><stop offset=".46" stopColor="#ff8e38"/><stop offset=".7" stopColor="#ffbc79"/><stop offset="1" stopColor="#fff"/></radialGradient></defs><path d="M 54 335 C 23 379 61 403 166 399 C 301 394 459 345 545 290"/><circle cx="166" cy="399" r="11" fill="url(#hero-orbit-glow)"/><circle cx="545" cy="290" r="6" fill="url(#hero-orbit-glow)"/></svg>
-    <div className="home-hero-card home-hero-skilled"><span className="home-hero-card-icon"><Users size={23} aria-hidden="true"/></span><span><strong>Skilled<br/>Workforce</strong><small>Ready for Your Projects</small></span></div>
-    <div className="home-hero-card home-hero-safety"><span className="home-hero-card-icon"><ShieldCheck size={26} aria-hidden="true"/></span><span><strong>Safety First</strong><small>Compliant &amp; Reliable</small></span></div>
   </div>;
 }
 
