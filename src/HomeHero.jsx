@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useNavigate, useSearchParams} from 'react-router-dom';
-import {ArrowRight, ChevronDown, Search, MapPin} from 'lucide-react';
+import {ArrowRight, ChevronDown, Search, MapPin, UserRound, Building2, Construction, TrafficCone, Shovel, Forklift, Hammer, Users} from 'lucide-react';
 import './home-hero.css';
 
 const industries = ['Construction', 'Traffic Management', 'Civil Construction', 'Warehousing', 'Trade Assistants', 'General Labour'];
@@ -33,15 +33,15 @@ function HeroSearch() {
 
   return <div className="home-search">
     <div className="home-search-tabs" role="tablist" aria-label="Find work or contact our team" onKeyDown={handleTabKey}>
-      <button id="hero-seeker-tab" type="button" role="tab" aria-selected={audience === 'seeker'} aria-controls="hero-seeker-panel" tabIndex={audience === 'seeker' ? 0 : -1} onClick={() => setAudience('seeker')}>I’m a Job Seeker</button>
-      <button id="hero-employer-tab" type="button" role="tab" aria-selected={audience === 'employer'} aria-controls="hero-employer-panel" tabIndex={audience === 'employer' ? 0 : -1} onClick={() => setAudience('employer')}>I’m an Employer</button>
+      <button id="hero-seeker-tab" type="button" role="tab" aria-selected={audience === 'seeker'} aria-controls="hero-seeker-panel" tabIndex={audience === 'seeker' ? 0 : -1} onClick={() => setAudience('seeker')}><UserRound size={24} aria-hidden="true"/><span>I’m a Job Seeker</span></button>
+      <button id="hero-employer-tab" type="button" role="tab" aria-selected={audience === 'employer'} aria-controls="hero-employer-panel" tabIndex={audience === 'employer' ? 0 : -1} onClick={() => setAudience('employer')}><Building2 size={24} aria-hidden="true"/><span>I’m an Employer</span></button>
     </div>
     <div className="home-search-panel" id="hero-seeker-panel" role="tabpanel" aria-labelledby="hero-seeker-tab" hidden={audience !== 'seeker'}>
       <form className="home-search-form" role="search" aria-label="Search work opportunities" onSubmit={submitSearch}>
         <label className="home-search-keyword"><span className="hero-sr-only">Job title or keyword</span><Search size={24} aria-hidden="true"/><input name="query" placeholder="Search job title or keyword" type="search" autoComplete="off"/></label>
-        <label className="home-search-select"><span className="hero-sr-only">Industry</span><select name="industry" defaultValue=""><option value="">All Industries</option>{industries.map(value => <option key={value}>{value}</option>)}</select><ChevronDown size={18} aria-hidden="true"/></label>
-        <label className="home-search-select"><span className="hero-sr-only">Location</span><select name="location" defaultValue=""><option value="">All Locations</option>{locations.map(value => <option key={value}>{value}</option>)}</select><ChevronDown size={18} aria-hidden="true"/></label>
-        <button className="home-search-submit" type="submit"><span className="home-search-button-label">Search Jobs <Search size={24} aria-hidden="true"/></span><span className="btn-scroll-chevron" aria-hidden="true"><ChevronDown size={17}/><ChevronDown size={17}/></span></button>
+        <label className="home-search-select"><span className="hero-sr-only">Industry</span><Building2 className="home-search-field-icon" size={24} aria-hidden="true"/><select name="industry" defaultValue=""><option value="">All Industries</option>{industries.map(value => <option key={value}>{value}</option>)}</select><ChevronDown size={18} aria-hidden="true"/></label>
+        <label className="home-search-select"><span className="hero-sr-only">Location</span><MapPin className="home-search-field-icon" size={24} aria-hidden="true"/><select name="location" defaultValue=""><option value="">All Locations</option>{locations.map(value => <option key={value}>{value}</option>)}</select><ChevronDown size={18} aria-hidden="true"/></label>
+        <button className="home-search-submit" type="submit"><Search size={24} aria-hidden="true"/><span>Search Jobs</span></button>
       </form>
     </div>
     <div className="home-search-panel home-employer-panel" id="hero-employer-panel" role="tabpanel" aria-labelledby="hero-employer-tab" hidden={audience !== 'employer'}>
@@ -53,25 +53,25 @@ function HeroSearch() {
 
 function HeroArtwork() {
   return <div className="home-hero-artwork">
-    <div className="home-hero-disc" aria-hidden="true"/>
-    <svg className="home-hero-orbit home-hero-orbit-back" viewBox="0 0 620 500" aria-hidden="true"><path d="M 466 202 C 591 199 614 245 545 290 C 459 345 301 394 166 399 C 61 403 23 379 54 335 C 76 302 127 278 178 257"/></svg>
     <img className="home-hero-worker" src="/assets/hero-worker-transparent.png" alt="Construction worker wearing a hard hat and high-visibility workwear" width="1536" height="1024" fetchPriority="high"/>
-    <svg className="home-hero-orbit home-hero-orbit-front" viewBox="0 0 620 500" aria-hidden="true"><defs><radialGradient id="hero-orbit-glow"><stop stopColor="#ffb45b"/><stop offset=".46" stopColor="#ff8e38"/><stop offset=".7" stopColor="#ffbc79"/><stop offset="1" stopColor="#fff"/></radialGradient></defs><path d="M 54 335 C 23 379 61 403 166 399 C 301 394 459 345 545 290"/><circle cx="166" cy="399" r="11" fill="url(#hero-orbit-glow)"/><circle cx="545" cy="290" r="6" fill="url(#hero-orbit-glow)"/></svg>
   </div>;
 }
 
 export default function HomeHero() {
   return <section className="homepage-hero" aria-labelledby="homepage-heading">
     <div className="home-hero-site" aria-hidden="true"/>
-    <div className="home-hero-dots" aria-hidden="true"/>
     <div className="homepage-hero-inner">
       <div className="homepage-hero-copy">
-        <h1 id="homepage-heading">Building a Reliable<br/>Workforce<br/>for Our Projects.</h1>
+        <span className="home-hero-eyebrow">Labour Hire Solutions</span>
+        <h1 id="homepage-heading">Skilled People<br/>for <em>Stronger Projects</em></h1>
         <p>We recruit reliable and work-ready people for construction, civil construction, traffic management, warehousing, and other operational roles across Victoria.</p>
         <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/find-work">Find Work <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/find-work#register">Register Your Details <ArrowRight size={20} aria-hidden="true"/></Link></div>
       </div>
       <HeroArtwork/>
       <HeroSearch/>
+      <ul className="home-hero-sectors" aria-label="Our work areas">
+        {[[Construction, 'Construction'], [TrafficCone, 'Traffic Management'], [Shovel, 'Civil Construction'], [Forklift, 'Warehousing'], [Hammer, 'Labour Hire'], [Users, 'Other Operational Roles']].map(([Icon, label]) => <li key={label}><Icon aria-hidden="true"/><span>{label}</span></li>)}
+      </ul>
     </div>
   </section>;
 }
