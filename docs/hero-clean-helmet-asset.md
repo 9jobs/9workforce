@@ -1,0 +1,9 @@
+# Clean helmet hero asset
+
+Created with the built-in image generator from the user-supplied reference images. No API key or deployment was used. The output is a photographic backdrop without the reference's webpage text, buttons, or search UI; the website renders those as real HTML controls.
+
+Asset: `public/assets/hero-clean-helmet-warehouse.png` (1983 × 793).
+
+## Generation prompt
+
+Use case: precise-object-edit. Asset type: clean photographic website hero background, NOT a screenshot or UI mockup. Input 1 is the exact desired scene and edit target. Input 2 is a detailed reference of the same desired helmet to preserve. Edit Input 1: remove ONLY all overlaid webpage text on the left ('LABOUR HIRE SOLUTIONS', headline, paragraph), both Find Work and Learn More button graphics, and the white rounded bar sliver at the bottom. Reconstruct the obscured dark warehouse photo naturally. Preserve the smooth clean white helmet exactly as pictured: same 3/4 side view with long brim pointing left, curved ribs, small navy stacked '9WORK' / 'FORCE' mark on the front-left, black suspension visible underneath the right rim. Do not make it dirty or front-facing, and do not enlarge or redesign it. Preserve the light gray workbench, rolled plan at right, soft blurred industrial background, green/yellow objects and cool dark blue open space at left. Then extend the image upward with matching warehouse background by about 120 pixels and below by about 60 pixels, so the final wide composition has space for navigation above. Keep helmet at right, occupying about x=64%-96% and y=33%-90% of final frame, bottom resting on bench. Output a single wide photo about 2.5:1 aspect ratio, preferably 1920x768. No UI, no buttons, no headings, no search bar, no borders, no watermarks. The only text should be the existing navy 9WORK FORCE print on the helmet. Keep photo realistic, clean and softly lit as the reference. Do not use the old dirty construction helmet.

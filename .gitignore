@@ -7,3 +7,5 @@ scratch/
 .env.*
 !.env.example
 data/
+
+.vercel

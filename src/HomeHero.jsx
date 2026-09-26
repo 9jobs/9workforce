@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useNavigate, useSearchParams} from 'react-router-dom';
-import {ArrowRight, ChevronDown, Search, MapPin, UserRound, Building2, Construction, TrafficCone, Shovel, Forklift, Hammer, Users} from 'lucide-react';
+import {ArrowRight, ChevronDown, Search, MapPin, UserRound, Building2, HardHat, TrafficCone, Forklift, Hammer, Users} from 'lucide-react';
 import './home-hero.css';
 
 const industries = ['Construction', 'Traffic Management', 'Civil Construction', 'Warehousing', 'Trade Assistants', 'General Labour'];
@@ -51,26 +51,19 @@ function HeroSearch() {
   </div>;
 }
 
-function HeroArtwork() {
-  return <div className="home-hero-artwork">
-    <img className="home-hero-worker" src="/assets/hero-worker-transparent.png" alt="Construction worker wearing a hard hat and high-visibility workwear" width="1536" height="1024" fetchPriority="high"/>
-  </div>;
-}
-
 export default function HomeHero() {
   return <section className="homepage-hero" aria-labelledby="homepage-heading">
-    <div className="home-hero-site" aria-hidden="true"/>
+    <div className="home-hero-site" aria-hidden="true"><img src="/assets/hero-clean-helmet-warehouse.png" alt="" width="1983" height="793" fetchPriority="high"/></div>
     <div className="homepage-hero-inner">
       <div className="homepage-hero-copy">
         <span className="home-hero-eyebrow">Labour Hire Solutions</span>
-        <h1 id="homepage-heading">Skilled People<br/>for <em>Stronger Projects</em></h1>
-        <p>We recruit reliable and work-ready people for construction, civil construction, traffic management, warehousing, and other operational roles across Victoria.</p>
-        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/find-work">Find Work <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/find-work#register">Register Your Details <ArrowRight size={20} aria-hidden="true"/></Link></div>
+        <h1 id="homepage-heading">Real Opportunities.<br/>Lasting <em>Careers.</em></h1>
+        <p>We connect skilled and reliable workers with leading projects across Victoria — from construction to warehousing and beyond.</p>
+        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/find-work">Find Work <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/who-we-are">Learn More</Link></div>
       </div>
-      <HeroArtwork/>
       <HeroSearch/>
       <ul className="home-hero-sectors" aria-label="Our work areas">
-        {[[Construction, 'Construction'], [TrafficCone, 'Traffic Management'], [Shovel, 'Civil Construction'], [Forklift, 'Warehousing'], [Hammer, 'Labour Hire'], [Users, 'Other Operational Roles']].map(([Icon, label]) => <li key={label}><Icon aria-hidden="true"/><span>{label}</span></li>)}
+        {[[HardHat, 'Construction'], [TrafficCone, 'Traffic Management'], [Building2, 'Civil Construction'], [Forklift, 'Warehousing'], [Hammer, 'Labour Hire'], [Users, 'Other Operational Roles']].map(([Icon, label]) => <li key={label}><Icon aria-hidden="true"/><span>{label}</span></li>)}
       </ul>
     </div>
   </section>;
