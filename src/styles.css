@@ -111,6 +111,28 @@ h1,h2,h3,h4,h1 em,h2 em,h3 em,h4 em{color:#30497D !important;font-weight:800}
   .compliance span{flex-basis:100%}
 }
 
+/* 9Work Force footer */
+footer{background:#30497D;color:#dce6f8;border-top:0;padding-top:54px}
+.footer-grid{grid-template-columns:1.35fr 1fr 1.15fr;gap:72px;max-width:1184px;margin:0 auto;padding-bottom:46px}
+.footer-logo{display:inline-flex;align-items:center;margin-bottom:22px}
+.footer-logo-art{display:block;width:178px;height:50px}
+.footer-about>p{max-width:350px;margin:0;color:#dce6f8;line-height:1.55}
+.footer-grid h4{margin:0 0 18px;color:#fff;font:800 15px/1.2 'Plus Jakarta Sans',sans-serif;text-transform:uppercase;letter-spacing:.3px}
+.footer-links{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.footer-links a,.footer-contact a,.footer-contact span{display:flex;align-items:center;gap:10px;color:#dce6f8;font-size:14px;line-height:1.4}
+.footer-links a:hover,.footer-contact a:hover{color:#fff}
+.footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.footer-contact svg{flex:0 0 auto;color:#fff}
+.footer-bottom{max-width:1184px;margin:0 auto;padding-top:18px}
+.copyright{padding-top:22px;color:#aebfdb}
+@media(max-width:780px){
+  .footer-grid{grid-template-columns:1fr;gap:30px;padding-bottom:34px}
+  .footer-about>p{max-width:420px}
+  .footer-links{gap:10px}
+  .footer-bottom{display:block}
+  .footer-bottom span{display:block;margin-top:12px}
+}
+
 /* ==========================================================================
    Hero Section - Pixel-Perfect Alignment with Reference Mockup
    ========================================================================== */
@@ -755,3 +777,25 @@ body{color:#30497D}
 .brand span,.live b,.metrics b,.solution-top,.solution a,.labour-cards a,.labour-cards li,.story-points span,.approach-line b,.industry-editorial a,.flexible-list span,.work-area-grid b,.timeline-row span{color:#30497D}
 .steps article>b,.compliance svg{background:#30497D}
 .find-work-footer-cta:after{background-color:#30497D}
+
+/* Keep the compliance heading and description on separate, readable rows. */
+.compliance>div{grid-template-rows:auto auto;row-gap:6px;align-content:center}
+.compliance b{line-height:1.25}
+.compliance>div>span{line-height:1.25}
+
+/* Keep the footer headings readable over the blue footer surface. */
+footer .footer-grid h4,
+footer .footer-grid h4:first-child{color:#fff !important;margin:0 0 18px;font:800 15px/1.2 'Plus Jakarta Sans',sans-serif;text-transform:uppercase;letter-spacing:.3px}
+footer .footer-grid{grid-template-columns:1.35fr 1fr 1.15fr;gap:72px;max-width:1184px;margin:0 auto;padding-bottom:46px}
+footer .footer-links{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+footer .footer-links a,footer .footer-contact a,footer .footer-contact span{display:flex;align-items:center;gap:10px;color:#dce6f8;font-size:14px;line-height:1.4}
+footer .footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+footer .footer-logo-art{display:block;width:178px;height:50px}
+@media(max-width:780px){footer .footer-grid{grid-template-columns:1fr;gap:30px;padding-bottom:34px}}
+footer .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1184px;margin:0 auto;padding:18px 0 0;border-top:1px solid rgba(255,255,255,.14);font-size:12px;color:#dce6f8}
+footer .footer-copyright,footer .footer-legal{background:none!important;padding:0!important;color:#dce6f8!important;font-size:12px}
+footer .footer-legal{white-space:nowrap}
+@media(max-width:780px){footer .footer-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:16px}footer .footer-legal{white-space:normal}}
+footer .footer-contact-cta{display:inline-flex;align-items:center;gap:4px;margin-top:4px;color:#fff;font-size:14px;line-height:1.4;text-decoration:none}
+footer .footer-contact-cta strong{color:#ffb14a;text-decoration:underline;text-underline-offset:2px}
+footer .footer-contact-cta:hover strong{color:#ffd08a}
