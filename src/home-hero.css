@@ -178,3 +178,14 @@
   .home-search-results>h1 { font-size:30px; }
   .home-search-result-list article { flex-direction:column; padding:20px; }
 }
+
+/* Compact laptop navigation: move secondary navigation into the existing menu
+   before the links can overlap the header actions. */
+@media (min-width:861px) and (max-width:1280px) {
+  .site-header.shared-nav .header-inner { grid-template-columns:minmax(0,1fr) max-content; }
+  .site-header.shared-nav nav { position:absolute;top:90px;left:12px;right:12px;width:auto;justify-self:stretch;height:auto;display:none;margin:0;max-width:none;white-space:normal;padding:12px;border-radius:12px;box-shadow:0 10px 30px rgba(15,29,56,.2);background:#fff;border:1px solid rgba(48,73,125,.12); }
+  .site-header.shared-nav nav.open { display:flex;flex-direction:column;align-items:stretch; }
+  .site-header.shared-nav nav.open a,.site-header.shared-nav nav.open a.active { color:#30497D!important; }
+  .site-header.shared-nav .header-actions .phone { display:none; }
+  .site-header.shared-nav .menu-btn { display:grid;place-items:center; }
+}

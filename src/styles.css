@@ -714,13 +714,13 @@ p{ text-align:justify; text-justify:inter-word; }
 .find-work-footer-cta .btn{min-width:192px}
 @media(max-width:780px){.find-work-footer-cta{margin:0 16px;padding:34px 20px 32px;border-radius:12px 12px 0 0}.find-work-footer-cta h2{font-size:30px}}
 .find-work-footer-cta{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;align-items:center;justify-content:stretch;gap:18px 42px;min-height:380px;padding:52px 44px;border-radius:14px 14px 0 0;border-bottom:4px solid var(--orange);text-align:left;overflow:hidden;background:#30497D;box-shadow:none}
-.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:380px;margin:-52px -44px -52px 0;background:url('/assets/hero-worker-cutout.png') center bottom / contain no-repeat}
+.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:380px;margin:-52px -44px -52px 0;background:url('/assets/site-sunset.png') center bottom / cover no-repeat}
 .find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:end;max-width:470px;color:#fff;font-size:38px;line-height:1.16;text-align:left}
 .find-work-footer-cta h2 em{color:#58d6c2}
 .find-work-footer-cta .btn{grid-column:1;grid-row:2;justify-self:start;min-width:150px}
 @media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:auto 230px;min-height:0;margin:0 16px;padding:32px 24px 0;border-radius:12px 12px 0 0;gap:26px}.find-work-footer-cta:after{grid-column:1;grid-row:2;min-height:230px;margin:0 -24px;background-position:center bottom}.find-work-footer-cta h2{grid-column:1;grid-row:1;font-size:30px}.find-work-footer-cta .btn{grid-column:1;grid-row:1;justify-self:start;margin-top:124px}}
 .find-work-footer-cta{max-width:none;width:100%;min-height:506px;margin:0;border-radius:0;background:#30497D;display:grid;grid-template-columns:50% 50%;grid-template-rows:1fr 52px;padding:0;gap:0;position:relative;overflow:hidden;border-bottom:4px solid var(--orange);box-shadow:none}
-.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1;min-height:0;margin:0;background:linear-gradient(90deg,#30497D 0%,rgba(48,73,125,.35) 13%,rgba(48,73,125,0) 34%),url('/assets/about-hero.jpeg') center/cover no-repeat;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}
+.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1;min-height:0;margin:0;background:linear-gradient(90deg,#30497D 0%,rgba(48,73,125,.35) 13%,rgba(48,73,125,0) 34%),url('/assets/site-sunset.png') center/cover no-repeat;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}
 .find-work-footer-cta h2{grid-column:1;grid-row:1;margin:auto 0 auto 31%;max-width:500px;color:transparent;font-size:0;line-height:1.16;letter-spacing:-.5px;text-align:left;font-weight:500}
 .find-work-footer-cta h2:before{content:'9Work Force\A\ARegister with 9Work Force\Ato find, apply & track\Ayour next Good Move\Ausing myWork Force.';display:block;white-space:pre-line;color:#fff;font-size:29px;line-height:1.16;margin-bottom:25px;letter-spacing:-.5px;font-weight:500}
 .find-work-footer-cta h2 em{color:#58d6c2}
@@ -729,7 +729,7 @@ p{ text-align:justify; text-justify:inter-word; }
 .find-work-footer-cta .btn:after{content:none}
 .find-work-footer-cta .btn{font-size:0}.find-work-footer-cta .btn:before{content:'Register Now';font-size:11px}
 .find-work-footer-cta:before{content:'9Work Force                 Workforce Operations & Recruitment Enquiries                                      Back to top  ↑';position:absolute;z-index:2;left:31%;right:2%;bottom:0;height:52px;display:flex;align-items:center;white-space:pre;color:#fff;font:600 10px Inter,Arial,sans-serif}
-@media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:390px 52px;min-height:442px}.find-work-footer-cta:after{grid-column:1;grid-row:1;clip-path:none;background:linear-gradient(0deg,#30497D 0%,rgba(48,73,125,0) 38%),url('/assets/about-hero.jpeg') center/cover no-repeat}.find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;margin:32px 24px 0;max-width:310px;font-size:0}.find-work-footer-cta h2:before{font-size:26px;margin-bottom:18px}.find-work-footer-cta h2:after{margin-top:16px}.find-work-footer-cta .btn{grid-column:1;grid-row:1;align-self:end;justify-self:start;margin:0 0 28px 24px}.find-work-footer-cta:before{left:24px;right:24px;bottom:0;font-size:8px;content:'9Work Force                         Back to top  ↑'}}
+@media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:390px 52px;min-height:442px}.find-work-footer-cta:after{grid-column:1;grid-row:1;clip-path:none;background:linear-gradient(0deg,#30497D 0%,rgba(48,73,125,0) 38%),url('/assets/site-sunset.png') center/cover no-repeat}.find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;margin:32px 24px 0;max-width:310px;font-size:0}.find-work-footer-cta h2:before{font-size:26px;margin-bottom:18px}.find-work-footer-cta h2:after{margin-top:16px}.find-work-footer-cta .btn{grid-column:1;grid-row:1;align-self:end;justify-self:start;margin:0 0 28px 24px}.find-work-footer-cta:before{left:24px;right:24px;bottom:0;font-size:8px;content:'9Work Force                         Back to top  ↑'}}
 .find-work-footer-cta:before{display:none}
 .find-work-footer-cta .btn{position:absolute;left:15.5%;top:405px;margin:0;z-index:3}
 @media(max-width:780px){.find-work-footer-cta .btn{left:24px;top:370px}}
@@ -791,6 +791,28 @@ footer .footer-links{display:flex;flex-direction:column;align-items:flex-start;g
 footer .footer-links a,footer .footer-contact a,footer .footer-contact span{display:flex;align-items:center;gap:10px;color:#dce6f8;font-size:14px;line-height:1.4}
 footer .footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 footer .footer-logo-art{display:block;width:178px;height:50px}
+footer .footer-logo-image{display:block;width:210px;height:auto;max-width:100%;filter:brightness(0) invert(1)}
+footer .footer-social-links a svg{flex:0 0 auto;color:#fff}
+footer .footer-social-icon{display:block;flex:0 0 17px;width:17px;height:17px;color:#fff;font-family:Arial,sans-serif;font-weight:800;line-height:1}
+footer .footer-social-icon.linkedin{border-radius:2px;background:#fff;color:#30497D;font-size:12px}
+
+/* Keep the full navigation clear at compact laptop widths. */
+@media (min-width:1201px) and (max-width:1320px){
+  .site-header.shared-nav nav{left:0}
+  .site-header.shared-nav nav a,.site-header.shared-nav nav a.active{font-size:11px;padding-left:6px;padding-right:6px}
+  .site-header.shared-nav .header-inner{grid-template-columns:180px minmax(0,1fr) 282px;column-gap:10px}
+  .site-header.shared-nav .header-actions .phone,.site-header.shared-nav .header-actions .btn.small{min-width:118px;padding-left:10px;padding-right:10px}
+}
+
+/* Menu links need high contrast on the mobile navigation surface. */
+@media (max-width:1200px){
+  .site-header.shared-nav nav.open a{color:#fff!important}
+  .site-header.shared-nav nav.open a.active{color:#fff!important}
+}
+
+@media (max-width:520px){
+  footer .footer-logo-image{width:190px}
+}
 @media(max-width:780px){footer .footer-grid{grid-template-columns:1fr;gap:30px;padding-bottom:34px}}
 footer .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1184px;margin:0 auto;padding:18px 0 0;border-top:1px solid rgba(255,255,255,.14);font-size:12px;color:#dce6f8}
 footer .footer-copyright,footer .footer-legal{background:none!important;padding:0!important;color:#dce6f8!important;font-size:12px}
@@ -799,3 +821,13 @@ footer .footer-legal{white-space:nowrap}
 footer .footer-contact-cta{display:inline-flex;align-items:center;gap:4px;margin-top:4px;color:#fff;font-size:14px;line-height:1.4;text-decoration:none}
 footer .footer-contact-cta strong{color:#ffb14a;text-decoration:underline;text-underline-offset:2px}
 footer .footer-contact-cta:hover strong{color:#ffd08a}
+
+/* Keep dark-surface metrics and CTA copy crisp and readable. */
+.metrics{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.18)}
+.metrics b{color:#fff!important}
+.metrics span{color:#dce6f8!important}
+.request-section h2{color:#fff!important}
+.request-section h2 em{color:#ffb14a!important}
+.request-section p{color:#e5edff!important}
+.employer-tiles article:after{background:linear-gradient(0deg,rgba(15,29,56,.9),rgba(15,29,56,.14) 72%)!important}
+.employer-tiles h3,.employer-tiles p{color:#fff!important;position:relative;z-index:1}
