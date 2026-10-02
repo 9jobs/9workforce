@@ -19,7 +19,7 @@
 .homepage-hero-copy { position:relative; z-index:2; width:56%;margin-left:0;min-height:calc(var(--hero-cover-height) - var(--hero-copy-top) - 68px);padding:0 0 40px; }
 .home-hero-eyebrow { display:block; margin-bottom:14px; color:#dce4e9; font-size:14px; font-weight:600; letter-spacing:2.8px; text-transform:uppercase; }
 .homepage-hero-copy h1 { margin:0; color:#fff !important; font:700 clamp(42px,3.9vw,74px)/1.08 Inter,Arial,sans-serif; letter-spacing:-1.5px; }
-.homepage-hero-copy h1 em { color:var(--hero-orange) !important; font-style:normal; }
+.homepage-hero-copy h1 em { color:inherit !important; font-style:normal; }
 .homepage-hero-copy p { max-width:540px; margin:18px 0 28px; color:#dce4e9; font-size:clamp(16px,1.2vw,21px); line-height:1.35; text-align:left; text-justify:auto; }
 .homepage-hero-actions { display:flex; align-items:center; gap:18px; }
 .homepage-hero-actions a { display:inline-flex; align-items:center; justify-content:center; gap:16px; min-width:170px;min-height:52px; padding:14px 28px; border-radius:8px; font:700 15px 'Plus Jakarta Sans',sans-serif; transition:transform .18s,box-shadow .18s; }
@@ -188,4 +188,93 @@
   .site-header.shared-nav nav.open a,.site-header.shared-nav nav.open a.active { color:#30497D!important; }
   .site-header.shared-nav .header-actions .phone { display:none; }
   .site-header.shared-nav .menu-btn { display:grid;place-items:center; }
+}
+
+/* Responsive collision fixes: preserve the existing composition while keeping
+   controls in their own flow at every viewport width. */
+.home-search { margin-top:0; }
+
+@media (min-width:1201px) {
+  .site-header.shared-nav nav { left:0; }
+}
+
+@media (min-width:1201px) and (max-width:1500px) {
+  .site-header.shared-nav .header-inner {
+    grid-template-columns:minmax(180px,200px) minmax(0,1fr) max-content;
+    column-gap:12px;
+  }
+  .site-header.shared-nav nav { width:100%; gap:0; }
+  .site-header.shared-nav nav a,
+  .site-header.shared-nav nav a.active {
+    padding-left:6px;
+    padding-right:6px;
+    font-size:11px;
+    white-space:nowrap;
+  }
+  .site-header.shared-nav .header-actions .phone,
+  .site-header.shared-nav .header-actions .btn.small {
+    min-width:0;
+    padding-left:10px;
+    padding-right:10px;
+    font-size:12px;
+    white-space:nowrap;
+  }
+}
+
+@media (max-width:860px) {
+  .home-search { margin-top:0; }
+}
+
+/* Keep the Enquiries pill transparent on blue-header pages, matching the
+   transparent treatment already used over the hero image. */
+.site-header.blue-header .header-actions .phone,
+.site-header.blue-header .header-actions .phone:hover,
+.site-header.blue-header .header-actions .phone:focus-visible {
+  background:transparent;
+  backdrop-filter:none;
+}
+
+/* Use the same transparent Enquiries treatment on light-header pages as well;
+   switch only the text/icon colour so it remains readable on white surfaces. */
+.site-header.shared-nav .header-actions .phone,
+.site-header.shared-nav .header-actions .phone:hover,
+.site-header.shared-nav .header-actions .phone:focus-visible {
+  background:transparent;
+  backdrop-filter:none;
+}
+.site-header.shared-nav:not(.hero-header):not(.blue-header) .header-actions .phone {
+  color:#30497D;
+}
+
+/* Keep the complete desktop header inside the viewport when the actions have
+   long labels at wide laptop and desktop widths. */
+@media (min-width:1201px) and (max-width:1700px) {
+  .site-header.shared-nav .header-inner {
+    grid-template-columns:190px minmax(0,1fr) max-content;
+    column-gap:12px;
+  }
+  .site-header.shared-nav nav {
+    left:0;
+    width:100%;
+    gap:0;
+  }
+  .site-header.shared-nav .header-actions {
+    width:max-content;
+    max-width:100%;
+    min-width:0;
+  }
+  .site-header.shared-nav .header-actions .phone,
+  .site-header.shared-nav .header-actions .btn.small {
+    min-width:0;
+    padding-left:10px;
+    padding-right:10px;
+  }
+}
+
+/* Keep the existing hero/search overlap relationship on larger screens: the
+   tabs and the field panel sit together over the hero edge without reaching
+   back into the hero action buttons. */
+@media (min-width:861px) {
+  .homepage-hero-copy { padding-bottom:80px; }
+  .home-search { margin-top:-48px; }
 }

@@ -711,20 +711,20 @@ p{ text-align:left; text-justify:auto; word-spacing:normal; letter-spacing:norma
 .steps article>b,.split-cta,.page-hero,.industry-hero,.worker-hero,.quick-path>div{background:#30497D}
 .find-work-footer-cta{max-width:1184px;margin:0 auto;min-height:232px;padding:42px 32px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;border-radius:14px 14px 0 0;background:linear-gradient(110deg,#30497D,#0f1d38 82%);color:#fff;box-shadow:0 12px 30px rgba(15,29,56,.13)}
 .find-work-footer-cta h2{color:#fff;font-size:40px;line-height:1.18;margin:0}
-.find-work-footer-cta h2 em{color:var(--orange)}
+.find-work-footer-cta h2 em{color:inherit}
 .find-work-footer-cta .btn{min-width:192px}
 @media(max-width:780px){.find-work-footer-cta{margin:0 16px;padding:34px 20px 32px;border-radius:12px 12px 0 0}.find-work-footer-cta h2{font-size:30px}}
 .find-work-footer-cta{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;align-items:center;justify-content:stretch;gap:18px 42px;min-height:380px;padding:52px 44px;border-radius:14px 14px 0 0;border-bottom:4px solid var(--orange);text-align:left;overflow:hidden;background:#30497D;box-shadow:none}
 .find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:380px;margin:-52px -44px -52px 0;background:url('/assets/site-sunset.png') center bottom / cover no-repeat}
 .find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:end;max-width:470px;color:#fff;font-size:38px;line-height:1.16;text-align:left}
-.find-work-footer-cta h2 em{color:#58d6c2}
+.find-work-footer-cta h2 em{color:inherit}
 .find-work-footer-cta .btn{grid-column:1;grid-row:2;justify-self:start;min-width:150px}
 @media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:auto 230px;min-height:0;margin:0 16px;padding:32px 24px 0;border-radius:12px 12px 0 0;gap:26px}.find-work-footer-cta:after{grid-column:1;grid-row:2;min-height:230px;margin:0 -24px;background-position:center bottom}.find-work-footer-cta h2{grid-column:1;grid-row:1;font-size:30px}.find-work-footer-cta .btn{grid-column:1;grid-row:1;justify-self:start;margin-top:124px}}
 .find-work-footer-cta{max-width:none;width:100%;min-height:506px;margin:0;border-radius:0;background:#30497D;display:grid;grid-template-columns:50% 50%;grid-template-rows:1fr 52px;padding:0;gap:0;position:relative;overflow:hidden;border-bottom:4px solid var(--orange);box-shadow:none}
 .find-work-footer-cta:after{content:'';grid-column:2;grid-row:1;min-height:0;margin:0;background:linear-gradient(90deg,#30497D 0%,rgba(48,73,125,.35) 13%,rgba(48,73,125,0) 34%),url('/assets/site-sunset.png') center/cover no-repeat;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}
 .find-work-footer-cta h2{grid-column:1;grid-row:1;margin:auto 0 auto 31%;max-width:500px;color:transparent;font-size:0;line-height:1.16;letter-spacing:-.5px;text-align:left;font-weight:500}
 .find-work-footer-cta h2:before{content:'9Work Force\A\ARegister with 9Work Force\Ato find, apply & track\Ayour next Good Move\Ausing myWork Force.';display:block;white-space:pre-line;color:#fff;font-size:29px;line-height:1.16;margin-bottom:25px;letter-spacing:-.5px;font-weight:500}
-.find-work-footer-cta h2 em{color:#58d6c2}
+.find-work-footer-cta h2 em{color:inherit}
 .find-work-footer-cta h2:after{content:'✓ Easily apply for suitable labour-hire roles\A✓ Keep your worker details and tickets up to date\A✓ Access construction and operational opportunities\A✓ Work with a safety-focused Victorian team';display:block;white-space:pre-line;color:#fff;font:11px/1.5 Inter,Arial,sans-serif;margin-top:24px;max-width:390px}
 .find-work-footer-cta .btn{grid-column:1;grid-row:1;align-self:end;justify-self:start;margin:0 0 78px 32%;min-width:100px;min-height:38px;padding:10px 18px;border-radius:0;background:#fff;color:#30497D;font-size:11px;box-shadow:none}
 .find-work-footer-cta .btn:after{content:none}
@@ -819,6 +819,39 @@ footer .footer-bottom{display:flex;align-items:center;justify-content:space-betw
 footer .footer-copyright,footer .footer-legal{background:none!important;padding:0!important;color:#dce6f8!important;font-size:12px}
 footer .footer-legal{white-space:nowrap}
 @media(max-width:780px){footer .footer-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:16px}footer .footer-legal{white-space:normal}}
+
+/* Cross-device layout safety: keep existing components and content intact while
+   allowing their contents to shrink and wrap inside responsive containers. */
+html, body, #root { max-width:100%; }
+img { max-width:100%; }
+button, input, select, textarea { min-width:0; max-width:100%; }
+.header-inner, .site-header nav, .header-actions,
+.section-heading, .section-heading > *,
+.about-hero > *, .industry-hero > *, .worker-hero > *,
+.about-story > *, .industry-editorial article > *,
+.request-section > *, .contact-main > *, .registration > *,
+.find-work-role-card > *, .find-work-role-main > *,
+.solution, .workflow-grid article, .why-grid article,
+.footer-grid > * { min-width:0; }
+.solution h3, .solution p, .find-work-role-main h3,
+.find-work-role-main p, .footer-grid p, .footer-links a,
+.footer-contact a { overflow-wrap:anywhere; }
+
+/* Hover motion is reserved for genuine hover-capable pointers so touch
+   devices do not retain a transformed or visually shifted state. */
+@media (hover:none), (pointer:coarse) {
+  .work-area-grid a:hover,
+  .find-work-register-button:hover,
+  .solution:hover .solution-media img,
+  .homepage-hero-actions a:hover { transform:none; }
+}
+
+/* Never leave readable page content in the scroll-reveal placeholder state if
+   an observer is interrupted or a page is captured during navigation. */
+main, main section, main footer, [data-motion-target] {
+  opacity:1 !important;
+  transform:none !important;
+}
 footer .footer-contact-cta{display:inline-flex;align-items:center;gap:4px;margin-top:4px;color:#fff;font-size:14px;line-height:1.4;text-decoration:none}
 footer .footer-contact-cta strong{color:#ffb14a;text-decoration:underline;text-underline-offset:2px}
 footer .footer-contact-cta:hover strong{color:#ffd08a}
@@ -828,7 +861,7 @@ footer .footer-contact-cta:hover strong{color:#ffd08a}
 .metrics b{color:#fff!important}
 .metrics span{color:#dce6f8!important}
 .request-section h2{color:#fff!important}
-.request-section h2 em{color:#ffb14a!important}
+.request-section h2 em{color:inherit!important}
 .request-section p{color:#e5edff!important}
 .employer-tiles article:after{background:linear-gradient(0deg,rgba(15,29,56,.9),rgba(15,29,56,.14) 72%)!important}
 .employer-tiles h3,.employer-tiles p{color:#fff!important;position:relative;z-index:1}
@@ -839,7 +872,7 @@ footer .footer-contact-cta:hover strong{color:#ffd08a}
 .solutions-eyebrow{display:inline-flex;align-items:center;gap:18px;color:var(--navy);font-size:12px;font-weight:800;letter-spacing:1.4px}
 .solutions-eyebrow i{display:block;width:52px;height:4px;border-radius:5px;background:var(--orange)}
 .solutions-intro h2{font-size:58px;line-height:1.08;margin:22px 0 22px;letter-spacing:-2px}
-.solutions-intro h2 em{color:var(--orange);position:relative}
+.solutions-intro h2 em{color:inherit;position:relative}
 .solutions-intro h2 em:after{content:none}
 .solutions-intro p{max-width:620px;font-size:18px;line-height:28px;color:#53617c}
 .solutions-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -852,7 +885,7 @@ footer .footer-contact-cta:hover strong{color:#ffd08a}
 .solution-grid{grid-template-columns:repeat(4,1fr);gap:22px}
 .solution{padding:0;min-height:0;border:0;border-radius:18px;overflow:hidden;box-shadow:0 10px 25px rgba(15,29,56,.1);transition:box-shadow .25s ease}
 .solution:nth-child(2n){border:0}
-.solution-media{height:212px;position:relative;overflow:hidden}
+.solution-media{height:212px;position:relative;overflow:visible}
 .solution-media:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 54%,rgba(15,29,56,.28))}
 .solution-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .solution:hover .solution-media img{transform:scale(1.04)}
@@ -873,4 +906,186 @@ footer .footer-contact-cta:hover strong{color:#ffd08a}
 .shared-nav{animation:site-nav-in .7s cubic-bezier(.22,1,.36,1) both}
 @keyframes site-nav-in{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.shared-nav{animation:none!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Work Areas reference treatment: retain the existing section, worker list and
+   interactions while presenting the same airy, rounded-card composition. */
+.industries{
+  position:relative;
+  isolation:isolate;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);
+  gap:32px;
+  padding-top:46px;
+  padding-bottom:46px;
+  background:
+    radial-gradient(circle at 2% 82%,rgba(255,255,255,.9) 0 9%,transparent 22%),
+    radial-gradient(circle at 98% 18%,rgba(211,226,249,.85) 0 10%,transparent 25%),
+    linear-gradient(135deg,#eef5ff 0%,#f8fbff 52%,#e9f2ff 100%);
+  overflow:hidden;
+}
+.industries::before,.industries::after{
+  content:'';
+  position:absolute;
+  z-index:-1;
+  border-radius:50%;
+  pointer-events:none;
+}
+.industries::before{
+  width:260px;
+  height:260px;
+  left:-120px;
+  bottom:-135px;
+  border:42px solid rgba(255,255,255,.5);
+}
+.industries::after{
+  width:300px;
+  height:300px;
+  right:-170px;
+  top:74px;
+  background:rgba(222,234,250,.55);
+}
+.industry-copy{position:relative;z-index:1;min-width:0;padding-top:4px}
+.industry-copy h2{
+  max-width:620px;
+  margin:0 0 14px;
+  font-size:44px;
+  line-height:1.02;
+  letter-spacing:-2px;
+}
+.industry-copy h2 em{color:inherit!important}
+.industry-copy p{
+  max-width:590px;
+  margin:0 0 16px;
+  color:#6079a5;
+  font-size:18px;
+  line-height:1.35;
+}
+.industry-row{
+  padding:0;
+  margin:0 0 6px;
+  border:0;
+  background:transparent;
+  display:block;
+}
+.industry-row-toggle{
+  width:100%;
+  min-height:56px;
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr) 34px;
+  align-items:center;
+  gap:14px;
+  padding:10px 20px 10px 14px;
+  border:1px solid rgba(255,255,255,.86);
+  border-radius:12px;
+  background:rgba(255,255,255,.92);
+  color:#163265;
+  text-align:left;
+  box-shadow:0 8px 18px rgba(77,111,163,.06);
+  cursor:pointer;
+  transition:border-color .2s ease,background-color .2s ease,box-shadow .2s ease;
+}
+.industry-row-toggle>span{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:#eef4fc;
+  color:#163f7b;
+  font-size:20px;
+  line-height:1;
+}
+.industry-row-toggle b{
+  min-width:0;
+  color:#163265;
+  font:700 16px/1.25 'Plus Jakarta Sans',sans-serif;
+  overflow-wrap:anywhere;
+}
+.industry-row-arrow{
+  justify-self:end;
+  width:32px;
+  height:32px;
+  padding:8px;
+  border-radius:50%;
+  background:#eef4fc;
+  color:#163f7b;
+}
+.industry-row-toggle:hover,.industry-row-toggle:focus-visible{
+  box-shadow:0 10px 22px rgba(77,111,163,.1);
+  outline:none;
+}
+.industry-row.is-open .industry-row-toggle{
+  border-color:#ff7b25;
+  background:linear-gradient(100deg,#fff6ee,#fffdfb);
+  box-shadow:0 8px 20px rgba(245,145,65,.12);
+}
+.industry-row.is-open .industry-row-toggle>span{
+  background:#fff0e3;
+  color:#f97316;
+}
+.industry-row.is-open .industry-row-arrow{
+  background:#ffab55;
+  color:#fff;
+}
+.industry-row-content{padding:0 20px 10px 76px;color:#60708d}
+.industry-row-content p{margin:0;font-size:13px;line-height:1.45}
+.industry-image{
+  min-height:520px;
+  height:100%;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 20px 42px rgba(55,86,132,.14);
+}
+.industry-image img{display:block;width:100%;height:100%;object-fit:cover}
+
+@media(max-width:1000px) and (min-width:781px){
+  .industries{padding-left:32px;padding-right:32px;gap:24px}
+  .industry-copy h2{font-size:38px;letter-spacing:-1.4px}
+  .industry-copy p{font-size:16px}
+  .industry-row-toggle{grid-template-columns:42px minmax(0,1fr) 32px;padding-right:12px}
+  .industry-row-toggle>span{width:36px;height:36px}
+  .industry-row-toggle b{font-size:14px}
+  .industry-image{min-height:460px}
+}
+@media(max-width:780px){
+  .industries{grid-template-columns:1fr;padding:44px 24px;gap:24px}
+  .industry-copy h2{font-size:38px;letter-spacing:-1.2px}
+  .industry-copy p{font-size:16px;line-height:1.5}
+  .industry-image{min-height:320px;height:320px}
+}
+@media(max-width:520px){
+  .industries{padding-left:16px;padding-right:16px}
+  .industry-copy h2{font-size:clamp(32px,9vw,38px)}
+  .industry-row-toggle{grid-template-columns:38px minmax(0,1fr) 30px;gap:10px;padding:9px 10px}
+  .industry-row-toggle>span{width:34px;height:34px;font-size:18px}
+  .industry-row-toggle b{font-size:14px}
+  .industry-row-arrow{width:28px;height:28px;padding:7px}
+  .industry-row-content{padding-left:58px;padding-right:10px}
+}
+
+/* Keep text legible when visitors select or copy content on any surface. */
+::selection{color:#fff;background:#0f1d38}
+::-moz-selection{color:#fff;background:#0f1d38}
+
+/* The site-wide single-colour heading rule must not hide headings on dark
+   brand panels; keep those headings and their emphasis words high-contrast. */
+.split-cta h1,.split-cta h2,.split-cta h3,.split-cta h4,
+.request-section h1,.request-section h2,.request-section h3,.request-section h4,
+.page-hero h1,.page-hero h2,.page-hero h3,.page-hero h4,
+.industry-hero h1,.industry-hero h2,.industry-hero h3,.industry-hero h4,
+.worker-hero h1,.worker-hero h2,.worker-hero h3,.worker-hero h4,
+.employer-hero h1,.employer-hero h2,.employer-hero h3,.employer-hero h4,
+.about-cta h1,.about-cta h2,.about-cta h3,.about-cta h4,
+.simple-cta h1,.simple-cta h2,.simple-cta h3,.simple-cta h4,
+.quick-path h1,.quick-path h2,.quick-path h3,.quick-path h4,
+.find-work-register-banner h1,.find-work-register-banner h2,.find-work-register-banner h3,.find-work-register-banner h4,
+.find-work-footer-cta h1,.find-work-footer-cta h2,.find-work-footer-cta h3,.find-work-footer-cta h4,
+.industry-image h1,.industry-image h2,.industry-image h3,.industry-image h4,
+.employer-tiles h1,.employer-tiles h2,.employer-tiles h3,.employer-tiles h4{
+  color:#fff!important;
+}
+:is(.split-cta,.request-section,.page-hero,.industry-hero,.worker-hero,.employer-hero,
+  .about-cta,.simple-cta,.quick-path,.find-work-register-banner,.find-work-footer-cta,
+  .industry-image,.employer-tiles) :is(h1,h2,h3,h4) em{
+  color:#fff!important;
+}
 
