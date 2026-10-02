@@ -720,20 +720,18 @@ p{ text-align:left; text-justify:auto; word-spacing:normal; letter-spacing:norma
 .find-work-footer-cta h2 em{color:inherit}
 .find-work-footer-cta .btn{grid-column:1;grid-row:2;justify-self:start;min-width:150px}
 @media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:auto 230px;min-height:0;margin:0 16px;padding:32px 24px 0;border-radius:12px 12px 0 0;gap:26px}.find-work-footer-cta:after{grid-column:1;grid-row:2;min-height:230px;margin:0 -24px;background-position:center bottom}.find-work-footer-cta h2{grid-column:1;grid-row:1;font-size:30px}.find-work-footer-cta .btn{grid-column:1;grid-row:1;justify-self:start;margin-top:124px}}
-.find-work-footer-cta{max-width:none;width:100%;min-height:506px;margin:0;border-radius:0;background:#30497D;display:grid;grid-template-columns:50% 50%;grid-template-rows:1fr 52px;padding:0;gap:0;position:relative;overflow:hidden;border-bottom:4px solid var(--orange);box-shadow:none}
-.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1;min-height:0;margin:0;background:linear-gradient(90deg,#30497D 0%,rgba(48,73,125,.35) 13%,rgba(48,73,125,0) 34%),url('/assets/site-sunset.png') center/cover no-repeat;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}
-.find-work-footer-cta h2{grid-column:1;grid-row:1;margin:auto 0 auto 31%;max-width:500px;color:transparent;font-size:0;line-height:1.16;letter-spacing:-.5px;text-align:left;font-weight:500}
-.find-work-footer-cta h2:before{content:'9Work Force\A\ARegister with 9Work Force\Ato find, apply & track\Ayour next Good Move\Ausing myWork Force.';display:block;white-space:pre-line;color:#fff;font-size:29px;line-height:1.16;margin-bottom:25px;letter-spacing:-.5px;font-weight:500}
+.find-work-footer-cta{max-width:none;width:100%;min-height:506px;margin:0;border-radius:0;background:#30497D;display:grid;grid-template-columns:50% 50%;grid-template-rows:auto auto;align-content:center;padding:0;gap:0;position:relative;overflow:hidden;border-bottom:4px solid var(--orange);box-shadow:none}
+.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:0;margin:0;background:linear-gradient(90deg,#30497D 0%,rgba(48,73,125,.35) 13%,rgba(48,73,125,0) 34%),url('/assets/site-sunset.png') center/cover no-repeat;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}
+.find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;margin:48px 32px 24px 31%;max-width:500px;color:transparent;font-size:0;line-height:0;letter-spacing:normal;text-align:left;font-weight:500}
+.find-work-footer-cta h2:before{content:'9Work Force\A\ARegister with 9Work Force\Ato find, apply & track\Ayour next Good Move\Ausing myWork Force.';display:block;white-space:pre-line;color:#fff;font-size:29px;line-height:1.35;margin:0;letter-spacing:0;font-weight:500}
 .find-work-footer-cta h2 em{color:inherit}
-.find-work-footer-cta h2:after{content:'✓ Easily apply for suitable labour-hire roles\A✓ Keep your worker details and tickets up to date\A✓ Access construction and operational opportunities\A✓ Work with a safety-focused Victorian team';display:block;white-space:pre-line;color:#fff;font:11px/1.5 Inter,Arial,sans-serif;margin-top:24px;max-width:390px}
-.find-work-footer-cta .btn{grid-column:1;grid-row:1;align-self:end;justify-self:start;margin:0 0 78px 32%;min-width:100px;min-height:38px;padding:10px 18px;border-radius:0;background:#fff;color:#30497D;font-size:11px;box-shadow:none}
+.find-work-footer-cta h2:after{content:'✓\2002 Easily apply for suitable labour-hire roles\A✓\2002 Keep your worker details and tickets up to date\A✓\2002 Access construction and operational opportunities\A✓\2002 Work with a safety-focused Victorian team';display:block;white-space:pre-line;color:#fff;font:14px/1.9 Inter,Arial,sans-serif;letter-spacing:0;margin-top:28px;max-width:460px}
+.find-work-footer-cta .btn{grid-column:1;grid-row:2;position:relative;left:auto;top:auto;align-self:start;justify-self:start;margin:0 32px 48px 31%;min-width:100px;min-height:42px;padding:12px 20px;border-radius:0;background:#fff;color:#30497D;font-size:13px;box-shadow:none;z-index:3}
 .find-work-footer-cta .btn:after{content:none}
-.find-work-footer-cta .btn{font-size:0}.find-work-footer-cta .btn:before{content:'Register Now';font-size:11px}
+.find-work-footer-cta .btn{font-size:0}.find-work-footer-cta .btn:before{content:'Register Now';font-size:13px;line-height:1.4}
 .find-work-footer-cta:before{content:'9Work Force                 Workforce Operations & Recruitment Enquiries                                      Back to top  ↑';position:absolute;z-index:2;left:31%;right:2%;bottom:0;height:52px;display:flex;align-items:center;white-space:pre;color:#fff;font:600 10px Inter,Arial,sans-serif}
-@media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:390px 52px;min-height:442px}.find-work-footer-cta:after{grid-column:1;grid-row:1;clip-path:none;background:linear-gradient(0deg,#30497D 0%,rgba(48,73,125,0) 38%),url('/assets/site-sunset.png') center/cover no-repeat}.find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;margin:32px 24px 0;max-width:310px;font-size:0}.find-work-footer-cta h2:before{font-size:26px;margin-bottom:18px}.find-work-footer-cta h2:after{margin-top:16px}.find-work-footer-cta .btn{grid-column:1;grid-row:1;align-self:end;justify-self:start;margin:0 0 28px 24px}.find-work-footer-cta:before{left:24px;right:24px;bottom:0;font-size:8px;content:'9Work Force                         Back to top  ↑'}}
+@media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:auto auto;min-height:442px}.find-work-footer-cta:after{grid-column:1;grid-row:1 / span 2;clip-path:none;background:linear-gradient(0deg,#30497D 0%,rgba(48,73,125,0) 38%),url('/assets/site-sunset.png') center/cover no-repeat}.find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;position:relative;z-index:1;margin:32px 24px 24px;max-width:480px;font-size:0}.find-work-footer-cta h2:before{font-size:26px;line-height:1.35}.find-work-footer-cta h2:after{margin-top:24px;font-size:13px;line-height:1.9}.find-work-footer-cta .btn{grid-column:1;grid-row:2;align-self:start;justify-self:start;margin:0 24px 32px}.find-work-footer-cta:before{left:24px;right:24px;bottom:0;font-size:8px;content:'9Work Force                         Back to top  ↑'}}
 .find-work-footer-cta:before{display:none}
-.find-work-footer-cta .btn{position:absolute;left:15.5%;top:405px;margin:0;z-index:3}
-@media(max-width:780px){.find-work-footer-cta .btn{left:24px;top:370px}}
 
 /* Brand theme: color-only overrides. Layout and component behavior remain unchanged. */
 :root{
@@ -899,6 +897,9 @@ footer .footer-contact-cta:hover strong{color:#ffd08a}
 .solution .tags{margin:16px 0 20px}
 .solution .tags small{font-size:12px}
 .solution a{font-size:14px;color:var(--orange);font-weight:700}
+.solutions-cta{display:flex;justify-content:center;margin-top:32px}
+.process-cta{display:flex;justify-content:center;margin-top:32px}
+.split-cta>.split-cta-action{grid-column:1/-1;display:flex;justify-content:center;padding:0 24px 40px}
 @media(max-width:1000px){.solutions-intro{grid-template-columns:1fr}.solutions-highlights{max-width:720px}.solution-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:780px){.solutions{padding-left:24px;padding-right:24px}.solutions-intro h2{font-size:42px}.solutions-intro p{font-size:16px;line-height:24px}.solutions-highlights{grid-template-columns:1fr;gap:16px}.solutions-highlights span+span{border-left:0;border-top:1px solid #cad5e8;padding:16px 0 0}.solution-grid{grid-template-columns:1fr}.solution-media{height:230px}}
 
