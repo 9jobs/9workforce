@@ -2,7 +2,7 @@ import tls from 'node:tls';
 import {randomUUID} from 'node:crypto';
 
 const clean = (value, max = 4000) => String(value ?? '').trim().slice(0, max);
-const formatSubmission = data => Object.entries(data).map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
+const formatSubmission = data => Object.entries(data).filter(([key]) => key !== 'resumeData').map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
 
 function sendJson(res, status, body) {
   res.status(status);
@@ -99,7 +99,7 @@ export default async function handler(req, res) {
   try {
     const input = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
     const type = input.type === 'employer' ? 'employer' : 'contact';
-    const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value)]));
+    const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, key === 'resumeData' ? 4200000 : 4000)]));
     if (!fields.email && type === 'contact') return sendJson(res, 400, {error: 'Email is required'});
     const submission = {id: randomUUID(), type, receivedAt: new Date().toISOString(), fields};
     await saveSubmission(submission);

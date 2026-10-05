@@ -37,7 +37,7 @@ function readBody(req) {
     let body = '';
     req.on('data', chunk => {
       body += chunk;
-      if (body.length > 200000) req.destroy(new Error('Request too large'));
+      if (body.length > 4500000) req.destroy(new Error('Request too large'));
     });
     req.on('end', () => resolve(body));
     req.on('error', reject);
@@ -49,7 +49,7 @@ function clean(value, max = 4000) {
 }
 
 function formatSubmission(data) {
-  return Object.entries(data).map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
+  return Object.entries(data).filter(([key]) => key !== 'resumeData').map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
 }
 
 function smtpCommand(socket, command, expected) {
@@ -152,7 +152,7 @@ async function handleApiRequest(req, res) {
   try {
     const input = JSON.parse(await readBody(req));
     const type = input.type === 'employer' ? 'employer' : 'contact';
-    const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value)]));
+    const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, key === 'resumeData' ? 4200000 : 4000)]));
     if (!fields.email && type === 'contact') return sendJson(res, 400, {error: 'Email is required'});
     const submission = {id: randomUUID(), type, receivedAt: new Date().toISOString(), fields};
     await saveSubmission(submission);

@@ -159,3 +159,344 @@ h2 a.work-role-title:hover {
   .role-candidate-form .form-row { grid-template-columns: 1fr; gap: 0; }
   .role-candidate-form-heading h3 { font-size: 21px; }
 }
+/* Role application flow, scoped to the role pages and their dialog. */
+.work-role-details { align-items: stretch; }
+.work-role-apply-card { align-self: center; padding: 40px; border: 1px solid #dce3ee; border-radius: 12px; background: #fff; }
+.work-role-apply-card h3 { margin: 0 0 12px; color: #102c50; font-size: 25px; }
+.work-role-apply-card p { color: #63738e; line-height: 1.7; margin: 0 0 24px; }
+.role-application-dialog { width: min(1060px, calc(100% - 48px)); max-width: none; max-height: calc(100dvh - 48px); padding: 0; border: 1px solid rgba(255,255,255,.14); border-radius: 20px; background: #30497d; color: #fff; box-shadow: 0 30px 100px #06152a70; overflow: auto; }
+.role-application-dialog::backdrop { background: #09182cbc; backdrop-filter: blur(5px); }
+.application-close { position: absolute; z-index: 2; top: 18px; right: 18px; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #ffffff30; border-radius: 50%; background: #ffffff10; color: #fff; cursor: pointer; }
+.role-application-layout { display: grid; grid-template-columns: .85fr 1.15fr; min-height: 660px; }
+.application-brand { display: flex; flex-direction: column; align-items: start; padding: 52px 40px 32px; background: linear-gradient(145deg,#263e70,#30497d); border-right: 1px solid #ffffff16; }
+.application-brand > svg { width: 240px; max-width: 100%; height: auto; margin-bottom: 64px; }
+.application-eyebrow { color: #ffae70; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
+.application-brand h2 { color: #fff !important; font-size: 35px; line-height: 1.2; letter-spacing: -.035em; margin: 18px 0; }
+.application-brand h2 em { color: #ff963e; font-style: normal; }
+.application-brand > p { color: #d3def2; font-size: 14px; line-height: 1.8; margin: 0; }
+.application-role { margin: 34px 0; padding: 18px 20px; width: 100%; border: 1px solid #ffffff20; border-radius: 10px; background: #ffffff08; }
+.application-role small { display: block; margin-bottom: 9px; color: #bdcce5; font-size: 9px; letter-spacing: .1em; }
+.application-role strong { color: #fff; font-size: 15px; line-height: 1.5; }
+.application-brand-note { margin-top: auto; color: #b6c7e5; font-size: 11px; }
+.application-panel { min-width: 0; padding: 54px 40px 28px; }
+.application-steps { display: flex; list-style: none; padding: 0 0 26px; margin: 0 0 28px; border-bottom: 1px solid #ffffff24; gap: 14px; }
+.application-steps li { flex: 1; display: flex; align-items: center; gap: 8px; color: #a8badd; position: relative; }
+.application-steps li > span { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border: 1px solid #ffffff30; border-radius: 50%; font-size: 12px; }
+.application-steps small { display: block; font-size: 8px; letter-spacing: .08em; margin-bottom: 4px; }
+.application-steps b { display: block; font-size: 10px; font-weight: 600; }
+.application-steps .current { color: #fff; }
+.application-steps .current > span { background: var(--orange); border-color: var(--orange); }
+.application-steps .complete { color: #fff; }
+.application-steps .complete > span { background: #ffffff20; }
+.application-heading > span { color: #ffad70; letter-spacing: .1em; font-size: 9px; font-weight: 700; }
+.application-heading h2 { margin: 10px 0 8px; color: #fff !important; font-size: 28px; }
+.application-heading p { color: #c7d5ed; font-size: 12px; line-height: 1.6; margin: 0 0 28px; }
+.application-form fieldset { min-width: 0; border: 0; margin: 0; padding: 0; }
+.application-form fieldset[hidden] { display: none; }
+.application-form label { display: block; color: #e2eaff; font-size: 10px; font-weight: 600; margin: 0 0 18px; }
+.application-form label i { color: #ffad70; font-style: normal; }
+.application-form label > small { color: #bfcee7; font-weight: 400; }
+.application-form :is(input,select,textarea) { display: block; width: 100%; margin-top: 8px; border: 1px solid #ffffff30; border-radius: 7px; padding: 12px 14px; color: #fff; background: #ffffff0c; font: 12px Inter,Arial,sans-serif; line-height: 1.5; }
+.application-form :is(input,select) { min-height: 44px; }
+.application-form textarea { resize: vertical; }
+.application-form option { color: #203b65; background: #fff; }
+.application-form ::placeholder { color: #b7c7e2; opacity: 1; }
+.application-form :is(input,select,textarea):focus-visible { outline: 2px solid #ffad70; outline-offset: 2px; }
+.application-field-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; }
+.application-form-actions { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 26px; }
+.application-form-actions .btn { margin-left: auto; background: var(--orange); min-height: 46px; padding: 12px 22px; font-size: 12px; }
+.application-back { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; color: #e4ecfa; font-size: 12px; cursor: pointer; }
+.application-upload { display: flex; align-items: center; flex-direction: column; gap: 7px; margin-top: 8px; padding: 18px; border: 1px dashed #b6c7e575; border-radius: 9px; background: #ffffff08; cursor: pointer; }
+.application-upload svg { color: #ffad70; }
+.application-upload b { font-size: 12px; overflow-wrap: anywhere; }
+.application-upload small { color: #bdcee9; font-size: 10px; }
+.application-upload input { border: 0; padding: 4px; min-height: 0; font-size: 10px; background: none; }
+.application-upload input::file-selector-button { border: 0; border-radius: 4px; padding: 5px 8px; background: #ffffff20; color: #fff; cursor: pointer; }
+.application-note { text-align: center; color: #b2c3df; font-size: 9px; margin: 16px 0 0; line-height: 1.5; }
+.application-error { color: #ffe0c8; border: 1px solid #ffad7070; padding: 12px; border-radius: 6px; font-size: 12px; }
+.application-success { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 540px; }
+.application-success > span { display: grid; place-items: center; width: 84px; height: 84px; color: #ffd1ac; background: #ff963e20; border-radius: 50%; margin-bottom: 25px; }
+.application-success h2 { color: #fff !important; font-size: 27px; line-height: 1.35; max-width: 380px; }
+.application-success p { color: #d0ddf2; font-size: 14px; margin: 12px 0 30px; }
+.application-success .btn { background: var(--orange); }
+.application-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (max-width: 780px) {
+  .role-application-dialog { width: calc(100% - 24px); max-height: calc(100dvh - 24px); border-radius: 14px; }
+  .role-application-layout { grid-template-columns: 1fr; min-height: 0; }
+  .application-brand { padding: 26px 24px; border-right: 0; border-bottom: 1px solid #ffffff20; }
+  .application-brand > svg { width: 170px; margin-bottom: 18px; }
+  .application-brand h2 { font-size: 24px; margin: 10px 0; }
+  .application-brand h2 br { display: none; }
+  .application-brand > p, .application-brand-note, .application-eyebrow { display: none; }
+  .application-role { padding: 0; border: 0; background: none; margin: 6px 0 0; }
+  .application-role small { display: none; }
+  .application-role strong { font-size: 12px; }
+  .application-panel { padding: 26px 24px; }
+  .application-steps { gap: 8px; }
+  .application-steps b { font-size: 9px; }
+  .application-steps li { gap: 6px; }
+  .application-field-row { grid-template-columns: 1fr; gap: 0; }
+  .application-success { min-height: 340px; }
+  .work-role-apply-card { padding: 28px; }
+}
+.application-brand h2 em { color: #ff963e !important; }
+/* Dedicated application page with the compact card arrangement from the reference. */
+.role-application-page { min-height: 100dvh; background: #091a2b; padding: 28px 32px 48px; color: #fff; }
+.application-page-top { display: flex; justify-content: space-between; align-items: center; max-width: 1060px; margin: 0 auto 24px; gap: 20px; }
+.application-page-top > span { color: #a7b9d0; font-size: 10px; letter-spacing: .08em; }
+.role-application-page .role-application-layout { max-width: 1060px; margin: auto; border: 1px solid #ffffff14; border-radius: 12px; overflow: hidden; background: #30497d; }
+.role-application-page .application-brand { background: linear-gradient(150deg,#203353,#142238); padding: 38px 32px 28px; }
+.role-application-page .application-brand > svg { width: 180px; margin-bottom: 42px; }
+.role-application-page .application-brand h2 { font-size: 29px; }
+.role-application-page .application-brand > p { font-size: 13px; }
+.role-application-page .application-panel { padding: 38px 34px 30px; }
+.role-application-page .application-steps { gap: 18px; }
+.role-application-page .application-steps li:not(:last-child):after { content: ''; width: 15px; height: 1px; background: #ffffff30; position: absolute; right: -16px; }
+.role-application-page .application-success { border: 1px solid #ffffff20; border-radius: 12px; background: #ffffff08; padding: 24px; }
+@media (max-width: 780px) {
+  .role-application-page { padding: 20px 12px 30px; }
+  .application-page-top > span { display: none; }
+  .role-application-page .application-brand { padding: 24px; }
+  .role-application-page .application-brand > svg { margin-bottom: 14px; width: 155px; }
+  .role-application-page .application-brand h2 { font-size: 23px; }
+  .role-application-page .application-panel { padding: 26px 22px; }
+}
+/* Equal registration cards on the same grid row. */
+.work-role-registration-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; align-items: stretch; }
+.work-role-registration-copy { grid-column: 1 / -1; max-width: 560px; }
+.work-role-registration-copy > p { margin-bottom: 0; }
+.work-role-registration-inner > .work-role-placement { max-width: none; }
+.work-role-registration-inner > .work-role-apply-card { align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 30px; }
+.work-role-registration-inner > .work-role-apply-card .btn { align-self: flex-start; }
+@media (max-width: 780px) {
+  .work-role-registration-inner { grid-template-columns: 1fr; }
+  .work-role-registration-inner > .work-role-apply-card { padding: 28px; }
+}
+.application-message > p { color: #d3def2; font-size: 13px; line-height: 1.8; margin: 0; }
+@media (max-width: 780px) {
+  .application-message .application-eyebrow { display: inline-block; }
+  .application-message > p { font-size: 12px; }
+}
+/* Reference design for the standalone application page. */
+.role-application-page { padding: 38px 32px; background: radial-gradient(ellipse at 55% 40%, #142c43 0, #071a2b 75%); }
+.role-application-page .role-application-layout { max-width: 1430px; grid-template-columns: minmax(0,.406fr) minmax(0,.594fr); min-height: 870px; border: 1px solid #526e99; border-radius: 18px; }
+.role-application-page .application-brand { position: relative; isolation: isolate; padding: 44px; background: radial-gradient(ellipse at 30% 0,#1a2e4b,#0a1d31); border: 0; overflow: hidden; }
+.role-application-page .application-brand > svg { width: 225px; margin-bottom: 48px; }
+.role-application-page .application-message { position: relative; z-index: 1; }
+.role-application-page .application-eyebrow { color: #ff931e; font-size: 15px; line-height: 1.5; letter-spacing: .075em; }
+.role-application-page .application-brand h2 { color: #fff !important; font-size: clamp(42px,4.1vw,64px); font-weight: 750; line-height: .97; letter-spacing: -.035em; margin: 20px 0 16px; }
+.role-application-page .application-brand h2 em { color: #ff921f !important; font-style: normal; }
+.role-application-page .application-message > p { font-size: 19px; line-height: 1.65; color: #c7ddf6; }
+.role-application-page .application-role { z-index: 1; position: relative; margin: 26px 0 220px; padding: 22px 30px; background: #ffffff04; border-color: #a4bed64a; border-radius: 14px; }
+.role-application-page .application-role small { color: #9bbfe4; font-size: 13px; letter-spacing: .08em; margin-bottom: 10px; }
+.role-application-page .application-role strong { font-size: 20px; line-height: 1.4; }
+.role-application-page .application-brand-note { display: block; position: relative; z-index: 1; color: #bedbf7; font-size: 15px; }
+.application-construction-art { position: absolute; z-index: 0; bottom: 34px; left: 0; width: 100%; height: auto; pointer-events: none; }
+.role-application-page .application-panel { padding: 64px 48px 36px; background: radial-gradient(ellipse at 50% 40%,#34578866,transparent 75%),#2f4c7f; }
+.application-progress { display: flex; padding: 0 0 34px; margin: 0 0 30px; list-style: none; border-bottom: 1px solid #a1bfdf4a; }
+.application-progress li { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 11px; color: #92acd1; }
+.application-progress li > span { position: relative; z-index: 1; display: grid; place-items: center; width: 50px; height: 50px; border: 1.5px solid #83a6d078; border-radius: 50%; color: #eff5ff; font-size: 17px; font-weight: 600; background: #304e80; }
+.application-progress li:not(:last-child):after { content: ''; position: absolute; left: calc(50% + 40px); width: calc(100% - 80px); height: 2px; top: 24px; background: #8aaed65c; }
+.application-progress li.current { color: #fff; }
+.application-progress li.current > span { background: linear-gradient(135deg,#ffa646,#ff8d21); border-color: #ffb15d; box-shadow: 0 3px 18px #ff992d20; }
+.application-progress li.complete > span { color: #fff; border-color: #a6c4e4; }
+.application-progress b { font-size: 16px; font-weight: 650; }
+.application-stage-heading { margin-bottom: 34px; }
+.application-stage-heading > span { font-size: 15px; font-weight: 700; letter-spacing: .08em; color: #ff921f; }
+.application-stage-heading h2 { color: #fff !important; font-size: 38px; line-height: 1.2; letter-spacing: -.025em; margin: 10px 0; }
+.application-stage-heading p { color: #b9d1ed; font-size: 19px; margin: 0; line-height: 1.5; }
+.role-application-page .application-form label { font-size: 15px; margin-bottom: 30px; }
+.role-application-page .application-form label i { color: #ff941e; }
+.role-application-page .application-form :is(input,select,textarea) { margin-top: 8px; font-size: 18px; padding: 16px 20px; border-color: #a1bdd669; border-radius: 12px; background: #ffffff07; }
+.role-application-page .application-form :is(input,select) { min-height: 64px; }
+.role-application-page .application-form ::placeholder { color: #a4bfde; }
+.role-application-page .application-form-actions { margin-top: 28px; }
+.role-application-page .application-form-actions .btn { min-height: 64px; padding: 16px 38px; border-radius: 12px; font-size: 18px; background: linear-gradient(135deg,#ff9c34,#ff8b23); box-shadow: 0 8px 16px #ff992a28; }
+.role-application-page .application-note { font-size: 12px; margin-top: 30px; }
+.role-application-page .application-upload { padding: 22px; }
+.role-application-page .application-upload input { min-height: 0; font-size: 12px; padding: 4px; }
+.role-application-page .application-upload b { font-size: 15px; }
+.role-application-page .application-upload small { font-size: 12px; }
+@media (max-width: 1150px) and (min-width: 781px) {
+  .role-application-page { padding: 24px; }
+  .role-application-page .application-brand { padding: 32px; }
+  .role-application-page .application-panel { padding: 48px 32px 30px; }
+  .role-application-page .application-message > p { font-size: 16px; }
+  .role-application-page .application-eyebrow { font-size: 12px; }
+  .role-application-page .application-role { padding: 20px; }
+  .role-application-page .application-role strong { font-size: 17px; }
+  .application-progress b { font-size: 13px; }
+  .application-stage-heading h2 { font-size: 30px; }
+}
+@media (max-width: 780px) {
+  .role-application-page { padding: 16px 12px; }
+  .role-application-page .role-application-layout { grid-template-columns: 1fr; min-height: 0; border-radius: 14px; }
+  .role-application-page .application-brand { padding: 28px 24px; }
+  .role-application-page .application-brand > svg { width: 180px; margin-bottom: 26px; }
+  .role-application-page .application-eyebrow { font-size: 11px; }
+  .role-application-page .application-brand h2 { font-size: 38px; line-height: 1.05; margin: 14px 0; }
+  .role-application-page .application-brand h2 br { display: none; }
+  .role-application-page .application-message > p { font-size: 14px; }
+  .role-application-page .application-role { margin: 20px 0 18px; padding: 18px; }
+  .role-application-page .application-role small { display: block; font-size: 10px; }
+  .role-application-page .application-role strong { font-size: 15px; }
+  .role-application-page .application-brand-note { font-size: 11px; }
+  .application-construction-art { opacity: .2; bottom: 0; }
+  .role-application-page .application-panel { padding: 30px 24px; }
+  .application-progress { padding-bottom: 24px; margin-bottom: 24px; }
+  .application-progress li { gap: 8px; }
+  .application-progress li > span { width: 34px; height: 34px; font-size: 13px; }
+  .application-progress li:not(:last-child):after { left: calc(50% + 23px); width: calc(100% - 46px); top: 16px; }
+  .application-progress b { font-size: 10px; text-align: center; }
+  .application-stage-heading > span { font-size: 11px; }
+  .application-stage-heading h2 { font-size: 27px; }
+  .application-stage-heading p { font-size: 14px; }
+  .application-stage-heading { margin-bottom: 24px; }
+  .role-application-page .application-form label { font-size: 12px; margin-bottom: 22px; }
+  .role-application-page .application-form :is(input,select,textarea) { font-size: 14px; padding: 12px; }
+  .role-application-page .application-form :is(input,select) { min-height: 48px; }
+  .role-application-page .application-form-actions .btn { min-height: 50px; padding: 13px 24px; font-size: 14px; }
+  .role-application-page .application-note { font-size: 10px; }
+}
+/* Compact application card without decorative construction lines. */
+.role-application-page { padding: 28px 32px; }
+.role-application-page .role-application-layout { max-width: 1300px; min-height: 740px; }
+.role-application-page .application-brand { padding: 36px; }
+.role-application-page .application-brand > svg { width: 200px; margin-bottom: 32px; }
+.role-application-page .application-brand h2 { font-size: clamp(38px,3.8vw,56px); }
+.role-application-page .application-message > p { font-size: 17px; line-height: 1.6; }
+.role-application-page .application-role { margin: 24px 0 36px; padding: 20px 24px; }
+.role-application-page .application-panel { padding: 42px 40px 28px; }
+.application-progress { padding-bottom: 24px; margin-bottom: 24px; }
+.application-stage-heading { margin-bottom: 26px; }
+.application-stage-heading h2 { font-size: 34px; }
+.application-stage-heading p { font-size: 17px; }
+.role-application-page .application-form label { margin-bottom: 22px; }
+.role-application-page .application-form :is(input,select) { min-height: 56px; }
+.role-application-page .application-form :is(input,select,textarea) { font-size: 16px; padding: 14px 18px; }
+.role-application-page .application-form-actions { margin-top: 22px; }
+.role-application-page .application-form-actions .btn { min-height: 56px; padding: 14px 32px; font-size: 16px; }
+.role-application-page .application-note { margin-top: 24px; }
+@media (max-width: 780px) {
+  .role-application-page { padding: 16px 12px; }
+  .role-application-page .role-application-layout { min-height: 0; }
+  .role-application-page .application-brand { padding: 24px; }
+  .role-application-page .application-brand > svg { width: 170px; margin-bottom: 22px; }
+  .role-application-page .application-brand h2 { font-size: 34px; }
+  .role-application-page .application-message > p { font-size: 14px; }
+  .role-application-page .application-role { margin: 20px 0; padding: 16px; }
+  .role-application-page .application-panel { padding: 26px 22px; }
+  .application-stage-heading h2 { font-size: 27px; }
+  .application-stage-heading p { font-size: 14px; }
+  .role-application-page .application-form :is(input,select,textarea) { font-size: 14px; padding: 12px; }
+  .role-application-page .application-form :is(input,select) { min-height: 48px; }
+}
+/* Smaller application card, centered in the viewport. */
+.role-application-page { display: flex; justify-content: center; align-items: center; min-height: 100dvh; padding: 24px; }
+.role-application-page .role-application-layout { width: 100%; max-width: 1080px; min-height: 0; margin: auto; }
+.role-application-page .application-brand { padding: 28px 30px; }
+.role-application-page .application-brand > svg { width: 175px; margin-bottom: 26px; }
+.role-application-page .application-eyebrow { font-size: 11px; }
+.role-application-page .application-brand h2 { font-size: 44px; margin: 16px 0 14px; }
+.role-application-page .application-message > p { font-size: 14px; line-height: 1.65; }
+.role-application-page .application-role { padding: 16px 20px; margin: 22px 0 30px; }
+.role-application-page .application-role small { font-size: 10px; }
+.role-application-page .application-role strong { font-size: 16px; }
+.role-application-page .application-brand-note { font-size: 12px; }
+.role-application-page .application-panel { padding: 30px 32px 24px; }
+.application-progress { padding-bottom: 20px; margin-bottom: 20px; }
+.application-progress li > span { width: 40px; height: 40px; font-size: 14px; }
+.application-progress li:not(:last-child):after { top: 19px; left: calc(50% + 30px); width: calc(100% - 60px); }
+.application-progress b { font-size: 12px; }
+.application-stage-heading { margin-bottom: 22px; }
+.application-stage-heading > span { font-size: 11px; }
+.application-stage-heading h2 { font-size: 28px; margin: 8px 0; }
+.application-stage-heading p { font-size: 14px; }
+.role-application-page .application-form label { font-size: 12px; margin-bottom: 18px; }
+.role-application-page .application-form :is(input,select,textarea) { padding: 11px 14px; font-size: 14px; border-radius: 8px; }
+.role-application-page .application-form :is(input,select) { min-height: 46px; }
+.role-application-page .application-form-actions { margin-top: 18px; }
+.role-application-page .application-form-actions .btn { min-height: 46px; padding: 12px 26px; font-size: 14px; border-radius: 8px; }
+.role-application-page .application-note { font-size: 10px; margin-top: 20px; }
+.role-application-page .application-success { min-height: 470px; }
+@media (max-width: 780px) {
+  .role-application-page { padding: 16px 12px; }
+  .role-application-page .application-brand { padding: 24px; }
+  .role-application-page .application-brand h2 { font-size: 34px; }
+  .role-application-page .application-panel { padding: 26px 22px; }
+  .application-progress b { font-size: 10px; }
+  .application-stage-heading h2 { font-size: 25px; }
+  .role-application-page .application-success { min-height: 340px; }
+}
+/* Keep every stage compact, including resume upload. */
+.role-application-page .application-brand { padding: 24px 28px; }
+.role-application-page .application-brand > svg { width: 160px; margin-bottom: 22px; }
+.role-application-page .application-brand h2 { font-size: 38px; }
+.role-application-page .application-panel { padding: 24px 28px 20px; }
+.application-progress { padding-bottom: 16px; margin-bottom: 16px; }
+.application-progress li { gap: 8px; }
+.application-progress li > span { width: 34px; height: 34px; font-size: 13px; }
+.application-progress li:not(:last-child):after { top: 16px; }
+.application-stage-heading { margin-bottom: 18px; }
+.application-stage-heading h2 { font-size: 25px; }
+.role-application-page .application-form label { margin-bottom: 14px; }
+.role-application-page .application-form :is(input,select) { min-height: 42px; }
+.role-application-page .application-form :is(input,select,textarea) { padding: 9px 12px; font-size: 13px; }
+.role-application-page .application-form textarea { height: 64px; min-height: 56px; }
+.role-application-page .application-upload { padding: 14px; gap: 5px; }
+.role-application-page .application-upload svg { width: 22px; height: 22px; }
+.role-application-page .application-upload b { font-size: 12px; }
+.role-application-page .application-upload small { font-size: 10px; }
+.role-application-page .application-upload input { padding: 4px; min-height: 0; font-size: 11px; background: transparent; }
+.role-application-page .application-form-actions { margin-top: 14px; }
+.role-application-page .application-form-actions .btn { min-height: 42px; padding: 10px 22px; font-size: 13px; }
+.role-application-page .application-note { margin-top: 14px; }
+.role-application-page .application-error { margin: 0 0 12px; padding: 9px 12px; font-size: 11px; }
+@media (max-width: 780px) {
+  .role-application-page .application-brand h2 { font-size: 32px; }
+  .role-application-page .application-panel { padding: 24px 20px; }
+}
+/* Soft depth for role information and registration cards. */
+.work-role-detail-card,
+.work-role-registration-inner > .work-role-placement,
+.work-role-registration-inner > .work-role-apply-card {
+  box-shadow: 0 8px 24px rgba(27, 52, 91, .09), 0 2px 6px rgba(27, 52, 91, .04);
+}
+/* Consistent centered messaging and spacing through all three stages. */
+.role-application-page .application-brand { align-items: center; text-align: center; }
+.application-brand-content { display: flex; flex: 1; flex-direction: column; justify-content: center; align-items: center; gap: 26px; width: 100%; padding: 12px 0 24px; }
+.role-application-page .application-brand h2 { line-height: 1.12; margin: 20px 0; }
+.role-application-page .application-message { width: 100%; }
+.role-application-page .application-message > p { line-height: 1.8; }
+.role-application-page .application-role { width: 100%; margin: 0; }
+.role-application-page .application-brand-note { margin-top: 18px; line-height: 1.6; }
+@media (max-width: 780px) {
+  .application-brand-content { gap: 22px; padding: 4px 0 16px; }
+  .role-application-page .application-brand h2 { margin: 16px 0; }
+}
+.role-application-page .application-message > p { text-align: center; }
+/* Compact application confirmation, approximately 60% of its original size. */
+.application-received-card { position: relative; width: min(100%, 390px); padding: 16px 25px; border: 1px solid #5b7cac55; border-radius: 14px; background: radial-gradient(ellipse at 45% 35%, #2e5895, #24477d 75%); box-shadow: 0 20px 60px #020f2533; color: #fff; text-align: center; }
+.application-received-close { position: absolute; right: 12px; top: 10px; display: grid; place-items: center; padding: 4px; background: none; border: 0; color: #fff; cursor: pointer; }
+.application-received-close svg { width: 18px; height: 18px; }
+.application-received-art { display: block; width: 105px; height: 78px; margin: 0 auto 8px; filter: drop-shadow(0 8px 10px #092e6460); }
+.application-received-eyebrow { color: #ff9b28; font-size: 10px; font-weight: 750; letter-spacing: .16em; }
+.application-received-card h1 { color: #fff !important; font-size: 29px; letter-spacing: -.035em; line-height: 1.08; margin: 10px 0; }
+.application-received-card h1:focus { outline: none; }
+.application-received-card h2 { color: #fff !important; font-size: 14px; line-height: 1.5; margin: 0 0 8px; letter-spacing: -.02em; }
+.application-received-description { color: #abcaf3; font-size: 12px; line-height: 1.6; margin: 0; text-align: center; }
+.received-desktop-break { display: none; }
+.application-stay-connected { display: flex; align-items: center; gap: 13px; border: 1px solid #aacbfa44; border-radius: 9px; background: #ffffff03; padding: 12px; margin: 12px 0; text-align: left; }
+.application-stay-connected > svg { width: 27px; height: 27px; flex-shrink: 0; color: #a9ceff; }
+.application-stay-connected > div { border-left: 1px solid #b1d1ff44; padding-left: 13px; }
+.application-stay-connected h3 { color: #fff !important; font-size: 13px; line-height: 1.4; margin: 0 0 4px; }
+.application-stay-connected p { color: #abcaf3; font-size: 11px; line-height: 1.6; margin: 0; }
+.application-received-card .application-home-link { display: flex; width: min(100%, 220px); min-height: 40px; margin: 0 auto; gap: 9px; padding: 11px 16px; border-radius: 9px; background: linear-gradient(135deg,#ff9b2a,#ff8c23); font-size: 13px; box-shadow: 0 7px 20px #ff961522; }
+.application-home-link svg { width: 18px; height: 18px; }
+.application-explore-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; color: #abcaf3; font-size: 12px; }
+.application-explore-link svg { width: 18px; height: 18px; color: #ff9b28; }
+.application-received-card :is(a,button):focus-visible { outline: 2px solid #ffd19b; outline-offset: 5px; }
+@media (max-width: 400px) {
+  .application-received-card { padding: 20px; }
+  .application-received-card h1 { font-size: 27px; }
+}
