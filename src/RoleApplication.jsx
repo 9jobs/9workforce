@@ -96,12 +96,12 @@ export default function RoleApplication({role, categories, onClose}) {
   if (success) return <ApplicationReceived onClose={onClose}/>;
   return <main className="role-application-page application-simple-page" aria-label="Candidate application">
     <div className="role-application-layout">
+          <ol className="application-progress" aria-label="Application progress">{stageHeadings.map((stage,index)=><li key={stage.label} className={index===step?'current':index<step?'complete':''} aria-current={index===step?'step':undefined}><span>{index<step?<Check size={20}/>:index+1}</span><b>{stage.label}</b></li>)}</ol>
       <aside className="application-brand">
-        <svg viewBox="346 818 1313 359" role="img" aria-label="9Work Force"><image href="/assets/9workforce-logo-white-clean.png" width="2000" height="2000"/></svg>
+        <img className="application-footer-logo" src="/assets/9workforce-footer-logo.png" alt="9Work Force"/>
         <p className="application-brand-tagline" aria-live="polite" aria-atomic="true">{['Your future starts with you.', 'YOUR SKILLS. YOUR NEXT STEP.', 'ONE STEP CLOSER'][step]}</p>
       </aside>
       <div className="application-panel">
-          <ol className="application-progress" aria-label="Application progress">{stageHeadings.map((stage,index)=><li key={stage.label} className={index===step?'current':index<step?'complete':''} aria-current={index===step?'step':undefined}><span>{index<step?<Check size={20}/>:index+1}</span><b>{stage.label}</b></li>)}</ol>
           <div className="application-stage-heading"><span>STEP {step+1} OF 3</span><h2>{stageHeadings[step].title}</h2><p>{stageHeadings[step].description}</p></div>
           <form ref={form} className="application-form" noValidate onSubmit={advance}>
             <fieldset data-step="0" hidden={step !== 0}><legend className="application-sr-only">Personal details</legend><label>Full name <i>*</i><input name="fullName" autoComplete="name" required placeholder="e.g. John Doe"/></label><label>Phone number <i>*</i><input name="phone" type="tel" autoComplete="tel" required placeholder="e.g. 0400 000 000"/></label><label>Email address <i>*</i><input name="email" type="email" autoComplete="email" required placeholder="e.g. john@example.com"/></label></fieldset>
