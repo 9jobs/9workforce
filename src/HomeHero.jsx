@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link, useNavigate, useSearchParams} from 'react-router-dom';
 import {ArrowRight, ChevronDown, Search, MapPin, UserRound, Building2, HardHat, TrafficCone, Forklift, Hammer, Users} from 'lucide-react';
 import './home-hero.css';
+import {getWorkRolePath} from './workRolePaths';
 
 const industries = ['General Construction Labourers', 'Skilled Construction Labourers', 'Trade Assistants', 'Civil Construction Labourers', 'Formwork & Concrete Labourers', 'Traffic Management Workers'];
 const locations = ['Melbourne', 'Regional Victoria'];
@@ -84,7 +85,7 @@ export function WorkSearchResults({roles, notes}) {
     <h1>Work Opportunities</h1>
     <p>Explore construction labour hire roles across Victoria. Availability and site locations depend on current project requirements.</p>
     <div className="home-search-summary" role="status">{matches.length} matching work {matches.length === 1 ? 'area' : 'areas'}{query && <> · “{query}”</>}{industry && <> · {industry}</>}{location && <> · Preferred location: {location}</>}</div>
-    <div className="home-search-result-list">{matches.length ? matches.map(({role, index}) => <article key={role[0]}><div><h2>{role[0]}</h2><p>{role[1]}</p><small><MapPin size={14} aria-hidden="true"/> Victoria · {notes[index]}</small></div><Link to="/find-work#register">Apply now <ArrowRight size={17} aria-hidden="true"/></Link></article>) : <div className="home-search-empty"><h2>No matching work areas</h2><p>Try a broader keyword or view all the work areas we recruit for.</p><Link to="/work-search">View all work areas <ArrowRight size={17} aria-hidden="true"/></Link></div>}</div>
+    <div className="home-search-result-list">{matches.length ? matches.map(({role, index}) => <article key={role[0]}><div><h2><Link className="work-role-title" to={getWorkRolePath(role[0])}>{role[0]}</Link></h2><p>{role[1]}</p><small><MapPin size={14} aria-hidden="true"/> Victoria · {notes[index]}</small></div><Link to={getWorkRolePath(role[0])}>Apply now <ArrowRight size={17} aria-hidden="true"/></Link></article>) : <div className="home-search-empty"><h2>No matching work areas</h2><p>Try a broader keyword or view all the work areas we recruit for.</p><Link to="/work-search">View all work areas <ArrowRight size={17} aria-hidden="true"/></Link></div>}</div>
       </section>;
 }
 
