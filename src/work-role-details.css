@@ -500,3 +500,108 @@ h2 a.work-role-title:hover {
   .application-received-card { padding: 20px; }
   .application-received-card h1 { font-size: 27px; }
 }
+
+/* Flat, full-page application with a simple brand panel and white form. */
+.role-application-page.application-simple-page { display: block; padding: 0; background: #30497d; }
+.application-simple-page .role-application-layout { width: 100%; max-width: none; min-height: 100dvh; margin: 0; grid-template-columns: 1fr 1fr; border: 0; border-radius: 0; box-shadow: none; overflow: visible; background: transparent; }
+.application-simple-page .application-brand { justify-content: center; align-items: center; gap: 44px; padding: 64px 48px; background: transparent; border: 0; text-align: center; }
+.application-simple-page .application-brand > svg { width: 230px; margin: 0; }
+.application-simple-page .application-brand h2 { max-width: 430px; margin: 0; font-size: clamp(38px,4vw,58px); line-height: 1.15; }
+.application-simple-page .application-panel { display: flex; flex-direction: column; justify-content: center; padding: 48px clamp(28px,5vw,88px); background: #fff; color: #30497d; }
+.application-simple-page .application-panel > * { width: 100%; max-width: 580px; margin-left: auto; margin-right: auto; }
+.application-simple-page .application-progress { border-color: #dfe7f4; margin-bottom: 28px; padding-bottom: 24px; }
+.application-simple-page .application-progress li { color: #7d8ba4; }
+.application-simple-page .application-progress li > span { border-color: #ccd7e9; background: #f3f6fb; color: #667e9f; }
+.application-simple-page .application-progress li.current > span { background: var(--orange); color: #fff; border-color: var(--orange); }
+.application-simple-page .application-progress li.complete > span { background: #30497d; color: #fff; border-color: #30497d; }
+.application-simple-page .application-progress li.current b,.application-simple-page .application-progress li.complete b { color: #30497d; }
+.application-simple-page .application-progress li:not(:last-child):after { background: #d9e3f1; }
+.application-simple-page .application-stage-heading h2 { color: #10233f !important; font-size: 28px; }
+.application-simple-page .application-stage-heading p { color: #7185a3; }
+.application-simple-page .application-form label { color: #30497d; font-size: 13px; margin-bottom: 20px; }
+.application-simple-page .application-form label i { color: var(--orange); }
+.application-simple-page .application-form label > small { color: #7185a3; }
+.application-simple-page .application-form :is(input,select,textarea) { background: #f7f9fc; color: #203b65; border-color: #d6e1f1; padding: 12px 14px; font-size: 14px; }
+.application-simple-page .application-form :is(input,select) { min-height: 48px; }
+.application-simple-page .application-form textarea { height: 80px; }
+.application-simple-page .application-form ::placeholder { color: #8a9cb8; }
+.application-simple-page .application-upload { background: #f7f9fc; border-color: #cbd9ee; color: #30497d; }
+.application-simple-page .application-upload small { color: #7185a3; }
+.application-simple-page .application-back { color: #30497d; }
+.application-simple-page .application-note { color: #7d8ba4; }
+.application-simple-page .application-error { background: #fff5ed; border-color: #ffd7b8; color: #934216; }
+@media (max-width: 780px) {
+  .application-simple-page .role-application-layout { grid-template-columns: 1fr; }
+  .application-simple-page .application-brand { padding: 36px 24px; gap: 24px; }
+  .application-simple-page .application-brand > svg { width: 170px; }
+  .application-simple-page .application-brand h2 { font-size: 32px; }
+  .application-simple-page .application-panel { padding: 32px 24px; }
+}
+
+.application-simple-page .application-upload input { min-height: 0; background: transparent; }
+.application-simple-page .application-upload input::file-selector-button { background: #e7edf7; color: #30497d; }
+
+/* Uniform blue page with a quiet brand tagline and white fields. */
+.application-simple-page .application-brand { gap: 24px; }
+.application-simple-page .application-brand > .application-brand-tagline { margin: 0; color: #fff; font-size: 16px; font-weight: 400; line-height: 1.6; text-align: center; }
+.application-simple-page .application-panel { background: transparent; color: #fff; }
+.application-simple-page .application-progress { border-color: #ffffff30; }
+.application-simple-page .application-progress li { color: #b7c9e7; }
+.application-simple-page .application-progress li > span { background: transparent; border-color: #ffffff40; color: #dce8fc; }
+.application-simple-page .application-progress li.current > span { background: var(--orange); color: #fff; border-color: var(--orange); }
+.application-simple-page .application-progress li.complete > span { background: #ffffff18; color: #fff; border-color: #ffffff60; }
+.application-simple-page .application-progress li.current b,.application-simple-page .application-progress li.complete b { color: #fff; }
+.application-simple-page .application-progress li:not(:last-child):after { background: #ffffff35; }
+.application-simple-page .application-stage-heading h2 { color: #fff !important; }
+.application-simple-page .application-stage-heading p { color: #c2d3ed; }
+.application-simple-page .application-form label { color: #fff; }
+.application-simple-page .application-form label > small { color: #c2d3ed; }
+.application-simple-page .application-form :is(input,select,textarea) { background: #fff; }
+.application-simple-page .application-upload { background: #fff; color: #30497d; }
+.application-simple-page .application-back { color: #fff; }
+.application-simple-page .application-note { color: #c2d3ed; }
+.application-simple-page .application-upload input { background: transparent; }
+@media (max-width: 780px) {
+  .application-simple-page .application-brand > .application-brand-tagline { font-size: 14px; }
+}
+
+/* Give the form more horizontal room and align the brand to the left. */
+.application-simple-page .role-application-layout { grid-template-columns: .85fr 1.15fr; }
+.application-simple-page .application-brand { align-items: flex-start; padding-left: clamp(32px,8vw,150px); text-align: left; }
+.application-simple-page .application-brand > .application-brand-tagline { text-align: left; }
+.application-simple-page .application-panel > * { max-width: 700px; }
+@media (max-width: 780px) {
+  .application-simple-page .role-application-layout { grid-template-columns: 1fr; }
+  .application-simple-page .application-brand { padding-left: 24px; }
+}
+
+/* Twelve-column proportions: three for branding and nine for the form. */
+.application-simple-page .role-application-layout { grid-template-columns: 3fr 9fr; }
+.application-simple-page .application-brand { padding-left: clamp(24px,4vw,76px); padding-right: 24px; }
+.application-simple-page .application-panel > * { max-width: none; }
+@media (max-width: 780px) {
+  .application-simple-page .role-application-layout { grid-template-columns: 1fr; }
+  .application-simple-page .application-brand { padding-left: 24px; }
+}
+
+/* Minimal white confirmation card against the application's blue theme. */
+.role-application-page.application-received-page { background: #30497d; }
+.application-received-page .application-received-card { width: min(100%, 420px); aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; padding: 28px; border-radius: 0; background: #fff; border: 0; color: #30497d; }
+.application-received-page .application-received-card h1 { color: #30497d !important; margin: 0 0 14px; font-size: 30px; }
+.application-received-page .application-received-description { color: #586e8d; font-size: 15px; line-height: 1.6; margin: 0 0 24px; }
+
+/* A brief celebration burst when a successful application is confirmed. */
+.application-celebration { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 10; }
+.application-celebration > span { position: absolute; left: 50%; top: 48%; background: var(--confetti-color); opacity: 0; animation: application-confetti-burst 3s var(--delay) cubic-bezier(.16,.65,.3,1) both; }
+.celebration-confetti { width: 9px; height: 14px; border-radius: 2px; }
+.application-celebration .celebration-ribbon { width: 13px; height: 45px; background: transparent; border: 3px solid var(--confetti-color); border-left-color: transparent; border-right-color: transparent; border-radius: 50%; }
+@keyframes application-confetti-burst {
+  0% { opacity: 0; transform: translate(0,0) rotate(0deg) scale(.25); }
+  8% { opacity: 1; }
+  38% { opacity: 1; transform: translate(var(--burst-x),var(--burst-y)) rotate(var(--spin)) scale(1); }
+  80% { opacity: .8; }
+  100% { opacity: 0; transform: translate(var(--burst-x),calc(var(--burst-y) + var(--fall-y))) rotate(calc(var(--spin) + 180deg)) scale(.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .application-celebration { display: none; }
+}

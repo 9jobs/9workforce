@@ -8,10 +8,6 @@ export default function WorkRoleDetails({role, index, children, onApply}) {
   return <>
     <section className="work-role-hero" aria-labelledby="work-role-heading">
       <div className="work-role-hero-inner">
-        <nav className="work-role-breadcrumb" aria-label="Breadcrumb">
-          <Link to="/find-work">Find Work</Link><span aria-hidden="true">/</span>
-          <span>{content.sector}</span><span aria-hidden="true">/</span><b>{role[0]}</b>
-        </nav>
         <div className="work-role-hero-grid">
           <div className="work-role-hero-copy">
             <span className="work-role-eyebrow"><i/>{content.category}</span>

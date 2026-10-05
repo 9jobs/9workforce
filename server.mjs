@@ -49,7 +49,7 @@ function clean(value, max = 4000) {
 }
 
 function formatSubmission(data) {
-  return Object.entries(data).filter(([key]) => key !== 'resumeData').map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
+  return Object.entries(data).filter(([key]) => !['resumeData', 'coverLetterData'].includes(key)).map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
 }
 
 function smtpCommand(socket, command, expected) {
@@ -152,8 +152,13 @@ async function handleApiRequest(req, res) {
   try {
     const input = JSON.parse(await readBody(req));
     const type = input.type === 'employer' ? 'employer' : 'contact';
-    const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, key === 'resumeData' ? 4200000 : 4000)]));
+    const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, ['resumeData', 'coverLetterData'].includes(key) ? 4200000 : 4000)]));
     if (!fields.email && type === 'contact') return sendJson(res, 400, {error: 'Email is required'});
+    if (fields.applicationForm === 'roleApplication') {
+      if (!fields.fullName || !fields.phone || !fields.email) return sendJson(res, 400, {error: 'Please fill in your full name, phone number and email address.'});
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return sendJson(res, 400, {error: 'Please enter a valid email address.'});
+      if (!fields.resumeData) return sendJson(res, 400, {error: 'Please upload your resume / CV.'});
+    }
     const submission = {id: randomUUID(), type, receivedAt: new Date().toISOString(), fields};
     await saveSubmission(submission);
     const subject = type === 'employer' ? 'New 9Work Force application' : 'New 9Work Force enquiry';
