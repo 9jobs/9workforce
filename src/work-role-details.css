@@ -605,3 +605,19 @@ h2 a.work-role-title:hover {
 @media (prefers-reduced-motion: reduce) {
   .application-celebration { display: none; }
 }
+
+/* Keep the logo and form inside the central six columns, with equal side margins. */
+.application-simple-page .role-application-layout { width: 50%; margin-inline: auto; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); }
+.application-simple-page .application-brand { grid-column: 1; padding: 40px 16px 40px 0; }
+.application-simple-page .application-brand > svg { width: 100%; max-width: 230px; }
+.application-simple-page .application-panel { grid-column: 2; padding: 40px 0 40px 20px; }
+.application-simple-page .application-upload { border: 2px dashed #ff921f; }
+@media (max-width: 780px) {
+  .application-simple-page .role-application-layout { width: 100%; grid-template-columns: 1fr; }
+  .application-simple-page .application-brand, .application-simple-page .application-panel { grid-column: 1; }
+  .application-simple-page .application-brand { padding: 24px; }
+  .application-simple-page .application-panel { padding: 24px; }
+}
+
+.application-simple-page .application-brand > .application-brand-tagline,
+.application-simple-page .application-stage-heading p { color: #c9cdd4; }
