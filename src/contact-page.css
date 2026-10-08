@@ -1,0 +1,553 @@
+/* Modern Contact Page Styles matching target design */
+
+.contact-page-wrap {
+  background: #fbfdff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Hero Section - Centered vertically between nav and footer */
+.contact-hero-section {
+  position: relative;
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 112px 32px 64px;
+  display: grid;
+  grid-template-columns: minmax(380px, 480px) minmax(560px, 680px);
+  gap: 56px;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  box-sizing: border-box;
+}
+
+/* Left Hero Intro */
+.contact-hero-intro {
+  margin-bottom: 24px;
+}
+
+.contact-modern-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: #163265;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.contact-eyebrow-dash {
+  display: inline-block;
+  width: 22px;
+  height: 3px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+.contact-modern-title {
+  font-size: clamp(40px, 4.4vw, 52px) !important;
+  font-weight: 800 !important;
+  color: #0f1d38 !important;
+  line-height: 1.08 !important;
+  margin: 0 0 16px !important;
+  letter-spacing: -1px;
+}
+
+.contact-modern-title .orange-dot {
+  color: var(--orange);
+}
+
+.contact-modern-desc {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #475569;
+  max-width: 460px;
+  margin: 0 0 28px;
+}
+
+/* Talk to our team card */
+.talk-team-card {
+  background: #eff6ff;
+  border-radius: 20px;
+  padding: 32px 30px;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 4px 18px rgba(15, 29, 56, 0.03);
+}
+
+.talk-team-card h2 {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  color: #0f1d38 !important;
+  margin: 0 0 10px !important;
+  letter-spacing: -0.4px;
+}
+
+.talk-team-sub {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0 0 24px;
+}
+
+.talk-team-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.talk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  text-decoration: none;
+  padding: 10px 0;
+  transition: transform 0.18s;
+}
+
+a.talk-item:hover {
+  transform: translateX(4px);
+}
+
+.talk-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(var(--orange-rgb), .12);
+  color: var(--orange);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.talk-text strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #0f1d38;
+  margin-bottom: 2px;
+}
+
+.talk-text .talk-val {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.talk-text small {
+  display: block;
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.talk-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 6px 0;
+}
+
+/* Right Form Column */
+.contact-form-column {
+  position: relative;
+  padding-top: 0;
+  width: 100%;
+}
+
+.contact-card-modern {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 44px 40px 38px;
+  box-shadow: 0 24px 64px -12px rgba(15, 29, 56, 0.15), 0 4px 16px rgba(15, 29, 56, 0.04);
+  border: 1px solid rgba(15, 29, 56, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-orange-pill {
+  position: absolute;
+  top: 0;
+  left: 32px;
+  width: 80px;
+  height: 5px;
+  background: var(--orange);
+  border-radius: 5px 5px 0 0;
+}
+
+.form-eyebrow {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: #163265;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.form-modern-title {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  color: #0f1d38 !important;
+  margin: 0 0 8px !important;
+  letter-spacing: -0.3px;
+  line-height: 1.25 !important;
+}
+
+.form-modern-sub {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 24px;
+}
+
+.form-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field-group label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.form-field-group label i {
+  color: #ef4444;
+  font-style: normal;
+  margin-left: 2px;
+}
+
+.form-field-group input,
+.form-field-group select,
+.form-field-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #ffffff;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.18s ease;
+  box-sizing: border-box;
+}
+
+.form-field-group input::placeholder,
+.form-field-group textarea::placeholder {
+  color: #94a3b8;
+  font-size: 13.5px;
+}
+
+.form-field-group input:focus,
+.form-field-group select:focus,
+.form-field-group textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(var(--orange-rgb), 0.12);
+}
+
+.form-field-group select {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230f1d38' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  cursor: pointer;
+  padding-right: 34px;
+}
+
+.form-field-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.contact-submit-btn {
+  width: 100%;
+  margin-top: 14px;
+  background: var(--orange);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.8px;
+  border-radius: 8px;
+  padding: 13px 20px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: uppercase;
+  font-family: inherit;
+  box-shadow: 0 4px 14px rgba(var(--orange-rgb), 0.35);
+  transition: all 0.18s ease;
+}
+
+.contact-submit-btn:hover {
+  background: var(--orange);
+  box-shadow: 0 6px 18px rgba(var(--orange-rgb), 0.45);
+  transform: translateY(-1px);
+}
+
+.contact-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==========================================================================
+   More Ways To Work With Us Section
+   ========================================================================== */
+
+.ways-section {
+  padding: 50px 24px 96px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ways-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 38px;
+}
+
+.ways-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ways-title {
+  font-size: clamp(28px, 4vw, 36px) !important;
+  font-weight: 800 !important;
+  color: #0f1d38 !important;
+  margin: 0 0 10px !important;
+  letter-spacing: -0.5px;
+}
+
+.ways-subtitle {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+}
+
+.ways-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+/* Employers Card */
+.ways-card-employers {
+  background: linear-gradient(135deg, rgba(15, 29, 56, 0.94) 0%, rgba(22, 50, 101, 0.88) 55%, rgba(15, 29, 56, 0.76) 100%),
+              url('/assets/site-sunset.png') center / cover no-repeat;
+  border-radius: 18px;
+  padding: 32px 30px;
+  min-height: 250px;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(15, 29, 56, 0.12);
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ways-card-employers:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(15, 29, 56, 0.25);
+}
+
+.ways-card-top {
+  position: relative;
+  z-index: 1;
+}
+
+.ways-badge-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+}
+
+.ways-badge-icon.orange {
+  background: var(--orange);
+  color: #ffffff;
+}
+
+.ways-badge-icon.navy {
+  background: #0f1d38;
+  color: #ffffff;
+}
+
+.ways-card-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.ways-card-employers .ways-card-eyebrow {
+  color: #94a3b8;
+}
+
+.ways-card-heading {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  margin: 0 0 10px !important;
+  line-height: 1.25 !important;
+}
+
+.ways-card-employers .ways-card-heading {
+  color: #ffffff !important;
+}
+
+.ways-card-copy {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 360px;
+}
+
+.ways-card-employers .ways-card-copy {
+  color: #cbd5e1 !important;
+}
+
+.ways-arrow-btn {
+  align-self: flex-end;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: transform 0.18s ease;
+}
+
+.ways-arrow-btn.orange {
+  background: var(--orange);
+  color: #ffffff;
+}
+
+.ways-arrow-btn.navy {
+  background: #0f1d38;
+  color: #ffffff;
+}
+
+.ways-card-employers:hover .ways-arrow-btn,
+.ways-card-jobseekers:hover .ways-arrow-btn {
+  transform: scale(1.1);
+}
+
+/* Job Seekers Card */
+.ways-card-jobseekers {
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 18px;
+  padding: 32px 30px;
+  min-height: 250px;
+  color: #0f1d38;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  box-shadow: 0 4px 18px rgba(15, 29, 56, 0.04);
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ways-card-jobseekers:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(15, 29, 56, 0.12);
+}
+
+.ways-card-jobseekers .ways-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 310px;
+}
+
+.ways-card-jobseekers .ways-card-eyebrow {
+  color: #64748b;
+}
+
+.ways-card-jobseekers .ways-card-heading {
+  color: #0f1d38 !important;
+}
+
+.ways-card-jobseekers .ways-card-copy {
+  color: #475569 !important;
+}
+
+.ways-worker-art {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 145px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ways-worker-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1080px) {
+  .contact-hero-section {
+    grid-template-columns: 1fr;
+    padding: 110px 24px 60px;
+    gap: 40px;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-hero-section {
+    padding: 100px 16px 40px;
+  }
+
+  .form-grid-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card-modern {
+    padding: 28px 20px 24px;
+    border-radius: 18px;
+  }
+
+  .talk-team-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+}

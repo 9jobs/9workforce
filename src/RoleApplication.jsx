@@ -18,7 +18,7 @@ function CelebrationBurst() {
       '--fall-y': `${180 + (index % 5) * 45}px`,
       '--spin': `${(index % 2 ? 1 : -1) * (360 + index * 23)}deg`,
       '--delay': `${(index % 8) * 35}ms`,
-      '--confetti-color': ['#ff921f', '#ffd166', '#7eb9ff', '#ffffff', '#58d6bc'][index % 5]
+      '--confetti-color': ['var(--orange)', '#ffd166', '#7eb9ff', '#ffffff', '#58d6bc'][index % 5]
     }}/>;
   })}</div>;
 }

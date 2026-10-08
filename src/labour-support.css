@@ -1,0 +1,84 @@
+.labour-orbit { position:relative; overflow:hidden; margin:24px; border:0; border-radius:0; background:#f7f8fa; color:#30497d; }
+.labour-orbit-inner { position:relative; z-index:1; max-width:1280px; min-height:770px; margin:auto; padding:76px 40px; display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:50px; align-items:center; }
+.labour-orbit-backdrop { position:absolute; inset:0; overflow:hidden; pointer-events:none; background:linear-gradient(125deg,#fafcff,#fff 55%,#f6f9ff); }
+.labour-orbit-glow { position:absolute; display:block; width:72%; height:90%; pointer-events:none; will-change:transform; animation:labour-glow-drift 18s ease-in-out infinite alternate; }
+.labour-orbit-glow-blue { top:-20%; right:-12%; background:radial-gradient(ellipse,#b7cdf580 0%,#dbe6fb38 38%,transparent 70%); }
+.labour-orbit-glow-warm { width:52%; height:75%; right:12%; bottom:-30%; background:radial-gradient(ellipse,#ffbe832e 0%,#ffe8d51c 40%,transparent 70%); animation-duration:23s; animation-delay:-8s; animation-direction:alternate-reverse; }
+.labour-orbit-glow-soft { width:55%; height:70%; left:-25%; bottom:-25%; background:radial-gradient(ellipse,#c3d6fa66 0%,#e5eeff26 42%,transparent 70%); animation-duration:21s; animation-delay:-5s; }
+.labour-orbit-halo { position:absolute; width:430px; aspect-ratio:1; border:72px solid #dce7fb55; border-radius:50%; }
+.labour-orbit-halo-left { left:-320px; top:7%; }
+.labour-orbit-halo-right { right:-300px; top:-170px; width:480px; }
+.labour-orbit-particles { position:absolute; inset:0; }
+.labour-orbit-particles i { position:absolute; display:block; width:6px; height:6px; border-radius:50%; background:var(--orange); box-shadow:0 0 14px 3px #ff923730; animation:labour-particle-float 6s ease-in-out infinite; }
+.labour-orbit-particles i:nth-child(1) { left:72%; top:12%; animation-delay:-1s; }
+.labour-orbit-particles i:nth-child(2) { left:88%; top:28%; width:5px; height:5px; animation-delay:-3s; }
+.labour-orbit-particles i:nth-child(3) { left:94%; top:51%; animation-delay:-2s; }
+.labour-orbit-particles i:nth-child(4) { left:82%; top:73%; width:4px; height:4px; animation-delay:-5s; }
+.labour-orbit-particles i:nth-child(5) { left:62%; top:89%; animation-delay:-4s; }
+.labour-orbit-particles i:nth-child(6) { left:47%; top:82%; width:4px; height:4px; animation-delay:-2.5s; }
+.labour-orbit-particles i:nth-child(7) { left:96%; top:18%; animation-delay:-4.5s; }
+.labour-orbit-particles i:nth-child(8) { left:54%; top:64%; animation-delay:-.5s; }
+.labour-orbit-particles i:nth-child(3n) { width:12px; height:12px; border-radius:0; background:var(--orange); clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%); box-shadow:none; animation-name:labour-sparkle-float; }
+@keyframes labour-particle-float {
+  0%,100% { transform:translate3d(0,8px,0); opacity:.35; }
+  50% { transform:translate3d(6px,-12px,0); opacity:.9; }
+}
+@keyframes labour-sparkle-float {
+  0%,100% { transform:translate3d(0,6px,0) rotate(0deg) scale(.7); opacity:.3; }
+  50% { transform:translate3d(-5px,-10px,0) rotate(35deg) scale(1); opacity:.85; }
+}
+@keyframes labour-glow-drift {
+  from { transform:translate3d(-3%,-2%,0) scale(.94); opacity:.72; }
+  to { transform:translate3d(6%,5%,0) scale(1.08); opacity:1; }
+}
+@media(max-width:780px) {
+  .labour-orbit-halo-left { left:-365px; }
+  .labour-orbit-halo-right { right:-380px; }
+  .labour-orbit-glow-blue { width:130%; height:65%; top:10%; right:-60%; }
+  .labour-orbit-glow-warm { width:100%; height:55%; right:-20%; bottom:-10%; }
+  .labour-orbit-glow-soft { width:100%; height:50%; left:-50%; }
+}
+.labour-orbit-copy { position:relative; z-index:2; max-width:480px; }
+.labour-orbit-copy h2 { margin:0 0 18px; font-size:clamp(32px,3.3vw,48px); line-height:1.04; letter-spacing:-1.8px; }
+.labour-orbit-copy h2 span { color:var(--orange); }
+.labour-orbit-intro { max-width:440px; font-size:16px; line-height:1.65; color:#637491; }
+.labour-orbit-benefits { display:grid; gap:10px; margin:28px 0; }
+.labour-orbit-benefits>div { display:flex; align-items:center; gap:14px; padding:14px 16px; border:1px solid #e4ebf4; border-radius:12px; background:#ffffffdb; box-shadow:0 4px 14px #30497d05; transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease; }
+.labour-orbit-benefits>div>span { display:grid; place-items:center; width:38px; height:38px; flex-shrink:0; background:#edf1f8; border-radius:9px; }
+.labour-orbit-benefits strong { display:block; font-size:14px; }
+.labour-orbit-benefits p { margin-top:5px; font-size:12px; line-height:1.45; color:#75849c; }
+.labour-orbit-cta { display:inline-flex; align-items:center; gap:24px; padding:14px 16px 14px 24px; min-height:52px; border-radius:99px; background:#30497d; color:#fff; font-size:12px; font-weight:800; box-shadow:0 8px 18px #30497d24; transition:transform .22s ease,box-shadow .22s ease; }
+.labour-orbit-cta>span { display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:#ffffff26; transition:transform .22s ease,background .22s ease; }
+.labour-orbit-display { min-width:0; position:relative; }
+.labour-orbit-stage { --orbit-radius:420px; --orbit-center-x:-25px; --orbit-center-y:450px; position:relative; height:620px; outline:none; touch-action:pan-x pinch-zoom; }
+.labour-orbit-card { position:absolute; width:260px; padding:12px; border:1px solid #dce4ef; border-radius:0; background:#fff; box-shadow:0 10px 24px #20385b14; left:var(--orbit-center-x); top:var(--orbit-center-y); will-change:transform,opacity; backface-visibility:hidden; transition:filter .24s ease,border-color .24s ease,box-shadow .24s ease; cursor:pointer; }
+.labour-orbit-card.is-active { border-color:#b9c8dd; box-shadow:0 22px 48px -12px #20385b30,0 4px 12px #20385b0c; }
+.labour-orbit-card-photo { position:relative; overflow:hidden; border-radius:0; height:182px; background:#e4edf6; }
+.labour-orbit-card-photo img { display:block; width:100%; height:100%; object-fit:cover; }
+/* The orbit owns card motion; page entrance animations must not hide its content. */
+.labour-orbit-card :is(img,h3,p) { opacity:1!important; transform:none!important; }
+.labour-orbit-card-label { position:absolute; top:10px; left:8px; display:flex; align-items:center; gap:6px; padding:6px 8px; border-radius:0; background:#fffffff2; font-size:8px; font-weight:800; letter-spacing:.6px; }
+.labour-orbit-card-label i { width:5px; height:5px; border-radius:50%; background:var(--orange); box-shadow:0 0 0 3px #ff8e381a; }
+.labour-orbit-card-number { position:absolute; right:8px; bottom:8px; padding:5px 7px; border-radius:0; background:#30497deb; color:#fff; font-size:9px; font-weight:700; }
+.labour-orbit-card-body { position:relative; padding:22px 44px 10px 4px; min-height:118px; }
+.labour-orbit-card-body h3 { font-size:15px; line-height:1.4; letter-spacing:-.3px; }
+.labour-orbit-card-summary { margin-top:8px; font-size:11px; line-height:1.5; color:#71819a; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.labour-orbit-card-body button { position:absolute; bottom:10px; right:0; display:grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; background:var(--orange); color:#fff; cursor:pointer; transition:transform .2s ease,box-shadow .2s ease; }
+.labour-orbit-detail { position:relative; z-index:12; margin-top:16px; padding:18px; background:#fff; border:1px solid #dce5ef; border-radius:12px; font-size:14px; }
+.labour-orbit-detail p { margin-top:8px; font-size:13px; line-height:1.6; color:#637491; }
+.labour-orbit:focus-visible,.labour-orbit :focus-visible { outline:3px solid var(--orange); outline-offset:4px; }
+.labour-orbit-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media(max-width:1100px) { .labour-orbit-inner { gap:24px; padding:56px 32px; } .labour-orbit-stage { --orbit-radius:340px; --orbit-center-x:-50px; --orbit-center-y:420px; height:580px; } .labour-orbit-card { width:238px; } .labour-orbit-card-photo { height:166px; } .labour-orbit-controls { gap:6px; } .labour-orbit-progress { width:64px; margin:0 4px; } }
+@media(max-width:780px) { .labour-orbit { margin:16px; border-radius:0; } .labour-orbit-inner { grid-template-columns:1fr; gap:32px; padding:44px 24px 28px; min-height:0; } .labour-orbit-copy { max-width:100%; } .labour-orbit-copy h2 { font-size:38px; } .labour-orbit-intro { max-width:540px; } .labour-orbit-benefits { max-width:480px; } .labour-orbit-display { width:min(100%,520px); justify-self:center; } .labour-orbit-stage { --orbit-radius:310px; --orbit-center-x:0px; --orbit-center-y:350px; height:490px; } .labour-orbit-dots { margin-right:0; } }
+@media(max-width:420px) { .labour-orbit-inner { padding:36px 18px 24px; } .labour-orbit-copy h2 { font-size:32px; letter-spacing:-1.2px; } .labour-orbit-intro { font-size:14px; } .labour-orbit-stage { --orbit-radius:240px; --orbit-center-x:-20px; --orbit-center-y:315px; height:460px; } .labour-orbit-card { width:218px; padding:10px; } .labour-orbit-card-photo { height:158px; } .labour-orbit-card-body { padding-top:18px; } .labour-orbit-controls { flex-wrap:wrap; } .labour-orbit-controls small { font-size:10px; } .labour-orbit-progress { width:48px; } }
+
+@media(hover:hover) and (pointer:fine) {
+  .labour-orbit-benefits>div:hover { transform:translateY(-2px); border-color:#c9d6e7; box-shadow:0 8px 22px #30497d0c; }
+  .labour-orbit-cta:hover { transform:translateY(-2px); box-shadow:0 12px 26px #30497d30; }
+  .labour-orbit-cta:hover>span { transform:translateX(2px); background:#ffffff38; }
+  .labour-orbit-card-body button:hover { transform:translateX(2px); box-shadow:0 4px 12px #ff8e3840; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .labour-orbit-glow,.labour-orbit-particles i { animation:none; will-change:auto; }
+  .labour-orbit-card,.labour-orbit-benefits>div,.labour-orbit-cta,.labour-orbit-cta>span,.labour-orbit-card-body button { transition:none; }
+}

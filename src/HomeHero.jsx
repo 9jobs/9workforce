@@ -35,7 +35,7 @@ function HeroSearch() {
   return <div className="home-search">
     <div className="home-search-tabs" role="tablist" aria-label="Find work or contact our team" onKeyDown={handleTabKey}>
       <button id="hero-seeker-tab" type="button" role="tab" aria-selected={audience === 'seeker'} aria-controls="hero-seeker-panel" tabIndex={audience === 'seeker' ? 0 : -1} onClick={() => setAudience('seeker')}><UserRound size={24} aria-hidden="true"/><span>I’m a Construction Worker</span></button>
-      <button id="hero-employer-tab" type="button" role="tab" aria-selected={audience === 'employer'} aria-controls="hero-employer-panel" tabIndex={audience === 'employer' ? 0 : -1} onClick={() => setAudience('employer')}><Building2 size={24} aria-hidden="true"/><span>I’m a Host Business</span></button>
+      <button id="hero-employer-tab" type="button" role="tab" aria-selected={audience === 'employer'} aria-controls="hero-employer-panel" tabIndex={audience === 'employer' ? 0 : -1} onClick={() => setAudience('employer')}><Building2 size={24} aria-hidden="true"/><span>I need construction workers</span></button>
     </div>
     <div className="home-search-panel" id="hero-seeker-panel" role="tabpanel" aria-labelledby="hero-seeker-tab" hidden={audience !== 'seeker'}>
       <form className="home-search-form" role="search" aria-label="Search work opportunities" onSubmit={submitSearch}>
@@ -46,8 +46,8 @@ function HeroSearch() {
       </form>
     </div>
     <div className="home-search-panel home-employer-panel" id="hero-employer-panel" role="tabpanel" aria-labelledby="hero-employer-tab" hidden={audience !== 'employer'}>
-      <div><strong>Tell us about your site requirements.</strong><p>Discuss construction labour hire for your Victorian project team.</p></div>
-      <Link className="home-search-submit" to="/contact">Discuss Labour Requirements <ArrowRight size={20} aria-hidden="true"/></Link>
+      <div><strong>Tell us what your site needs.</strong><p>Share the roles, location and start date with our team by phone or email.</p></div>
+      <Link className="home-search-submit" to="/contact">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link>
     </div>
   </div>;
 }
@@ -57,10 +57,10 @@ export default function HomeHero() {
     <div className="home-hero-site" aria-hidden="true"><img src="/assets/hero-clean-helmet-warehouse.png" alt="" width="1983" height="793" fetchPriority="high"/></div>
     <div className="homepage-hero-inner">
       <div className="homepage-hero-copy">
-        <span className="home-hero-eyebrow">Construction Labour Hire</span>
-        <h1 id="homepage-heading">Construction Labour Hire<br/>for Victorian <em>Projects.</em></h1>
-        <p>We focus on connecting suitable construction labourers with contractors, construction companies, project teams and host businesses across Victoria.</p>
-        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/find-work">Find Work <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/who-we-are">Learn More</Link></div>
+        <span className="home-hero-eyebrow">PEOPLE POWERING AUSTRALIA</span>
+        <h1 id="homepage-heading">Construction labour<br/>when you <em>need it.</em></h1>
+        <p>Tell us what your site needs. We’ll handle the workforce.</p>
+        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/contact">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/who-we-are">Learn More</Link></div>
       </div>
       <HeroSearch/>
       <ul className="home-hero-sectors" aria-label="Our work areas">
@@ -82,8 +82,8 @@ export function WorkSearchResults({roles, notes}) {
   });
   return <section className="section home-search-results">
     <Link className="home-search-back" to="/">← Back to home</Link>
-    <h1>Work Opportunities</h1>
-    <p>Explore construction labour hire roles across Victoria. Availability and site locations depend on current project requirements.</p>
+    <h1>Work opportunities</h1>
+    <p>Explore construction work across Victoria. Role availability and site locations depend on project requirements.</p>
     <div className="home-search-summary" role="status">{matches.length} matching work {matches.length === 1 ? 'area' : 'areas'}{query && <> · “{query}”</>}{industry && <> · {industry}</>}{location && <> · Preferred location: {location}</>}</div>
     <div className="home-search-result-list">{matches.length ? matches.map(({role, index}) => <article key={role[0]}><div><h2><Link className="work-role-title" to={getWorkRolePath(role[0])}>{role[0]}</Link></h2><p>{role[1]}</p><small><MapPin size={14} aria-hidden="true"/> Victoria · {notes[index]}</small></div><Link to={getWorkRolePath(role[0])}>Apply now <ArrowRight size={17} aria-hidden="true"/></Link></article>) : <div className="home-search-empty"><h2>No matching work areas</h2><p>Try a broader keyword or view all the work areas we recruit for.</p><Link to="/work-search">View all work areas <ArrowRight size={17} aria-hidden="true"/></Link></div>}</div>
       </section>;

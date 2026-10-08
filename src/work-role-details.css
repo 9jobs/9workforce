@@ -25,7 +25,7 @@ h2 a.work-role-title:hover {
 .work-role-breadcrumb b { color: #fff; font-weight: 600; }
 .work-role-hero-grid { display: grid; grid-template-columns: minmax(0,1.45fr) minmax(0,1fr); gap: 48px; align-items: center; }
 .work-role-hero-copy { min-width: 0; }
-.work-role-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; background: rgba(255,142,56,.14); color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+.work-role-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; background: rgba(var(--orange-rgb), .14); color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: .04em; }
 .work-role-eyebrow i { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
 .work-role-hero h1 { color: #fff !important; font-size: clamp(34px,3.6vw,48px); line-height: 1.08; letter-spacing: -.04em; margin: 15px 0 18px; max-width: 650px; overflow-wrap: break-word; }
 .work-role-hero-copy > p { color: #f0f4fc; font-size: 18px; font-weight: 500; line-height: 1.55; max-width: 670px; margin: 0; }
@@ -61,7 +61,7 @@ h2 a.work-role-title:hover {
 .work-role-detail-card li { display: flex; align-items: start; gap: 10px; margin: 0 0 14px; font-size: 14px; line-height: 1.6; color: #536582; }
 .work-role-detail-card li:last-child { margin-bottom: 0; }
 .work-role-detail-card li > svg { width: 17px; height: 17px; padding: 3px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
-.work-role-duty-list li > svg { color: var(--orange); background: #fff1e8; }
+.work-role-duty-list li > svg { color: var(--orange); background: rgba(var(--orange-rgb), .12); }
 .work-role-requirement-list li > svg { color: #6781aa; background: #eef2f8; }
 .work-role-detail-card strong { color: #29476f; font-weight: 600; }
 
@@ -124,7 +124,7 @@ h2 a.work-role-title:hover {
 .role-candidate-form-heading > p { color: #8a98ad; font-size: 11px; line-height: 1.6; }
 .role-candidate-form .form-row { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px; }
 .work-role-registration .role-candidate-form label { position: relative; margin: 0 0 20px; color: #29476f; font-size: 10px; font-weight: 600; line-height: 1.5; letter-spacing: .045em; text-transform: uppercase; }
-.role-candidate-form label > i { color: #fa702c; font-style: normal; }
+.role-candidate-form label > i { color: var(--orange); font-style: normal; }
 .work-role-registration .role-candidate-form :is(input,select,textarea) { width: 100%; min-width: 0; margin-top: 8px; background: #fafbfd; color: #284164; border: 1px solid #d9e3f0; border-radius: 6px; padding: 12px; font-family: Inter,Arial,sans-serif; font-size: 12px; font-weight: 400; line-height: 1.5; letter-spacing: 0; text-transform: none; }
 .work-role-registration .role-candidate-form :is(input,select) { height: 43px; }
 .work-role-registration .role-candidate-form textarea { height: 100px; min-height: 43px; resize: vertical; }
@@ -139,7 +139,7 @@ h2 a.work-role-title:hover {
 .work-role-registration .role-candidate-form .role-resume-upload input { position: absolute; bottom: 44px; left: 15%; width: 70%; height: 24px; padding: 0; border: 0; background: transparent; font-size: 10px; color: #8798b1; cursor: pointer; }
 .role-resume-upload input::file-selector-button { border: 0; background: transparent; color: #30497d; font: inherit; padding: 0 5px 0 0; cursor: pointer; }
 .work-role-registration .role-candidate-form .role-resume-upload { margin-bottom: -14px; }
-.work-role-registration .role-candidate-form .btn { margin: 8px 0 0; min-height: 56px; border-radius: 7px; background: var(--orange); box-shadow: 0 5px 9px rgba(255,142,56,.18); font-size: 14px; font-weight: 700; }
+.work-role-registration .role-candidate-form .btn { margin: 8px 0 0; min-height: 56px; border-radius: 7px; background: var(--orange); box-shadow: 0 5px 9px rgba(var(--orange-rgb), .18); font-size: 14px; font-weight: 700; }
 .role-candidate-form > p.role-candidate-form-note { color: #8d9bb0; font-size: 10px; line-height: 1.5; margin-top: 12px; text-align: center; }
 @media (max-width: 1000px) {
   .work-role-registration-inner { gap: 32px; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); }
@@ -170,9 +170,9 @@ h2 a.work-role-title:hover {
 .role-application-layout { display: grid; grid-template-columns: .85fr 1.15fr; min-height: 660px; }
 .application-brand { display: flex; flex-direction: column; align-items: start; padding: 52px 40px 32px; background: linear-gradient(145deg,#263e70,#30497d); border-right: 1px solid #ffffff16; }
 .application-brand > svg { width: 240px; max-width: 100%; height: auto; margin-bottom: 64px; }
-.application-eyebrow { color: #ffae70; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
+.application-eyebrow { color: var(--orange); font-size: 10px; font-weight: 700; letter-spacing: .14em; }
 .application-brand h2 { color: #fff !important; font-size: 35px; line-height: 1.2; letter-spacing: -.035em; margin: 18px 0; }
-.application-brand h2 em { color: #ff963e; font-style: normal; }
+.application-brand h2 em { color: var(--orange); font-style: normal; }
 .application-brand > p { color: #d3def2; font-size: 14px; line-height: 1.8; margin: 0; }
 .application-role { margin: 34px 0; padding: 18px 20px; width: 100%; border: 1px solid #ffffff20; border-radius: 10px; background: #ffffff08; }
 .application-role small { display: block; margin-bottom: 9px; color: #bdcce5; font-size: 9px; letter-spacing: .1em; }
@@ -188,34 +188,34 @@ h2 a.work-role-title:hover {
 .application-steps .current > span { background: var(--orange); border-color: var(--orange); }
 .application-steps .complete { color: #fff; }
 .application-steps .complete > span { background: #ffffff20; }
-.application-heading > span { color: #ffad70; letter-spacing: .1em; font-size: 9px; font-weight: 700; }
+.application-heading > span { color: var(--orange); letter-spacing: .1em; font-size: 9px; font-weight: 700; }
 .application-heading h2 { margin: 10px 0 8px; color: #fff !important; font-size: 28px; }
 .application-heading p { color: #c7d5ed; font-size: 12px; line-height: 1.6; margin: 0 0 28px; }
 .application-form fieldset { min-width: 0; border: 0; margin: 0; padding: 0; }
 .application-form fieldset[hidden] { display: none; }
 .application-form label { display: block; color: #e2eaff; font-size: 10px; font-weight: 600; margin: 0 0 18px; }
-.application-form label i { color: #ffad70; font-style: normal; }
+.application-form label i { color: var(--orange); font-style: normal; }
 .application-form label > small { color: #bfcee7; font-weight: 400; }
 .application-form :is(input,select,textarea) { display: block; width: 100%; margin-top: 8px; border: 1px solid #ffffff30; border-radius: 7px; padding: 12px 14px; color: #fff; background: #ffffff0c; font: 12px Inter,Arial,sans-serif; line-height: 1.5; }
 .application-form :is(input,select) { min-height: 44px; }
 .application-form textarea { resize: vertical; }
 .application-form option { color: #203b65; background: #fff; }
 .application-form ::placeholder { color: #b7c7e2; opacity: 1; }
-.application-form :is(input,select,textarea):focus-visible { outline: 2px solid #ffad70; outline-offset: 2px; }
+.application-form :is(input,select,textarea):focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 .application-field-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; }
 .application-form-actions { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 26px; }
 .application-form-actions .btn { margin-left: auto; background: var(--orange); min-height: 46px; padding: 12px 22px; font-size: 12px; }
 .application-back { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; color: #e4ecfa; font-size: 12px; cursor: pointer; }
 .application-upload { display: flex; align-items: center; flex-direction: column; gap: 7px; margin-top: 8px; padding: 18px; border: 1px dashed #b6c7e575; border-radius: 9px; background: #ffffff08; cursor: pointer; }
-.application-upload svg { color: #ffad70; }
+.application-upload svg { color: var(--orange); }
 .application-upload b { font-size: 12px; overflow-wrap: anywhere; }
 .application-upload small { color: #bdcee9; font-size: 10px; }
 .application-upload input { border: 0; padding: 4px; min-height: 0; font-size: 10px; background: none; }
 .application-upload input::file-selector-button { border: 0; border-radius: 4px; padding: 5px 8px; background: #ffffff20; color: #fff; cursor: pointer; }
 .application-note { text-align: center; color: #b2c3df; font-size: 9px; margin: 16px 0 0; line-height: 1.5; }
-.application-error { color: #ffe0c8; border: 1px solid #ffad7070; padding: 12px; border-radius: 6px; font-size: 12px; }
+.application-error { color: var(--orange); border: 1px solid rgba(var(--orange-rgb), 0.439); padding: 12px; border-radius: 6px; font-size: 12px; }
 .application-success { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 540px; }
-.application-success > span { display: grid; place-items: center; width: 84px; height: 84px; color: #ffd1ac; background: #ff963e20; border-radius: 50%; margin-bottom: 25px; }
+.application-success > span { display: grid; place-items: center; width: 84px; height: 84px; color: var(--orange); background: rgba(var(--orange-rgb), 0.125); border-radius: 50%; margin-bottom: 25px; }
 .application-success h2 { color: #fff !important; font-size: 27px; line-height: 1.35; max-width: 380px; }
 .application-success p { color: #d0ddf2; font-size: 14px; margin: 12px 0 30px; }
 .application-success .btn { background: var(--orange); }
@@ -239,7 +239,7 @@ h2 a.work-role-title:hover {
   .application-success { min-height: 340px; }
   .work-role-apply-card { padding: 28px; }
 }
-.application-brand h2 em { color: #ff963e !important; }
+.application-brand h2 em { color: var(--orange) !important; }
 /* Dedicated application page with the compact card arrangement from the reference. */
 .role-application-page { min-height: 100dvh; background: #091a2b; padding: 28px 32px 48px; color: #fff; }
 .application-page-top { display: flex; justify-content: space-between; align-items: center; max-width: 1060px; margin: 0 auto 24px; gap: 20px; }
@@ -283,9 +283,9 @@ h2 a.work-role-title:hover {
 .role-application-page .application-brand { position: relative; isolation: isolate; padding: 44px; background: radial-gradient(ellipse at 30% 0,#1a2e4b,#0a1d31); border: 0; overflow: hidden; }
 .role-application-page .application-brand > svg { width: 225px; margin-bottom: 48px; }
 .role-application-page .application-message { position: relative; z-index: 1; }
-.role-application-page .application-eyebrow { color: #ff931e; font-size: 15px; line-height: 1.5; letter-spacing: .075em; }
+.role-application-page .application-eyebrow { color: var(--orange); font-size: 15px; line-height: 1.5; letter-spacing: .075em; }
 .role-application-page .application-brand h2 { color: #fff !important; font-size: clamp(42px,4.1vw,64px); font-weight: 750; line-height: .97; letter-spacing: -.035em; margin: 20px 0 16px; }
-.role-application-page .application-brand h2 em { color: #ff921f !important; font-style: normal; }
+.role-application-page .application-brand h2 em { color: var(--orange) !important; font-style: normal; }
 .role-application-page .application-message > p { font-size: 19px; line-height: 1.65; color: #c7ddf6; }
 .role-application-page .application-role { z-index: 1; position: relative; margin: 26px 0 220px; padding: 22px 30px; background: #ffffff04; border-color: #a4bed64a; border-radius: 14px; }
 .role-application-page .application-role small { color: #9bbfe4; font-size: 13px; letter-spacing: .08em; margin-bottom: 10px; }
@@ -298,20 +298,20 @@ h2 a.work-role-title:hover {
 .application-progress li > span { position: relative; z-index: 1; display: grid; place-items: center; width: 50px; height: 50px; border: 1.5px solid #83a6d078; border-radius: 50%; color: #eff5ff; font-size: 17px; font-weight: 600; background: #304e80; }
 .application-progress li:not(:last-child):after { content: ''; position: absolute; left: calc(50% + 40px); width: calc(100% - 80px); height: 2px; top: 24px; background: #8aaed65c; }
 .application-progress li.current { color: #fff; }
-.application-progress li.current > span { background: linear-gradient(135deg,#ffa646,#ff8d21); border-color: #ffb15d; box-shadow: 0 3px 18px #ff992d20; }
+.application-progress li.current > span { background: linear-gradient(135deg,var(--orange),var(--orange)); border-color: var(--orange); box-shadow: 0 3px 18px rgba(var(--orange-rgb), 0.125); }
 .application-progress li.complete > span { color: #fff; border-color: #a6c4e4; }
 .application-progress b { font-size: 16px; font-weight: 650; }
 .application-stage-heading { margin-bottom: 34px; }
-.application-stage-heading > span { font-size: 15px; font-weight: 700; letter-spacing: .08em; color: #ff921f; }
+.application-stage-heading > span { font-size: 15px; font-weight: 700; letter-spacing: .08em; color: var(--orange); }
 .application-stage-heading h2 { color: #fff !important; font-size: 38px; line-height: 1.2; letter-spacing: -.025em; margin: 10px 0; }
 .application-stage-heading p { color: #b9d1ed; font-size: 19px; margin: 0; line-height: 1.5; }
 .role-application-page .application-form label { font-size: 15px; margin-bottom: 30px; }
-.role-application-page .application-form label i { color: #ff941e; }
+.role-application-page .application-form label i { color: var(--orange); }
 .role-application-page .application-form :is(input,select,textarea) { margin-top: 8px; font-size: 18px; padding: 16px 20px; border-color: #a1bdd669; border-radius: 12px; background: #ffffff07; }
 .role-application-page .application-form :is(input,select) { min-height: 64px; }
 .role-application-page .application-form ::placeholder { color: #a4bfde; }
 .role-application-page .application-form-actions { margin-top: 28px; }
-.role-application-page .application-form-actions .btn { min-height: 64px; padding: 16px 38px; border-radius: 12px; font-size: 18px; background: linear-gradient(135deg,#ff9c34,#ff8b23); box-shadow: 0 8px 16px #ff992a28; }
+.role-application-page .application-form-actions .btn { min-height: 64px; padding: 16px 38px; border-radius: 12px; font-size: 18px; background: linear-gradient(135deg,var(--orange),var(--orange)); box-shadow: 0 8px 16px rgba(var(--orange-rgb), 0.157); }
 .role-application-page .application-note { font-size: 12px; margin-top: 30px; }
 .role-application-page .application-upload { padding: 22px; }
 .role-application-page .application-upload input { min-height: 0; font-size: 12px; padding: 4px; }
@@ -480,7 +480,7 @@ h2 a.work-role-title:hover {
 .application-received-close { position: absolute; right: 12px; top: 10px; display: grid; place-items: center; padding: 4px; background: none; border: 0; color: #fff; cursor: pointer; }
 .application-received-close svg { width: 18px; height: 18px; }
 .application-received-art { display: block; width: 105px; height: 78px; margin: 0 auto 8px; filter: drop-shadow(0 8px 10px #092e6460); }
-.application-received-eyebrow { color: #ff9b28; font-size: 10px; font-weight: 750; letter-spacing: .16em; }
+.application-received-eyebrow { color: var(--orange); font-size: 10px; font-weight: 750; letter-spacing: .16em; }
 .application-received-card h1 { color: #fff !important; font-size: 29px; letter-spacing: -.035em; line-height: 1.08; margin: 10px 0; }
 .application-received-card h1:focus { outline: none; }
 .application-received-card h2 { color: #fff !important; font-size: 14px; line-height: 1.5; margin: 0 0 8px; letter-spacing: -.02em; }
@@ -491,11 +491,11 @@ h2 a.work-role-title:hover {
 .application-stay-connected > div { border-left: 1px solid #b1d1ff44; padding-left: 13px; }
 .application-stay-connected h3 { color: #fff !important; font-size: 13px; line-height: 1.4; margin: 0 0 4px; }
 .application-stay-connected p { color: #abcaf3; font-size: 11px; line-height: 1.6; margin: 0; }
-.application-received-card .application-home-link { display: flex; width: min(100%, 220px); min-height: 40px; margin: 0 auto; gap: 9px; padding: 11px 16px; border-radius: 9px; background: linear-gradient(135deg,#ff9b2a,#ff8c23); font-size: 13px; box-shadow: 0 7px 20px #ff961522; }
+.application-received-card .application-home-link { display: flex; width: min(100%, 220px); min-height: 40px; margin: 0 auto; gap: 9px; padding: 11px 16px; border-radius: 9px; background: linear-gradient(135deg,var(--orange),var(--orange)); font-size: 13px; box-shadow: 0 7px 20px rgba(var(--orange-rgb), 0.133); }
 .application-home-link svg { width: 18px; height: 18px; }
 .application-explore-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; color: #abcaf3; font-size: 12px; }
-.application-explore-link svg { width: 18px; height: 18px; color: #ff9b28; }
-.application-received-card :is(a,button):focus-visible { outline: 2px solid #ffd19b; outline-offset: 5px; }
+.application-explore-link svg { width: 18px; height: 18px; color: var(--orange); }
+.application-received-card :is(a,button):focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
 @media (max-width: 400px) {
   .application-received-card { padding: 20px; }
   .application-received-card h1 { font-size: 27px; }
@@ -529,7 +529,7 @@ h2 a.work-role-title:hover {
 .application-simple-page .application-upload small { color: #7185a3; }
 .application-simple-page .application-back { color: #30497d; }
 .application-simple-page .application-note { color: #7d8ba4; }
-.application-simple-page .application-error { background: #fff5ed; border-color: #ffd7b8; color: #934216; }
+.application-simple-page .application-error { background: rgba(var(--orange-rgb), .12); border-color: rgba(var(--orange-rgb), .3); color: #934216; }
 @media (max-width: 780px) {
   .application-simple-page .role-application-layout { grid-template-columns: 1fr; }
   .application-simple-page .application-brand { padding: 36px 24px; gap: 24px; }
@@ -611,7 +611,7 @@ h2 a.work-role-title:hover {
 .application-simple-page .application-brand { grid-column: 1; padding: 40px 16px 40px 0; }
 .application-simple-page .application-brand > svg { width: 100%; max-width: 230px; }
 .application-simple-page .application-panel { grid-column: 2; padding: 40px 0 40px 20px; }
-.application-simple-page .application-upload { border: 2px dashed #ff921f; }
+.application-simple-page .application-upload { border: 2px dashed var(--orange); }
 @media (max-width: 780px) {
   .application-simple-page .role-application-layout { width: 100%; grid-template-columns: 1fr; }
   .application-simple-page .application-brand, .application-simple-page .application-panel { grid-column: 1; }
@@ -646,7 +646,7 @@ h2 a.work-role-title:hover {
 .application-simple-page .application-panel > * { width: 100%; max-width: none; margin-left: 0; margin-right: 0; }
 .application-simple-page .application-progress li { color: #dce3ef; gap: 14px; }
 .application-simple-page .application-progress li > span { width: 60px; height: 60px; font-size: 24px; border-width: 1px; box-shadow: none; }
-.application-simple-page .application-progress li.current > span { background: linear-gradient(135deg, #ffa126, #ff8e27); border-color: #ff9b26; }
+.application-simple-page .application-progress li.current > span { background: linear-gradient(135deg, var(--orange), var(--orange)); border-color: var(--orange); }
 .application-simple-page .application-progress li b { font-size: 18px; font-weight: 600; line-height: 1.4; }
 .application-simple-page .application-progress li:not(:last-child):after { top: 29px; left: calc(50% + 46px); width: calc(100% - 92px); height: 1px; background: #ffffff40; }
 .application-simple-page .application-stage-heading { margin-bottom: 20px; }
@@ -658,10 +658,10 @@ h2 a.work-role-title:hover {
 .application-simple-page .application-form :is(input,select,textarea) { font-size: 18px; padding: 13px 16px; border: 1px solid #dbe2ee; border-radius: 8px; box-shadow: 0 2px 4px #1324440a; transition: border-color .15s, box-shadow .15s; }
 .application-simple-page .application-form :is(input,select) { min-height: 56px; }
 .application-simple-page .application-form :is(input,select,textarea):focus { border-color: #b6c8e5; outline: none; box-shadow: 0 0 0 3px #ffffff12; }
-.application-simple-page .application-form :is(input,select,textarea):focus-visible { outline: 2px solid #ffac58; outline-offset: 3px; }
+.application-simple-page .application-form :is(input,select,textarea):focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 .application-simple-page .application-form ::placeholder { color: #728198; opacity: 1; }
 .application-simple-page .application-form-actions { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 26px; }
-.application-simple-page .application-form-actions .btn { margin: 0 0 0 auto; min-width: 190px; min-height: 60px; font-size: 18px; padding: 16px 32px; border-radius: 9px; background: linear-gradient(115deg, #ff941f, #ff8a27); box-shadow: 0 5px 14px #14233c18; }
+.application-simple-page .application-form-actions .btn { margin: 0 0 0 auto; min-width: 190px; min-height: 60px; font-size: 18px; padding: 16px 32px; border-radius: 9px; background: linear-gradient(115deg, var(--orange), var(--orange)); box-shadow: 0 5px 14px #14233c18; }
 .application-simple-page .application-form-actions .btn:only-child { margin-inline: auto; }
 .application-simple-page .application-form-actions .btn svg { width: 20px; height: 20px; }
 .application-simple-page .application-form-actions .btn:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }

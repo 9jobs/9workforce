@@ -2,7 +2,7 @@ export const workRoleContent = [
   {
     category: 'CONSTRUCTION LABOUR HIRE', sector: 'Construction & Trades',
     image: '/assets/construction-worker.png', imageLabel: 'Construction Site Support',
-    intro: 'Register your interest in general construction labouring across metropolitan Melbourne and regional Victoria. Support commercial, residential and infrastructure project teams with materials handling, preparation and practical site assistance.',
+    intro: 'Register for general construction labouring opportunities in metropolitan Melbourne and regional Victoria. Support commercial, residential and infrastructure teams with materials handling, site preparation and practical assistance.',
     overview: 'As a General Construction Labourer with 9Work Force, you support the day-to-day activities that keep a construction site organised and ready for work. Duties depend on the project, your experience and the instructions of the site team.',
     duties: [
       'Keep work areas clean, sort materials and maintain safe access around the site.',
@@ -23,7 +23,7 @@ export const workRoleContent = [
   {
     category: 'SKILLED CONSTRUCTION LABOUR', sector: 'Construction & Trades',
     image: '/assets/materials-worker.png', imageLabel: 'Skilled Site Activities',
-    intro: 'Register for skilled construction labouring opportunities across Victoria. Bring your practical site experience to project teams that need support with specialised preparation, tools, materials and construction activities.',
+    intro: 'Register your experience for skilled construction labouring opportunities across Victoria. Support project teams with specialised preparation, tools, materials and construction tasks.',
     overview: 'Skilled Construction Labourers assist with tasks that call for established construction experience and familiarity with site routines. Your duties are matched to your demonstrated skills, relevant credentials and each project’s requirements.',
     duties: [
       'Support specialised construction tasks within your skills and site authorisation.',
@@ -44,7 +44,7 @@ export const workRoleContent = [
   {
     category: 'TRADE SUPPORT', sector: 'Construction & Trades',
     image: '/assets/trade-team.png', imageLabel: 'Working Alongside Trades',
-    intro: 'Register your interest in Trade Assistant roles supporting qualified tradespeople across Victorian construction sites. Help with tools, materials and work-area preparation while building on your practical trade-support experience.',
+    intro: 'Register for Trade Assistant opportunities on Victorian construction sites. Support qualified tradespeople with tools, materials and work-area preparation within your trade-support experience.',
     overview: 'Trade Assistants provide hands-on support to the trades team so work can progress smoothly. Tasks are directed by qualified tradespeople and stay within your experience, training and the scope of the assigned role.',
     duties: [
       'Prepare and organise tools, materials and supplies for the trades team.',
@@ -65,7 +65,7 @@ export const workRoleContent = [
   {
     category: 'CIVIL CONSTRUCTION', sector: 'Civil & Infrastructure',
     image: '/assets/civil-excavation.png', imageLabel: 'Civil Project Support',
-    intro: 'Register for Civil Construction Labourer opportunities on Victorian civil and infrastructure projects. Support site preparation, drainage, roadworks and excavation-related activities according to your experience and project requirements.',
+    intro: 'Register for Civil Construction Labourer opportunities across Victoria. Support site preparation, drainage, roadworks and excavation-related tasks within your experience and project requirements.',
     overview: 'Civil Construction Labourers assist crews working on roads, drainage and infrastructure. Tasks vary by project and may involve outdoor work, materials handling and coordination with supervisors and plant operators.',
     duties: [
       'Assist with site preparation, clean-up and access around civil work areas.',
@@ -86,7 +86,7 @@ export const workRoleContent = [
   {
     category: 'FORMWORK & CONCRETE', sector: 'Construction & Structures',
     image: '/assets/construction-worker.png', imageLabel: 'Structural Construction Support',
-    intro: 'Register your interest in Formwork & Concrete Labourer roles across Victoria. Assist structural construction teams with formwork preparation, materials and concrete-related site activities within your experience and training.',
+    intro: 'Register for Formwork & Concrete Labourer opportunities across Victoria. Assist structural crews with formwork preparation, materials and concrete-related tasks within your experience and training.',
     overview: 'Formwork & Concrete Labourers support crews preparing and carrying out structural construction work. Your tasks depend on previous experience, site supervision and the requirements of each construction stage.',
     duties: [
       'Prepare and organise formwork materials and tools for the crew.',
@@ -107,7 +107,7 @@ export const workRoleContent = [
   {
     category: 'TRAFFIC MANAGEMENT', sector: 'Traffic & Infrastructure',
     image: '/assets/traffic-control.png', imageLabel: 'Traffic & Site Access Support',
-    intro: 'Register for Traffic Management Worker opportunities supporting Victorian construction, civil and infrastructure sites. Share your qualifications and experience for roles matched to site traffic-management requirements.',
+    intro: 'Register for Traffic Management Worker opportunities on Victorian construction, civil and infrastructure sites. Share your qualifications and experience for review against site traffic-management requirements.',
     overview: 'Traffic Management Workers support movement around active project work areas. Activities depend on your current qualifications, demonstrated competencies, site briefing and the traffic-management arrangements for the project.',
     duties: [
       'Support traffic-management activities within your training and assigned duties.',

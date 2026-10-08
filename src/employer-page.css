@@ -1,0 +1,124 @@
+/* Hire Workers: reference layout using the site's shared brand colors. */
+.employer-experience { background:#fff; }
+.hire-hero { position:relative; isolation:isolate; min-height:690px; overflow:hidden; background:linear-gradient(90deg,rgba(15,29,56,.91) 0%,rgba(22,50,101,.80) 37%,rgba(22,50,101,.25) 66%,rgba(22,50,101,.04) 100%),url('/assets/employer-construction-hero.jpg') 70% center/cover; }
+.hire-hero-inner { width:min(1280px,calc(100% - 96px)); margin:0 auto; display:grid; grid-template-columns:minmax(0,1.12fr) minmax(335px,.88fr) minmax(80px,.30fr); gap:46px; padding:155px 0 58px; align-items:center; }
+.hire-hero-copy { color:#fff; }
+.hire-hero h1 { margin:16px 0 18px; color:#fff !important; font-size:clamp(44px,4.4vw,66px); line-height:1.03; letter-spacing:-2.2px; font-weight:800; }
+.hire-hero h1 em { color:var(--orange) !important; }
+.hire-hero-copy > p { max-width:490px; font-size:16px; line-height:1.65; color:#edf4ff; }
+.hire-trust { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:30px; }
+.hire-trust > div { display:flex; flex-direction:column; align-items:flex-start; gap:6px; }
+.hire-trust > div > span { display:grid; place-items:center; width:58px; height:58px; border-radius:50%; margin-bottom:3px; color:var(--orange); background:linear-gradient(145deg,rgba(48,73,125,.80),rgba(22,50,101,.70)); border:1px solid #7c9bc34a; box-shadow:inset 0 1px 0 #ffffff14; }
+.hire-trust strong { font-size:14px; letter-spacing:.025em; }
+.hire-trust small { font-size:12px; color:#edf4ff; line-height:1.5; }
+.employer-experience .request-form { width:100%; padding:26px 25px 20px; border:1px solid #dce6f7; border-radius:13px; background:#fff; color:var(--brand); box-shadow:0 18px 55px #06152a40; }
+.employer-experience .form-head { display:block; padding:0; border:0; }
+.employer-experience .form-head b { font-size:21px; font-weight:800; color:var(--brand); }
+.employer-experience .form-head > span { display:none; }
+.hire-form-intro { margin-top:6px; font-size:12px; line-height:1.55; color:#536582; }
+.employer-experience .request-form label { margin:17px 0 0; font-size:10px; line-height:1.4; font-weight:700; color:var(--brand); }
+.employer-experience .request-form :is(input,select) { display:block; width:100%; min-width:0; height:39px; margin-top:6px; padding:8px 11px; border:1px solid #cbd9ec; border-radius:5px; background:#fff; color:var(--brand); font-size:11px; }
+.employer-experience .request-form input::placeholder { color:#7185a3; opacity:1; }
+.employer-experience .request-form :is(input,select):focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
+.employer-experience .request-form .form-row { gap:15px; }
+.employer-experience .request-form .btn { min-height:47px; margin:22px 0 0; border-radius:6px; font-size:12px; font-weight:800; background:var(--orange); box-shadow:0 5px 15px rgba(var(--orange-rgb),.23); }
+.hire-form-note { display:flex; align-items:flex-start; justify-content:center; gap:7px; margin-top:13px; color:#60708d; font-size:9px; line-height:1.5; }
+.hire-form-note svg { flex:0 0 12px; margin-top:1px; }
+.hire-form-note a { text-decoration:underline; text-underline-offset:2px; }
+.hire-support { display:grid; grid-template-columns:1.08fr 1fr 1fr; gap:20px; width:min(1280px,calc(100% - 96px)); margin:0 auto; padding:46px 0; align-items:stretch; }
+.hire-support-copy { padding:6px 20px 6px 0; }
+.hire-eyebrow { display:inline-flex; align-items:center; gap:10px; color:var(--brand); font-size:11px; font-weight:800; letter-spacing:.03em; }
+.hire-eyebrow::before { content:''; display:inline-block; width:30px; height:3px; background:var(--orange); border-radius:2px; }
+.hire-support h2 { margin:17px 0 14px; font-size:36px; line-height:1.14; letter-spacing:-1.3px; color:var(--brand); }
+.hire-support h2 em { color:var(--orange) !important; }
+.hire-support-copy p { max-width:360px; font-size:14px; line-height:1.6; color:#536582; }
+.hire-blue-button { display:inline-flex; align-items:center; justify-content:center; gap:16px; min-height:46px; padding:13px 20px; margin-top:20px; border-radius:6px; background:var(--brand); color:#fff; font-size:13px; font-weight:700; box-shadow:0 5px 15px #30497d16; }
+.hire-photo-card { position:relative; display:flex; flex-direction:column; justify-content:flex-end; min-height:294px; border-radius:15px; overflow:hidden; padding:24px; color:#fff; isolation:isolate; box-shadow:0 5px 12px #0f1d3812; }
+.hire-photo-card > img { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
+.hire-photo-card::after { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,transparent 25%,rgba(15,29,56,.65) 60%,rgba(15,29,56,.98) 100%); }
+.hire-card-icon { display:grid; place-items:center; width:50px; height:50px; border-radius:50%; background:linear-gradient(145deg,#4b78b2,#163265); border:1px solid #b6c7e560; margin-bottom:12px; color:#fff; }
+.hire-photo-card h3 { color:#fff !important; font-size:18px; line-height:1.35; letter-spacing:-.45px; padding-right:5px; }
+.hire-photo-card p { max-width:calc(100% - 32px); margin-top:7px; font-size:12px; line-height:1.5; color:#e1e8f0; }
+.hire-card-arrow { position:absolute; right:20px; bottom:26px; display:grid; place-items:center; width:35px; height:35px; border:1px solid #a7b9d060; border-radius:50%; background:#16326590; }
+.hire-process { background:linear-gradient(120deg,#f3f8ff,#edf5ff); padding:34px 0 106px; }
+.hire-process-inner { width:min(1280px,calc(100% - 96px)); margin:auto; text-align:center; }
+.hire-process h2 { margin:14px 0 9px; font-size:29px; line-height:1.3; color:var(--brand); letter-spacing:-.9px; }
+.hire-process-intro { color:#536582; font-size:14px; line-height:1.6; text-align:center; }
+.hire-steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:40px; list-style:none; padding:0; margin:28px 0 0; text-align:left; }
+.hire-steps li { position:relative; background:#fff; border:1px solid #e3edf9; border-radius:16px; padding:24px 23px 24px 65px; box-shadow:0 4px 16px #30497d05; }
+.hire-step-number { position:absolute; top:18px; left:17px; color:#c7d8ed; font-size:22px; font-weight:800; }
+.hire-step-icon { display:grid; place-items:center; width:52px; height:52px; color:var(--orange); border-radius:50%; background:rgba(var(--orange-rgb),.14); margin-bottom:13px; }
+.hire-steps h3 { color:var(--brand); font-size:15px; line-height:1.4; letter-spacing:-.3px; }
+.hire-steps p { color:#536582; font-size:12px; line-height:1.6; margin-top:8px; }
+.hire-step-arrow { position:absolute; right:-33px; top:45%; color:#6079a5; }
+.hire-next-step { position:relative; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; width:min(1340px,calc(100% - 60px)); margin:-66px auto 20px; padding:38px 58px; border-radius:14px; isolation:isolate; overflow:hidden; background:linear-gradient(90deg,rgba(15,29,56,.97),rgba(22,50,101,.80) 47%,rgba(22,50,101,.12)),url('/assets/employer-construction-hero.jpg') 65% 45%/cover; color:#fff; box-shadow:0 7px 24px #30497d12; }
+.hire-next-step .hire-eyebrow { color:var(--orange); }
+.hire-next-step h2 { color:#fff !important; font-size:36px; line-height:1.12; letter-spacing:-1.2px; margin:17px 0 14px; }
+.hire-next-step h2 em { color:var(--orange) !important; }
+.hire-next-step p { max-width:600px; color:#edf4ff; font-size:14px; line-height:1.6; }
+.hire-next-actions { width:100%; max-width:365px; justify-self:center; display:flex; flex-direction:column; gap:10px; }
+.hire-enquiry { display:flex; align-items:center; gap:17px; padding:17px 20px; border:1px solid #dfe7f4; border-radius:11px; background:rgba(255,255,255,.97); color:var(--brand); }
+.hire-enquiry > span { display:grid; place-items:center; width:49px; height:49px; flex-shrink:0; border-radius:50%; background:#edf4ff; }
+.hire-enquiry strong { display:block; font-size:13px; }
+.hire-enquiry small { display:block; margin-top:3px; font-size:11px; line-height:1.4; color:#60708d; }
+.hire-enquiry > svg { margin-left:auto; flex-shrink:0; color:#6079a5; }
+.hire-next-actions .btn { width:100%; min-height:47px; font-size:13px; font-weight:800; border-radius:7px; background:var(--orange); }
+.employer-experience footer { padding-top:35px; padding-bottom:20px; }
+.employer-experience :is(.hire-blue-button,.hire-photo-card,.hire-enquiry):focus-visible { outline:3px solid var(--orange); outline-offset:4px; }
+@media (hover:hover) { .hire-photo-card:hover .hire-card-arrow { background:var(--orange); border-color:var(--orange); } .hire-blue-button:hover { background:#163265; } .hire-enquiry:hover { background:#edf4ff; } }
+@media (max-width:1200px) {
+  .hire-hero-inner { width:calc(100% - 64px); grid-template-columns:minmax(0,1fr) minmax(330px,.85fr) 50px; gap:30px; padding-top:135px; }
+  .hire-hero h1 { font-size:53px; }
+  .hire-support,.hire-process-inner { width:calc(100% - 64px); }
+  .hire-support h2 { font-size:31px; }
+  .hire-steps { gap:28px; }
+  .hire-steps li { padding:24px 18px 24px 48px; }
+  .hire-step-number { left:12px; font-size:20px; }
+  .hire-step-arrow { right:-26px; }
+}
+@media (max-width:960px) {
+  .hire-hero-inner { grid-template-columns:1fr minmax(310px,.9fr); }
+  .hire-hero { background-position:76% center; }
+  .hire-hero h1 { font-size:45px; }
+  .hire-hero-copy > p { font-size:14px; }
+  .hire-trust { gap:12px; }
+  .hire-trust small { font-size:10px; }
+  .hire-support { grid-template-columns:1fr 1fr; }
+  .hire-support-copy { grid-column:1 / -1; }
+  .hire-support-copy p { max-width:630px; }
+  .hire-support h2 br { display:none; }
+  .hire-steps { grid-template-columns:1fr 1fr; }
+  .hire-step-arrow { display:none; }
+  .hire-next-step { gap:25px; padding:32px; }
+  .hire-next-step h2 { font-size:30px; }
+}
+@media (max-width:680px) {
+  .hire-hero-inner { width:calc(100% - 40px); grid-template-columns:minmax(0,1fr); gap:30px; padding:128px 0 36px; }
+  .hire-hero { background-image:linear-gradient(90deg,rgba(15,29,56,.93),rgba(22,50,101,.64)),url('/assets/employer-construction-hero.jpg'); background-position:center,77% top; background-size:cover,auto 820px; background-color:#163265; background-repeat:no-repeat; }
+  .hire-hero h1 { font-size:clamp(34px,10.8vw,48px); letter-spacing:-1.3px; }
+  .hire-hero-copy > p { font-size:15px; max-width:440px; }
+  .hire-trust { gap:16px; margin-top:23px; }
+  .hire-trust small { font-size:11px; }
+  .hire-trust > div > span { width:50px; height:50px; }
+  .employer-experience .request-form { max-width:460px; justify-self:center; padding:24px; }
+  .employer-experience .request-form label { font-size:11px; }
+  .employer-experience .request-form :is(input,select) { font-size:16px; height:44px; }
+  .employer-experience .request-form .form-row { gap:12px; }
+  .hire-support,.hire-process-inner { width:calc(100% - 40px); }
+  .hire-support { grid-template-columns:1fr; padding:34px 0; gap:18px; }
+  .hire-support h2 { font-size:34px; }
+  .hire-support-copy { padding:0 0 7px; }
+  .hire-photo-card { min-height:290px; }
+  .hire-process { padding:30px 0 75px; }
+  .hire-process h2 { font-size:25px; }
+  .hire-steps { grid-template-columns:1fr; gap:14px; margin-top:24px; }
+  .hire-steps li { min-height:160px; padding:22px 22px 22px 75px; }
+  .hire-step-number { left:22px; font-size:23px; top:24px; }
+  .hire-step-icon { width:45px; height:45px; margin-bottom:9px; }
+  .hire-steps h3 { font-size:16px; }
+  .hire-steps p { font-size:13px; }
+  .hire-next-step { width:calc(100% - 28px); grid-template-columns:1fr; padding:30px 25px; margin-top:-40px; background-position:78% center; }
+  .hire-next-step h2 { font-size:32px; }
+  .hire-next-actions { max-width:none; }
+}
+@media (prefers-reduced-motion:reduce) { .employer-experience .btn { transition:none; } }

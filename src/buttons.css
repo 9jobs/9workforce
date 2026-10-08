@@ -1,0 +1,192 @@
+/* One shared finish for action buttons across the website. */
+#root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register) {
+  --action-top:#3d598c;
+  --action-bottom:#263f6e;
+  --action-edge:#8babc15c;
+  --action-shadow:#20385824;
+  border:1px solid var(--action-edge);
+  border-radius:6px;
+  background:linear-gradient(160deg,var(--action-top),var(--action-bottom));
+  color:#fff;
+  box-shadow:inset 0 1px 2px #ffffff26,0 5px 12px var(--action-shadow);
+  min-height:44px;
+  padding:12px 20px;
+  gap:10px;
+  font-size:13px;
+  font-weight:700;
+  line-height:1.4;
+  text-align:center;
+  text-decoration:none;
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+#root :is(.btn.orange,.home-hero-primary,.btn-find-work,.about-btn-primary,.contact-submit-btn,.site-footer-request > a,.nav-register) {
+  --action-top:#ff9b35;
+  --action-bottom:var(--orange);
+  --action-edge:#ffb66c99;
+  --action-shadow:#ff8e3829;
+}
+#root :is(.home-hero-secondary,.btn.light,.about-btn-secondary,.work-role-secondary,.legal-pill-btn.secondary) {
+  --action-top:#30497df0;
+  --action-bottom:#20395fe8;
+  --action-edge:#c4d7e275;
+}
+#root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register) svg { flex-shrink:0; }
+#root .labour-orbit-cta > span { background:transparent; border-radius:0; }
+#root .find-work-footer-cta .btn { font-size:0; }
+#root .find-work-footer-cta .btn::before { font-size:13px; }
+@media(hover:hover) and (pointer:fine) {
+  #root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register):hover:not(:disabled) {
+    transform:translateY(-2px);
+    filter:brightness(1.04);
+    box-shadow:inset 0 1px 2px #ffffff30,0 8px 18px var(--action-shadow);
+  }
+}
+#root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register):focus-visible { outline:3px solid var(--orange); outline-offset:3px; }
+#root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register):disabled { opacity:.65; cursor:wait; }
+/* Compact controls keep their dimensions and existing interactions. */
+#root :is(.labour-orbit-card-body button,.menu-btn,.legal-tab-btn,.home-search-tabs button) { border-radius:6px; }
+@media(max-width:600px) {
+  #root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register) { padding:11px 16px; font-size:12px; }
+  #root .find-work-footer-cta .btn { font-size:0; }
+  #root .homepage-hero-actions a { padding:11px 12px; gap:8px; font-size:11px; white-space:nowrap; }
+}
+@media(max-width:359px) {
+  #root .homepage-hero-actions { flex-direction:column; align-items:stretch; }
+  #root .homepage-hero-actions a { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register) { transition:none; }
+}

@@ -1,0 +1,7 @@
+Footer reference artwork
+Tool: built-in ImageGen (reference-image edit)
+Saved asset: D:/labourer Hire website/public/assets/footer-reference-background.png
+Reference: user-supplied footer screenshot, codex-clipboard-1141d5bf-ae25-4632-9828-3b4347ee05f1.png
+
+Final prompt:
+Edit target: attached website footer screenshot. Deliver ONLY a clean reusable background texture of the footer itself, aspect ratio approximately 3.35:1 (e.g. 2000x600). Crop away all white page above and below, and crop away the copyright strip at bottom. Faithfully preserve the background artwork composition: dark navy-blue broad empty central canvas, subtle concrete unfinished building facade at the far left edge, layered folded blue diagonal chevron ribbons entering from the top-right with narrow glowing orange edge, crane and skyscraper silhouettes at warm sunset within the rightmost angled photo cutout. Preserve those shapes and their positions very closely to the supplied reference. REMOVE ALL text, logo, icons, circles behind icons, buttons, heading underlines, thin column divider lines and bottom divider line; seamlessly fill these areas with the continuous dark blue backdrop. Empty center must be uninterrupted and suitable for live white text. Adjust royal blue ribbon hues to the website brand #30497D and orange glow to #FF8E38, retaining rich navy shadows. No new objects, no hard hats, no words, no watermark. This asset goes behind real HTML footer text, so absolutely no UI text or controls in the resulting artwork.
