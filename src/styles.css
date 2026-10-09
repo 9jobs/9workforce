@@ -849,7 +849,7 @@ button, input, select, textarea { min-width:0; max-width:100%; }
 
 /* Never leave readable page content in the scroll-reveal placeholder state if
    an observer is interrupted or a page is captured during navigation. */
-main, main section, main footer, [data-motion-target] {
+main, main section:not(.construction-journey), main footer, [data-motion-target] {
   opacity:1 !important;
   transform:none !important;
 }
@@ -1101,3 +1101,14 @@ footer .footer-contact-cta:hover strong{color:var(--orange)}
 /* Center the shared copyright footer on every screen size. */
 footer .footer-bottom{justify-content:center;align-items:center;text-align:center}
 footer .footer-copyright{width:100%;text-align:center;justify-content:center}
+
+/* Worker invitation uses the supplied pale blue background. */
+.split-cta,.split-cta>div+div{background:#f0f5fe;color:#30497d}
+.split-cta h2{color:#30497d!important}
+#root .split-cta h2 em{color:#f2842f!important}
+.split-cta p{color:#30497d}
+.split-cta .eyebrow{background:#e5edfa;color:#30497d}
+
+/* Rendered outside page stacking contexts so form feedback stays visible. */
+.form-status-popup{top:auto;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:16px;z-index:10000}
+.form-status-popup span{min-width:0;overflow-wrap:anywhere}

@@ -1,5 +1,8 @@
+import {registrationAttachments,validateWorkerRegistration,registrationEmailBody} from '../lib/workerRegistration.js';
+import {validateContactEnquiry, formatContactEnquiry} from '../lib/contactEnquiry.js';
 import tls from 'node:tls';
 import {randomUUID} from 'node:crypto';
+import {validateWorkerRequest, formatWorkerRequest} from '../lib/workerRequest.js';
 
 const clean = (value, max = 4000) => String(value ?? '').trim().slice(0, max);
 const formatSubmission = data => Object.entries(data).filter(([key]) => !['resumeData', 'coverLetterData'].includes(key)).map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
@@ -34,7 +37,8 @@ function smtpCommand(socket, command, expected) {
   });
 }
 
-async function sendEmail(subject, text) {
+async function sendEmail(subject, text, attachments = []) {
+  const mime = registrationEmailBody(text, attachments, `9workforce-${randomUUID()}`);
   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
   const port = Number(process.env.SMTP_PORT || 465);
   const user = process.env.SMTP_USER || 'support@9workforce.com.au';
@@ -56,10 +60,10 @@ async function sendEmail(subject, text) {
       `From: 9Work Force <${user}>`,
       `To: ${to}`,
       `Subject: ${subject.replace(/[\r\n]/g, ' ')}`,
-      'Content-Type: text/plain; charset=utf-8',
+      `Content-Type: ${mime.contentType}`,
       'MIME-Version: 1.0',
       '',
-      text.replace(/^\./gm, '..'),
+      mime.body.replace(/^\./gm, '..'),
       ''
     ].join('\r\n');
     await smtpCommand(socket, `${message}\r\n.`, [250]);
@@ -101,6 +105,23 @@ export default async function handler(req, res) {
     const type = input.type === 'employer' ? 'employer' : 'contact';
     const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, ['resumeData', 'coverLetterData'].includes(key) ? 4200000 : 4000)]));
     if (!fields.email && type === 'contact') return sendJson(res, 400, {error: 'Email is required'});
+    const isWorkerRegistration = fields.applicationForm === 'workerRegistration';
+    let attachments = [];
+    if (isWorkerRegistration) {
+      const error = validateWorkerRegistration(fields);
+      if (error) return sendJson(res, 400, {error});
+      try { attachments = registrationAttachments(fields); } catch(error) { return sendJson(res, 400, {error: error.message}); }
+    }
+    const isContactEnquiry = fields.applicationForm === 'contactEnquiry';
+    if (isContactEnquiry) {
+      const error = validateContactEnquiry(fields);
+      if (error) return sendJson(res, 400, {error});
+    }
+    const isWorkerRequest = fields.applicationForm === 'workerRequest';
+    if (isWorkerRequest) {
+      const error = validateWorkerRequest(fields);
+      if (error) return sendJson(res, 400, {error});
+    }
     if (fields.applicationForm === 'roleApplication') {
       if (!fields.fullName || !fields.phone || !fields.email) return sendJson(res, 400, {error: 'Please fill in your full name, phone number and email address.'});
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return sendJson(res, 400, {error: 'Please enter a valid email address.'});
@@ -108,8 +129,8 @@ export default async function handler(req, res) {
     }
     const submission = {id: randomUUID(), type, receivedAt: new Date().toISOString(), fields};
     await saveSubmission(submission);
-    const subject = type === 'employer' ? 'New 9Work Force application' : 'New 9Work Force enquiry';
-    await sendEmail(subject, `A new ${type} submission was received.\n\n${formatSubmission(fields)}\n\nSubmission ID: ${submission.id}`);
+    const subject = isWorkerRegistration ? `New worker registration from ${fields.fullName.replace(/[\r\n]/g, ' ')}` : isContactEnquiry ? `New contact enquiry from ${fields.fullName.replace(/[\r\n]/g, ' ')}` : isWorkerRequest ? 'New 9Work Force worker request' : type === 'employer' ? 'New 9Work Force application' : 'New 9Work Force enquiry';
+    await sendEmail(subject, `A new ${isWorkerRequest ? 'worker request' : type} submission was received.\n\n${isContactEnquiry ? formatContactEnquiry(fields) : isWorkerRequest ? formatWorkerRequest(fields) : formatSubmission(fields)}\n\nSubmission ID: ${submission.id}`, attachments);
     await markEmailSent(submission.id);
     return sendJson(res, 200, {ok: true, message: 'Thanks — your details have been sent.'});
   } catch (error) {

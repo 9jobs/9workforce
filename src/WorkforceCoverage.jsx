@@ -24,17 +24,19 @@ export default function WorkforceCoverage() {
   const [selected,setSelected]=useState(0);
   const [city,setCity]=useState(cities[0]);
   const [query,setQuery]=useState('');
+  const [searchOpen,setSearchOpen]=useState(false);
+  const [locationHover,setLocationHover]=useState(false);
   const matches=cities.filter(item=>`${item.name} ${item.region} ${item.search}`.toLowerCase().includes(query.trim().toLowerCase()));
   const [x,y]=project(city.lon,city.lat);
-  function chooseCity(item) {setCity(item);setSelected(item.region==='Melbourne Metro'?0:1);setQuery('');}
-  function chooseGroup(index) {setSelected(index);if(index===0)setCity(cities[0]);if(index===1)setCity(cities[1]);}
+  function chooseCity(item) {setCity(item);setSelected(item.region==='Melbourne Metro'?0:1);setQuery(item.name);setSearchOpen(false);setLocationHover(false);}
+  function chooseGroup(index) {if(index<2)chooseCity(cities[index]);else setSelected(index);}
   return <section className="workforce-coverage" aria-labelledby="coverage-heading">
     <div className="coverage-shell">
       <header className="coverage-heading-row">
         <div><span className="coverage-eyebrow"><i/>OUR SERVICE AREAS</span><h2 id="coverage-heading">Local knowledge.<br/><em>Workforce coverage.</em></h2><p>Construction labour support across Melbourne and Victoria.</p></div>
-        <div className="coverage-search-wrap">
-          <label className="coverage-search"><Search size={18} aria-hidden="true"/><span className="coverage-sr">Search a Victorian location</span><input type="search" value={query} onChange={event=>setQuery(event.target.value)} onKeyDown={event=>{if(event.key==='Escape')setQuery('');if(event.key==='Enter'&&matches.length===1)chooseCity(matches[0]);}} placeholder="Search Melbourne, Geelong…" aria-controls="coverage-results" autoComplete="off"/>{query&&<button type="button" onClick={()=>setQuery('')} aria-label="Clear location search"><X size={16}/></button>}</label>
-          <div id="coverage-results" className="coverage-results" hidden={!query.trim()}>{matches.length?matches.map(item=><button type="button" key={item.name} onClick={()=>chooseCity(item)}><MapPin size={16}/><span>{item.name}<small>{item.region}</small></span><ArrowRight size={16}/></button>):<p>No matching location. <Link to="/contact">Ask us about your site.</Link></p>}</div>
+        <div className="coverage-search-wrap" onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))setSearchOpen(false);}}>
+          <label className="coverage-search"><Search size={18} aria-hidden="true"/><span className="coverage-sr">Search a Victorian location</span><input type="search" value={query} onFocus={()=>setSearchOpen(true)} onChange={event=>{setQuery(event.target.value);setSearchOpen(true);}} onKeyDown={event=>{if(event.key==='Escape')setSearchOpen(false);if(event.key==='Enter'&&matches.length===1){event.preventDefault();chooseCity(matches[0]);}}} placeholder="Search Melbourne, Geelong…" aria-controls="coverage-results" aria-expanded={searchOpen} autoComplete="off"/>{query&&<button type="button" onClick={()=>{setQuery('');setSearchOpen(true);}} aria-label="Clear location search"><X size={16}/></button>}</label>
+          <div id="coverage-results" className="coverage-results" hidden={!searchOpen}>{matches.length?matches.map(item=><button type="button" key={item.name} onClick={()=>chooseCity(item)} onMouseEnter={()=>setLocationHover(true)} onMouseLeave={()=>setLocationHover(false)}><MapPin size={16}/><span>{item.name}<small>{item.region}</small></span><ArrowRight size={16}/></button>):<p>No matching location. <Link to="/contact">Ask us about your site.</Link></p>}</div>
         </div>
       </header>
       <div className="coverage-content">
@@ -46,8 +48,8 @@ export default function WorkforceCoverage() {
         </div>
         <div className="coverage-map-panel">
           <div className="coverage-map-heading"><span><MapPin size={14}/>MELBOURNE &amp; VICTORIA</span><span className="coverage-north" aria-hidden="true">↑ N</span></div>
-          <svg className="coverage-map" viewBox="0 0 640 510" role="img" aria-labelledby="coverage-map-title coverage-map-desc">
-            <title id="coverage-map-title">Australia workforce map, Victoria highlighted</title><desc id="coverage-map-desc">Selected location: {city.name}. Use the location buttons below to explore Victoria.</desc>
+          <svg className={`coverage-map${locationHover?' is-location-hovered':''}`} viewBox="0 0 640 510" role="img" aria-labelledby="coverage-map-title coverage-map-desc">
+            <title id="coverage-map-title">Australia workforce map</title><desc id="coverage-map-desc">Selected location: {city.name}. Use the location buttons below to explore Victoria.</desc>
             <defs><linearGradient id="coverage-land" x2="0" y2="1"><stop stopColor="#5274a3"/><stop offset="1" stopColor="#293f67"/></linearGradient><linearGradient id="coverage-victoria" x2="0" y2="1"><stop stopColor="#ffac50"/><stop offset="1" stopColor="#ff8628"/></linearGradient></defs>
             {australiaStates.map(state=><path key={state.name} d={state.path} className={state.name==='Victoria'?'coverage-state-vic':'coverage-state'}><title>{state.name}</title></path>)}
             {stateLabels.map(([label,lon,lat])=>{const [sx,sy]=project(lon,lat);return <text key={label} x={sx} y={sy} className="coverage-state-label">{label}</text>;})}
@@ -55,7 +57,7 @@ export default function WorkforceCoverage() {
             <g transform={`translate(${x} ${y})`} className="coverage-location-pin"><circle className="coverage-pin-pulse" r="10"/><circle r="5" className="coverage-pin-core"/><path d="M8 0 H50 L68 -28 H118" className="coverage-pin-leader"/><text x="70" y="-36" className="coverage-pin-label">{city.name}</text></g>
           </svg>
           <div className="coverage-map-summary" aria-live="polite"><span className="coverage-live-dot"/><div><strong>{selected<2?city.name:groups[selected].title}</strong><p>{selected<2?`${city.region} · Victoria`:groups[selected].text}</p></div><span className="coverage-vic-tag">VIC</span></div>
-          <div className="coverage-city-list" aria-label="Select a location">{cities.map(item=><button type="button" key={item.name} aria-pressed={item.name===city.name} onClick={()=>chooseCity(item)}>{item.name}</button>)}</div>
+          <div className="coverage-city-list" aria-label="Select a location">{cities.map(item=><button type="button" key={item.name} aria-pressed={item.name===city.name} onClick={()=>chooseCity(item)} onMouseEnter={()=>setLocationHover(true)} onMouseLeave={()=>setLocationHover(false)}>{item.name}</button>)}</div>
         </div>
       </div>
     </div>

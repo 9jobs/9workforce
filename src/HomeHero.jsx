@@ -39,7 +39,7 @@ function HeroSearch() {
     </div>
     <div className="home-search-panel" id="hero-seeker-panel" role="tabpanel" aria-labelledby="hero-seeker-tab" hidden={audience !== 'seeker'}>
       <form className="home-search-form" role="search" aria-label="Search work opportunities" onSubmit={submitSearch}>
-        <label className="home-search-keyword"><span className="hero-sr-only">Construction role or keyword</span><Search size={24} aria-hidden="true"/><input name="query" placeholder="Search construction role" type="search" autoComplete="off"/></label>
+        <label className="home-search-select home-search-keyword"><span className="hero-sr-only">Construction role</span><Search className="home-search-field-icon" size={24} aria-hidden="true"/><select name="query" defaultValue=""><option value="">Search construction role</option>{['Construction Labourer','General Labourer','Labourer','Other'].map(value=><option key={value}>{value}</option>)}</select><ChevronDown size={18} aria-hidden="true"/></label>
         <label className="home-search-select"><span className="hero-sr-only">Construction work area</span><Building2 className="home-search-field-icon" size={24} aria-hidden="true"/><select name="industry" defaultValue=""><option value="">All Construction Areas</option>{industries.map(value => <option key={value}>{value}</option>)}</select><ChevronDown size={18} aria-hidden="true"/></label>
         <label className="home-search-select"><span className="hero-sr-only">Location</span><MapPin className="home-search-field-icon" size={24} aria-hidden="true"/><select name="location" defaultValue=""><option value="">All Victorian Locations</option>{locations.map(value => <option key={value}>{value}</option>)}</select><ChevronDown size={18} aria-hidden="true"/></label>
         <button className="home-search-submit" type="submit"><Search size={24} aria-hidden="true"/><span>Find Construction Work</span></button>
@@ -47,7 +47,7 @@ function HeroSearch() {
     </div>
     <div className="home-search-panel home-employer-panel" id="hero-employer-panel" role="tabpanel" aria-labelledby="hero-employer-tab" hidden={audience !== 'employer'}>
       <div><strong>Tell us what your site needs.</strong><p>Share the roles, location and start date with our team by phone or email.</p></div>
-      <Link className="home-search-submit" to="/contact">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link>
+      <Link className="home-search-submit" to="/request-workers">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link>
     </div>
   </div>;
 }
@@ -60,7 +60,7 @@ export default function HomeHero() {
         <span className="home-hero-eyebrow">PEOPLE POWERING AUSTRALIA</span>
         <h1 id="homepage-heading">Construction labour<br/>when you <em>need it.</em></h1>
         <p>Tell us what your site needs. We’ll handle the workforce.</p>
-        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/contact">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/who-we-are">Learn More</Link></div>
+        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/request-workers">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/who-we-are">Learn More</Link></div>
       </div>
       <HeroSearch/>
       <ul className="home-hero-sectors" aria-label="Our work areas">

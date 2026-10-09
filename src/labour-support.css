@@ -1,6 +1,6 @@
-.labour-orbit { position:relative; overflow:hidden; margin:24px; border:0; border-radius:0; background:#f7f8fa; color:#30497d; }
+.labour-orbit { position:relative; overflow:hidden; margin:24px; border:0; border-radius:0; background:#30497D; color:#30497d; }
 .labour-orbit-inner { position:relative; z-index:1; max-width:1280px; min-height:770px; margin:auto; padding:76px 40px; display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:50px; align-items:center; }
-.labour-orbit-backdrop { position:absolute; inset:0; overflow:hidden; pointer-events:none; background:linear-gradient(125deg,#fafcff,#fff 55%,#f6f9ff); }
+.labour-orbit-backdrop { position:absolute; inset:0; overflow:hidden; pointer-events:none; background:#30497D; }
 .labour-orbit-glow { position:absolute; display:block; width:72%; height:90%; pointer-events:none; will-change:transform; animation:labour-glow-drift 18s ease-in-out infinite alternate; }
 .labour-orbit-glow-blue { top:-20%; right:-12%; background:radial-gradient(ellipse,#b7cdf580 0%,#dbe6fb38 38%,transparent 70%); }
 .labour-orbit-glow-warm { width:52%; height:75%; right:12%; bottom:-30%; background:radial-gradient(ellipse,#ffbe832e 0%,#ffe8d51c 40%,transparent 70%); animation-duration:23s; animation-delay:-8s; animation-direction:alternate-reverse; }
@@ -41,14 +41,16 @@
 .labour-orbit-copy { position:relative; z-index:2; max-width:480px; }
 .labour-orbit-copy h2 { margin:0 0 18px; font-size:clamp(32px,3.3vw,48px); line-height:1.04; letter-spacing:-1.8px; }
 .labour-orbit-copy h2 span { color:var(--orange); }
-.labour-orbit-intro { max-width:440px; font-size:16px; line-height:1.65; color:#637491; }
+.labour-orbit-copy h2 { color:#fff!important; }
+.labour-orbit-intro { max-width:440px; font-size:16px; line-height:1.65; color:#fff; }
 .labour-orbit-benefits { display:grid; gap:10px; margin:28px 0; }
-.labour-orbit-benefits>div { display:flex; align-items:center; gap:14px; padding:14px 16px; border:1px solid #e4ebf4; border-radius:12px; background:#ffffffdb; box-shadow:0 4px 14px #30497d05; transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease; }
+.labour-orbit-benefits>div { display:flex; align-items:center; gap:14px; padding:14px 16px; border:1px solid #e4ebf4; border-radius:12px; background:#fff; box-shadow:0 4px 14px #30497d05; transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease; }
 .labour-orbit-benefits>div>span { display:grid; place-items:center; width:38px; height:38px; flex-shrink:0; background:#edf1f8; border-radius:9px; }
 .labour-orbit-benefits strong { display:block; font-size:14px; }
 .labour-orbit-benefits p { margin-top:5px; font-size:12px; line-height:1.45; color:#75849c; }
 .labour-orbit-cta { display:inline-flex; align-items:center; gap:24px; padding:14px 16px 14px 24px; min-height:52px; border-radius:99px; background:#30497d; color:#fff; font-size:12px; font-weight:800; box-shadow:0 8px 18px #30497d24; transition:transform .22s ease,box-shadow .22s ease; }
 .labour-orbit-cta>span { display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:#ffffff26; transition:transform .22s ease,background .22s ease; }
+#root section.labour-orbit .labour-orbit-cta { --action-top:#F2842F; --action-bottom:#F2842F; --action-edge:#ffa65e99; --action-shadow:#f2842f29; }
 .labour-orbit-display { min-width:0; position:relative; }
 .labour-orbit-stage { --orbit-radius:420px; --orbit-center-x:-25px; --orbit-center-y:450px; position:relative; height:620px; outline:none; touch-action:pan-x pinch-zoom; }
 .labour-orbit-card { position:absolute; width:260px; padding:12px; border:1px solid #dce4ef; border-radius:0; background:#fff; box-shadow:0 10px 24px #20385b14; left:var(--orbit-center-x); top:var(--orbit-center-y); will-change:transform,opacity; backface-visibility:hidden; transition:filter .24s ease,border-color .24s ease,box-shadow .24s ease; cursor:pointer; }

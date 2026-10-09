@@ -8,15 +8,21 @@
     "dev:client": "vite --port 3000",
     "build": "vite build",
     "preview": "vite preview --port 3000",
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "test:construction": "playwright test"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
     "framer-motion": "^13.4.0",
+    "gsap": "^3.15.0",
     "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
+    "three": "^0.186.1",
     "vite": "latest"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0"
   }
 }

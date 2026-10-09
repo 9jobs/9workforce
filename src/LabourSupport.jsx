@@ -24,7 +24,7 @@ function OrbitCard({area, description, index, count, position, active, expanded,
   const selected = index === active;
   const visible = distance >= 0 && distance <= 3;
   return <motion.article className={`labour-orbit-card${selected?' is-active':''}`} aria-hidden={!selected} style={{
-    transform, opacity, filter:selected?'blur(0px)':`blur(${Math.max(0,distance) + 1}px)`,
+    transform, opacity, filter:selected?'blur(0px)':`blur(${Math.max(0,distance)+2}px)`,
     zIndex:selected?10:5-Math.abs(distance), pointerEvents:visible?'auto':'none',
   }}>
     <div className="labour-orbit-card-photo"><img src={`/assets/${photos[index]}`} alt="" loading={visible?'eager':'lazy'} decoding="async"/><span className="labour-orbit-card-label"><i/>{selected?'ACTIVE ROLE':'SITE SUPPORT'}</span><span className="labour-orbit-card-number">{String(index + 1).padStart(2,'0')} / {String(count).padStart(2,'0')}</span></div>
@@ -49,29 +49,123 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
     target.current = value;
     input.set(value);
   }, [input]);
-  const select = index => moveTo(Math.round(target.current) + index - wrap(Math.round(target.current), areas.length));
-  const advance = direction => moveTo(Math.round(target.current) + direction);
+  const select = index => moveTo(index);
+  const advance = direction => moveTo(Math.max(0,Math.min(areas.length-1,Math.round(target.current) + direction)));
 
   useEffect(() => {
     const element = section.current;
+    let engaged=false;
+    let lastInput=0;
+    let touchY=null;
+    let previousY=window.scrollY;
+    let previousStop=0;
+    const last=areas.length-1;
+    const anchor=()=>{
+      const bounds=element.getBoundingClientRect();
+      return Math.max(0,window.scrollY+bounds.top+(bounds.height-window.innerHeight)/2);
+    };
+    previousStop=anchor();
+    function hold(stop){
+      previousY=stop;
+      previousStop=stop;
+      window.scrollTo({top:stop,behavior:'instant'});
+    }
+    function enter(direction,stop){
+      engaged=true;
+      const entry=direction>0?0:last;
+      moveTo(entry);
+      spring.jump(entry);
+      lastInput=performance.now();
+      hold(stop);
+    }
+    function guardScroll(){
+      const y=window.scrollY;
+      const stop=anchor();
+      const direction=Math.sign(y-previousY);
+      if(!direction){previousStop=stop;return;}
+      const crossed=direction>0?previousY<previousStop-2&&y>=stop:previousY>previousStop+2&&y<=stop;
+      if(engaged){
+        const endpoint=direction>0?last:0;
+        const complete=target.current===endpoint&&Math.abs(position.get()-endpoint)<.03&&performance.now()-lastInput>180;
+        if(!complete){hold(stop);return;}
+        engaged=false;
+      }else if(crossed){
+        // Native momentum, PageDown/End and scrollbar jumps may have no cancellable wheel event.
+        enter(direction,stop);
+        return;
+      }
+      previousY=y;
+      previousStop=stop;
+    }
+    function consume(event,pixels) {
+      if(!pixels||event.target.closest('input,select,textarea,[role="dialog"]'))return;
+      const stop=anchor();
+      const y=window.scrollY;
+      const direction=Math.sign(pixels);
+      const now=performance.now();
+      const quiet=now-lastInput>180;
+      const atAnchor=Math.abs(y-stop)<3;
+      // Intercept on the page, before a large wheel/touch delta can jump past the section.
+      const crossing=direction>0?y<stop&&y+pixels>=stop:y>stop&&y+pixels<=stop;
+      if(!engaged&&!atAnchor&&!crossing)return;
+      if(!engaged){
+        engaged=true;
+        if(crossing){
+          event.preventDefault();
+          enter(direction,stop);
+          return;
+        }
+      }
+      // Finish rendering the boundary card and wait for a fresh gesture before releasing.
+      const endpoint=direction>0?last:0;
+      if(target.current===endpoint&&Math.abs(position.get()-endpoint)<.03&&quiet){
+        engaged=false;
+        lastInput=now;
+        return;
+      }
+      event.preventDefault();
+      hold(stop);
+      lastInput=now;
+      const next=target.current+Math.max(-.65,Math.min(.65,pixels/240));
+      moveTo(Math.max(0,Math.min(last,Math.max(position.get()-.75,Math.min(position.get()+.75,next)))));
+    }
     function rotate(event) {
       if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-      const direction = Math.sign(event.deltaY);
-      const cycle = Math.floor(target.current / areas.length) * areas.length;
-      const first = cycle;
-      const last = cycle + areas.length - 1;
-      // Hand page scrolling back at either end, including trackpad momentum.
-      if (!direction || (target.current <= first && direction < 0) || (target.current >= last && direction > 0)) return;
-      event.preventDefault();
       const pixels = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? element.clientHeight : 1);
-      const delta = Math.max(-180,Math.min(180,pixels)) / 120;
-      moveTo(Math.max(first,Math.min(last,target.current + delta)));
-      // Follow every wheel event, then gently settle on the nearest card.
-      snapTimer.current = setTimeout(() => moveTo(Math.round(target.current)), 140);
+      consume(event,pixels);
     }
-    element.addEventListener('wheel', rotate, {passive:false});
-    return () => { element.removeEventListener('wheel', rotate); clearTimeout(snapTimer.current); };
-  }, [areas.length, moveTo]);
+    function keyScroll(event){
+      if(event.defaultPrevented||event.ctrlKey||event.metaKey||event.altKey||event.target.closest('input,select,textarea,button,a,[contenteditable="true"]'))return;
+      const direction={PageDown:1,PageUp:-1,ArrowDown:1,ArrowUp:-1,End:1,Home:-1,' ':event.shiftKey?-1:1}[event.key];
+      if(!direction)return;
+      const distance=engaged?240:['End','Home'].includes(event.key)?document.documentElement.scrollHeight:window.innerHeight;
+      consume(event,direction*distance);
+    }
+    function touchStart(event){touchY=event.touches.length===1?event.touches[0].clientY:null;}
+    function touchMove(event){
+      if(touchY===null||event.touches.length!==1)return;
+      const next=event.touches[0].clientY;
+      consume(event,touchY-next);
+      if(event.defaultPrevented)suppressClick.current=performance.now()+500;
+      touchY=next;
+    }
+    function release(){engaged=false;previousY=window.scrollY;previousStop=anchor();}
+    window.addEventListener('wheel',rotate,{passive:false,capture:true});
+    window.addEventListener('scroll',guardScroll,{passive:true});
+    window.addEventListener('keydown',keyScroll);
+    window.addEventListener('touchstart',touchStart,{passive:true});
+    window.addEventListener('touchmove',touchMove,{passive:false});
+    window.addEventListener('resize',release);
+    return () => {
+      window.removeEventListener('wheel',rotate,true);
+      window.removeEventListener('scroll',guardScroll);
+      window.removeEventListener('keydown',keyScroll);
+      window.removeEventListener('touchstart',touchStart);
+      window.removeEventListener('touchmove',touchMove);
+      window.removeEventListener('resize',release);
+      clearTimeout(snapTimer.current);
+    };
+  }, [areas.length, moveTo, position, spring]);
 
   function keyboard(event) {
     if (event.target !== event.currentTarget) return;
@@ -86,8 +180,8 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
     onPointerUp={event => {
       if (!swipe.current) return;
       const dx=swipe.current.x-event.clientX; const dy=swipe.current.y-event.clientY;
-      if (Math.max(Math.abs(dx),Math.abs(dy)) > 40) {
-        const direction=Math.abs(dy) > Math.abs(dx) ? Math.sign(dy) : Math.sign(dx);
+      if (Math.abs(dx) > 40 && Math.abs(dx)>Math.abs(dy)) {
+        const direction=Math.sign(dx);
         suppressClick.current=performance.now()+400;
         if (wrap(Math.round(target.current),areas.length) === areas.length-1 && direction > 0) section.current.nextElementSibling?.scrollIntoView({behavior:reduceMotion?'instant':'smooth',block:'start'});
         else advance(direction);
@@ -95,14 +189,7 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
       swipe.current=null;
     }}
     onPointerCancel={() => { swipe.current=null; }}>
-    <div className="labour-orbit-backdrop" aria-hidden="true">
-      <span className="labour-orbit-glow labour-orbit-glow-blue"/>
-      <span className="labour-orbit-glow labour-orbit-glow-warm"/>
-      <span className="labour-orbit-glow labour-orbit-glow-soft"/>
-      <span className="labour-orbit-halo labour-orbit-halo-left"/>
-      <span className="labour-orbit-halo labour-orbit-halo-right"/>
-      <div className="labour-orbit-particles"><i/><i/><i/><i/><i/><i/><i/><i/></div>
-    </div>
+    <div className="labour-orbit-backdrop" aria-hidden="true"/>
     <span className="labour-orbit-sr" role="status" aria-live="polite" aria-atomic="true">{active + 1} of {areas.length}: {areas[active]}. Click the section or use arrow keys to rotate.</span>
     <div className="labour-orbit-inner">
       <div className="labour-orbit-copy">

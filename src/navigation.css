@@ -90,6 +90,24 @@
 }
 .site-header.shared-nav .header-actions .nav-request { background:#30497d; }
 .site-header.shared-nav .header-actions .nav-register { background:var(--orange); }
+#root .site-header.shared-nav :is(.header-actions,.nav-mobile-actions) .nav-call {
+  justify-content:center;
+  min-height:48px;
+  padding:12px 22px;
+  gap:10px;
+  border:1px solid #8eaed080;
+  border-radius:999px;
+  background:linear-gradient(155deg,#44576e 0%,#20334f 48%,#12213c 100%);
+  color:#fff!important;
+  box-shadow:inset 0 2px 4px #d3e5ff45,inset 0 -2px 5px #06112466,0 0 16px #648cc529;
+  font-size:14px;
+  font-weight:700;
+  line-height:1.4;
+  white-space:nowrap;
+  text-decoration:none;
+}
+#root .site-header.shared-nav .nav-call:focus-visible {outline:3px solid var(--orange);outline-offset:3px}
+#root .site-header.shared-nav .nav-call:hover {filter:brightness(1.12)}
 .site-header.shared-nav .nav-mobile-actions { display:none; }
 .site-header.shared-nav .menu-btn {
   display:none;

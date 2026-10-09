@@ -46,7 +46,7 @@
 .coverage-map { display:block; width:100%; height:auto; overflow:visible; margin:10px 0 4px; }
 .coverage-state { fill:url(#coverage-land); stroke:#8aaace; stroke-width:1; stroke-linejoin:round; }
 .coverage-state-vic { fill:url(#coverage-victoria); stroke:#ffcd82; stroke-width:1.5; filter:drop-shadow(0 0 7px #ff943559); }
-.coverage-state-label { fill:#b4c8e1; font-size:11px; letter-spacing:2px; text-anchor:middle; }
+.coverage-state-label { fill:#b4c8e1; font-size:11px; letter-spacing:2px; text-anchor:middle; pointer-events:none; }
 .coverage-ocean { fill:#7894b9; font-size:8px; letter-spacing:2.5px; text-anchor:middle; }
 .coverage-pin-core { fill:#fff; stroke:#ff9235; stroke-width:3; }
 .coverage-pin-pulse { fill:none; stroke:#ffb363; stroke-width:2; transform-box:fill-box; transform-origin:center; animation:coverage-location-pulse 3s ease-out infinite; }
@@ -61,6 +61,12 @@
 .coverage-city-list button[aria-pressed="true"] { border-color:#ffad5b80; background:#ff9a341a; color:#ffc285; }
 .coverage-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 .workforce-coverage :focus-visible { outline:2px solid #ffb363; outline-offset:4px; }
+.workforce-coverage .coverage-search input:focus-visible { outline:none; box-shadow:none; }
+.coverage-search>svg { flex-shrink:0; }
+.coverage-state-vic { fill:url(#coverage-land); stroke:#8aaace; stroke-width:1; filter:none; }
+.coverage-state:hover,.coverage-state-vic:hover,.coverage-map.is-location-hovered .coverage-state-vic { fill:var(--orange); stroke:#ffc283; filter:drop-shadow(0 0 7px #f2842f45); }
+.coverage-city-list button[aria-pressed="true"] { border-color:#9db8dc; background:#ffffff12; color:#fff; }
+.coverage-city-list button:hover { border-color:var(--orange); color:#ffb363; }
 @keyframes coverage-location-pulse { 0% { transform:scale(.7); opacity:.85; } 100% { transform:scale(2.3); opacity:0; } }
 @media(hover:hover) and (pointer:fine) { .coverage-option:hover { transform:translateX(3px); border-color:#ffae5e99; } .coverage-city-list button:hover { background:#ffffff12; color:#fff; } }
 @media(max-width:1000px) { .workforce-coverage { padding:0 24px; } .coverage-shell { padding:28px; } .coverage-content { gap:24px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); } .coverage-option { padding:12px; gap:10px; } .coverage-heading-row { gap:20px; } .coverage-search-wrap { width:260px; } }
