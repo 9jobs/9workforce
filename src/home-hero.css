@@ -99,6 +99,9 @@
 .home-search-result-list p { text-align:left; max-width:710px; line-height:1.6; }
 .home-search-result-list small { display:flex; gap:8px; align-items:center; margin-top:12px; }
 .home-search-result-list a { display:inline-flex; align-items:center; gap:10px; white-space:nowrap; font-weight:700; }
+.home-search-result-list article,.home-search-result-list article>div { min-width:0; }
+.home-search-result-list .work-role-title { max-width:100%; white-space:normal; }
+.home-search-result-list small svg { flex-shrink:0; }
 .home-search-empty { padding:32px; background:rgba(var(--orange-rgb), .12); border-radius:12px; }
 .home-search-empty a { margin-top:18px; }
 
@@ -280,4 +283,12 @@
 @media (min-width:861px) {
   .homepage-hero-copy { padding-bottom:80px; }
   .home-search { margin-top:-48px; }
+}
+
+/* Keep native select labels and the search action readable on landscape tablets. */
+@media (min-width:861px) and (max-width:1200px) {
+  .home-search-form { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:780px) {
+  .home-search-keyword input,.home-search-select select { font-size:16px; }
 }

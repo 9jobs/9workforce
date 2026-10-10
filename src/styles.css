@@ -903,7 +903,8 @@ footer .footer-contact-cta:hover strong{color:var(--orange)}
 .solutions-cta{display:flex;justify-content:center;margin-top:32px}
 .process-cta{display:flex;justify-content:center;margin-top:32px}
 .split-cta>.split-cta-action{grid-column:1/-1;display:flex;justify-content:center;padding:0 24px 40px}
-@media(max-width:1000px){.solutions-intro{grid-template-columns:1fr}.solutions-highlights{max-width:720px}.solution-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1200px){.solutions-intro{grid-template-columns:1fr}.solutions-highlights{max-width:720px}}
+@media(max-width:1000px){.solution-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:780px){.solutions{padding-left:24px;padding-right:24px}.solutions-intro h2{font-size:42px}.solutions-intro p{font-size:16px;line-height:24px}.solutions-highlights{grid-template-columns:1fr;gap:16px}.solutions-highlights span+span{border-left:0;border-top:1px solid #cad5e8;padding:16px 0 0}.solution-grid{grid-template-columns:1fr}.solution-media{height:230px}}
 
 /* Page-load motion for the existing navigation only. */

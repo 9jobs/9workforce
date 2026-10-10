@@ -229,13 +229,13 @@ export default function ConstructionJourney() {
     </picture>
     <div className="construction-vignette" aria-hidden="true"/>
     <p className="construction-sr-only">Follow a construction plan as it becomes a dimensional building, with concrete floors, columns, formwork, scaffolding and cranes. Construction labourers finish concrete, carry materials and assist trades on site.</p>
-    <div className="construction-copy construction-copy-plan" data-story-copy aria-hidden="true"><span className="construction-kicker">THE START OF SOMETHING GREAT</span><h2>Every great build<br/>starts with <em>a plan.</em></h2><p>From the first line.<br/>To the last detail.</p></div>
-    <div className="construction-copy" data-story-copy aria-hidden="true"><span className="construction-kicker">BUILT FROM THE GROUND UP</span><h2>Vision takes<br/><em>shape.</em></h2><p>Solid foundations.<br/>Real progress.</p></div>
-    <div className="construction-copy construction-copy-workers" data-story-copy aria-hidden="true"><span className="construction-kicker">POWERED BY PEOPLE</span><h2>The right people.<br/><em>At every stage.</em></h2><p>General labour. Concrete work.<br/>Trade assistance.</p></div>
+    <div className="construction-copy construction-copy-plan" data-story-copy aria-hidden="true"><span className="construction-kicker">THE JOURNEY BEGINS</span><h2>The right people.<br/><em>From day one.</em></h2><p>Every successful project starts<br/>with the right workforce.</p></div>
+    <div className="construction-copy" data-story-copy aria-hidden="true"><span className="construction-kicker">SAFETY COMES FIRST</span><h2>Prepared for site.<br/><em>Ready to build.</em></h2><p>Verified workers. Relevant tickets.<br/>Safety-focused preparation.</p></div>
+    <div className="construction-copy construction-copy-workers" data-story-copy aria-hidden="true"><span className="construction-kicker">PEOPLE POWERING PROGRESS</span><h2>Real people.<br/><em>Real progress.</em></h2><p>Reliable labour supporting<br/>every stage of construction.</p></div>
     <div className="construction-cta" aria-hidden="true" inert>
-      <span className="construction-kicker">YOUR NEXT PROJECT STARTS HERE</span>
-      <h2>Need reliable<br/><em>construction labour?</em></h2>
-      <p>Tell us what you need. We'll find the right workers.</p>
+      <span className="construction-kicker">BUILT ON TRUST</span>
+      <h2>Fair pay.<br/><em>Stronger partnerships.</em></h2>
+      <p>Compliant payroll. Supported workers. Confident builders.</p>
       <button type="button" className="construction-request" onClick={() => navigate('/request-workers')}>GET MY WORKFORCE</button>
     </div>
     <div className="construction-progress" aria-hidden="true" style={{display:'none'}}><div className="construction-progress-fill"/></div>

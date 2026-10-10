@@ -32,3 +32,4 @@
 @media(max-width:700px) { .contact-studio { width:calc(100% - 32px); grid-template-columns:1fr; margin:112px auto 48px; } .contact-studio::before { top:auto; height:40%; width:22%; } .contact-studio-form { padding:36px 28px 40px; } #root .contact-studio h1 { font-size:37px; } .contact-studio-info { margin:0 0 28px 20px; padding:34px 28px; } .contact-studio-accent { top:145px; width:10px; height:36px; } .contact-studio-details { gap:23px; } }
 @media(max-width:359px) { .contact-studio-form { padding:32px 22px; } .contact-studio-info { margin-left:14px; padding:30px 20px; } .contact-studio-details>a,.contact-studio-details>div { gap:12px; } .contact-studio-details span>span { font-size:12px; } }
 @media(prefers-reduced-motion:reduce) { .contact-studio-fields :is(input,textarea) { transition:none; } }
+@media(max-width:780px) { .contact-studio-fields :is(input,textarea) { font-size:16px; } }
