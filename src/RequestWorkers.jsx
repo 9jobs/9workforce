@@ -1,3 +1,4 @@
+import PremiumDatePicker from './PremiumDatePicker';
 import React, {useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {ArrowRight, HardHat, CheckCircle2, LockKeyhole, Mail, Phone, MapPin} from 'lucide-react';
@@ -42,7 +43,7 @@ export default function RequestWorkers() {
           <label className="worker-request-full">Site suburb / location<input name="siteLocation" autoComplete="address-level2" required maxLength={200} placeholder="e.g. Richmond, Melbourne"/></label>
           <label>Workers required<select name="workersRequired" required defaultValue=""><option value="" disabled>Select workers</option><option>General Labourers</option><option>Skilled Labourers</option><option>Other</option></select></label>
           <label>How many workers?<input name="workerCount" type="number" min="1" max="10000" step="1" required placeholder="e.g. 4"/></label>
-          <label className="worker-request-full">Start date<input name="startDate" type="date" required/></label>
+          <label className="worker-request-full">Start date<PremiumDatePicker name="startDate" label="Start date" required/></label>
           <label className="worker-request-full">What do you need?<textarea name="requirements" rows={3} maxLength={2000} placeholder="A short description of the work and site requirements"/></label>
         </fieldset>
         {error&&<p className="worker-request-error" role="alert">{error}</p>}

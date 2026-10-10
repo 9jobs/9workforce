@@ -1,4 +1,5 @@
-.labour-orbit { position:relative; overflow:hidden; margin:24px; border:0; border-radius:0; background:#30497D; color:#30497d; }
+html.labour-orbit-scroll-locked { overflow:hidden; scrollbar-gutter:stable; overscroll-behavior:none; }
+.labour-orbit { position:relative; overflow:hidden; overflow-anchor:none; margin:24px; border:0; border-radius:0; background:#30497D; color:#30497d; }
 .labour-orbit-inner { position:relative; z-index:1; max-width:1280px; min-height:770px; margin:auto; padding:76px 40px; display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:50px; align-items:center; }
 .labour-orbit-backdrop { position:absolute; inset:0; overflow:hidden; pointer-events:none; background:#30497D; }
 .labour-orbit-glow { position:absolute; display:block; width:72%; height:90%; pointer-events:none; will-change:transform; animation:labour-glow-drift 18s ease-in-out infinite alternate; }

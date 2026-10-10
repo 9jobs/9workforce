@@ -1,3 +1,4 @@
+import {validateRoleApplication} from '../lib/applicationValidation.js';
 import {registrationAttachments,validateWorkerRegistration,registrationEmailBody} from '../lib/workerRegistration.js';
 import {validateContactEnquiry, formatContactEnquiry} from '../lib/contactEnquiry.js';
 import tls from 'node:tls';
@@ -122,15 +123,16 @@ export default async function handler(req, res) {
       const error = validateWorkerRequest(fields);
       if (error) return sendJson(res, 400, {error});
     }
-    if (fields.applicationForm === 'roleApplication') {
-      if (!fields.fullName || !fields.phone || !fields.email) return sendJson(res, 400, {error: 'Please fill in your full name, phone number and email address.'});
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return sendJson(res, 400, {error: 'Please enter a valid email address.'});
-      if (!fields.resumeData) return sendJson(res, 400, {error: 'Please upload your resume / CV.'});
+    const isRoleApplication = fields.applicationForm === 'roleApplication';
+    if (isRoleApplication) {
+      const error = validateRoleApplication(fields);
+      if (error) return sendJson(res, 400, {error});
+      try { attachments = registrationAttachments(fields); } catch (error) { return sendJson(res, 400, {error:error.message}); }
     }
     const submission = {id: randomUUID(), type, receivedAt: new Date().toISOString(), fields};
     await saveSubmission(submission);
-    const subject = isWorkerRegistration ? `New worker registration from ${fields.fullName.replace(/[\r\n]/g, ' ')}` : isContactEnquiry ? `New contact enquiry from ${fields.fullName.replace(/[\r\n]/g, ' ')}` : isWorkerRequest ? 'New 9Work Force worker request' : type === 'employer' ? 'New 9Work Force application' : 'New 9Work Force enquiry';
-    await sendEmail(subject, `A new ${isWorkerRequest ? 'worker request' : type} submission was received.\n\n${isContactEnquiry ? formatContactEnquiry(fields) : isWorkerRequest ? formatWorkerRequest(fields) : formatSubmission(fields)}\n\nSubmission ID: ${submission.id}`, attachments);
+    const subject = isRoleApplication ? `New role application from ${fields.fullName.replace(/[\r\n]/g, ' ')}` : isWorkerRegistration ? `New worker registration from ${fields.fullName.replace(/[\r\n]/g, ' ')}` : isContactEnquiry ? `New contact enquiry from ${fields.fullName.replace(/[\r\n]/g, ' ')}` : isWorkerRequest ? 'New 9Work Force worker request' : type === 'employer' ? 'New 9Work Force application' : 'New 9Work Force enquiry';
+    await sendEmail(subject, `A new ${isWorkerRequest ? 'worker request' : type} submission was received.\n\n${isContactEnquiry ? formatContactEnquiry(fields) : isWorkerRequest ? formatWorkerRequest(fields) : formatSubmission(fields)}`, attachments);
     await markEmailSent(submission.id);
     return sendJson(res, 200, {ok: true, message: 'Thanks — your details have been sent.'});
   } catch (error) {

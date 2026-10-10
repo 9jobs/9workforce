@@ -55,27 +55,29 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
   useEffect(() => {
     const element = section.current;
     let engaged=false;
-    let lastInput=0;
     let touchY=null;
     let previousY=window.scrollY;
     let previousStop=0;
     const last=areas.length-1;
     const anchor=()=>{
       const bounds=element.getBoundingClientRect();
-      return Math.max(0,window.scrollY+bounds.top+(bounds.height-window.innerHeight)/2);
+      return Math.round(Math.max(0,window.scrollY+bounds.top+(bounds.height-window.innerHeight)/2));
     };
+    function setEngaged(value){
+      engaged=value;
+      document.documentElement.classList.toggle('labour-orbit-scroll-locked',value);
+    }
     previousStop=anchor();
     function hold(stop){
       previousY=stop;
       previousStop=stop;
-      window.scrollTo({top:stop,behavior:'instant'});
+      if(Math.abs(window.scrollY-stop)>=1)window.scrollTo({top:stop,behavior:'instant'});
     }
     function enter(direction,stop){
-      engaged=true;
+      setEngaged(true);
       const entry=direction>0?0:last;
       moveTo(entry);
       spring.jump(entry);
-      lastInput=performance.now();
       hold(stop);
     }
     function guardScroll(){
@@ -86,9 +88,9 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
       const crossed=direction>0?previousY<previousStop-2&&y>=stop:previousY>previousStop+2&&y<=stop;
       if(engaged){
         const endpoint=direction>0?last:0;
-        const complete=target.current===endpoint&&Math.abs(position.get()-endpoint)<.03&&performance.now()-lastInput>180;
+        const complete=Math.round(target.current)===endpoint;
         if(!complete){hold(stop);return;}
-        engaged=false;
+        setEngaged(false);
       }else if(crossed){
         // Native momentum, PageDown/End and scrollbar jumps may have no cancellable wheel event.
         enter(direction,stop);
@@ -102,30 +104,31 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
       const stop=anchor();
       const y=window.scrollY;
       const direction=Math.sign(pixels);
-      const now=performance.now();
-      const quiet=now-lastInput>180;
       const atAnchor=Math.abs(y-stop)<3;
       // Intercept on the page, before a large wheel/touch delta can jump past the section.
       const crossing=direction>0?y<stop&&y+pixels>=stop:y>stop&&y+pixels<=stop;
       if(!engaged&&!atAnchor&&!crossing)return;
       if(!engaged){
-        engaged=true;
-        if(crossing){
+        setEngaged(true);
+        if(crossing&&!atAnchor){
           event.preventDefault();
           enter(direction,stop);
           return;
         }
       }
-      // Finish rendering the boundary card and wait for a fresh gesture before releasing.
+      // Release immediately at either boundary, even while the spring is settling.
       const endpoint=direction>0?last:0;
-      if(target.current===endpoint&&Math.abs(position.get()-endpoint)<.03&&quiet){
-        engaged=false;
-        lastInput=now;
+      if(Math.round(target.current)===endpoint){
+        moveTo(endpoint);
+        spring.jump(endpoint);
+        setEngaged(false);
+        event.preventDefault();
+        window.scrollBy({top:pixels,behavior:'instant'});
+        previousY=window.scrollY;
+        previousStop=anchor();
         return;
       }
       event.preventDefault();
-      hold(stop);
-      lastInput=now;
       const next=target.current+Math.max(-.65,Math.min(.65,pixels/240));
       moveTo(Math.max(0,Math.min(last,Math.max(position.get()-.75,Math.min(position.get()+.75,next)))));
     }
@@ -149,7 +152,7 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
       if(event.defaultPrevented)suppressClick.current=performance.now()+500;
       touchY=next;
     }
-    function release(){engaged=false;previousY=window.scrollY;previousStop=anchor();}
+    function release(){setEngaged(false);previousY=window.scrollY;previousStop=anchor();}
     window.addEventListener('wheel',rotate,{passive:false,capture:true});
     window.addEventListener('scroll',guardScroll,{passive:true});
     window.addEventListener('keydown',keyScroll);
@@ -157,6 +160,7 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
     window.addEventListener('touchmove',touchMove,{passive:false});
     window.addEventListener('resize',release);
     return () => {
+      setEngaged(false);
       window.removeEventListener('wheel',rotate,true);
       window.removeEventListener('scroll',guardScroll);
       window.removeEventListener('keydown',keyScroll);

@@ -1,9 +1,11 @@
+import PremiumDatePicker from './PremiumDatePicker';
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {createPortal} from 'react-dom';
 import {BrowserRouter, Routes, Route, NavLink, Link, useLocation, useParams, Navigate, useNavigate} from 'react-router-dom';
 import {ArrowRight, ArrowUpRight, Phone, PhoneCall, Mail, Menu, X, Check, ShieldCheck, Clock3, HardHat, Truck, MapPin, ChevronDown, ChevronRight, LockKeyhole, Users, DollarSign, ClipboardList, MessageCircle} from 'lucide-react';
-import {animate, motion, MotionConfig, useReducedMotion} from 'framer-motion';
+import {motion, MotionConfig, useReducedMotion} from 'framer-motion';
+import MotionObserver from './ScrollReveals';
 import './styles.css';
 import HomeHero, {WorkSearchResults} from './HomeHero';
 import ConstructionJourney from './ConstructionJourney';
@@ -11,11 +13,13 @@ import RequestWorkers from './RequestWorkers';
 import './about-purpose.css';
 import {getWorkRolePath} from './workRolePaths';
 import WorkRoleDetails from './WorkRoleDetails';
+import {additionalWorkRoleContent} from './workRoleContent';
 import RoleApplication from './RoleApplication';
 import LegalPolicies from './LegalPolicies';
 import './work-role-details.css';
 import './contact-page.css';
 import './about-page.css';
+import AboutPage from './AboutPage';
 import './employer-page.css';
 import './industry-showcase.css';
 import './navigation.css';
@@ -54,7 +58,6 @@ const nav=[['Home','/'],['Who We Are','/who-we-are'],['Work Areas','/industries'
 const MotionLink=motion.create(Link);
 const MotionNavLink=motion.create(NavLink);
 function MotionMain({children}){const reduce=useReducedMotion();return <motion.main initial={reduce?false:{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{duration:reduce?0:.42,ease:[.22,1,.36,1]}}>{children}</motion.main>}
-function MotionObserver({root}){const reduce=useReducedMotion();useEffect(()=>{if(!root.current)return;const sections=[...root.current.querySelectorAll('main section:not(.construction-journey),main footer')];if(reduce)return;const animations=[];const managedCards='.solution,.steps article,.labour-cards article,.workflow-grid article,.why-grid article,.employer-tiles article,.industry-editorial article,.find-work-role-card,.worker-benefits .benefit-grid article,.timeline-row article';const targets=[];sections.forEach((section,sectionIndex)=>{section.querySelectorAll('h1,h2,h3,p,img,.btn,.home-hero-eyebrow,.solutions-eyebrow,.metrics>div,.trust>span,.about-trust>span,.story-points>span,.flexible-list>span,.contact-details>span,.footer-grid>div,.footer-bottom>span,.request-form label,.contact-form label,.worker-form label,.why-grid svg,.benefit-grid svg').forEach((target,index)=>{if(target.closest(managedCards)||target.closest('.solution-media,.construction-journey'))return;const isImage=target.tagName==='IMG';const isRight=target.closest('.contact-main,.registration')?.lastElementChild===target.parentElement||target.closest('.about-story')?.lastElementChild===target.parentElement;target.style.opacity='0';target.style.transform=isImage?'scale(.98)':`translateX(${isRight||sectionIndex%2?24:-24}px)`;target.dataset.motionTarget='true';target.dataset.motionDelay=String(Math.min(index*.04,.28));targets.push(target)})});const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;const target=entry.target;const delay=Number(target.dataset.motionDelay||0);animations.push(animate(target,{opacity:1,x:0,y:0,scale:1},{duration:.7,delay,ease:[.22,1,.36,1]}));observer.unobserve(target)})},{threshold:.14,rootMargin:'0px 0px -10%'});targets.forEach(target=>observer.observe(target));return()=>{observer.disconnect();animations.forEach(control=>control.stop());sections.forEach(section=>{section.style.opacity='';section.style.transform='' });targets.forEach(target=>{target.style.opacity='';target.style.transform='';delete target.dataset.motionTarget;delete target.dataset.motionDelay})}},[reduce,root]);return null}
 function MotionPage({children}){const reduce=useReducedMotion();const {pathname}=useLocation();const root=useRef(null);return <motion.div className="motion-page" key={pathname} ref={root} initial={reduce?false:{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{duration:reduce?0:.42,ease:[.22,1,.36,1]}}><MotionObserver key={pathname} root={root}/>{children}</motion.div>}
 function Header(){const [open,setOpen]=useState(false);const {pathname}=useLocation();const isHomeHeader=pathname==='/';const isBlueHeader=(['/labour-hire','/employers','/industries','/find-work'].includes(pathname)||pathname.startsWith('/find-work/'));const whiteLogo=isBlueHeader||isHomeHeader;const logoSource=whiteLogo?'/assets/9workforce-logo-white-clean.png':'/assets/9workforce-logo-updated.png';const logoViewBox=whiteLogo?'346 818 1313 359':'546 877 911 250';return <header className={`site-header shared-nav${isBlueHeader?' blue-header':''}${isHomeHeader?' hero-header':''}`}><div className="header-inner"><Link className="header-logo" to="/" aria-label="9Work Force home"><svg className={`header-logo-art${whiteLogo?' light-logo':''}`} viewBox={logoViewBox} role="img" aria-label="9Work Force"><image className="header-logo-image" href={logoSource} width="2000" height="2000"/></svg></Link><nav className={open?'open':''}>{nav.map(([n,p])=><MotionNavLink key={p} to={p} end className={({isActive})=>isActive?'active':''} onClick={()=>setOpen(false)} whileHover={{y:-1}} transition={{duration:.18}}>{n}</MotionNavLink>)}<div className="nav-mobile-actions"><a className="nav-call" href="tel:+61422279428" onClick={()=>setOpen(false)}><PhoneCall size={19} aria-hidden="true"/>Call Now</a><Link className="nav-register" to="/find-work#register" onClick={()=>setOpen(false)}><ArrowUpRight size={15} aria-hidden="true"/>Register for Work</Link></div></nav><div className="header-actions"><motion.a className="phone nav-call" href="tel:+61422279428" whileHover={{y:-2}} whileTap={{scale:.98}} transition={{duration:.18}}><PhoneCall size={19} aria-hidden="true"/>Call Now</motion.a><MotionLink className="phone nav-register" to="/find-work#register" whileHover={{y:-2}} whileTap={{scale:.98}} transition={{duration:.18}}><ArrowUpRight size={15} aria-hidden="true"/>Register for Work</MotionLink><motion.button className="menu-btn" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} onClick={()=>setOpen(!open)} whileTap={{scale:.94}} transition={{duration:.15}}>{open?<X/>:<Menu/>}</motion.button></div></div></header>}
 function WhatsAppIcon(){return <svg className="footer-social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.077 4.487.71.306 1.263.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.004 2a9.91 9.91 0 0 0-8.411 15.14L2 22l4.999-1.58A9.91 9.91 0 1 0 12.004 2m0 18.16a8.24 8.24 0 0 1-4.204-1.153l-.301-.18-2.968.938.965-2.892-.197-.313a8.24 8.24 0 1 1 6.705 3.6"/></svg>}
@@ -111,192 +114,21 @@ function Employers(){return <div className="employer-experience"><Header/><main>
 </main></div>}
 async function submitLeadForm(event, type, setStatus){event.preventDefault();setStatus('sending');const form=event.currentTarget;const fields=Object.fromEntries(new FormData(form).entries());try{const response=await fetch('/api/submissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,fields})});const raw=await response.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{throw new Error('Form server returned an invalid response. Please restart the app with npm run dev.')}if(!response.ok)throw new Error(result.error||'Unable to send');form.reset();setStatus(result.message||'Thanks — your details have been sent.')}catch(error){setStatus(error.message||'Unable to send the form right now. Please try again.')}}
 function FormStatusPopup({message,onClose}){useEffect(()=>{if(!message||message==='sending')return;const timer=window.setTimeout(onClose,5000);return()=>window.clearTimeout(timer)},[message,onClose]);if(!message||message==='sending')return null;const isError=/unable|invalid|required|failed|error/i.test(message);return createPortal(<div className={`form-status-popup${isError?' error':''}`} role="status" aria-live="polite"><span>{message}</span><button type="button" onClick={onClose} aria-label="Close message">×</button></div>,document.body)}
-function RequestForm(){const [status,setStatus]=useState('');return <form className="request-form" aria-label="Worker application" onSubmit={e=>submitLeadForm(e,'employer',setStatus)}><div className="form-head"><b>Join Our Team</b><span>WORKER APPLICATION</span></div><p className="hire-form-intro">Share your details for suitable construction work opportunities.</p><label>What type of work are you interested in?<select name="workType" defaultValue="General Construction Labourers"><option>General Construction Labourers</option><option>Skilled Construction Labourers</option><option>Trade Assistants</option><option>Civil Construction Labourers</option><option>Formwork &amp; Concrete Labourers</option><option>Traffic Management Workers</option></select></label><div className="form-row"><label>Years of experience<input name="yearsExperience" type="number" min="0" placeholder="e.g. 2"/></label><label>Available start date<input name="availableStartDate" type="date"/></label></div><label>Preferred location in Victoria<input name="preferredLocation" placeholder="e.g. Melbourne, Geelong, Ballarat"/></label><label>Your email address<input name="email" type="email" placeholder="you@example.com" required/></label><button className="btn orange" type="submit" disabled={status==='sending'}>{status==='sending'?'SENDING…':'SUBMIT APPLICATION'} <ArrowRight size={16}/></button><p className="hire-form-note"><LockKeyhole size={12} aria-hidden="true"/><span>Learn how we handle your details in our <Link to="/privacy-policy">Privacy Policy</Link>.</span></p><FormStatusPopup message={status} onClose={()=>setStatus('')}/></form>}
+function RequestForm(){const [status,setStatus]=useState('');return <form className="request-form" aria-label="Worker application" onSubmit={e=>submitLeadForm(e,'employer',setStatus)}><div className="form-head"><b>Join Our Team</b><span>WORKER APPLICATION</span></div><p className="hire-form-intro">Share your details for suitable construction work opportunities.</p><label>What type of work are you interested in?<select name="workType" defaultValue="General Construction Labourers"><option>General Construction Labourers</option><option>Skilled Construction Labourers</option><option>Trade Assistants</option><option>Civil Construction Labourers</option><option>Formwork &amp; Concrete Labourers</option><option>Traffic Management Workers</option></select></label><div className="form-row"><label>Years of experience<input name="yearsExperience" type="number" min="0" placeholder="e.g. 2"/></label><label>Available start date<PremiumDatePicker name="availableStartDate" label="Available start date"/></label></div><label>Preferred location in Victoria<input name="preferredLocation" placeholder="e.g. Melbourne, Geelong, Ballarat"/></label><label>Your email address<input name="email" type="email" placeholder="you@example.com" required/></label><button className="btn orange" type="submit" disabled={status==='sending'}>{status==='sending'?'SENDING…':'SUBMIT APPLICATION'} <ArrowRight size={16}/></button><p className="hire-form-note"><LockKeyhole size={12} aria-hidden="true"/><span>Learn how we handle your details in our <Link to="/privacy-policy">Privacy Policy</Link>.</span></p><FormStatusPopup message={status} onClose={()=>setStatus('')}/></form>}
 function RequestSection(){return <section className="request-section"><div><Badge>WORKER RECRUITMENT TEAM</Badge><h2>Ready to work on<br/><em>our Victorian projects?</em></h2><p>Register your details, experience and availability today. Our recruitment team reviews applications for suitable opportunities.</p><Btn to="/find-work">Apply for Work</Btn></div><div className="contact-card"><Phone/><b>Worker Enquiries</b><span>Recruitment &amp; Operations Support<br/>Victoria, Australia</span></div></section>}
 
-function WhoWeAre(){
-  return <>
-    <Header/>
-    <main className="about-page-wrap">
-      {/* Modern Hero Section with Soft Background */}
-      <section className="about-hero-wrapper">
-        <div className="about-hero-container">
-          <div className="about-hero-left">
-            <h1 className="about-hero-title">
-              Labour hire with a construction focus.
-            </h1>
-            <p className="about-hero-desc">
-              9Work Force supplies construction labour for builders, contractors and project teams across Melbourne and Victoria. We review worker skills, credentials and site suitability to support your workforce needs.
-            </p>
-            <div className="about-trust-grid">
-              <div className="about-trust-card">
-                <div className="about-trust-icon"><ShieldCheck size={20} /></div>
-                <div>
-                  <strong>Reliable People</strong>
-                  <small>Suitable Site Workers</small>
-                </div>
-              </div>
-              <div className="about-trust-card">
-                <div className="about-trust-icon navy"><HardHat size={20} /></div>
-                <div>
-                  <strong>Safety First</strong>
-                  <small>WHS & Induction Ready</small>
-                </div>
-              </div>
-              <div className="about-trust-card">
-                <div className="about-trust-icon"><Clock3 size={20} /></div>
-                <div>
-                  <strong>Victoria Wide</strong>
-                  <small>Melbourne & Regional</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="about-hero-visual">
-            <div className="about-photo-frame">
-              <img src={imgs.aboutHero} alt="9Work Force construction team reviewing site plans" fetchPriority="high" />
-              <div className="about-photo-caption">
-                <strong>Focused on Victoria</strong>
-                <p>Construction labour hire support for commercial, civil and infrastructure projects across Victoria.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Story Section */}
-      <section className="about-story-section">
-        <div className="about-story-image-wrap">
-          <img className="about-story-image" src={imgs.aboutStory} alt="Workers collaborating on Victorian construction site" loading="lazy" />
-        </div>
-        <div className="about-story-copy">
-          <h2>Workers suited to your project.</h2>
-          <p>
-            We help Victorian construction businesses plan their labour support by reviewing worker experience, credentials, tickets, availability and role suitability.
-          </p>
-          <p>
-            Clear communication, worker screening and practical site coordination guide our service. Safety awareness and fair treatment remain part of the process.
-          </p>
-          <div className="about-story-highlights">
-            <div className="about-highlight-pill">
-              <Check size={16} /> Direct worker recruitment, screening & verification
-            </div>
-            <div className="about-highlight-pill">
-              <Check size={16} /> Safety, White Card & site induction readiness
-            </div>
-            <div className="about-highlight-pill">
-              <Check size={16} /> Transparent payroll, superannuation & entitlement management
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <VisionMission />
-
-      {/* Internal Operations / Approach */}
-      <section className="about-approach-section">
-        <div className="about-approach-container">
-          <h2>How we manage our workforce.</h2>
-          <div className="about-approach-grid">
-            <article className="about-approach-card">
-              <span className="about-step-badge">01</span>
-              <h3>Recruitment & Onboarding</h3>
-              <p>We review experience, work rights, White Cards, relevant tickets and onboarding documents against role requirements.</p>
-            </article>
-            <article className="about-approach-card">
-              <span className="about-step-badge">02</span>
-              <h3>Safety & Site Readiness</h3>
-              <p>We review relevant credentials, induction requirements, PPE awareness and worker suitability for the site.</p>
-            </article>
-            <article className="about-approach-card">
-              <span className="about-step-badge">03</span>
-              <h3>Payroll & Entitlements</h3>
-              <p>We manage timesheets, wages, superannuation and applicable employment entitlements through our payroll processes.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* Operational Roles */}
-      <section className="about-roles-section">
-        <h2>Workforce coordination.</h2>
-        <div className="about-roles-grid">
-          <article className="about-role-card">
-            <div className="about-role-icon"><Users size={22} /></div>
-            <h3>Business Manager</h3>
-            <p>Oversees business operations, client requirements and overall workforce coordination.</p>
-          </article>
-          <article className="about-role-card">
-            <div className="about-role-icon"><HardHat size={22} /></div>
-            <h3>Recruitment Officer</h3>
-            <p>Supports worker recruitment, screening and role matching for construction labour requirements.</p>
-          </article>
-          <article className="about-role-card">
-            <div className="about-role-icon"><ShieldCheck size={22} /></div>
-            <h3>Compliance Officer</h3>
-            <p>Supports worker documentation, licences, tickets, safety requirements and compliance records.</p>
-          </article>
-          <article className="about-role-card">
-            <div className="about-role-icon"><MapPin size={22} /></div>
-            <h3>Site Coordinator</h3>
-            <p>Supports attendance, worker communication and site-related coordination during placements.</p>
-          </article>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="about-values-section">
-        <div className="about-values-container">
-          <h2>Safety and respect on site.</h2>
-          <div className="about-values-grid">
-            {[
-              ['S', 'Safety', 'Worker safety is an essential part of construction labour hire and site work.'],
-              ['R', 'Reliability', 'Dependable attendance, suitable experience and clear communication support site placements.'],
-              ['C', 'Compliance', 'Relevant work rights, credentials, licences and fair work requirements are upheld.'],
-              ['R', 'Respect', 'Workers are treated fairly, professionally and respectfully across all projects.'],
-              ['P', 'Preparation', 'Workers meet site inductions, PPE and role-specific requirements prior to placement.']
-            ].map(([letter, title, desc]) => (
-              <article className="about-value-card" key={title}>
-                <span className="about-value-letter">{letter}</span>
-                <h3>{title}</h3>
-                <p>{desc}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA Band */}
-      <section className="about-cta-band">
-        <div className="about-cta-inner">
-          <div>
-            <h2>Join our construction workforce.</h2>
-            <p>If you have construction experience, relevant tickets or site-based skills and are looking for work opportunities in Victoria, register your interest today.</p>
-          </div>
-          <div className="about-cta-actions">
-            <Link className="about-btn-primary" to="/find-work">Apply for Work <ArrowRight size={16} /></Link>
-            <Link className="about-btn-secondary" to="/contact">Get in Touch</Link>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </main>
-  </>;
-}
-
+function WhoWeAre(){return <><Header/><AboutPage footer={<Footer/>}/></>}
 const industryItems=[['FORMWORK & CONCRETE LABOURERS','Labourers assisting with formwork preparation, concrete-related tasks and structural construction support.',imgs.construction],['TRAFFIC MANAGEMENT WORKERS','Suitably trained workers supporting traffic-management activities according to qualifications, competencies, inductions and host-site requirements.',imgs.trades],['PLANT & EQUIPMENT OPERATORS','Suitably experienced and appropriately qualified workers operating relevant construction plant and equipment for the role and site.',imgs.civil],['HIGH-RISK LICENSED WORKERS','Workers with relevant high-risk work licences for roles where specific licences, competencies and site requirements apply.',imgs.warehouse],['CONSTRUCTION SITE SUPPORT WORKERS','Workers supporting site organisation, materials movement, logistics and day-to-day assistance for construction crews.',imgs.logistics],['RAIL & INFRASTRUCTURE LABOURERS','Workers supporting rail, civil and infrastructure projects according to competencies, inductions, experience and project requirements.',imgs.employerHero]];
 const industryCardIcons=[HardHat,ShieldCheck,Truck,ClipboardList,Users,MapPin];
+
 function IndustryShowcase(){return <section className="work-area-showcase" aria-labelledby="work-area-showcase-title"><div className="work-area-showcase-inner">
   <div className="work-area-showcase-heading"><div><span className="work-area-eyebrow">WORK AREAS / VICTORIA</span><h2 id="work-area-showcase-title">Construction labour hire <br/>across&nbsp;<em>Victoria.</em></h2></div><div className="work-area-heading-note"><p>Explore six work areas, with worker suitability reviewed against relevant experience, credentials and site requirements.</p><span><i aria-hidden="true"/>06 WORK AREAS</span></div></div>
   <div className="work-area-photo-grid">{industryItems.map(([title,description,photo],index)=>{const Icon=industryCardIcons[index];const displayTitle=title.toLowerCase().replace(/\b\w/g,letter=>letter.toUpperCase());return <article className="work-area-photo-card" key={title}>
     <div className="work-area-card-media"><img src={photo} alt={displayTitle+' on a construction project'} loading="lazy" width="1672" height="941"/></div>
-    <div className="work-area-card-copy"><div className="work-area-card-meta"><span className="work-area-card-index">0{index+1}<small> / WORK AREA</small></span><span className="work-area-card-icon"><Icon size={22} aria-hidden="true"/></span></div><h3>{displayTitle}</h3><p>{description}</p><Link className="work-area-card-link" to="/find-work"><span>Apply for this work</span><span className="work-area-link-arrow"><ArrowRight size={18} aria-hidden="true"/></span></Link></div>
+    <div className="work-area-card-copy"><div className="work-area-card-meta"><span className="work-area-card-index">0{index+1}<small> / WORK AREA</small></span><span className="work-area-card-icon"><Icon size={22} aria-hidden="true"/></span></div><h3>{displayTitle}</h3><p>{description}</p><Link className="work-area-card-link" to={getWorkRolePath(title)}><span>Apply for this work</span><span className="work-area-link-arrow"><ArrowRight size={18} aria-hidden="true"/></span></Link></div>
   </article>})}</div>
 </div></section>}
 function IndustriesPage(){return <><Header/><main className="work-areas-page">
-  <section className="industry-hero"><div><span className="work-areas-hero-label">WORK AREAS / VICTORIA</span><h1>Construction labour for <em>your project.</em></h1><p>Labour support for builders, contractors and site teams across Melbourne and Victoria, from formwork and concrete to civil and infrastructure works.</p><div className="hero-buttons"><Btn to="/find-work">Find Work</Btn><Btn light to="/employers">Register Details</Btn></div></div><div className="work-areas-hero-media"><img src={imgs.industryHero} alt="Construction site and tower cranes in Victoria" fetchPriority="high"/><span><MapPin size={16} aria-hidden="true"/>MELBOURNE &amp; VICTORIA</span></div></section>
   <IndustryShowcase/>
   <section className="section flexible-band"><div><span className="work-area-eyebrow">SITE READINESS</span><h2>Skills suited to&nbsp;<em>your site.</em></h2><p>Worker suitability considers construction experience, White Card, relevant tickets, licences, availability and project location.</p></div><div className="flexible-list">{['Valid Tickets & Licences','White Card Ready','Safety Inductions','Victorian Locations'].map(x=><span key={x}><Check aria-hidden="true"/>{x}</span>)}</div></section>
   <section className="simple-cta"><div><span className="work-areas-cta-label">YOUR NEXT OPPORTUNITY</span><h2>Ready to work in&nbsp;<em>these areas?</em></h2><p>Share your experience, tickets and availability for suitable Victorian construction roles.</p></div><Btn to="/find-work">Register for Construction Work</Btn></section><Footer/>
@@ -318,10 +150,11 @@ function WorkRolePage({application=false}){
   const {roleSlug}=useParams();
   const navigate=useNavigate();
   const index=labourCards.findIndex(role=>getWorkRolePath(role[0])===`/find-work/${roleSlug}`);
-  if(index===-1)return <Navigate to="/find-work#opportunities" replace/>;
-  const role=labourCards[index];
-  if(application)return <RoleApplication key={roleSlug} role={role[0]} categories={workAreas} onClose={()=>navigate(getWorkRolePath(role[0]))}/>;
-  return <MotionPage key={roleSlug}><Header/><main><WorkRoleDetails role={role} index={index} onApply={()=>navigate(`${getWorkRolePath(role[0])}/apply`)}/><Footer/></main></MotionPage>;
+  const workArea=industryItems.find(item=>getWorkRolePath(item[0])===`/find-work/${roleSlug}`);
+  if(index===-1&&!workArea)return <Navigate to="/find-work#opportunities" replace/>;
+  const role=index>=0?labourCards[index]:[workArea[0].toLowerCase().replace(/\b\w/g,letter=>letter.toUpperCase()),workArea[1],workArea[2]];
+  if(application)return <RoleApplication key={roleSlug} role={role[0]} categories={workAreas.includes(role[0])?workAreas:[...workAreas,role[0]]} onClose={()=>navigate(getWorkRolePath(role[0]))}/>;
+  return <MotionPage key={roleSlug}><Header/><main><WorkRoleDetails role={role} index={index} contentOverride={additionalWorkRoleContent[roleSlug]} onApply={()=>navigate(`${getWorkRolePath(role[0])}/apply`)}/><Footer/></main></MotionPage>;
 }
 function WorkerRegistration(){return <section id="register" className="registration worker-registration"><div className="worker-registration-card"><div className="worker-registration-body"><div className="worker-registration-heading"><span>WORKER REGISTRATION</span><h2>Register for <em>construction work.</em></h2><p>Register your construction experience, White Card, work rights, tickets, availability and preferred locations. Registration does not guarantee employment or placement.</p></div><WorkerForm/></div><aside className="worker-registration-side" aria-label="Registration team contact details"><div className="worker-registration-info"><span>9WORKFORCE · VICTORIA</span><h3>Your next step<br/><em>starts here.</em></h3><p>Speak with our team about registering for construction work.</p><ul><li><Mail size={21} aria-hidden="true"/><a href="mailto:support@9workforce.com.au">support@9workforce.com.au</a></li><li><Phone size={21} aria-hidden="true"/><a href="tel:+61422279428">+61 422 279 428</a></li><li><MapPin size={21} aria-hidden="true"/><span>Melbourne, Victoria,<br/>Australia</span></li></ul><div className="worker-registration-info-foot"><HardHat size={22} aria-hidden="true"/><span>Construction work.<br/>A team ready to help.</span></div></div></aside></div></section>}
 async function submitWorkerRegistration(event, setStatus){

@@ -8,7 +8,10 @@ const fill=async form=>{
   await form.getByLabel('Site suburb / location').fill('Melbourne - local preview test');
   await form.getByLabel('Workers required').selectOption('General Labourers');
   await form.getByLabel('How many workers?').fill('2');
-  await form.getByLabel('Start date').fill('2026-10-12');
+  await form.getByRole('button',{name:'Start date',exact:true}).click();
+  await form.page().getByLabel('Calendar year').selectOption('2026');
+  await form.page().getByLabel('Calendar month').selectOption('9');
+  await form.page().getByRole('button',{name:'12 October 2026',exact:true}).click();
   await form.getByLabel('What do you need?').fill('[LOCAL TEST ONLY] Verify the new Request Workers form and email delivery. No workers are requested; please disregard this test enquiry.');
 };
 

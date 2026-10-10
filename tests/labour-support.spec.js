@@ -1,5 +1,21 @@
 import {test,expect} from '@playwright/test';
 
+test('carousel stays in place while wheel gestures rotate the cards',async({page})=>{
+  const anchor=Math.round(await prepare(page));
+  await page.evaluate(y=>scrollTo({top:y-250,behavior:'instant'}),anchor);
+  await page.waitForTimeout(100);
+  await page.mouse.move(8,350);
+  await page.mouse.wheel(0,500);
+  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(anchor);
+  await page.evaluate(()=>{
+    window.orbitPositions=[];window.sampleOrbit=true;
+    function sample(){if(!window.sampleOrbit)return;window.orbitPositions.push(document.querySelector('.labour-orbit').getBoundingClientRect().top);requestAnimationFrame(sample);}sample();
+  });
+  for(let i=0;i<6;i++){await page.mouse.wheel(0,120);await page.waitForTimeout(100);}
+  const movement=await page.evaluate(()=>{window.sampleOrbit=false;return Math.max(...window.orbitPositions)-Math.min(...window.orbitPositions);});
+  expect(movement).toBeLessThanOrEqual(1);
+});
+
 async function prepare(page){
   await page.goto('/');
   const section=page.locator('.labour-orbit');
@@ -27,10 +43,7 @@ for(const motion of ['no-preference','reduce'])for(const width of [1440,390]){
       expect(Math.abs(await page.evaluate(()=>scrollY)-anchor)).toBeLessThan(2);
       if(index<7)await page.waitForTimeout(400);
     }
-    // A continuous fling must stay captured after reaching the final card.
-    for(let n=0;n<8;n++)await page.mouse.wheel(0,5000);
-    expect(Math.abs(await page.evaluate(()=>scrollY)-anchor)).toBeLessThan(2);
-    await page.waitForTimeout(400);
+    // The next wheel gesture leaves immediately at the final card.
     await page.mouse.wheel(0,500);
     await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(anchor+100);
     await page.waitForTimeout(200);
@@ -43,7 +56,7 @@ for(const motion of ['no-preference','reduce'])for(const width of [1440,390]){
       expect(Math.abs(await page.evaluate(()=>scrollY)-anchor)).toBeLessThan(2);
       if(index>0)await page.waitForTimeout(400);
     }
-    await page.waitForTimeout(400);await page.mouse.wheel(0,-500);
+    await page.mouse.wheel(0,-500);
     await expect.poll(()=>page.evaluate(()=>scrollY)).toBeLessThan(anchor-100);
   });
 }

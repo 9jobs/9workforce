@@ -17,8 +17,8 @@ const groups = [
   {title:'Civil & infrastructure',text:'Labour support for roadworks, utilities and infrastructure projects.',icon:Route},
   {title:'Site support roles',text:'General labourers, skilled labourers and trade assistants.',icon:HardHat},
 ];
-const stateLabels=[['WA',126,-25],['NT',133,-20],['SA',135,-29],['QLD',144,-23],['NSW',146,-32],['TAS',147,-43]];
-const project = (lon,lat) => [(lon-112)*14,(-lat-9)*14];
+const victoria = australiaStates.find(state => state.name === 'Victoria');
+const project = (lon,lat) => [((lon-112)*14-395)*3.8,((-lat-9)*14-325)*3.8];
 
 export default function WorkforceCoverage() {
   const [selected,setSelected]=useState(0);
@@ -49,11 +49,14 @@ export default function WorkforceCoverage() {
         <div className="coverage-map-panel">
           <div className="coverage-map-heading"><span><MapPin size={14}/>MELBOURNE &amp; VICTORIA</span><span className="coverage-north" aria-hidden="true">↑ N</span></div>
           <svg className={`coverage-map${locationHover?' is-location-hovered':''}`} viewBox="0 0 640 510" role="img" aria-labelledby="coverage-map-title coverage-map-desc">
-            <title id="coverage-map-title">Australia workforce map</title><desc id="coverage-map-desc">Selected location: {city.name}. Use the location buttons below to explore Victoria.</desc>
+            <title id="coverage-map-title">Victoria and Melbourne workforce map</title><desc id="coverage-map-desc">Coverage across Victoria and all Melbourne metro areas, including the CBD, western, northern and south eastern suburbs. Selected location: {city.name}.</desc>
             <defs><linearGradient id="coverage-land" x2="0" y2="1"><stop stopColor="#5274a3"/><stop offset="1" stopColor="#293f67"/></linearGradient><linearGradient id="coverage-victoria" x2="0" y2="1"><stop stopColor="#ffac50"/><stop offset="1" stopColor="#ff8628"/></linearGradient></defs>
-            {australiaStates.map(state=><path key={state.name} d={state.path} className={state.name==='Victoria'?'coverage-state-vic':'coverage-state'}><title>{state.name}</title></path>)}
-            {stateLabels.map(([label,lon,lat])=>{const [sx,sy]=project(lon,lat);return <text key={label} x={sx} y={sy} className="coverage-state-label">{label}</text>;})}
-            <text x="325" y="470" className="coverage-ocean">SOUTHERN OCEAN</text>
+            <path d={victoria.path} transform="translate(-1501 -1235) scale(3.8)" className="coverage-state-vic"><title>Victoria</title></path>
+            <text x="260" y="180" className="coverage-state-label">VICTORIA</text>
+            {cities.map(item => {const [cx,cy]=project(item.lon,item.lat);return <g key={item.name} transform={`translate(${cx} ${cy})`}><circle r={item.name===city.name?0:4} className="coverage-city-dot"/><title>{item.name}</title></g>;})}
+            <ellipse cx={project(cities[0].lon,cities[0].lat)[0]} cy={project(cities[0].lon,cities[0].lat)[1]} rx="32" ry="24" className="coverage-metro-area"><title>All Melbourne metro areas</title></ellipse>
+            <text x="320" y="448" className="coverage-metro-title">MELBOURNE METRO</text>
+            <text x="320" y="471" className="coverage-metro-caption">CBD · West · North · South east</text>
             <g transform={`translate(${x} ${y})`} className="coverage-location-pin"><circle className="coverage-pin-pulse" r="10"/><circle r="5" className="coverage-pin-core"/><path d="M8 0 H50 L68 -28 H118" className="coverage-pin-leader"/><text x="70" y="-36" className="coverage-pin-label">{city.name}</text></g>
           </svg>
           <div className="coverage-map-summary" aria-live="polite"><span className="coverage-live-dot"/><div><strong>{selected<2?city.name:groups[selected].title}</strong><p>{selected<2?`${city.region} · Victoria`:groups[selected].text}</p></div><span className="coverage-vic-tag">VIC</span></div>

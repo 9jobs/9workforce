@@ -1,6 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {ArrowLeft, ArrowRight, Check, Home, UploadCloud} from 'lucide-react';
+import {isAustralianPhone, isValidEmail} from '../lib/applicationValidation';
+import VictoriaAddressInput from './VictoriaAddressInput';
 
 function CelebrationBurst() {
   const [visible, setVisible] = useState(true);
@@ -48,9 +50,15 @@ export default function RoleApplication({role, categories, onClose}) {
   const [resume, setResume] = useState('');
   const [coverLetter, setCoverLetter] = useState('');
   useEffect(() => { form.current?.querySelector(`[data-step="${step}"] input, [data-step="${step}"] select`)?.focus(); }, [step]);
+  function validateContactField(field) {
+    const value = field.value.trim();
+    if (field.name === 'phone') field.setCustomValidity(value && !isAustralianPhone(value) ? 'Enter a valid Australian mobile or landline number, e.g. 0412 345 678 or +61 412 345 678.' : '');
+    if (field.name === 'email') field.setCustomValidity(value && !isValidEmail(value) ? 'Enter a valid email address, e.g. name@example.com.' : '');
+  }
   async function advance(event) {
     event.preventDefault();
     if (status === 'sending') return;
+    form.current.querySelectorAll('[name=phone], [name=email]').forEach(validateContactField);
     const fields = form.current.querySelectorAll(`[data-step="${step}"] input, [data-step="${step}"] select, [data-step="${step}"] textarea`);
     for (const field of fields) if (!field.reportValidity()) return;
     if (step < 2) setStep(step + 1);
@@ -67,6 +75,8 @@ export default function RoleApplication({role, categories, onClose}) {
       try {
         const data = new FormData(form.current);
         const fields = Object.fromEntries([...data.entries()].filter(([key]) => !['resume', 'coverLetter'].includes(key)));
+        fields.email = fields.email.trim();
+        fields.phone = fields.phone.trim();
         fields.preferredRole = role;
         fields.applicationForm = 'roleApplication';
         const attachments = [['resume', data.get('resume')], ['coverLetter', data.get('coverLetter')]];
@@ -104,9 +114,9 @@ export default function RoleApplication({role, categories, onClose}) {
       <div className="application-panel">
           <div className="application-stage-heading"><span>STEP {step+1} OF 3</span><h2>{stageHeadings[step].title}</h2><p>{stageHeadings[step].description}</p></div>
           <form ref={form} className="application-form" noValidate onSubmit={advance}>
-            <fieldset data-step="0" hidden={step !== 0}><legend className="application-sr-only">Personal details</legend><label>Full name <i>*</i><input name="fullName" autoComplete="name" required placeholder="e.g. John Doe"/></label><label>Phone number <i>*</i><input name="phone" type="tel" autoComplete="tel" required placeholder="e.g. 0400 000 000"/></label><label>Email address <i>*</i><input name="email" type="email" autoComplete="email" required placeholder="e.g. john@example.com"/></label></fieldset>
-            <fieldset data-step="1" hidden={step !== 1}><legend className="application-sr-only">Work details</legend><label>Location in Victoria<input name="location" placeholder="e.g. Melbourne CBD, Western Suburbs"/></label><div className="application-field-row"><label>Work type / category<select name="workCategory" defaultValue={role}>{categories.map(category => <option key={category}>{category}</option>)}</select></label><label>Availability<select name="availability"><option>Immediately</option><option>Within 2 weeks</option><option>Just exploring</option></select></label></div><label>Experience &amp; tickets<textarea name="experienceTickets" rows="4" placeholder="White Card, relevant site experience and role-specific tickets"/></label></fieldset>
-            <fieldset data-step="2" hidden={step !== 2}><legend className="application-sr-only">Documents</legend><label>Upload resume / CV <i>*</i><span className="application-upload"><UploadCloud size={28}/><b>{resume || 'Choose your resume'}</b><small>Combined upload limit: 3 MB</small><input name="resume" type="file" required onChange={event => setResume(event.target.files[0]?.name || '')}/></span></label><label>Cover letter <small>(optional)</small><span className="application-upload"><UploadCloud size={28}/><b>{coverLetter || 'Choose your cover letter'}</b><small>Combined upload limit: 3 MB</small><input name="coverLetter" type="file" onChange={event => setCoverLetter(event.target.files[0]?.name || '')}/></span></label><label>Message / additional information<textarea name="additionalInformation" rows="3" placeholder="Transport, tickets or anything else you would like us to know"/></label></fieldset>
+            <fieldset data-step="0" hidden={step !== 0}><legend className="application-sr-only">Personal details</legend><label>Full name <i>*</i><input name="fullName" autoComplete="name" required placeholder="e.g. John Doe"/></label><label>Phone number <i>*</i><input name="phone" type="tel" autoComplete="tel" required maxLength={32} onChange={event => validateContactField(event.target)} placeholder="e.g. 0412 345 678 or +61 412 345 678"/></label><label>Email address <i>*</i><input name="email" type="email" autoComplete="email" required maxLength={254} onChange={event => validateContactField(event.target)} placeholder="e.g. john@example.com"/></label></fieldset>
+            <fieldset data-step="1" hidden={step !== 1}><legend className="application-sr-only">Work details</legend><VictoriaAddressInput/><div className="application-field-row"><label>Work type / category<select name="workCategory" defaultValue={role}>{categories.map(category => <option key={category}>{category}</option>)}</select></label><label>Availability<select name="availability"><option>Immediately</option><option>Within 2 weeks</option><option>After 2 weeks</option><option>Just exploring</option></select></label></div><label>Experience &amp; tickets<textarea name="experienceTickets" rows="4" placeholder="White Card, relevant site experience and role-specific tickets"/></label></fieldset>
+            <fieldset data-step="2" hidden={step !== 2}><legend className="application-sr-only">Documents</legend><label>Upload resume / CV <i>*</i><span className="application-upload"><UploadCloud size={28}/><b>{resume || 'Upload resume / CV'}</b><small>Click to upload · Combined limit: 3 MB</small><input name="resume" type="file" required onChange={event => setResume(event.target.files[0]?.name || '')}/></span></label><label>Cover letter <small>(optional)</small><span className="application-upload"><UploadCloud size={28}/><b>{coverLetter || 'Upload cover letter'}</b><small>Click to upload · Combined limit: 3 MB</small><input name="coverLetter" type="file" onChange={event => setCoverLetter(event.target.files[0]?.name || '')}/></span></label><label>Message / additional information<textarea name="additionalInformation" rows="3" placeholder="Transport, tickets or anything else you would like us to know"/></label></fieldset>
             {status && status !== 'sending' && <p className="application-error" role="alert">{status}</p>}
             <div className="application-form-actions">{step > 0 && <button type="button" className="application-back" disabled={status === 'sending'} onClick={() => setStep(step - 1)}><ArrowLeft size={16}/> Back</button>}<button className="btn orange" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Submitting…' : step === 2 ? 'Submit application' : 'Continue'}<ArrowRight size={16}/></button></div>
           </form>

@@ -26,6 +26,38 @@ export default function ConstructionJourney() {
     const nextSection = root.nextElementSibling;
     let photoReady = false;
     let refreshVisual = () => {};
+    const enteredText = new Set();
+    const textEffects = new Set();
+    let textInView = false;
+    const revealText = panel => {
+      if (!textInView || media.matches || enteredText.has(panel) || !Element.prototype.animate) return;
+      enteredText.add(panel);
+      [...panel.children].forEach((element, index) => {
+        element.dataset.storyTextReveal = 'running';
+        const timing={duration:650,delay:index*80,easing:'cubic-bezier(.22,1,.36,1)',fill:'both'};
+        const effects=[
+          element.animate([{opacity:0},{opacity:1}],timing),
+          element.animate([
+            {transform:'translate3d(0,24px,0)',composite:'add'},
+            {transform:'translate3d(0,0,0)',composite:'add'},
+          ],timing),
+        ];
+        effects.forEach(effect=>textEffects.add(effect));
+        Promise.all(effects.map(effect=>effect.finished)).then(() => {
+          effects.forEach(effect=>{effect.cancel();textEffects.delete(effect);});
+          element.dataset.storyTextReveal = 'complete';
+        }).catch(() => {});
+      });
+    };
+    const cancelText = () => {
+      textEffects.forEach(effect => effect.cancel());textEffects.clear();
+      root.querySelectorAll('[data-story-text-reveal]').forEach(element => element.removeAttribute('data-story-text-reveal'));
+    };
+    const textObserver = new IntersectionObserver(entries => {
+      textInView = entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= .16);
+      if (textInView) refreshVisual();
+    }, {threshold:[0,.16]});
+    textObserver.observe(root);
     const onPhotoLoad = () => { photoReady = true; refreshVisual(); };
     photo.addEventListener('load', onPhotoLoad);
 
@@ -35,6 +67,7 @@ export default function ConstructionJourney() {
       photoReady = photo.complete && photo.naturalWidth > 0;
     };
     const setStatic = () => {
+      cancelText();
       root.dataset.mode = 'static';
       root.dataset.progress = '1';
       loadPhoto();
@@ -91,6 +124,8 @@ export default function ConstructionJourney() {
           panels[1].style.opacity = fade(p, .23, .46);
           panels[2].style.opacity = fade(p, .66, .81);
           const finalOpacity = clamp((p - .86) / .065);
+          panels.forEach(panel => { if (Number(panel.style.opacity) > 0) revealText(panel); });
+          if (finalOpacity > 0) revealText(cta);
           cta.style.opacity = finalOpacity;
           cta.style.visibility = finalOpacity > 0 ? 'visible' : 'hidden';
           cta.inert = finalOpacity < .95;
@@ -180,6 +215,7 @@ export default function ConstructionJourney() {
       observer.disconnect();
       window.removeEventListener('scroll', onApproach);
       media.removeEventListener('change', onPreference);
+      textObserver.disconnect();cancelText();
       photo.removeEventListener('load', onPhotoLoad);
       disposeAnimation();
     };

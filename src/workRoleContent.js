@@ -1,3 +1,30 @@
+const extraRoleRequirements = [
+  ['White Card & inductions', 'Provide construction induction details and complete the requirements of the host site.'],
+  ['Relevant experience', 'Share the projects, equipment and tasks you have experience supporting.'],
+  ['Role credentials', 'Provide current licences, tickets and competencies relevant to the assignment.'],
+  ['Safety & communication', 'Follow site procedures, PPE requirements and instructions from the project team.'],
+];
+
+export const additionalWorkRoleContent = Object.fromEntries([
+  ['plant-and-equipment-operators', 'PLANT & EQUIPMENT OPERATIONS', '/assets/civil-excavation.png', 'Plant & Equipment Operators',
+    'Operate relevant construction plant and equipment within your demonstrated experience, qualifications and site authorisation.',
+    ['Complete equipment checks and report faults before use.', 'Operate assigned plant within your training and authorisation.', 'Coordinate movements with the site team and follow exclusion zones.']],
+  ['high-risk-licensed-workers', 'LICENSED CONSTRUCTION SUPPORT', '/assets/materials-worker.png', 'High-Risk Licensed Workers',
+    'Support assigned construction tasks requiring relevant high-risk work licences, competencies and host-site authorisation.',
+    ['Perform licensed tasks within the scope of your current credentials.', 'Follow task briefings, exclusion zones and safe work procedures.', 'Check assigned equipment and report hazards to the supervisor.']],
+  ['construction-site-support-workers', 'CONSTRUCTION SITE SUPPORT', '/assets/labour-site-team.png', 'Construction Site Support Workers',
+    'Support site organisation, materials movement, logistics and day-to-day assistance for construction crews.',
+    ['Prepare and organise materials and work areas.', 'Assist site crews with practical tasks within your skills.', 'Maintain housekeeping, safe access and communication on site.']],
+  ['rail-and-infrastructure-labourers', 'RAIL & INFRASTRUCTURE SUPPORT', '/assets/site-sunset.png', 'Rail & Infrastructure Labourers',
+    'Support rail, civil and infrastructure crews according to your experience, competencies, inductions and project requirements.',
+    ['Assist with work-area preparation and materials handling.', 'Support infrastructure crews within your training and site authorisation.', 'Follow project access requirements, briefings and supervisor instructions.']],
+].map(([slug,category,image,imageLabel,overview,duties])=>[slug,{
+  category, image, imageLabel, overview, duties,
+  intro:`Register for ${imageLabel.toLowerCase()} opportunities across Melbourne and Victoria. ${overview}`,
+  requirementIntro:'Share your relevant experience, current credentials and availability so our team can review your suitability for each assignment.',
+  requirements:extraRoleRequirements,
+}]));
+
 export const workRoleContent = [
   {
     category: 'CONSTRUCTION LABOUR HIRE', sector: 'Construction & Trades',

@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {ArrowRight, MapPin, BriefcaseBusiness, DollarSign, ClipboardList, ShieldCheck, Check, CircleDot} from 'lucide-react';
 import {workRoleContent} from './workRoleContent';
 
-export default function WorkRoleDetails({role, index, children, onApply}) {
-  const content = workRoleContent[index];
+export default function WorkRoleDetails({role, index, children, onApply, contentOverride}) {
+  const content = contentOverride || workRoleContent[index];
   return <>
     <section className="work-role-hero" aria-labelledby="work-role-heading">
       <div className="work-role-hero-inner">

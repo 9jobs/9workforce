@@ -49,6 +49,10 @@
 .coverage-state-label { fill:#b4c8e1; font-size:11px; letter-spacing:2px; text-anchor:middle; pointer-events:none; }
 .coverage-ocean { fill:#7894b9; font-size:8px; letter-spacing:2.5px; text-anchor:middle; }
 .coverage-pin-core { fill:#fff; stroke:#ff9235; stroke-width:3; }
+.coverage-city-dot { fill:#ffb363; stroke:#fff; stroke-width:1; }
+.coverage-metro-area { fill:#ff94351c; stroke:#ffb363; stroke-width:1; stroke-dasharray:4 4; }
+.coverage-metro-title { fill:#ffb363; font-size:13px; font-weight:700; letter-spacing:2px; text-anchor:middle; }
+.coverage-metro-caption { fill:#c7d7eb; font-size:12px; text-anchor:middle; }
 .coverage-pin-pulse { fill:none; stroke:#ffb363; stroke-width:2; transform-box:fill-box; transform-origin:center; animation:coverage-location-pulse 3s ease-out infinite; }
 .coverage-pin-leader { fill:none; stroke:#ffb56b; stroke-width:1; }
 .coverage-pin-label { fill:#fff; font-size:13px; font-weight:700; paint-order:stroke; stroke:#243e65; stroke-width:4px; stroke-linejoin:round; }
