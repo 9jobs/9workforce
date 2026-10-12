@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {useInView, useReducedMotion} from 'framer-motion';
+import {motion, useInView, useReducedMotion} from 'framer-motion';
 import {Link} from 'react-router-dom';
 import {ArrowRight, HardHat, Users} from 'lucide-react';
 import {getWorkRolePath} from './workRolePaths';
@@ -48,10 +48,14 @@ export default function HomeSolutions({roles}) {
       <p>Construction labour for builders, contractors and site managers across Melbourne and Victoria. Tell us the roles and skills your site needs.</p>
     </div>
     <div className="solutions-highlights" aria-label="Our approach">
-      {highlights.map(([Icon, title, copy]) => <div className="solution-highlight" key={title}>
+      {highlights.map(([Icon, title, copy],index) => <motion.div className="solution-highlight" key={title}
+        initial={reducedMotion?false:{opacity:0,scale:.72,y:28}}
+        whileInView={{opacity:1,scale:1,y:0}}
+        viewport={{once:true,amount:.3}}
+        transition={{type:'spring',stiffness:180,damping:16,delay:index*.13}}>
         <strong>{title}</strong><span className="solution-highlight-ring"><Icon size={28} strokeWidth={1.7} aria-hidden="true"/></span>
         <span className="solution-highlight-stem" aria-hidden="true"/><p>{copy}</p>
-      </div>)}
+      </motion.div>)}
     </div>
     <div ref={gridRef} className={`solution-grid${burst ? ' is-bursting' : ''}`}>
       {roles.map(({number, title, copy, Icon}) => <article className="solution" key={number}>
