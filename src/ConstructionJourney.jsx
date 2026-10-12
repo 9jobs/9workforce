@@ -13,7 +13,7 @@ export default function ConstructionJourney() {
 
   useEffect(() => {
     const root = section.current;
-    const media = matchMedia('(prefers-reduced-motion: reduce), (max-width:860px), (pointer:coarse)');
+    const media = matchMedia('(prefers-reduced-motion: reduce)');
     let cancelled = false;
     let disposeAnimation = () => {};
     let generation = 0;
@@ -142,9 +142,9 @@ export default function ConstructionJourney() {
             immediateRender: false,
             scrollTrigger: {
               id: 'construction-journey', trigger: root, start: 'top top',
-              end: () => `+=${Math.round(root.offsetHeight * (innerWidth < 768 ? 4.5 : 5.5))}`,
+              end: () => `+=${Math.round(root.offsetHeight * (matchMedia('(max-width:860px), (pointer:coarse)').matches ? 1.1 : 5.5))}`,
               // Fixed pinning avoids scroll-thread/compositor drift from transform pinning.
-              pin: true, pinType: 'fixed', scrub: 1.05,
+              pin: true, pinType: 'fixed', scrub: matchMedia('(max-width:860px), (pointer:coarse)').matches ? .3 : 1.05,
               onLeave: self => { self.getTween()?.progress(1); self.animation.progress(1); },
               onLeaveBack: self => { self.getTween()?.progress(1); self.animation.progress(0); },
               onEnterBack: () => update(),
