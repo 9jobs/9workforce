@@ -1113,3 +1113,9 @@ footer .footer-copyright{width:100%;text-align:center;justify-content:center}
 /* Rendered outside page stacking contexts so form feedback stays visible. */
 .form-status-popup{top:auto;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:16px;z-index:10000}
 .form-status-popup span{min-width:0;overflow-wrap:anywhere}
+
+/* Mobile registration copy needs contrast over the bright construction photo. */
+@media(max-width:780px){
+ .find-work-footer-cta:after{background:linear-gradient(180deg,rgba(15,35,65,.87),rgba(25,49,87,.8) 60%,rgba(48,73,125,.94)),url('/assets/work-areas-helmet-branded.png') 65% center/cover no-repeat}
+ .find-work-footer-cta h2:before,.find-work-footer-cta h2:after{color:#fff;text-shadow:0 2px 8px #07182d40}
+}

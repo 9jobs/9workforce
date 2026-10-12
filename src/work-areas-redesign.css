@@ -34,3 +34,6 @@
 .wa-assurance-cards article>span{transition:background .25s ease,color .25s ease,transform .25s ease}
 @media(hover:hover){.wa-assurance-cards article:hover{border-color:#ff923744;box-shadow:0 22px 42px #203b691c}.wa-assurance-cards article:hover>span{background:#fff0e1;color:var(--orange);transform:scale(1.06)}}
 @media(prefers-reduced-motion:reduce){.wa-assurance-cards article,.wa-assurance-cards article>span{transition:none}.wa-assurance-cards article:hover>span{transform:none}}
+
+/* Show the complete project photographs on phones, including the helmet. */
+@media(max-width:700px){.wa-project-grid article img,.wa-project-grid article:first-child img{height:auto;min-height:0;aspect-ratio:auto;object-fit:contain}}
