@@ -193,7 +193,20 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
       swipe.current=null;
     }}
     onPointerCancel={() => { swipe.current=null; }}>
-    <div className="labour-orbit-backdrop" aria-hidden="true"/>
+    <div className="labour-orbit-backdrop" aria-hidden="true">
+      <svg className="labour-orbit-scenery" viewBox="0 0 1672 941" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="labour-wave-fill" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#5078bc" stopOpacity=".7"/><stop offset="1" stopColor="#27487f" stopOpacity=".12"/></linearGradient>
+          <pattern id="labour-orbit-dot-grid" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.5" fill="#b9d7ff" opacity=".45"/></pattern>
+        </defs>
+        <path d="M850 0 C1080 120 1000 370 1250 410 C1460 440 1540 250 1672 230 L1672 0Z" fill="url(#labour-wave-fill)"/>
+        <path d="M0 570 C310 620 355 870 960 900 C1310 940 1370 710 1672 590 L1672 941 H0Z" fill="url(#labour-wave-fill)"/>
+        <path d="M0 680 C180 720 210 890 390 941 H0Z" fill="#5284cf" opacity=".3"/>
+        <rect x="20" y="90" width="200" height="200" fill="url(#labour-orbit-dot-grid)"/>
+        <rect x="1420" y="280" width="130" height="160" fill="url(#labour-orbit-dot-grid)"/>
+        <rect x="20" y="640" width="190" height="180" fill="url(#labour-orbit-dot-grid)" opacity=".65"/>
+      </svg>
+    </div>
     <span className="labour-orbit-sr" role="status" aria-live="polite" aria-atomic="true">{active + 1} of {areas.length}: {areas[active]}. Click the section or use arrow keys to rotate.</span>
     <div className="labour-orbit-inner">
       <div className="labour-orbit-copy">

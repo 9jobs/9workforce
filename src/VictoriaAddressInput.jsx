@@ -1,7 +1,7 @@
 import React, {useEffect, useId, useRef, useState} from 'react';
 import {ChevronDown} from 'lucide-react';
 
-export default function VictoriaAddressInput() {
+export default function VictoriaAddressInput({name='location', required=false, label='Enter your Address'}) {
   const id = useId();
   const root = useRef(null);
   const [value, setValue] = useState('');
@@ -11,6 +11,12 @@ export default function VictoriaAddressInput() {
   const [message, setMessage] = useState('');
   const [selected, setSelected] = useState('');
   const [visibleCount, setVisibleCount] = useState(60);
+  useEffect(() => {
+    const form=root.current?.closest('form');
+    const reset=()=>{setValue('');setSelected('');setResults([]);setOpen(false);setMessage('');};
+    form?.addEventListener('reset',reset);
+    return ()=>form?.removeEventListener('reset',reset);
+  },[]);
   useEffect(() => {
     if (!open) return;
     const query = value === selected ? '' : value.trim();
@@ -34,9 +40,9 @@ export default function VictoriaAddressInput() {
   }, [value, selected, open]);
   function choose(result) { setValue(result.label); setSelected(result.label); setOpen(false); setResults([]); setMessage(''); }
   return <div ref={root} className="application-address" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
-    <label htmlFor={id}>Enter your Address</label>
+    <label htmlFor={id}>{label}</label>
     <div className="application-address-control">
-    <input id={id} name="location" value={value} autoComplete="off" placeholder="Select or search your suburb / area in Victoria"
+    <input id={id} name={name} required={required} maxLength={200} value={value} autoComplete="off" placeholder="Select or search your suburb / area in Victoria"
       role="combobox" aria-autocomplete="list" aria-expanded={open && results.length > 0} aria-controls={`${id}-options`}
       aria-activedescendant={open && active >= 0 ? `${id}-option-${active}` : undefined}
       onFocus={() => setOpen(true)} onClick={() => setOpen(true)} onChange={event => { setValue(event.target.value); setSelected(''); setResults([]); setActive(-1); setOpen(true); }}

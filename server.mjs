@@ -1,5 +1,5 @@
 import {searchVictoriaLocations} from './lib/victoriaLocations.js';
-import {validateRoleApplication} from './lib/applicationValidation.js';
+import {validateRoleApplication, validateJoinTeam} from './lib/applicationValidation.js';
 import {registrationAttachments,validateWorkerRegistration,registrationEmailBody} from './lib/workerRegistration.js';
 import {validateContactEnquiry, formatContactEnquiry} from './lib/contactEnquiry.js';
 import http from 'node:http';
@@ -165,6 +165,7 @@ async function handleApiRequest(req, res) {
     const input = JSON.parse(await readBody(req));
     const type = input.type === 'employer' ? 'employer' : 'contact';
     const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, ['resumeData', 'coverLetterData'].includes(key) ? 4200000 : 4000)]));
+    if (fields.applicationForm === 'joinTeam') { const error=validateJoinTeam(fields); if(error) return sendJson(res,400,{error}); }
     if (!fields.email && type === 'contact') return sendJson(res, 400, {error: 'Email is required'});
     const isWorkerRegistration = fields.applicationForm === 'workerRegistration';
     let attachments = [];

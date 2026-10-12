@@ -54,7 +54,7 @@ function HeroSearch() {
 
 export default function HomeHero() {
   return <section className="homepage-hero" aria-labelledby="homepage-heading">
-    <div className="home-hero-site" aria-hidden="true"><img src="/assets/hero-clean-helmet-warehouse.png" alt="" width="1983" height="793" fetchPriority="high"/></div>
+    <div className="home-hero-site" aria-hidden="true"><img src="/assets/hero-construction-workforce-v2.png" alt="" width="1642" height="958" fetchPriority="high"/></div>
     <div className="homepage-hero-inner">
       <div className="homepage-hero-copy">
         <span className="home-hero-eyebrow">PEOPLE POWERING AUSTRALIA</span>
@@ -62,6 +62,7 @@ export default function HomeHero() {
         <p>Tell us what your site needs. We’ll handle the workforce.</p>
         <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/request-workers">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/who-we-are">Learn More</Link></div>
       </div>
+      <div className="home-hero-mobile-photo" aria-hidden="true"><img src="/assets/hero-construction-workforce-mobile.png" alt="" width="1122" height="1402" fetchPriority="high"/></div>
       <HeroSearch/>
       <ul className="home-hero-sectors" aria-label="Our work areas">
         {[[HardHat, 'General Construction Labourers'], [TrafficCone, 'Skilled Construction Labourers'], [Building2, 'Trade Assistants'], [Forklift, 'Civil Construction Labourers'], [Hammer, 'Formwork & Concrete Labourers'], [Users, 'Traffic Management Workers']].map(([Icon, label]) => <li key={label}><Icon aria-hidden="true"/><span>{label}</span></li>)}
