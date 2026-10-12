@@ -13,7 +13,7 @@ export default function ConstructionJourney() {
 
   useEffect(() => {
     const root = section.current;
-    const media = matchMedia('(prefers-reduced-motion: reduce)');
+    const media = matchMedia('(prefers-reduced-motion: reduce), (max-width:860px), (pointer:coarse)');
     let cancelled = false;
     let disposeAnimation = () => {};
     let generation = 0;

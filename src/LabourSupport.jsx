@@ -54,6 +54,10 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
 
   useEffect(() => {
     const element = section.current;
+    if (window.matchMedia('(max-width:860px), (pointer:coarse)').matches) {
+      document.documentElement.classList.remove('labour-orbit-scroll-locked');
+      return;
+    }
     let engaged=false;
     let touchY=null;
     let previousY=window.scrollY;
