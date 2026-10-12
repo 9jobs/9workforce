@@ -54,3 +54,4 @@ html.labour-orbit-scroll-locked { overflow:hidden; scrollbar-gutter:stable; over
 @media(prefers-reduced-motion:reduce) {
   .labour-orbit-card,.labour-orbit-benefits>div,.labour-orbit-cta,.labour-orbit-cta>span,.labour-orbit-card-body button { transition:none; }
 }
+@media(max-width:860px),(pointer:coarse){.labour-orbit-stage{touch-action:pan-y pinch-zoom}}
