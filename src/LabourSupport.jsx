@@ -54,10 +54,7 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
 
   useEffect(() => {
     const element = section.current;
-    if (window.matchMedia('(max-width:860px), (pointer:coarse)').matches) {
-      document.documentElement.classList.remove('labour-orbit-scroll-locked');
-      return;
-    }
+    const mobileScroll = window.matchMedia('(max-width:860px), (pointer:coarse)').matches;
     let engaged=false;
     let touchY=null;
     let previousY=window.scrollY;
@@ -133,8 +130,9 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
         return;
       }
       event.preventDefault();
-      const next=target.current+Math.max(-.65,Math.min(.65,pixels/240));
-      moveTo(Math.max(0,Math.min(last,Math.max(position.get()-.75,Math.min(position.get()+.75,next)))));
+      const next=target.current+Math.max(-.65,Math.min(.65,pixels/(mobileScroll?100:240)));
+      const nextPosition=mobileScroll?next:Math.max(position.get()-.75,Math.min(position.get()+.75,next));
+      moveTo(Math.max(0,Math.min(last,nextPosition)));
     }
     function rotate(event) {
       if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
