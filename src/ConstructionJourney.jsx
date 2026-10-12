@@ -4,7 +4,7 @@ import './construction-journey.css';
 
 const clamp = value => Math.max(0, Math.min(1, value));
 const smooth = value => { const p = clamp(value); return p * p * (3 - 2 * p); };
-const fade = (p, enter, leave) => clamp((p - enter) / .035) * (1 - clamp((p - leave) / .035));
+const fade = (p, enter, leave, width=.035) => smooth((p - enter) / width) * (1 - smooth((p - leave) / width));
 
 export default function ConstructionJourney() {
   const section = useRef(null);
@@ -104,6 +104,7 @@ export default function ConstructionJourney() {
         });
         if (cancelled || run !== generation) return;
         gsap.registerPlugin(ScrollTrigger);
+        const mobileScene = matchMedia('(max-width:860px), (pointer:coarse)').matches;
         loadPhoto();
         scene = createConstructionScene(host, () => { disposeAnimation(); setStatic(); });
         root.dataset.mode = 'animated';
@@ -117,13 +118,16 @@ export default function ConstructionJourney() {
           const pull = smooth((p - .82) / .15);
           // One photographic plate bridges into human detail; geometry owns the first four beats.
           photo.style.opacity = reveal;
-          photo.style.transform = `scale(${1.08 + .31 * push - .38 * pull}) translate3d(${-3 * push + 3 * pull}%, ${-3 * push + 3 * pull}%, 0)`;
+          const zoom = mobileScene ? 1.04 + .12 * push - .15 * pull : 1.08 + .31 * push - .38 * pull;
+          const pan = mobileScene ? 1.2 : 3;
+          photo.style.transform = `scale(${zoom}) translate3d(${-pan * push + pan * pull}%, ${-pan * push + pan * pull}%, 0)`;
           photo.style.filter = `saturate(${.65 + reveal * .35})`;
           host.style.opacity = 1 - reveal;
-          panels[0].style.opacity = 1 - clamp((p - .17) / .04);
-          panels[1].style.opacity = fade(p, .23, .46);
-          panels[2].style.opacity = fade(p, .66, .81);
-          const finalOpacity = clamp((p - .86) / .065);
+          const fadeWidth = mobileScene ? .065 : .035;
+          panels[0].style.opacity = 1 - smooth((p - .17) / (mobileScene ? .065 : .04));
+          panels[1].style.opacity = fade(p, .23, .46, fadeWidth);
+          panels[2].style.opacity = fade(p, .66, .81, fadeWidth);
+          const finalOpacity = smooth((p - .86) / (mobileScene ? .09 : .065));
           panels.forEach(panel => { if (Number(panel.style.opacity) > 0) revealText(panel); });
           if (finalOpacity > 0) revealText(cta);
           cta.style.opacity = finalOpacity;
@@ -142,9 +146,9 @@ export default function ConstructionJourney() {
             immediateRender: false,
             scrollTrigger: {
               id: 'construction-journey', trigger: root, start: 'top top',
-              end: () => `+=${Math.round(root.offsetHeight * (matchMedia('(max-width:860px), (pointer:coarse)').matches ? 1.1 : 5.5))}`,
+              end: () => `+=${Math.round(root.offsetHeight * (matchMedia('(max-width:860px), (pointer:coarse)').matches ? 2.8 : 5.5))}`,
               // Fixed pinning avoids scroll-thread/compositor drift from transform pinning.
-              pin: true, pinType: 'fixed', scrub: matchMedia('(max-width:860px), (pointer:coarse)').matches ? .3 : 1.05,
+              pin: true, pinType: 'fixed', scrub: mobileScene ? .85 : 1.05,
               onLeave: self => { self.getTween()?.progress(1); self.animation.progress(1); },
               onLeaveBack: self => { self.getTween()?.progress(1); self.animation.progress(0); },
               onEnterBack: () => update(),
