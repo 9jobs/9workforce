@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {Link, useNavigate, useSearchParams} from 'react-router-dom';
+import {Link, Navigate, useNavigate, useSearchParams} from 'react-router-dom';
 import {ArrowRight, ChevronDown, Search, MapPin, UserRound, Building2, HardHat, TrafficCone, Forklift, Hammer, Users} from 'lucide-react';
 
 import HeroVideo from './HeroVideo';
 import {heroVideoSource} from './heroVideoSource';
 import './home-hero.css';
-import {getWorkRolePath} from './workRolePaths';
+import {getWorkRolePath, getSelectedWorkRole, getWorkRoleSearchPath} from './workRolePaths';
 
 const industries = ['General Construction Labourers', 'Skilled Construction Labourers', 'Trade Assistants', 'Civil Construction Labourers', 'Formwork & Concrete Labourers', 'Traffic Management Workers'];
 const locations = ['Melbourne', 'Regional Victoria'];
@@ -19,7 +19,8 @@ function HeroSearch() {
     const data = new FormData(event.currentTarget);
     const params = new URLSearchParams();
     for (const [key, value] of data) if (value.trim()) params.set(key, value.trim());
-    navigate(`/work-search${params.size ? `?${params}` : ''}`);
+    const selectedRole = getSelectedWorkRole(params.get('query') || '', params.get('industry') || '', industries);
+    navigate(selectedRole ? getWorkRoleSearchPath(selectedRole, params.get('location') || '') : `/work-search${params.size ? `?${params}` : ''}`);
   }
 
   function handleTabKey(event) {
@@ -79,17 +80,19 @@ export function WorkSearchResults({roles, notes}) {
   const query = params.get('query')?.trim() || '';
   const industry = params.get('industry') || '';
   const location = params.get('location') || '';
+  const selectedRole = getSelectedWorkRole(query, industry, roles.map(role => role[0]));
   const matches = roles.map((role, index) => ({role, index})).filter(({role, index}) => {
-    const words = query.toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    const words = (query.toLowerCase() === 'other' ? '' : query).toLocaleLowerCase().split(/\s+/).filter(Boolean);
     const text = `${role[0]} ${role[1]} ${industries[index]} ${notes[index]}`.toLocaleLowerCase();
     return (!industry || industries[index] === industry) && words.every(word => text.includes(word));
   });
+  if (selectedRole) return <Navigate to={getWorkRoleSearchPath(selectedRole, location)} replace/>;
   return <section className="section home-search-results">
     <Link className="home-search-back" to="/">← Back to home</Link>
     <h1>Work opportunities</h1>
     <p>Explore construction work across Victoria. Role availability and site locations depend on project requirements.</p>
     <div className="home-search-summary" role="status">{matches.length} matching work {matches.length === 1 ? 'area' : 'areas'}{query && <> · “{query}”</>}{industry && <> · {industry}</>}{location && <> · Preferred location: {location}</>}</div>
-    <div className="home-search-result-list">{matches.length ? matches.map(({role, index}) => <article key={role[0]}><div><h2><Link className="work-role-title" to={getWorkRolePath(role[0])}>{role[0]}</Link></h2><p>{role[1]}</p><small><MapPin size={14} aria-hidden="true"/> Victoria · {notes[index]}</small></div><Link to={`${getWorkRolePath(role[0])}/apply`}>Apply now <ArrowRight size={17} aria-hidden="true"/></Link></article>) : <div className="home-search-empty"><h2>No matching work areas</h2><p>Try a broader keyword or view all the work areas we recruit for.</p><Link to="/work-search">View all work areas <ArrowRight size={17} aria-hidden="true"/></Link></div>}</div>
+    <div className="home-search-result-list">{matches.length ? matches.map(({role, index}) => <article key={role[0]}><div><h2><Link className="work-role-title" to={getWorkRoleSearchPath(role[0], location)}>{role[0]}</Link></h2><p>{role[1]}</p><small><MapPin size={14} aria-hidden="true"/> {location || 'Victoria'} · {notes[index]}</small></div><Link to={getWorkRoleSearchPath(role[0], location)}>Apply now <ArrowRight size={17} aria-hidden="true"/></Link></article>) : <div className="home-search-empty"><h2>No matching work areas</h2><p>Try a broader keyword or view all the work areas we recruit for.</p><Link to="/work-search">View all work areas <ArrowRight size={17} aria-hidden="true"/></Link></div>}</div>
       </section>;
 }
 

@@ -43,7 +43,7 @@ const stageHeadings = [
   {label: 'Work details', title: 'Tell us what you bring', description: 'Share your experience and availability.'},
   {label: 'Resume & submit', title: 'You’re one step closer', description: 'Add your resume and complete your application.'}
 ];
-export default function RoleApplication({role, categories, onClose}) {
+export default function RoleApplication({role, categories, onClose, preferredLocation}) {
   const form = useRef(null);
   const [step, setStep] = useState(0);
   const [status, setStatus] = useState('');
@@ -78,6 +78,7 @@ export default function RoleApplication({role, categories, onClose}) {
         fields.email = fields.email.trim();
         fields.phone = fields.phone.trim();
         fields.preferredRole = role;
+        if (preferredLocation) fields.preferredWorkLocation = preferredLocation;
         fields.applicationForm = 'roleApplication';
         const attachments = [['resume', data.get('resume')], ['coverLetter', data.get('coverLetter')]];
         if (!attachments[0][1]?.size) throw new Error('Please upload your resume / CV.');

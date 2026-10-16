@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {ArrowRight, Mail, Phone, MapPin, Users, ShieldCheck, HardHat} from 'lucide-react';
 import './site-footer.css';
+import {socialLinks} from './socialLinks';
 
 const features = [[Users,'Reliable','Workforce'],[ShieldCheck,'Compliance','Focused'],[HardHat,'Construction','Specialists']];
 
@@ -15,9 +16,9 @@ export default function SiteFooter({whatsAppIcon, instagramIcon}) {
         <div className="site-footer-features">{features.map(([Icon, first, second]) => <div key={first}><span><Icon size={32} aria-hidden="true"/></span><p>{first}<br/>{second}</p></div>)}</div>
       </div>
       <div className="site-footer-social"><h2>Connect With Us</h2>
-        <a href="https://www.linkedin.com/company/9work-force/" target="_blank" rel="noreferrer"><span><b className="site-footer-linkedin" aria-hidden="true">in</b></span>LinkedIn</a>
-        <a href="https://wa.me/61422279428" target="_blank" rel="noreferrer"><span>{whatsAppIcon}</span>WhatsApp</a>
-        <a href="https://www.instagram.com" target="_blank" rel="noreferrer"><span>{instagramIcon}</span>Instagram</a>
+        <a href={socialLinks.linkedin} target="_blank" rel="noreferrer"><span><b className="site-footer-linkedin" aria-hidden="true">in</b></span>LinkedIn</a>
+        <a href={socialLinks.whatsapp} target="_blank" rel="noreferrer"><span>{whatsAppIcon}</span>WhatsApp</a>
+        <a href={socialLinks.instagram} target="_blank" rel="noreferrer"><span>{instagramIcon}</span>Instagram</a>
       </div>
       <div className="site-footer-contact"><h2>Get in Touch</h2>
         <a href="mailto:support@9workforce.com.au"><Mail size={25} aria-hidden="true"/><span>support@9workforce.com.au</span></a>

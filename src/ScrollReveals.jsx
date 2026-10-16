@@ -11,7 +11,7 @@ export const revealVariants = {
 
 // These elements own their transforms/entrances. Keep their containers intact;
 // ordinary text inside an existing card can have its own additive entrance.
-const protectedScenes = '.construction-journey,.labour-orbit,.about-coordination-scene,.about-service-coverage,.site-footer-bottom,.blog-cta';
+const protectedScenes = '.blog-insights-collage,.construction-journey,.labour-orbit,.about-coordination-scene,.about-service-coverage,.site-footer-bottom,.blog-cta';
 const existingReveals = [
   '.solutions-intro','.solution','.process > div:first-child',
   '.steps article','.labour-cards article','.workflow-grid article',

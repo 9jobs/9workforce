@@ -6,10 +6,10 @@ const extraRoleRequirements = [
 ];
 
 export const additionalWorkRoleContent = Object.fromEntries([
-  ['plant-and-equipment-operators', 'PLANT & EQUIPMENT OPERATIONS', '/assets/civil-excavation.webp', 'Plant & Equipment Operators',
+  ['plant-and-equipment-operators', 'PLANT & EQUIPMENT OPERATIONS', '/assets/role-plant-operator.webp', 'Plant & Equipment Operators',
     'Operate relevant construction plant and equipment within your demonstrated experience, qualifications and site authorisation.',
     ['Complete equipment checks and report faults before use.', 'Operate assigned plant within your training and authorisation.', 'Coordinate movements with the site team and follow exclusion zones.']],
-  ['high-risk-licensed-workers', 'LICENSED CONSTRUCTION SUPPORT', '/assets/materials-worker.webp', 'High-Risk Licensed Workers',
+  ['high-risk-licensed-workers', 'LICENSED CONSTRUCTION SUPPORT', '/assets/role-licensed-equipment.webp', 'High-Risk Licensed Workers',
     'Support assigned construction tasks requiring relevant high-risk work licences, competencies and host-site authorisation.',
     ['Perform licensed tasks within the scope of your current credentials.', 'Follow task briefings, exclusion zones and safe work procedures.', 'Check assigned equipment and report hazards to the supervisor.']],
   ['construction-site-support-workers', 'CONSTRUCTION SITE SUPPORT', '/assets/labour-site-team.webp', 'Construction Site Support Workers',
@@ -112,7 +112,7 @@ export const workRoleContent = [
   },
   {
     category: 'FORMWORK & CONCRETE', sector: 'Construction & Structures',
-    image: '/assets/construction-worker.webp', imageLabel: 'Structural Construction Support',
+    image: '/assets/role-formwork-concrete.webp', imageLabel: 'Structural Construction Support',
     intro: 'Register for Formwork & Concrete Labourer opportunities across Victoria. Assist structural crews with formwork preparation, materials and concrete-related tasks within your experience and training.',
     overview: 'Formwork & Concrete Labourers support crews preparing and carrying out structural construction work. Your tasks depend on previous experience, site supervision and the requirements of each construction stage.',
     duties: [

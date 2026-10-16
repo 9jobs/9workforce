@@ -82,7 +82,7 @@
 .talk-team-card h2 {
   font-size: 26px !important;
   font-weight: 800 !important;
-  color: #0f1d38 !important;
+  color: var(--brand, #30497d) !important;
   margin: 0 0 10px !important;
   letter-spacing: -0.4px;
 }

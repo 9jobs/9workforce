@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {ArrowRight, MapPin, BriefcaseBusiness, DollarSign, ClipboardList, ShieldCheck, Check, CircleDot} from 'lucide-react';
 import {workRoleContent} from './workRoleContent';
 
-export default function WorkRoleDetails({role, index, children, onApply, contentOverride}) {
+export default function WorkRoleDetails({role, index, children, onApply, contentOverride, preferredLocation}) {
   const content = contentOverride || workRoleContent[index];
   return <>
     <section className="work-role-hero" aria-labelledby="work-role-heading">
@@ -13,7 +13,7 @@ export default function WorkRoleDetails({role, index, children, onApply, content
             <h1 id="work-role-heading">{role[0]}</h1>
             <p>{content.intro}</p>
             <div className="work-role-summary">
-              <div><span className="work-role-meta-icon"><MapPin aria-hidden="true"/></span><span><small>LOCATION</small><b>Victoria</b></span></div>
+              <div><span className="work-role-meta-icon"><MapPin aria-hidden="true"/></span><span><small>LOCATION</small><b>{preferredLocation || 'Victoria'}</b></span></div>
               <div><span className="work-role-meta-icon"><BriefcaseBusiness aria-hidden="true"/></span><span><small>CONTRACT</small><b>Labour-hire role</b></span></div>
               <div><span className="work-role-meta-icon"><DollarSign aria-hidden="true"/></span><span><small>REMUNERATION</small><b>Pay confirmed per role</b></span></div>
             </div>
@@ -60,7 +60,7 @@ export default function WorkRoleDetails({role, index, children, onApply, content
             <h3><ShieldCheck size={15} aria-hidden="true"/>SITE PLACEMENT STANDARD</h3>
             <dl>
               <div><dt>Site credentials:</dt><dd>{index===5?'Traffic qualifications & White Card':'White Card & relevant tickets'}</dd></div>
-              <div><dt>Primary territory:</dt><dd>Victoria (Metro &amp; Regional)</dd></div>
+              <div><dt>Primary territory:</dt><dd>{preferredLocation || 'Victoria (Metro & Regional)'}</dd></div>
               <div><dt>Engagement type:</dt><dd>Labour-hire opportunity</dd></div>
             </dl>
             <p><i/>Role suitability is reviewed against project requirements.</p>

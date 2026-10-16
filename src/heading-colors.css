@@ -1,0 +1,30 @@
+/* One heading colour per background; text accents inherit the heading colour. */
+#root :is(h1,h2,h3,h4,h5,h6) {
+  color:#30497d!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+#root#root :is(h1,h2,h3,h4,h5,h6) :is(em,span,strong,b,a) {
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+#root :is(
+  .homepage-hero-copy,.construction-journey,.labour-orbit-copy,
+  .about-brand-hero,.about-purpose-banner,.about-service-coverage,.about-quote-section,
+  .about-coordination-grid article:nth-child(1),.about-coordination-grid article:nth-child(4),
+  .coverage-heading-row,.site-footer,.footer-grid,
+  .wa-hero,.work-role-hero,.worker-hero,.page-hero,.industry-hero,.employer-hero,
+  .request-section,.about-cta,.simple-cta,.quick-path,.industry-image,.employer-tiles,
+  .find-work-register-banner,.find-work-footer-cta,
+  .worker-registration-info,.worker-request-info,.contact-studio-info,
+  .hire-hero,.hire-photo-card,.hire-next-step,
+  .blog-cta,.blog-side-cta,.application-brand,.application-stage-heading,
+  .application-heading,.application-success,.application-stay-connected
+) :is(h1,h2,h3,h4,h5,h6) {
+  color:#fff!important;
+}
+/* Selected service cards use a dark background only in their active state. */
+#root .solutions-reference .solution:is(.is-selected,:has(:focus-visible)) h3 { color:#fff!important; }
+@media(hover:hover) and (pointer:fine) {
+  #root .solutions-reference .solution:hover h3 { color:#fff!important; }
+}
+
