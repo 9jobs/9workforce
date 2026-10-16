@@ -10,7 +10,7 @@ export default function SiteFooter({whatsAppIcon, instagramIcon}) {
     <div className="site-footer-art" aria-hidden="true"><div className="site-footer-scene"/></div>
     <div className="site-footer-main">
       <div className="site-footer-brand">
-        <Link to="/" className="site-footer-logo" aria-label="9Work Force home"><img src="/assets/9workforce-footer-logo.png" alt="9Work Force" width="320" height="36" loading="lazy"/></Link>
+        <Link to="/" className="site-footer-logo" aria-label="9Work Force home"><img src="/assets/9workforce-footer-logo.webp" alt="9Work Force" width="320" height="36" loading="lazy"/></Link>
         <p>Providing reliable construction labour and workforce solutions for contractors, construction companies, project teams and businesses across Victoria.</p>
         <div className="site-footer-features">{features.map(([Icon, first, second]) => <div key={first}><span><Icon size={32} aria-hidden="true"/></span><p>{first}<br/>{second}</p></div>)}</div>
       </div>

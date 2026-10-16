@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useInView, useReducedMotion} from 'framer-motion';
 import {Link} from 'react-router-dom';
 import {ArrowRight, CircleCheck, ShieldCheck, HardHat, Clock3, Users, ClipboardList, MapPin, Check, Zap, CalendarDays, PhoneCall} from 'lucide-react';
-import {australiaStates} from './coverageMapData';
 
 const operations = [
   ['Share Your Labour Needs', 'Builders and companies tell us the roles, number of labourers, site location, start date and duration of work they need.', ClipboardList],
@@ -87,7 +86,7 @@ export default function AboutPage({footer}) {
         </div>
         <svg className="about-brand-photo" viewBox="1050 0 1053 578" role="img" aria-label="Three construction workers reviewing plans at a building site" preserveAspectRatio="xMidYMid slice">
           <defs><clipPath id="about-reference-photo"><path d="M 1270 0 H 2045 L 1955 256 L 2000 274 L 1970 390 L 1939 539 Q 1926 578 1885 578 H 1087 Q 1049 578 1064 535 L 1230 50 Q 1248 0 1270 0 Z"/></clipPath></defs>
-          <image href="/assets/about-hero-reference.png" width="2103" height="748" clipPath="url(#about-reference-photo)"/>
+          <image href="/assets/about-hero-reference.webp" width="2103" height="748" clipPath="url(#about-reference-photo)"/>
         </svg>
         <div className="about-brand-dots" aria-hidden="true"/>
         <div className="about-brand-facts" aria-label="Our focus">
@@ -131,6 +130,7 @@ export default function AboutPage({footer}) {
     </section>
 
     <section ref={coverageRef} className={`about-service-coverage${coverageVisible ? ' is-visible' : ''}`} aria-labelledby="about-project-title">
+      <div className="about-coverage-site-photo" aria-hidden="true"/>
       <svg className="about-coverage-art" viewBox="0 0 1672 941" preserveAspectRatio="none" aria-hidden="true">
         <defs><linearGradient id="about-coverage-ribbon"><stop stopColor="#235b9a" stopOpacity=".4"/><stop offset="1" stopColor="#174773" stopOpacity=".08"/></linearGradient><linearGradient id="about-coverage-dot-colour"><stop stopColor="#1c5e9d" stopOpacity=".05"/><stop offset=".7" stopColor="#527bac"/><stop offset="1" stopColor="#ff9d35"/></linearGradient><pattern id="about-coverage-dot-pattern" width="21" height="20" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.7" fill="white"/></pattern><mask id="about-coverage-dot-mask"><rect width="1672" height="941" fill="url(#about-coverage-dot-pattern)"/></mask></defs>
         <path d="M1073 0H1148L1321 174H1245Z M0 468L310 777H630L795 941H698L536 777H135L0 642Z M1672 737V807L1537 941H1466Z" fill="url(#about-coverage-ribbon)"/>
@@ -141,17 +141,20 @@ export default function AboutPage({footer}) {
       <div className="about-service-coverage-inner">
         <div className="about-service-coverage-copy"><span className="about-coverage-eyebrow">Where we work</span><h2 id="about-project-title">Across<br/><em>Melbourne &amp; Victoria</em></h2><p>We supply general and skilled construction labourers to builders, contractors and companies across Melbourne and Victoria. From a few extra hands to a full crew, we recruit, verify and coordinate suitable workers for your site requirements.</p></div>
         <div className="about-coverage-dashboard">
-          <article className="about-coverage-turnaround"><span className="about-coverage-round-icon"><Zap size={32} strokeWidth={1.7} aria-hidden="true"/></span><CoverageNumber value={24} suffix="hr" active={coverageVisible} reducedMotion={reducedMotion}/><span className="about-coverage-caption">Typical turnaround</span><svg className="about-coverage-clock" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" strokeWidth="5"/>{Array.from({length:12},(_,i)=><line key={i} x1="120" y1="22" x2="120" y2="33" stroke="currentColor" strokeWidth="3" transform={`rotate(${i*30} 120 120)`}/>)}<path d="M96 72L120 120L163 134" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round"/><circle cx="120" cy="120" r="4" fill="currentColor"/></svg></article>
+          <article className="about-coverage-turnaround"><span className="about-coverage-round-icon"><Zap size={32} strokeWidth={1.7} aria-hidden="true"/></span><div className="about-coverage-stat-copy"><CoverageNumber value={24} suffix="hr" active={coverageVisible} reducedMotion={reducedMotion}/><span className="about-coverage-caption">Typical turnaround</span></div></article>
           <article className="about-coverage-certification"><span className="about-coverage-cert-icon" aria-hidden="true"><ShieldCheck size={59} strokeWidth={1.4}/><HardHat size={27}/></span><div><CoverageNumber value={100} suffix="%" active={coverageVisible} reducedMotion={reducedMotion}/><span className="about-coverage-caption">White Card certified</span></div></article>
-          <article className="about-coverage-location"><div><span className="about-coverage-round-icon"><MapPin size={27} aria-hidden="true"/></span><strong>Melbourne &amp; Victoria</strong><span className="about-coverage-caption">Coverage area</span></div><svg className="about-coverage-vic-map" viewBox="395 340 145 95" role="img" aria-label="Victoria coverage map"><path d={australiaStates.find(state=>state.name==='Victoria').path}/><circle className="about-coverage-map-ring" cx="462" cy="399" r="16"/><circle className="about-coverage-map-ring" cx="462" cy="399" r="10"/><circle className="about-coverage-map-pin" cx="462" cy="399" r="3"/><circle className="about-coverage-map-pin" cx="435" cy="403" r="2"/><circle className="about-coverage-map-pin" cx="490" cy="390" r="2"/></svg></article>
-          <article className="about-coverage-availability"><CalendarDays size={47} strokeWidth={1.5} aria-hidden="true"/><div><CoverageNumber value={7} suffix=" days" active={coverageVisible} reducedMotion={reducedMotion}/><span className="about-coverage-caption">On call every week</span></div></article>
+          <article className="about-coverage-crew">
+            <div className="about-coverage-crew-heading"><span className="about-coverage-round-icon"><Users size={30} strokeWidth={1.7} aria-hidden="true"/></span><div><strong>Flexible crew sizes</strong><span className="about-coverage-caption">Labour to suit your project</span></div></div>
+            <div className="about-coverage-crew-scale"><div className="about-coverage-crew-option"><HardHat size={25} strokeWidth={1.6} aria-hidden="true"/><div><span>Extra support</span><b>A few extra hands</b></div></div><ArrowRight className="about-coverage-crew-arrow" size={20} aria-hidden="true"/><div className="about-coverage-crew-option"><Users size={27} strokeWidth={1.6} aria-hidden="true"/><div><span>Project crews</span><b>A full site crew</b></div></div></div>
+          </article>
+          <article className="about-coverage-availability"><span className="about-coverage-round-icon"><CalendarDays size={47} strokeWidth={1.5} aria-hidden="true"/></span><div className="about-coverage-stat-copy"><CoverageNumber value={7} suffix=" days" active={coverageVisible} reducedMotion={reducedMotion}/><span className="about-coverage-caption">On call every week</span></div></article>
         </div>
       </div>
     </section>
 
     <section className="about-coordination-section" aria-labelledby="about-coordination-title">
       <div className="about-section-heading"><span className="about-kicker">THE TEAM BEHIND YOUR TEAM</span><h2 id="about-coordination-title">Workforce coordination.</h2><p>From the first conversation to day-to-day site support, our team keeps people and project requirements connected.</p></div>
-      <div className="about-coordination-scene"><img src="/assets/about-vision-team.png" alt="Team discussing construction plans" loading="lazy"/><CoordinationCards/></div>
+      <div className="about-coordination-scene"><img src="/assets/about-vision-team.webp" alt="Team discussing construction plans" loading="lazy"/><CoordinationCards/></div>
     </section>
 
     <section className="about-quote-section" aria-labelledby="about-quote-title">

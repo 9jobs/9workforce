@@ -16,6 +16,7 @@ export default function HomeSolutions({roles}) {
   const visible = useInView(gridRef, {once:true, amount:.18});
   const reducedMotion = useReducedMotion();
   const [burst, setBurst] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(null);
 
   useEffect(() => {
     if (!visible || reducedMotion || !gridRef.current) return;
@@ -58,7 +59,10 @@ export default function HomeSolutions({roles}) {
       </motion.div>)}
     </div>
     <div ref={gridRef} className={`solution-grid${burst ? ' is-bursting' : ''}`}>
-      {roles.map(({number, title, copy, Icon}) => <article className="solution" key={number}>
+      {roles.map(({number, title, copy, Icon}) => <article className={`solution${selectedRole === number ? ' is-selected' : ''}`} key={number}>
+        <button className="solution-colour-control" type="button" aria-label={`Highlight ${title}`} aria-pressed={selectedRole === number} onClick={() => {
+          if (window.matchMedia('(hover: none)').matches) setSelectedRole(current => current === number ? null : number);
+        }}/>
         <span className="solution-card-icon"><Icon size={40} strokeWidth={1.6} aria-hidden="true"/></span>
         <h3><Link className="work-role-title" to={getWorkRolePath(title)}>{title}</Link></h3>
         <p>{copy}</p>

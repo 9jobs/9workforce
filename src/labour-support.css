@@ -33,9 +33,18 @@ html.labour-orbit-scroll-locked { overflow:hidden; scrollbar-gutter:stable; over
 .labour-orbit-card-body { position:relative; padding:22px 44px 10px 4px; min-height:118px; }
 .labour-orbit-card-body h3 { font-size:15px; line-height:1.4; letter-spacing:-.3px; }
 .labour-orbit-card-summary { margin-top:8px; font-size:11px; line-height:1.5; color:#71819a; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.labour-orbit-card-body button { position:absolute; bottom:10px; right:0; display:grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; background:var(--orange); color:#fff; cursor:pointer; transition:transform .2s ease,box-shadow .2s ease; }
-.labour-orbit-detail { position:relative; z-index:12; margin-top:16px; padding:18px; background:#fff; border:1px solid #dce5ef; border-radius:12px; font-size:14px; }
-.labour-orbit-detail p { margin-top:8px; font-size:13px; line-height:1.6; color:#637491; }
+.labour-orbit-card-arrow { position:absolute; bottom:10px; right:0; display:grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; background:var(--orange); color:#fff; cursor:pointer; transition:transform .2s ease,box-shadow .2s ease; }
+/* The card links to its matching role page; hover motion stays inside the orbit. */
+.labour-orbit-card-link { display:block; color:inherit; transition:transform .28s ease; }
+.labour-orbit-card-photo::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(115deg,transparent 25%,#ffffff32 48%,transparent 70%); transform:translateX(-110%); transition:transform .65s ease; }
+.labour-orbit-card.is-active:focus-within { border-color:#ffb871; box-shadow:0 24px 52px -12px #071b3eb0,0 0 22px #ff9d3f26; }
+@media(hover:hover) and (pointer:fine) {
+  .labour-orbit-card.is-active:hover { border-color:#ffb871; box-shadow:0 24px 52px -12px #071b3eb0,0 0 22px #ff9d3f26; }
+  .labour-orbit-card.is-active:hover .labour-orbit-card-link { transform:translateY(-3px); }
+  .labour-orbit-card.is-active:hover .labour-orbit-card-photo::after { transform:translateX(110%); }
+  .labour-orbit-card.is-active:hover .labour-orbit-card-arrow { transform:translateX(2px); box-shadow:0 4px 12px #ff8e3860; }
+}
+@media(prefers-reduced-motion:reduce) { .labour-orbit-card-link,.labour-orbit-card-photo::after { transition:none; } }
 .labour-orbit:focus-visible,.labour-orbit :focus-visible { outline:3px solid var(--orange); outline-offset:4px; }
 .labour-orbit-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 @media(max-width:1100px) { .labour-orbit-inner { gap:24px; padding:56px 32px; } .labour-orbit-stage { --orbit-radius:340px; --orbit-center-x:-50px; --orbit-center-y:420px; height:580px; } .labour-orbit-card { width:238px; } .labour-orbit-card-photo { height:166px; } .labour-orbit-controls { gap:6px; } .labour-orbit-progress { width:64px; margin:0 4px; } }
@@ -46,12 +55,12 @@ html.labour-orbit-scroll-locked { overflow:hidden; scrollbar-gutter:stable; over
   .labour-orbit-benefits>div:hover { transform:translateY(-2px); border-color:#c9d6e7; box-shadow:0 8px 22px #30497d0c; }
   .labour-orbit-cta:hover { transform:translateY(-2px); box-shadow:0 12px 26px #30497d30; }
   .labour-orbit-cta:hover>span { transform:translateX(2px); background:#ffffff38; }
-  .labour-orbit-card-body button:hover { transform:translateX(2px); box-shadow:0 4px 12px #ff8e3840; }
+  .labour-orbit-card-arrow:hover { transform:translateX(2px); box-shadow:0 4px 12px #ff8e3840; }
 }
 /* Keep the complete active card centred inside the mobile animation area. */
 @media(max-width:780px) { .labour-orbit-stage { --orbit-center-x:calc(50% - 223px); } }
 @media(max-width:420px) { .labour-orbit-stage { --orbit-center-x:calc(50% - 173px); } }
 @media(prefers-reduced-motion:reduce) {
-  .labour-orbit-card,.labour-orbit-benefits>div,.labour-orbit-cta,.labour-orbit-cta>span,.labour-orbit-card-body button { transition:none; }
+  .labour-orbit-card,.labour-orbit-benefits>div,.labour-orbit-cta,.labour-orbit-cta>span,.labour-orbit-card-arrow { transition:none; }
 }
 @media(max-width:860px),(pointer:coarse){.labour-orbit-stage{touch-action:pan-y pinch-zoom}}

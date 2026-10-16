@@ -209,4 +209,16 @@ const server = http.createServer((req, res) => {
   return sendJson(res, 404, {error: 'Not found'});
 });
 
-server.listen(port, () => console.log(`App and Form API listening on http://localhost:${port}`));
+let listenPort = port;
+server.on('error', async error => {
+  if (isDev && error.code === 'EADDRINUSE' && listenPort < Math.min(port + 20, 65535)) {
+    console.log(`Port ${listenPort} is in use, trying ${listenPort + 1}...`);
+    server.listen(++listenPort);
+    return;
+  }
+  console.error(`Unable to start server on port ${listenPort}: ${error.message}`);
+  await vite?.close();
+  process.exitCode = 1;
+});
+server.on('listening', () => console.log(`App and Form API listening on http://localhost:${server.address().port}`));
+server.listen(listenPort);

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+scratch/
+docs/
+data/
+.git/
+.vercel/
+.agents/
+.codex/
+.env
+.env.*
+!.env.example
+*.log
+tests/
+playwright*.js
+src/*.hero-backup

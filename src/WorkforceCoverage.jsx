@@ -44,7 +44,7 @@ export default function WorkforceCoverage() {
           <div className="coverage-intro"><Users size={18}/><span>The right support for your site</span></div>
           <div className="coverage-options" aria-label="Explore workforce coverage">{groups.map(({title,text,icon:Icon},index)=><button key={title} type="button" className={`coverage-option${selected===index?' is-selected':''}`} aria-pressed={selected===index} onClick={()=>chooseGroup(index)}><span className="coverage-number">0{index+1}</span><span className="coverage-option-copy"><strong>{title}</strong><span>{text}</span></span><Icon className="coverage-option-icon" size={20} aria-hidden="true"/><ArrowRight size={18} aria-hidden="true"/></button>)}</div>
           <p className="coverage-note">Tell us your location, roles and start date. Our team will confirm suitable workers and availability.</p>
-          <Link className="btn orange coverage-cta" to="/contact">Request Workers <ArrowRight size={16}/></Link>
+          <Link className="btn orange coverage-cta" to="/request-workers">Request Workers <ArrowRight size={16}/></Link>
         </div>
         <div className="coverage-map-panel">
           <div className="coverage-map-heading"><span><MapPin size={14}/>MELBOURNE &amp; VICTORIA</span><span className="coverage-north" aria-hidden="true">↑ N</span></div>

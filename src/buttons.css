@@ -1,53 +1,111 @@
-/* One shared finish for action buttons across the website. */
-#root :is(.btn,
-  .home-hero-primary,
-  .home-hero-secondary,
-  .home-search-submit,
-  .btn-find-work,
-  .btn-register-details,
-  .about-btn-primary,
-  .about-btn-secondary,
-  .hire-blue-button,
-  .labour-orbit-cta,
-  .contact-submit-btn,
-  .find-work-register-button,
-  .legal-pill-btn,
-  .work-role-secondary,
-  .application-back,
-  .site-footer-request > a,
-  .header-actions .nav-request,
-  .header-actions .nav-register,
-  .nav-mobile-actions .nav-request,
-  .nav-mobile-actions .nav-register) {
-  --action-top:#3d598c;
-  --action-bottom:#263f6e;
-  --action-edge:#8babc15c;
-  --action-shadow:#20385824;
-  border:1px solid var(--action-edge);
-  border-radius:6px;
-  background:linear-gradient(160deg,var(--action-top),var(--action-bottom));
+/* Shared action buttons: solid colour on light surfaces, edged navy on dark surfaces. */
+#root .wa-final .wa-actions .btn {
+  --action-fill:linear-gradient(145deg,#203955,#10263d);
+  --action-edge:#78a5c8;
+  --action-shadow:#20385828;
+  --action-glow:#69afff12;
+  min-width:190px;
   color:#fff;
-  box-shadow:inset 0 1px 2px #ffffff26,0 5px 12px var(--action-shadow);
-  min-height:44px;
-  padding:12px 20px;
-  gap:10px;
-  font-size:13px;
-  font-weight:700;
-  line-height:1.4;
-  text-align:center;
-  text-decoration:none;
-  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
 }
-#root :is(.btn.orange,.home-hero-primary,.btn-find-work,.about-btn-primary,.contact-submit-btn,.site-footer-request > a,.nav-register) {
-  --action-top:#ff9b35;
-  --action-bottom:var(--orange);
-  --action-edge:#ffb66c99;
-  --action-shadow:#ff8e3829;
+#root .wa-final .wa-actions .btn.orange {
+  --action-fill:linear-gradient(145deg,#213041,#122131);
+  --action-edge:#d8a06a;
+  --action-glow:#ff963112;
 }
-#root :is(.home-hero-secondary,.btn.light,.about-btn-secondary,.work-role-secondary,.legal-pill-btn.secondary) {
-  --action-top:#30497df0;
-  --action-bottom:#20395fe8;
-  --action-edge:#c4d7e275;
+#root .wa-final .wa-actions .btn.orange > svg { color:#ffb76f; }
+#root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .header-actions .nav-call,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button) {
+  --action-fill:linear-gradient(145deg,#3b5787,#30497d);
+  --action-edge:#5876a3;
+  --action-shadow:#20385822;
+  --action-glow:transparent;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:44px;padding:12px 20px;border:1px solid var(--action-edge);border-radius:6px;
+  background:var(--action-fill);color:#fff;
+  box-shadow:0 5px 14px var(--action-shadow),0 0 14px var(--action-glow);
+  font-size:13px;font-weight:700;line-height:1.45;text-align:center;text-decoration:none;
+  cursor:pointer;transition:transform .2s,box-shadow .2s,filter .2s;
+}
+#root :is(.btn.orange,.home-hero-primary,.btn-find-work,.about-btn-primary,.contact-submit-btn,.find-work-register-button,.legal-pill-btn.primary,.site-footer-request > a,.nav-register,.wa-button,.about-quote-call,.worker-request-actions button[type="submit"],.worker-request-success button) {
+  --action-fill:#ff9238;
+  --action-edge:#ffa85b;
+  --action-shadow:#ff8e3826;
+}
+#root :is(.btn.light,.home-hero-secondary,.about-btn-secondary,.work-role-secondary,.application-back,.worker-request-back,.legal-pill-btn.secondary,.wa-outline,.about-quote-request) {
+  --action-fill:linear-gradient(145deg,#edf3fa,#e3ecf7);
+  --action-edge:#c3d2e4;
+  --action-shadow:#20385812;
+  color:#30497d;box-shadow:inset 0 1px 0 #fff,0 3px 10px var(--action-shadow);
+}
+#root :is(.homepage-hero,.page-hero,.worker-hero,.industry-hero,.hire-hero,.hire-next-step,.split-cta,.work-role-hero,.application-simple-page,.find-work-register-banner,.find-work-footer-cta,.about-quote-section,.about-service-coverage,.coverage-shell,.labour-orbit,.site-footer,.wa-hero,.blue-header,.hero-header) :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .header-actions .nav-call,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button) {
+  --action-fill:linear-gradient(145deg,#203955,#10263d);
+  --action-edge:#78a5c8;
+  --action-shadow:#02091266;
+  --action-glow:#69afff1f;
+  color:#fff;
+}
+#root :is(.homepage-hero,.page-hero,.worker-hero,.industry-hero,.hire-hero,.hire-next-step,.split-cta,.work-role-hero,.application-simple-page,.find-work-register-banner,.find-work-footer-cta,.about-quote-section,.about-service-coverage,.coverage-shell,.labour-orbit,.site-footer,.wa-hero,.blue-header,.hero-header) :is(.btn.orange,.home-hero-primary,.btn-find-work,.about-btn-primary,.contact-submit-btn,.find-work-register-button,.legal-pill-btn.primary,.site-footer-request > a,.nav-register,.wa-button,.about-quote-call,.worker-request-actions button[type="submit"],.worker-request-success button) {
+  --action-fill:linear-gradient(145deg,#213041,#122131);
+  --action-edge:#d8a06a;
+  --action-glow:#ff963122;
+}
+#root :is(.homepage-hero,.page-hero,.worker-hero,.industry-hero,.hire-hero,.hire-next-step,.split-cta,.work-role-hero,.application-simple-page,.find-work-register-banner,.find-work-footer-cta,.about-quote-section,.about-service-coverage,.coverage-shell,.labour-orbit,.site-footer,.wa-hero,.blue-header,.hero-header) :is(.btn.light,.home-hero-secondary,.about-btn-secondary,.work-role-secondary,.application-back,.worker-request-back,.legal-pill-btn.secondary,.wa-outline,.about-quote-request) {
+  --action-fill:linear-gradient(145deg,#203955,#10263d);
+  --action-edge:#78a5c8;
+  color:#fff;box-shadow:inset 0 1px 0 #ffffff14,0 5px 14px var(--action-shadow),0 0 14px var(--action-glow);
 }
 #root :is(.btn,
   .home-hero-primary,
@@ -67,11 +125,73 @@
   .site-footer-request > a,
   .header-actions .nav-request,
   .header-actions .nav-register,
+  .header-actions .nav-call,
   .nav-mobile-actions .nav-request,
-  .nav-mobile-actions .nav-register) svg { flex-shrink:0; }
-#root .labour-orbit-cta > span { background:transparent; border-radius:0; }
-#root .find-work-footer-cta .btn { font-size:0; }
-#root .find-work-footer-cta .btn::before { font-size:13px; }
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button) svg {flex-shrink:0;}
+#root :is(.homepage-hero,.page-hero,.worker-hero,.industry-hero,.hire-hero,.hire-next-step,.split-cta,.work-role-hero,.application-simple-page,.find-work-register-banner,.find-work-footer-cta,.about-quote-section,.about-service-coverage,.coverage-shell,.labour-orbit,.site-footer,.wa-hero,.blue-header,.hero-header) :is(.btn.orange,.home-hero-primary,.btn-find-work,.about-btn-primary,.contact-submit-btn,.find-work-register-button,.legal-pill-btn.primary,.site-footer-request > a,.nav-register,.wa-button,.about-quote-call,.worker-request-actions button[type="submit"],.worker-request-success button) > svg {color:#ffb76f;}
+#root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .header-actions .nav-call,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button):focus-visible {outline:3px solid #ffb467;outline-offset:4px;}
+#root :is(.btn,
+  .home-hero-primary,
+  .home-hero-secondary,
+  .home-search-submit,
+  .btn-find-work,
+  .btn-register-details,
+  .about-btn-primary,
+  .about-btn-secondary,
+  .hire-blue-button,
+  .labour-orbit-cta,
+  .contact-submit-btn,
+  .find-work-register-button,
+  .legal-pill-btn,
+  .work-role-secondary,
+  .application-back,
+  .site-footer-request > a,
+  .header-actions .nav-request,
+  .header-actions .nav-register,
+  .header-actions .nav-call,
+  .nav-mobile-actions .nav-request,
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button):disabled {opacity:.55;cursor:not-allowed;}
 @media(hover:hover) and (pointer:fine) {
   #root :is(.btn,
   .home-hero-primary,
@@ -91,56 +211,26 @@
   .site-footer-request > a,
   .header-actions .nav-request,
   .header-actions .nav-register,
+  .header-actions .nav-call,
   .nav-mobile-actions .nav-request,
-  .nav-mobile-actions .nav-register):hover:not(:disabled) {
-    transform:translateY(-2px);
-    filter:brightness(1.04);
-    box-shadow:inset 0 1px 2px #ffffff30,0 8px 18px var(--action-shadow);
-  }
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button):hover:not(:disabled) {transform:translateY(-2px);filter:brightness(1.08);box-shadow:inset 0 1px 0 #ffffff30,0 8px 20px var(--action-shadow),0 0 20px var(--action-glow);}
 }
-#root :is(.btn,
-  .home-hero-primary,
-  .home-hero-secondary,
-  .home-search-submit,
-  .btn-find-work,
-  .btn-register-details,
-  .about-btn-primary,
-  .about-btn-secondary,
-  .hire-blue-button,
-  .labour-orbit-cta,
-  .contact-submit-btn,
-  .find-work-register-button,
-  .legal-pill-btn,
-  .work-role-secondary,
-  .application-back,
-  .site-footer-request > a,
-  .header-actions .nav-request,
-  .header-actions .nav-register,
-  .nav-mobile-actions .nav-request,
-  .nav-mobile-actions .nav-register):focus-visible { outline:3px solid var(--orange); outline-offset:3px; }
-#root :is(.btn,
-  .home-hero-primary,
-  .home-hero-secondary,
-  .home-search-submit,
-  .btn-find-work,
-  .btn-register-details,
-  .about-btn-primary,
-  .about-btn-secondary,
-  .hire-blue-button,
-  .labour-orbit-cta,
-  .contact-submit-btn,
-  .find-work-register-button,
-  .legal-pill-btn,
-  .work-role-secondary,
-  .application-back,
-  .site-footer-request > a,
-  .header-actions .nav-request,
-  .header-actions .nav-register,
-  .nav-mobile-actions .nav-request,
-  .nav-mobile-actions .nav-register):disabled { opacity:.65; cursor:wait; }
-/* Compact controls keep their dimensions and existing interactions. */
-#root :is(.labour-orbit-card-body button,.menu-btn,.legal-tab-btn,.home-search-tabs button) { border-radius:6px; }
+#root .homepage-hero .homepage-hero-actions a {min-height:52px;min-width:190px;padding:14px 24px;border-radius:8px;font-size:15px;}
+#root .labour-orbit-cta > span {background:transparent;border-radius:0;}
+#root .find-work-footer-cta .btn {font-size:0;}
+#root .find-work-footer-cta .btn::before {font-size:13px;}
+/* Compact popup actions retain the menu's sharp corners and stacked labels. */
+#root .site-header.shared-nav nav.open .nav-mobile-actions a {border-radius:0;background:var(--action-fill);border-color:var(--action-edge);box-shadow:0 4px 12px var(--action-shadow);}
+#root .site-header.shared-nav .header-actions .nav-call {border-radius:6px;background:var(--action-fill);border-color:var(--action-edge);box-shadow:inset 0 1px 0 #ffffff20,0 5px 14px var(--action-shadow);}
 @media(max-width:600px) {
+  #root .site-header.shared-nav .header-actions :is(.nav-call,.nav-register,.nav-request) { display:none; }
   #root :is(.btn,
   .home-hero-primary,
   .home-hero-secondary,
@@ -159,17 +249,21 @@
   .site-footer-request > a,
   .header-actions .nav-request,
   .header-actions .nav-register,
+  .header-actions .nav-call,
   .nav-mobile-actions .nav-request,
-  .nav-mobile-actions .nav-register) { padding:11px 16px; font-size:12px; }
-  #root .find-work-footer-cta .btn { font-size:0; }
-  #root .homepage-hero-actions a { padding:11px 12px; gap:8px; font-size:11px; white-space:nowrap; }
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button) {padding:11px 16px;font-size:12px;}
+  #root .homepage-hero .homepage-hero-actions a {min-width:0;min-height:50px;padding:12px 10px;font-size:13px;}
+  #root .find-work-footer-cta .btn {font-size:0;}
 }
-@media(max-width:359px) {
-  #root .homepage-hero-actions { flex-direction:column; align-items:stretch; }
-  #root .homepage-hero-actions a { width:100%; }
-}
-@media(prefers-reduced-motion:reduce) {
-  #root :is(.btn,
+@media(max-width:359px) {#root .homepage-hero-actions {flex-direction:column;align-items:stretch;} #root .homepage-hero-actions a {width:100%;}}
+@media(prefers-reduced-motion:reduce) {#root :is(.btn,
   .home-hero-primary,
   .home-hero-secondary,
   .home-search-submit,
@@ -187,6 +281,33 @@
   .site-footer-request > a,
   .header-actions .nav-request,
   .header-actions .nav-register,
+  .header-actions .nav-call,
   .nav-mobile-actions .nav-request,
-  .nav-mobile-actions .nav-register) { transition:none; }
+  .nav-mobile-actions .nav-register,
+  .nav-mobile-actions .nav-call,
+  .wa-button,
+  .wa-outline,
+  .about-quote-call,
+  .about-quote-request,
+  .worker-request-actions button,
+  .worker-request-success button) {transition:none;}}
+
+/* The hero search panel is a light surface inside the dark hero. */
+#root .homepage-hero .home-search-panel .home-search-submit {
+  --action-fill:linear-gradient(145deg,#3b5787,#30497d);
+  --action-edge:#5876a3;
+  --action-shadow:#20385822;
+  --action-glow:transparent;
+}
+#root .homepage-hero .home-employer-panel .home-search-submit {
+  --action-fill:#ff9238;
+  --action-edge:#ffa85b;
+  --action-shadow:#ff8e3826;
+}
+/* Apply screens are navy; the confirmation card stays white. */
+#root .application-received-card .application-home-link {
+  --action-fill:#ff9238;
+  --action-edge:#ffa85b;
+  --action-shadow:#ff8e3826;
+  --action-glow:transparent;
 }

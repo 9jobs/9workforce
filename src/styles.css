@@ -715,13 +715,13 @@ p{ text-align:left; text-justify:auto; word-spacing:normal; letter-spacing:norma
 .find-work-footer-cta .btn{min-width:192px}
 @media(max-width:780px){.find-work-footer-cta{margin:0 16px;padding:34px 20px 32px;border-radius:12px 12px 0 0}.find-work-footer-cta h2{font-size:30px}}
 .find-work-footer-cta{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;align-items:center;justify-content:stretch;gap:18px 42px;min-height:380px;padding:52px 44px;border-radius:14px 14px 0 0;border-bottom:4px solid var(--orange);text-align:left;overflow:hidden;background:#30497D;box-shadow:none}
-.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:380px;margin:-52px -44px -52px 0;background:url('/assets/site-sunset.png') center bottom / cover no-repeat}
+.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:380px;margin:-52px -44px -52px 0;background:url('/assets/site-sunset.webp') center bottom / cover no-repeat}
 .find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:end;max-width:470px;color:#fff;font-size:38px;line-height:1.16;text-align:left}
 .find-work-footer-cta h2 em{color:inherit}
 .find-work-footer-cta .btn{grid-column:1;grid-row:2;justify-self:start;min-width:150px}
 @media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:auto 230px;min-height:0;margin:0 16px;padding:32px 24px 0;border-radius:12px 12px 0 0;gap:26px}.find-work-footer-cta:after{grid-column:1;grid-row:2;min-height:230px;margin:0 -24px;background-position:center bottom}.find-work-footer-cta h2{grid-column:1;grid-row:1;font-size:30px}.find-work-footer-cta .btn{grid-column:1;grid-row:1;justify-self:start;margin-top:124px}}
 .find-work-footer-cta{max-width:none;width:100%;min-height:506px;margin:0;border-radius:0;background:#30497D;display:grid;grid-template-columns:50% 50%;grid-template-rows:auto auto;align-content:center;padding:0;gap:0;position:relative;overflow:hidden;border-bottom:4px solid var(--orange);box-shadow:none}
-.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:0;margin:0;background:linear-gradient(90deg,#30497D 0%,rgba(48,73,125,.35) 13%,rgba(48,73,125,0) 34%),url('/assets/work-areas-helmet-branded.png') center/cover no-repeat;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}
+.find-work-footer-cta:after{content:'';grid-column:2;grid-row:1 / span 2;align-self:stretch;min-height:0;margin:0;background:linear-gradient(90deg,#30497D 0%,rgba(48,73,125,.35) 13%,rgba(48,73,125,0) 34%),url('/assets/work-areas-helmet-branded.webp') center/cover no-repeat;clip-path:polygon(15% 0,100% 0,100% 100%,0 100%)}
 .find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;margin:48px 32px 24px 31%;max-width:500px;color:transparent;font-size:0;line-height:0;letter-spacing:normal;text-align:left;font-weight:500}
 .find-work-footer-cta h2:before{content:'Register for construction work\A across Melbourne\A and Victoria.';display:block;white-space:pre-line;color:#fff;font-size:29px;line-height:1.35;margin:0;letter-spacing:0;font-weight:500}
 .find-work-footer-cta h2 em{color:inherit}
@@ -730,7 +730,7 @@ p{ text-align:left; text-justify:auto; word-spacing:normal; letter-spacing:norma
 .find-work-footer-cta .btn:after{content:none}
 .find-work-footer-cta .btn{font-size:0}.find-work-footer-cta .btn:before{content:'Register Now';font-size:13px;line-height:1.4}
 .find-work-footer-cta:before{content:'9Work Force                 Workforce Operations & Recruitment Enquiries                                      Back to top  ↑';position:absolute;z-index:2;left:31%;right:2%;bottom:0;height:52px;display:flex;align-items:center;white-space:pre;color:#fff;font:600 10px Inter,Arial,sans-serif}
-@media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:auto auto;min-height:442px}.find-work-footer-cta:after{grid-column:1;grid-row:1 / span 2;clip-path:none;background:linear-gradient(0deg,#30497D 0%,rgba(48,73,125,0) 38%),url('/assets/site-sunset.png') center/cover no-repeat}.find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;position:relative;z-index:1;margin:32px 24px 24px;max-width:480px;font-size:0}.find-work-footer-cta h2:before{font-size:26px;line-height:1.35}.find-work-footer-cta h2:after{margin-top:24px;font-size:13px;line-height:1.9}.find-work-footer-cta .btn{grid-column:1;grid-row:2;align-self:start;justify-self:start;margin:0 24px 32px}.find-work-footer-cta:before{left:24px;right:24px;bottom:0;font-size:8px;content:'9Work Force                         Back to top  ↑'}}
+@media(max-width:780px){.find-work-footer-cta{grid-template-columns:1fr;grid-template-rows:auto auto;min-height:442px}.find-work-footer-cta:after{grid-column:1;grid-row:1 / span 2;clip-path:none;background:linear-gradient(0deg,#30497D 0%,rgba(48,73,125,0) 38%),url('/assets/site-sunset.webp') center/cover no-repeat}.find-work-footer-cta h2{grid-column:1;grid-row:1;align-self:start;position:relative;z-index:1;margin:32px 24px 24px;max-width:480px;font-size:0}.find-work-footer-cta h2:before{font-size:26px;line-height:1.35}.find-work-footer-cta h2:after{margin-top:24px;font-size:13px;line-height:1.9}.find-work-footer-cta .btn{grid-column:1;grid-row:2;align-self:start;justify-self:start;margin:0 24px 32px}.find-work-footer-cta:before{left:24px;right:24px;bottom:0;font-size:8px;content:'9Work Force                         Back to top  ↑'}}
 .find-work-footer-cta:before{display:none}
 
 /* Brand theme: color-only overrides. Layout and component behavior remain unchanged. */
@@ -1116,6 +1116,10 @@ footer .footer-copyright{width:100%;text-align:center;justify-content:center}
 
 /* Mobile registration copy needs contrast over the bright construction photo. */
 @media(max-width:780px){
- .find-work-footer-cta:after{background:linear-gradient(180deg,rgba(15,35,65,.87),rgba(25,49,87,.8) 60%,rgba(48,73,125,.94)),url('/assets/work-areas-helmet-branded.png') 65% center/cover no-repeat}
+ .find-work-footer-cta:after{background:linear-gradient(180deg,rgba(15,35,65,.87),rgba(25,49,87,.8) 60%,rgba(48,73,125,.94)),url('/assets/work-areas-helmet-branded.webp') 65% center/cover no-repeat}
  .find-work-footer-cta h2:before,.find-work-footer-cta h2:after{color:#fff;text-shadow:0 2px 8px #07182d40}
 }
+
+/* Give the home process introduction clear spacing and readable line height. */
+.how > div:first-child h2 { margin-bottom:18px; line-height:1.25; }
+.how > div:first-child > p { max-width:640px; margin:0 auto 28px; line-height:1.7; text-wrap:pretty; }

@@ -304,108 +304,6 @@
  .about-page-wrap .about-purpose-text-card p { font-size:14px; }
 }
 
-/* Compact coverage feature card, bounded independently of viewport size. */
-.about-service-coverage { position:relative; isolation:isolate; overflow:hidden; width:calc(100% - 64px); max-width:1320px; margin:64px auto; padding:48px; border:1px solid #45688e; border-radius:20px; box-shadow:0 22px 55px #102d5126, inset 0 1px 0 #ffffff12; color:#fff; background:radial-gradient(ellipse at 0% 0%,#225891 0%,#0c3562 38%,#021d3b 77%); }
-.about-coverage-art { position:absolute; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; opacity:.28; }
-.about-service-coverage-inner { width:100%; max-width:none; margin:0; display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr); align-items:center; gap:40px; }
-.about-service-coverage-copy { position:relative; padding-top:3px; }
-.about-coverage-eyebrow { display:flex; align-items:center; gap:13px; text-transform:uppercase; font-size:11.2px; font-weight:600; letter-spacing:1.4px; color:var(--orange); }
-.about-coverage-eyebrow::before { content:''; width:36.5px; height:2px; background:var(--orange); }
-.about-page-wrap .about-service-coverage h2 { color:#fff!important; font-size:38px; line-height:1.16; letter-spacing:-1.4px; margin:22.5px 0 20px; font-weight:800; }
-.about-page-wrap .about-service-coverage h2 em { color:var(--orange)!important; font-style:normal; white-space:normal; }
-.about-page-wrap .about-service-coverage-copy p { color:#d7e3f3; font-size:15px; line-height:1.65; max-width:95%; margin:0; }
-.about-coverage-dashboard { display:grid; grid-template-columns:38.4% 59.3%; grid-template-rows:94px 138px 94px; gap:12px 2.3%; }
-.about-coverage-dashboard article { position:relative; overflow:hidden; border:1px solid #4487bf; border-radius:10.5px; padding:16px; background:linear-gradient(125deg,#1b487b4d,#001a3280); box-shadow:inset 0 1px 0 #d4eaff16; }
-.about-coverage-dashboard strong { display:block; color:var(--orange); font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; letter-spacing:-0.6px; }
-.about-coverage-caption { display:block; color:#e3eeff; text-transform:uppercase; font-size:10px; line-height:1.4; letter-spacing:1px; }
-.about-coverage-dashboard .about-coverage-turnaround { grid-row:1/4; padding:26px 20px; border-color:#8bafca; border-left-color:var(--orange); border-bottom-color:#fc9d3680; background:radial-gradient(ellipse at 0% 100%,#f79529d6,transparent 39%),linear-gradient(135deg,#ffffff20,transparent 28%,#153e674d 60%,#06284c); }
-.about-coverage-turnaround::before { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(135deg,transparent 43%,#3e69961a 43%,#3e69961a 62%,transparent 62%); }
-.about-coverage-round-icon { position:relative; display:grid; place-items:center; width:50px; height:50px; border-radius:50%; color:var(--orange); border:1.5px solid #ff9d35ac; }
-.about-coverage-round-icon svg { width:27px; height:27px; }
-.about-coverage-turnaround strong { position:relative; font-size:56px; line-height:1; margin:18px 0 11px; }
-.about-coverage-turnaround .about-coverage-caption { white-space:normal; font-size:10px; }
-.about-coverage-clock { position:absolute; right:-34px; bottom:-43px; width:157px; height:157px; color:#689ee49c; }
-.about-coverage-certification,.about-coverage-availability { display:flex; align-items:center; gap:13px; }
-.about-coverage-certification strong,.about-coverage-availability strong { font-size:33px; line-height:1.1; margin-bottom:4px; }
-.about-coverage-cert-icon { position:relative; display:block; flex-shrink:0; color:#e1edff; padding-right:12px; border-right:1px solid #29659766; }
-.about-coverage-cert-icon>svg:first-child { width:44px; height:53px; }
-.about-coverage-cert-icon>svg:last-child { position:absolute; width:23px; height:23px; left:10.5px; top:13px; color:var(--orange); background:#0c2e52; }
-.about-coverage-certification::after { content:''; position:absolute; right:14px; top:13px; bottom:13px; width:60px; background:radial-gradient(circle,#ff9d3599 1.4px,transparent 2px) 0 0/12.5px 12px; opacity:.3; }
-.about-coverage-certification>div { z-index:1; }
-.about-coverage-location { display:flex; align-items:center; }
-.about-coverage-location>div { position:relative; z-index:1; }
-.about-coverage-location .about-coverage-round-icon { width:45px; height:45px; margin-bottom:6px; }
-.about-coverage-location strong { font-size:15.5px; letter-spacing:-0.4px; margin:0 0 5px; }
-.about-coverage-vic-map { position:absolute; right:4px; top:10px; width:43%; height:110px; opacity:1; }
-.about-coverage-vic-map path { fill:#15477c88; stroke:#46a1ef; stroke-width:.8; }
-.about-coverage-map-ring { fill:none; stroke:#4294dc60; stroke-width:.65; }
-.about-coverage-map-pin { fill:var(--orange); stroke:#ffd19e; stroke-width:.7; }
-.about-coverage-availability>svg { flex-shrink:0; color:#ddeafa; width:52px; height:42px; padding-right:10px; border-right:1px solid #29659766; }
-.about-coverage-dashboard .about-coverage-availability { background:radial-gradient(ellipse at 100% 100%,#ed8b2580,transparent 35%),linear-gradient(135deg,#153b6450,#001a3280); border-right-color:#fda044; border-bottom-color:#b78e61; }
-.about-coverage-availability::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,transparent 70%,#528ac726 70%,#528ac726 78%,transparent 78%,transparent 82%,#528ac733 82%,#528ac733 84%,transparent 84%); pointer-events:none; }
-@media(max-width:1100px) {
- .about-service-coverage { padding:36px 28px; }
- .about-service-coverage-inner { grid-template-columns:1fr; gap:36px; }
- .about-coverage-eyebrow { font-size:12px; letter-spacing:1.4px; gap:16px; }
- .about-coverage-eyebrow::before { width:40px; }
- .about-page-wrap .about-service-coverage h2 { font-size:clamp(34px,5.7vw,50px); letter-spacing:-1px; margin:26px 0 23px; }
- .about-page-wrap .about-service-coverage h2 em { white-space:normal; }
- .about-page-wrap .about-service-coverage-copy p { font-size:16px; max-width:650px; line-height:1.65; }
- .about-coverage-dashboard { grid-template-rows:125px 160px 120px; gap:16px; }
- .about-coverage-dashboard article { padding:22px; border-radius:13px; }
- .about-coverage-dashboard .about-coverage-turnaround { padding:28px 24px; }
- .about-coverage-round-icon { width:58px; height:58px; }
- .about-coverage-round-icon svg { width:30px; height:30px; }
- .about-coverage-turnaround strong { font-size:65px; margin:28px 0 14px; }
- .about-coverage-turnaround .about-coverage-caption,.about-coverage-caption { font-size:12px; letter-spacing:1px; white-space:normal; }
- .about-coverage-clock { width:220px; height:220px; right:-55px; bottom:-50px; }
- .about-coverage-certification,.about-coverage-availability { gap:16px; }
- .about-coverage-certification strong,.about-coverage-availability strong { font-size:40px; margin-bottom:7px; }
- .about-coverage-cert-icon { padding-right:12px; }
- .about-coverage-cert-icon>svg:first-child { width:50px; height:60px; }
- .about-coverage-cert-icon>svg:last-child { width:25px; height:25px; left:12px; top:16px; }
- .about-coverage-certification::after { display:none; }
- .about-coverage-location .about-coverage-round-icon { width:48px; height:48px; margin-bottom:10px; }
- .about-coverage-location strong { font-size:18px; margin-bottom:7px; }
- .about-coverage-vic-map { height:135px; top:12px; right:8px; opacity:.75; }
- .about-coverage-availability>svg { width:57px; height:48px; padding-right:12px; }
-}
-@media(max-width:550px) {
- .about-service-coverage { width:calc(100% - 32px); margin:36px auto; padding:28px 20px; border-radius:16px; }
- .about-page-wrap .about-service-coverage-copy p { font-size:14px; }
- .about-coverage-dashboard { grid-template-columns:1fr; grid-template-rows:auto; }
- .about-coverage-dashboard .about-coverage-turnaround { grid-row:auto; min-height:250px; }
- .about-coverage-dashboard article { min-height:125px; }
- .about-coverage-dashboard .about-coverage-location { min-height:170px; }
- .about-coverage-turnaround strong { font-size:66px; margin:22px 0 10px; }
- .about-coverage-clock { right:-12px; }
-}
-
-@media(max-width:550px) {
- .about-page-wrap .about-service-coverage h2 { font-size:30px; margin:20px 0; }
- .about-coverage-dashboard .about-coverage-turnaround { min-height:210px; }
- .about-coverage-turnaround strong { font-size:56px; }
- .about-coverage-clock { opacity:.55; }
- .about-coverage-certification strong,.about-coverage-availability strong { font-size:34px; }
- .about-coverage-caption { font-size:10px; }
- .about-coverage-location strong { font-size:16px; }
- .about-coverage-vic-map { opacity:.5; }
-}
-
-/* Sharp coverage cards and restrained entrance animations. */
-.about-service-coverage,
-.about-coverage-dashboard article { border-radius:0; }
-.about-service-coverage.is-visible .about-service-coverage-copy,
-.about-service-coverage.is-visible .about-coverage-caption,
-.about-service-coverage.is-visible .about-coverage-location strong {
-  animation:about-coverage-reveal .8s cubic-bezier(.22,1,.36,1) both;
-}
-.about-service-coverage.is-visible .about-coverage-caption { animation-delay:.15s; }
-.about-coverage-dashboard strong { font-variant-numeric:tabular-nums; }
-@keyframes about-coverage-reveal {
-  from { opacity:0; transform:translateY(14px); }
-  to { opacity:1; transform:translateY(0); }
-}
 .about-quote-section {
   position:relative; isolation:isolate; overflow:hidden; max-width:1320px;
   width:calc(100% - 64px); margin:64px auto; padding:72px 32px;
@@ -414,7 +312,7 @@
 }
 .about-quote-section::before {
   content:''; position:absolute; inset:0; z-index:-1;
-  background:linear-gradient(90deg,#142746ed,#30497dc9,#142746e8),url('/assets/employer-construction-hero.jpg') center 55%/cover;
+  background:linear-gradient(90deg,#142746ed,#30497dc9,#142746e8),url('/assets/employer-construction-hero.webp') center 55%/cover;
 }
 .about-quote-content { max-width:740px; margin:0 auto; }
 .about-page-wrap .about-quote-section h2 em { color:var(--orange)!important; font-style:normal; }
@@ -430,7 +328,7 @@
 .about-quote-request:hover { background:#ffffff18; }
 .about-quote-actions a:focus-visible { outline:3px solid #fff; outline-offset:4px; }
 @media(max-width:550px) {
-  .about-service-coverage,.about-coverage-dashboard article { border-radius:0; }
+
   .about-quote-section { width:calc(100% - 32px); margin:36px auto; padding:48px 22px; }
   .about-page-wrap .about-quote-section h2 { font-size:28px; }
   .about-page-wrap .about-quote-section p { font-size:14px; }

@@ -6,16 +6,16 @@ const extraRoleRequirements = [
 ];
 
 export const additionalWorkRoleContent = Object.fromEntries([
-  ['plant-and-equipment-operators', 'PLANT & EQUIPMENT OPERATIONS', '/assets/civil-excavation.png', 'Plant & Equipment Operators',
+  ['plant-and-equipment-operators', 'PLANT & EQUIPMENT OPERATIONS', '/assets/civil-excavation.webp', 'Plant & Equipment Operators',
     'Operate relevant construction plant and equipment within your demonstrated experience, qualifications and site authorisation.',
     ['Complete equipment checks and report faults before use.', 'Operate assigned plant within your training and authorisation.', 'Coordinate movements with the site team and follow exclusion zones.']],
-  ['high-risk-licensed-workers', 'LICENSED CONSTRUCTION SUPPORT', '/assets/materials-worker.png', 'High-Risk Licensed Workers',
+  ['high-risk-licensed-workers', 'LICENSED CONSTRUCTION SUPPORT', '/assets/materials-worker.webp', 'High-Risk Licensed Workers',
     'Support assigned construction tasks requiring relevant high-risk work licences, competencies and host-site authorisation.',
     ['Perform licensed tasks within the scope of your current credentials.', 'Follow task briefings, exclusion zones and safe work procedures.', 'Check assigned equipment and report hazards to the supervisor.']],
-  ['construction-site-support-workers', 'CONSTRUCTION SITE SUPPORT', '/assets/labour-site-team.png', 'Construction Site Support Workers',
+  ['construction-site-support-workers', 'CONSTRUCTION SITE SUPPORT', '/assets/labour-site-team.webp', 'Construction Site Support Workers',
     'Support site organisation, materials movement, logistics and day-to-day assistance for construction crews.',
     ['Prepare and organise materials and work areas.', 'Assist site crews with practical tasks within your skills.', 'Maintain housekeeping, safe access and communication on site.']],
-  ['rail-and-infrastructure-labourers', 'RAIL & INFRASTRUCTURE SUPPORT', '/assets/site-sunset.png', 'Rail & Infrastructure Labourers',
+  ['rail-and-infrastructure-labourers', 'RAIL & INFRASTRUCTURE SUPPORT', '/assets/site-sunset.webp', 'Rail & Infrastructure Labourers',
     'Support rail, civil and infrastructure crews according to your experience, competencies, inductions and project requirements.',
     ['Assist with work-area preparation and materials handling.', 'Support infrastructure crews within your training and site authorisation.', 'Follow project access requirements, briefings and supervisor instructions.']],
 ].map(([slug,category,image,imageLabel,overview,duties])=>[slug,{
@@ -28,7 +28,7 @@ export const additionalWorkRoleContent = Object.fromEntries([
 export const workRoleContent = [
   {
     category: 'CONSTRUCTION LABOUR HIRE', sector: 'Construction & Trades',
-    image: '/assets/construction-worker.png', imageLabel: 'Construction Site Support',
+    image: '/assets/construction-worker.webp', imageLabel: 'Construction Site Support',
     intro: 'Register for general construction labouring opportunities in metropolitan Melbourne and regional Victoria. Support commercial, residential and infrastructure teams with materials handling, site preparation and practical assistance.',
     overview: 'As a General Construction Labourer with 9Work Force, you support the day-to-day activities that keep a construction site organised and ready for work. Duties depend on the project, your experience and the instructions of the site team.',
     duties: [
@@ -49,7 +49,7 @@ export const workRoleContent = [
   },
   {
     category: 'SKILLED CONSTRUCTION LABOUR', sector: 'Construction & Trades',
-    image: '/assets/materials-worker.png', imageLabel: 'Skilled Site Activities',
+    image: '/assets/materials-worker.webp', imageLabel: 'Skilled Site Activities',
     intro: 'Register your experience for skilled construction labouring opportunities across Victoria. Support project teams with specialised preparation, tools, materials and construction tasks.',
     overview: 'Skilled Construction Labourers assist with tasks that call for established construction experience and familiarity with site routines. Your duties are matched to your demonstrated skills, relevant credentials and each project’s requirements.',
     duties: [
@@ -70,7 +70,7 @@ export const workRoleContent = [
   },
   {
     category: 'TRADE SUPPORT', sector: 'Construction & Trades',
-    image: '/assets/trade-team.png', imageLabel: 'Working Alongside Trades',
+    image: '/assets/trade-team.webp', imageLabel: 'Working Alongside Trades',
     intro: 'Register for Trade Assistant opportunities on Victorian construction sites. Support qualified tradespeople with tools, materials and work-area preparation within your trade-support experience.',
     overview: 'Trade Assistants provide hands-on support to the trades team so work can progress smoothly. Tasks are directed by qualified tradespeople and stay within your experience, training and the scope of the assigned role.',
     duties: [
@@ -91,7 +91,7 @@ export const workRoleContent = [
   },
   {
     category: 'CIVIL CONSTRUCTION', sector: 'Civil & Infrastructure',
-    image: '/assets/civil-excavation.png', imageLabel: 'Civil Project Support',
+    image: '/assets/civil-excavation.webp', imageLabel: 'Civil Project Support',
     intro: 'Register for Civil Construction Labourer opportunities across Victoria. Support site preparation, drainage, roadworks and excavation-related tasks within your experience and project requirements.',
     overview: 'Civil Construction Labourers assist crews working on roads, drainage and infrastructure. Tasks vary by project and may involve outdoor work, materials handling and coordination with supervisors and plant operators.',
     duties: [
@@ -112,7 +112,7 @@ export const workRoleContent = [
   },
   {
     category: 'FORMWORK & CONCRETE', sector: 'Construction & Structures',
-    image: '/assets/construction-worker.png', imageLabel: 'Structural Construction Support',
+    image: '/assets/construction-worker.webp', imageLabel: 'Structural Construction Support',
     intro: 'Register for Formwork & Concrete Labourer opportunities across Victoria. Assist structural crews with formwork preparation, materials and concrete-related tasks within your experience and training.',
     overview: 'Formwork & Concrete Labourers support crews preparing and carrying out structural construction work. Your tasks depend on previous experience, site supervision and the requirements of each construction stage.',
     duties: [
@@ -133,7 +133,7 @@ export const workRoleContent = [
   },
   {
     category: 'TRAFFIC MANAGEMENT', sector: 'Traffic & Infrastructure',
-    image: '/assets/traffic-control.png', imageLabel: 'Traffic & Site Access Support',
+    image: '/assets/traffic-control.webp', imageLabel: 'Traffic & Site Access Support',
     intro: 'Register for Traffic Management Worker opportunities on Victorian construction, civil and infrastructure sites. Share your qualifications and experience for review against site traffic-management requirements.',
     overview: 'Traffic Management Workers support movement around active project work areas. Activities depend on your current qualifications, demonstrated competencies, site briefing and the traffic-management arrangements for the project.',
     duties: [

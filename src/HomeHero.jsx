@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {Link, useNavigate, useSearchParams} from 'react-router-dom';
 import {ArrowRight, ChevronDown, Search, MapPin, UserRound, Building2, HardHat, TrafficCone, Forklift, Hammer, Users} from 'lucide-react';
+
+import HeroVideo from './HeroVideo';
+import {heroVideoSource} from './heroVideoSource';
 import './home-hero.css';
 import {getWorkRolePath} from './workRolePaths';
 
@@ -54,15 +57,15 @@ function HeroSearch() {
 
 export default function HomeHero() {
   return <section className="homepage-hero" aria-labelledby="homepage-heading">
-    <div className="home-hero-site" aria-hidden="true"><img src="/assets/hero-construction-workforce-v2.png" alt="" width="1642" height="958" fetchPriority="high"/></div>
+    <div className="home-hero-site" aria-hidden="true"><img src="/assets/hero-construction-workforce-v2.webp" alt="" width="1642" height="958" fetchPriority="high"/><HeroVideo source={heroVideoSource.desktop}/></div>
     <div className="homepage-hero-inner">
       <div className="homepage-hero-copy">
         <span className="home-hero-eyebrow">PEOPLE POWERING AUSTRALIA</span>
         <h1 id="homepage-heading">Construction labour<br/>when you <em>need it.</em></h1>
         <p>Tell us what your site needs. We’ll handle the workforce.</p>
-        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/request-workers">REQUEST WORKERS <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/who-we-are">Learn More</Link></div>
+        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/find-work#opportunities">Join Works <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/request-workers">Request Workers</Link></div>
       </div>
-      <div className="home-hero-mobile-photo" aria-hidden="true"><img src="/assets/hero-construction-workforce-mobile.png" alt="" width="1122" height="1402" fetchPriority="high"/></div>
+      <div className="home-hero-mobile-photo" aria-hidden="true"><img src="/assets/hero-construction-workforce-mobile.webp" alt="" width="1122" height="1402" fetchPriority="high"/><HeroVideo source={heroVideoSource.mobile || heroVideoSource.desktop} mobile/></div>
       <HeroSearch/>
       <ul className="home-hero-sectors" aria-label="Our work areas">
         {[[HardHat, 'General Construction Labourers'], [TrafficCone, 'Skilled Construction Labourers'], [Building2, 'Trade Assistants'], [Forklift, 'Civil Construction Labourers'], [Hammer, 'Formwork & Concrete Labourers'], [Users, 'Traffic Management Workers']].map(([Icon, label]) => <li key={label}><Icon aria-hidden="true"/><span>{label}</span></li>)}
@@ -86,7 +89,7 @@ export function WorkSearchResults({roles, notes}) {
     <h1>Work opportunities</h1>
     <p>Explore construction work across Victoria. Role availability and site locations depend on project requirements.</p>
     <div className="home-search-summary" role="status">{matches.length} matching work {matches.length === 1 ? 'area' : 'areas'}{query && <> · “{query}”</>}{industry && <> · {industry}</>}{location && <> · Preferred location: {location}</>}</div>
-    <div className="home-search-result-list">{matches.length ? matches.map(({role, index}) => <article key={role[0]}><div><h2><Link className="work-role-title" to={getWorkRolePath(role[0])}>{role[0]}</Link></h2><p>{role[1]}</p><small><MapPin size={14} aria-hidden="true"/> Victoria · {notes[index]}</small></div><Link to={getWorkRolePath(role[0])}>Apply now <ArrowRight size={17} aria-hidden="true"/></Link></article>) : <div className="home-search-empty"><h2>No matching work areas</h2><p>Try a broader keyword or view all the work areas we recruit for.</p><Link to="/work-search">View all work areas <ArrowRight size={17} aria-hidden="true"/></Link></div>}</div>
+    <div className="home-search-result-list">{matches.length ? matches.map(({role, index}) => <article key={role[0]}><div><h2><Link className="work-role-title" to={getWorkRolePath(role[0])}>{role[0]}</Link></h2><p>{role[1]}</p><small><MapPin size={14} aria-hidden="true"/> Victoria · {notes[index]}</small></div><Link to={`${getWorkRolePath(role[0])}/apply`}>Apply now <ArrowRight size={17} aria-hidden="true"/></Link></article>) : <div className="home-search-empty"><h2>No matching work areas</h2><p>Try a broader keyword or view all the work areas we recruit for.</p><Link to="/work-search">View all work areas <ArrowRight size={17} aria-hidden="true"/></Link></div>}</div>
       </section>;
 }
 

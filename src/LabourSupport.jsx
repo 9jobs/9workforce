@@ -2,9 +2,11 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {motion, useMotionValue, useMotionValueEvent, useReducedMotion, useSpring, useTransform} from 'framer-motion';
 import {ArrowRight, ShieldCheck, ClipboardCheck, Zap} from 'lucide-react';
+import {getWorkRolePath} from './workRolePaths';
 import './labour-support.css';
 
-const photos = ['general-labour.png', 'construction-worker.png', 'trade-team.png', 'civil-excavation.png', 'labour-site-team.png', 'traffic-control.png', 'materials-worker.png', 'site-sunset.png'];
+const photos = ['general-labour.webp', 'construction-worker.webp', 'trade-team.webp', 'civil-excavation.webp', 'labour-site-team.webp', 'traffic-control.webp', 'materials-worker.webp', 'site-sunset.webp'];
+const roleTitles = ['General Construction Labourers', 'Skilled Construction Labourers', 'Trade Assistants', 'Civil Construction Labourers', 'Formwork & Concrete Labourers', 'High-Risk Licensed Workers', 'Construction Site Support Workers', 'Rail & Infrastructure Labourers'];
 const benefits = [
   [ShieldCheck, 'Verified Workers', 'Experience and relevant tickets reviewed.'],
   [ClipboardCheck, 'Site Ready', 'Site requirements and inductions coordinated.'],
@@ -13,7 +15,7 @@ const benefits = [
 
 const wrap = (value, length) => ((value % length) + length) % length;
 
-function OrbitCard({area, description, index, count, position, active, expanded, onToggle}) {
+function OrbitCard({area, description, index, count, position, active, canNavigate}) {
   const offset = useTransform(position, value => wrap(index - value + 1, count) - 1);
   const transform = useTransform(offset, value => {
     const angle = (-44 + value * 26) * Math.PI / 180;
@@ -25,14 +27,16 @@ function OrbitCard({area, description, index, count, position, active, expanded,
   const visible = distance >= 0 && distance <= 3;
   return <motion.article className={`labour-orbit-card${selected?' is-active':''}`} aria-hidden={!selected} style={{
     transform, opacity, filter:selected?'blur(0px)':`blur(${Math.max(0,distance)+2}px)`,
-    zIndex:selected?10:5-Math.abs(distance), pointerEvents:visible?'auto':'none',
+    zIndex:selected?10:5-Math.abs(distance), pointerEvents:selected?'auto':'none',
   }}>
-    <div className="labour-orbit-card-photo"><img src={`/assets/${photos[index]}`} alt="" loading={visible?'eager':'lazy'} decoding="async"/><span className="labour-orbit-card-label"><i/>{selected?'ACTIVE ROLE':'SITE SUPPORT'}</span><span className="labour-orbit-card-number">{String(index + 1).padStart(2,'0')} / {String(count).padStart(2,'0')}</span></div>
-    <div className="labour-orbit-card-body"><h3>{area}</h3><p className="labour-orbit-card-summary">{description}</p><button type="button" tabIndex={selected?0:-1} aria-label={`${expanded?'Hide':'Show'} ${area} details`} aria-expanded={expanded} aria-controls={selected?`work-area-panel-${index}`:undefined} onClick={event => { event.stopPropagation(); onToggle(expanded?null:index); }}><ArrowRight size={18} aria-hidden="true"/></button></div>
+    <Link className="labour-orbit-card-link" to={getWorkRolePath(roleTitles[index])} tabIndex={selected?0:-1} aria-label={`View ${area} role and requirements`} onClick={event => { event.stopPropagation(); if (!canNavigate()) event.preventDefault(); }}>
+      <div className="labour-orbit-card-photo"><img src={`/assets/${photos[index]}`} alt="" loading={visible?'eager':'lazy'} decoding="async"/><span className="labour-orbit-card-label"><i/>{selected?'ACTIVE ROLE':'SITE SUPPORT'}</span><span className="labour-orbit-card-number">{String(index + 1).padStart(2,'0')} / {String(count).padStart(2,'0')}</span></div>
+      <div className="labour-orbit-card-body"><h3>{area}</h3><p className="labour-orbit-card-summary">{description}</p><span className="labour-orbit-card-arrow"><ArrowRight size={18} aria-hidden="true"/></span></div>
+    </Link>
   </motion.article>;
 }
 
-export default function LabourSupport({areas, descriptions, openArea, setOpenArea}) {
+export default function LabourSupport({areas, descriptions}) {
   const [active, setActive] = useState(0);
   const section = useRef(null);
   const swipe = useRef(null);
@@ -182,7 +186,7 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
 
   return <section className="labour-orbit" ref={section} tabIndex={0} role="region" aria-roledescription="carousel" aria-labelledby="labour-orbit-heading" onKeyDown={keyboard}
     onClick={event => { if (event.target.closest('a,button') || performance.now() < suppressClick.current || window.getSelection()?.toString()) return; advance(1); }}
-    onPointerDown={event => { if (event.pointerType !== 'mouse' && !event.target.closest('a,button')) { swipe.current = {x:event.clientX,y:event.clientY}; event.currentTarget.setPointerCapture(event.pointerId); } }}
+    onPointerDown={event => { if (event.pointerType !== 'mouse' && (!event.target.closest('a,button') || event.target.closest('.labour-orbit-card-link'))) { swipe.current = {x:event.clientX,y:event.clientY}; if (!event.target.closest('.labour-orbit-card')) event.currentTarget.setPointerCapture(event.pointerId); } }}
     onPointerUp={event => {
       if (!swipe.current) return;
       const dx=swipe.current.x-event.clientX; const dy=swipe.current.y-event.clientY;
@@ -215,13 +219,12 @@ export default function LabourSupport({areas, descriptions, openArea, setOpenAre
         <h2 id="labour-orbit-heading">Skilled site support,<br/>made simple<span>.</span></h2>
         <p className="labour-orbit-intro">Reliable construction workers for site tasks, material handling, civil works and specialist support across Melbourne and Victoria.</p>
         <div className="labour-orbit-benefits">{benefits.map(([Icon, title, copy]) => <div key={title}><span><Icon size={19} aria-hidden="true"/></span><div><strong>{title}</strong><p>{copy}</p></div></div>)}</div>
-        <Link className="labour-orbit-cta" to="/contact">REQUEST WORKERS <span><ArrowRight size={17} aria-hidden="true"/></span></Link>
+        <Link className="labour-orbit-cta" to="/request-workers">REQUEST WORKERS <span><ArrowRight size={17} aria-hidden="true"/></span></Link>
       </div>
       <div className="labour-orbit-display">
         <div className="labour-orbit-stage">
-          {areas.map((area,index) => <OrbitCard key={area} area={area} description={descriptions[index]} index={index} count={areas.length} position={position} active={active} expanded={openArea === index} onToggle={setOpenArea}/>)}
+          {areas.map((area,index) => <OrbitCard key={area} area={area} description={descriptions[index]} index={index} count={areas.length} position={position} active={active} canNavigate={() => performance.now() >= suppressClick.current}/>) }
         </div>
-        <div className="labour-orbit-detail" id={`work-area-panel-${active}`} hidden={openArea !== active}><strong>{areas[active]}</strong><p>{descriptions[active]}</p></div>
       </div>
     </div>
   </section>;

@@ -1,6 +1,7 @@
 /* Hire Workers: reference layout using the site's shared brand colors. */
 .employer-experience { background:#fff; }
-.hire-hero { position:relative; isolation:isolate; min-height:690px; overflow:hidden; background:linear-gradient(90deg,rgba(15,29,56,.91) 0%,rgba(22,50,101,.80) 37%,rgba(22,50,101,.25) 66%,rgba(22,50,101,.04) 100%),url('/assets/employer-construction-hero.jpg') 70% center/cover; }
+.employer-experience > main { padding-top:100px; }
+.hire-hero { position:relative; isolation:isolate; min-height:690px; overflow:hidden; background:linear-gradient(90deg,rgba(15,29,56,.91) 0%,rgba(22,50,101,.80) 37%,rgba(22,50,101,.25) 66%,rgba(22,50,101,.04) 100%),url('/assets/employer-construction-hero.webp') 70% center/cover; }
 .hire-hero-inner { width:min(1280px,calc(100% - 96px)); margin:0 auto; display:grid; grid-template-columns:minmax(0,1.12fr) minmax(335px,.88fr) minmax(80px,.30fr); gap:46px; padding:155px 0 58px; align-items:center; }
 .hire-hero-copy { color:#fff; }
 .hire-hero h1 { margin:16px 0 18px; color:#fff !important; font-size:clamp(44px,4.4vw,66px); line-height:1.03; letter-spacing:-2.2px; font-weight:800; }
@@ -51,7 +52,7 @@
 .hire-steps h3 { color:var(--brand); font-size:15px; line-height:1.4; letter-spacing:-.3px; }
 .hire-steps p { color:#536582; font-size:12px; line-height:1.6; margin-top:8px; }
 .hire-step-arrow { position:absolute; right:-33px; top:45%; color:#6079a5; }
-.hire-next-step { position:relative; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; width:min(1340px,calc(100% - 60px)); margin:-66px auto 20px; padding:38px 58px; border-radius:14px; isolation:isolate; overflow:hidden; background:linear-gradient(90deg,rgba(15,29,56,.97),rgba(22,50,101,.80) 47%,rgba(22,50,101,.12)),url('/assets/employer-construction-hero.jpg') 65% 45%/cover; color:#fff; box-shadow:0 7px 24px #30497d12; }
+.hire-next-step { position:relative; display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; width:min(1340px,calc(100% - 60px)); margin:-66px auto 20px; padding:38px 58px; border-radius:14px; isolation:isolate; overflow:hidden; background:linear-gradient(90deg,rgba(15,29,56,.97),rgba(22,50,101,.80) 47%,rgba(22,50,101,.12)),url('/assets/employer-construction-hero.webp') 65% 45%/cover; color:#fff; box-shadow:0 7px 24px #30497d12; }
 .hire-next-step .hire-eyebrow { color:var(--orange); }
 .hire-next-step h2 { color:#fff !important; font-size:36px; line-height:1.12; letter-spacing:-1.2px; margin:17px 0 14px; }
 .hire-next-step h2 em { color:var(--orange) !important; }
@@ -94,7 +95,7 @@
 }
 @media (max-width:680px) {
   .hire-hero-inner { width:calc(100% - 40px); grid-template-columns:minmax(0,1fr); gap:30px; padding:128px 0 36px; }
-  .hire-hero { background-image:linear-gradient(90deg,rgba(15,29,56,.93),rgba(22,50,101,.64)),url('/assets/employer-construction-hero.jpg'); background-position:center,77% top; background-size:cover,auto 820px; background-color:#163265; background-repeat:no-repeat; }
+  .hire-hero { background-image:linear-gradient(90deg,rgba(15,29,56,.93),rgba(22,50,101,.64)),url('/assets/employer-construction-hero.webp'); background-position:center,77% top; background-size:cover,auto 820px; background-color:#163265; background-repeat:no-repeat; }
   .hire-hero h1 { font-size:clamp(34px,10.8vw,48px); letter-spacing:-1.3px; }
   .hire-hero-copy > p { font-size:15px; max-width:440px; }
   .hire-trust { gap:16px; margin-top:23px; }
@@ -131,7 +132,7 @@
 @media(max-width:1000px){.employer-experience .hire-hero-inner{gap:32px;grid-template-columns:minmax(0,1fr) minmax(0,460px)}.employer-experience .hire-hero .request-form{padding:28px}}
 @media(max-width:700px){.employer-experience .hire-hero-inner{grid-template-columns:minmax(0,1fr);gap:30px}.employer-experience .hire-hero .request-form{max-width:520px;justify-self:center;padding:24px}.employer-experience .hire-hero .request-form :is(input,select){font-size:16px}}
 /* Construction cover and existing Victoria autocomplete in the hero form. */
-.employer-experience .hire-hero{background:linear-gradient(90deg,#18345aeb,#30497dd9 55%,#203b69a8),url('/assets/labour-site-team.png') center/cover no-repeat}
+.employer-experience .hire-hero{background:linear-gradient(90deg,#18345aeb,#30497dd9 55%,#203b69a8),url('/assets/labour-site-team.webp') center/cover no-repeat}
 .employer-experience .hire-hero .application-address{margin:20px 0 0}
 .employer-experience .hire-hero .application-address>label{display:block;margin:0 0 6px}
 .employer-experience .hire-hero .application-address-control input{margin:0;padding-right:48px}

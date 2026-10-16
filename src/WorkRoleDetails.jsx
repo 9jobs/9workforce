@@ -10,7 +10,6 @@ export default function WorkRoleDetails({role, index, children, onApply, content
       <div className="work-role-hero-inner">
         <div className="work-role-hero-grid">
           <div className="work-role-hero-copy">
-            <span className="work-role-eyebrow"><i/>{content.category}</span>
             <h1 id="work-role-heading">{role[0]}</h1>
             <p>{content.intro}</p>
             <div className="work-role-summary">

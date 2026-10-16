@@ -108,7 +108,7 @@ export default function RoleApplication({role, categories, onClose}) {
     <div className="role-application-layout">
           <ol className="application-progress" aria-label="Application progress">{stageHeadings.map((stage,index)=><li key={stage.label} className={index===step?'current':index<step?'complete':''} aria-current={index===step?'step':undefined}><span>{index<step?<Check size={20}/>:index+1}</span><b>{stage.label}</b></li>)}</ol>
       <aside className="application-brand">
-        <img className="application-footer-logo" src="/assets/9workforce-footer-logo.png" alt="9Work Force"/>
+        <img className="application-footer-logo" src="/assets/9workforce-footer-logo.webp" alt="9Work Force"/>
         <p className="application-brand-tagline" aria-live="polite" aria-atomic="true">{['Your future starts with you.', 'YOUR SKILLS. YOUR NEXT STEP.', 'ONE STEP CLOSER'][step]}</p>
       </aside>
       <div className="application-panel">

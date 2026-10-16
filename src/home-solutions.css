@@ -64,3 +64,38 @@
   .solutions-reference .solution { transition:none; }
   .solution-grid.is-bursting .solutions-burst-glow { animation:none; }
 }
+
+/* Clear gradients and a directional hover reveal. */
+.solutions-reference .solution { isolation:isolate;overflow:hidden;background:linear-gradient(120deg,#fff,#e8eff9); }
+.solutions-reference .solution:nth-child(1),.solutions-reference .solution:nth-child(4) { background:linear-gradient(120deg,#ffc477 0%,#ffa24b 45%,#ff8b32 100%); }
+.solutions-reference .solution::before { content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,#1b304e 0%,#30497d 55%,#4b6b9c 100%);clip-path:inset(0 100% 0 0);transition:clip-path .65s cubic-bezier(.22,1,.36,1); }
+.solutions-reference .solution:is(.is-selected,:has(:focus-visible))::before { clip-path:inset(0); }
+.solutions-reference .solution-colour-control { position:absolute;inset:0;z-index:1;width:100%;height:100%;max-width:none;padding:0;border:0;border-radius:inherit;background:transparent;cursor:pointer; }
+.solutions-reference .solution :is(.solution-card-icon,h3,p) { position:relative;z-index:2;pointer-events:none;transition:color .4s; }
+.solutions-reference .solution h3 a { pointer-events:auto; }
+.solutions-reference .solution:is(.is-selected,:has(:focus-visible)) h3 { color:#fff!important; }
+.solutions-reference .solution:is(.is-selected,:has(:focus-visible)) p { color:#e1ebf9; }
+.solutions-reference .solution:is(.is-selected,:has(:focus-visible)) .solution-card-icon { color:#ffb46d; }
+.solutions-reference .solution:has(.solution-colour-control:focus-visible) { outline:3px solid #30497d;outline-offset:5px; }
+.solutions-reference .solution-colour-control:focus-visible { outline:none; }
+#root .solutions-reference .solutions-cta .btn { position:relative;isolation:isolate;overflow:hidden;min-width:164px;min-height:46px;background:linear-gradient(135deg,#ffbd70 0%,#ff963e 48%,#ed7828 100%);border-color:#ffc58a;border-radius:6px;color:#fff;box-shadow:inset 0 1px 0 #ffe2bd66,0 6px 18px #ff8e3830; }
+@media(hover:hover) and (pointer:fine) {
+ .solutions-reference .solution:hover::before { clip-path:inset(0); }
+ .solutions-reference .solution:hover h3 { color:#fff!important; }
+ .solutions-reference .solution:hover p { color:#e1ebf9; }
+ .solutions-reference .solution:hover .solution-card-icon { color:#ffb46d; }
+ #root .solutions-reference .solutions-cta .btn:hover { border-color:#ffdab1;filter:brightness(1.04);box-shadow:inset 0 1px 0 #ffe2bd80,0 8px 22px #ff8e3840; }
+ #root .solutions-reference .solutions-cta .btn svg { color:inherit; }
+}
+@media(max-width:600px) {
+ .solutions-reference .solution:nth-child(odd) { background:linear-gradient(155deg,#ffc477,#ffa24b 45%,#ff8b32); }
+ .solutions-reference .solution:nth-child(even) { background:linear-gradient(155deg,#fff,#e8eff9); }
+ .solutions-reference .solution::before { background:linear-gradient(180deg,#1b304e,#30497d 55%,#4b6b9c);clip-path:inset(0 0 100% 0); }
+ .solutions-reference .solution:is(.is-selected,:has(:focus-visible))::before { clip-path:inset(0); }
+ .solutions-reference .solution:nth-child(odd) :is(p,.solution-card-icon) { color:#243a55; }
+ #root .solutions-reference .solution:is(.is-selected,:has(:focus-visible)) p { color:#f1f5fc; }
+ #root .solutions-reference .solution:is(.is-selected,:has(:focus-visible)) .solution-card-icon { color:#ffb46d; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .solutions-reference .solution::before,.solutions-reference .solution :is(.solution-card-icon,h3,p) { transition:none; }
+}

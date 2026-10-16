@@ -356,7 +356,7 @@ a.talk-item:hover {
 /* Employers Card */
 .ways-card-employers {
   background: linear-gradient(135deg, rgba(15, 29, 56, 0.94) 0%, rgba(22, 50, 101, 0.88) 55%, rgba(15, 29, 56, 0.76) 100%),
-              url('/assets/site-sunset.png') center / cover no-repeat;
+              url('/assets/site-sunset.webp') center / cover no-repeat;
   border-radius: 18px;
   padding: 32px 30px;
   min-height: 250px;
