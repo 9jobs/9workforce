@@ -64,7 +64,7 @@ export default function HomeHero() {
         <span className="home-hero-eyebrow">PEOPLE POWERING AUSTRALIA</span>
         <h1 id="homepage-heading">Construction labour<br/>when you <em>need it.</em></h1>
         <p>Tell us what your site needs. We’ll handle the workforce.</p>
-        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/find-work#opportunities">Join Works <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/request-workers">Request Workers</Link></div>
+        <div className="homepage-hero-actions"><Link className="home-hero-primary" to="/find-work#register">Join Works <ArrowRight size={20} aria-hidden="true"/></Link><Link className="home-hero-secondary" to="/request-workers">Request Workers</Link></div>
       </div>
       <div className="home-hero-mobile-photo" aria-hidden="true"><img src="/assets/hero-construction-workforce-mobile.webp" alt="" width="1122" height="1402" fetchPriority="high"/><HeroVideo source={heroVideoSource.mobile || heroVideoSource.desktop} mobile/></div>
       <HeroSearch/>
