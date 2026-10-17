@@ -100,7 +100,7 @@ test('hero and direct worker forms require login, then return to the chosen form
   expect(new URL(page.url()).searchParams.get('next')).toBe(role);
 });
 
-test('Google-only account can set a password through a single-use email link',async({page})=>{
+test('repeat Google registration never claims a password was saved, and email recovery enables password login',async({page})=>{
   const root=mkdtempSync('scratch/password-flow-');
   let resetUrl;
   const auth=await createAccountAuth(root,{}, {sendResetPassword:async({url})=>{resetUrl=url;}});
@@ -116,11 +116,16 @@ test('Google-only account can set a password through a single-use email link',as
       const response=await route.fetch({url:`http://localhost:3019${target.pathname}${target.search}`,headers:{...request.headers(),host:'localhost:3019',origin:'http://localhost:3019'}});
       await route.fulfill({response});
     });
-    await page.goto('/register?mode=signin');
+    await page.goto('/register');
+    await page.getByLabel('Full name').fill('Google Test');
     await page.getByLabel('Email address').fill('google-only@example.com');
     await page.getByLabel('Password',{exact:true}).fill('New-test-password-42');
-    await page.locator('form').getByRole('button',{name:'Sign in',exact:true}).click();
-    await expect(page.getByRole('alert')).toContainText('Registered with Google?');
+    await page.getByRole('checkbox').check();
+    await page.getByRole('button',{name:'Create account',exact:true}).click();
+    await expect(page.getByRole('heading',{name:'Welcome back.'})).toBeVisible();
+    await expect(page.getByRole('alert')).toContainText('This email is already registered.');
+    await expect(page.getByRole('status')).toHaveCount(0);
+    expect(db.prepare("SELECT COUNT(*) AS count FROM account WHERE userId='google-test' AND providerId='credential'").get().count).toBe(0);
     await page.getByRole('button',{name:'Forgot / set password via email'}).click();
     await expect(page.getByRole('status')).toContainText('secure password link');
     await expect.poll(()=>Boolean(resetUrl)).toBe(true);
@@ -139,4 +144,41 @@ test('Google-only account can set a password through a single-use email link',as
     const reuse=await page.request.post('http://localhost:3019/api/auth/reset-password',{headers:{Origin:'http://localhost:3019'},data:{token,newPassword:'Another-test-password-42'}});
     expect(reuse.ok()).toBe(false);
   }finally{db.close();await new Promise(resolve=>server.close(resolve));}
+});
+
+test('new email registration signs in with the same credentials and repeat signup cannot replace a password',async({page})=>{
+  const auth=await createAccountAuth(mkdtempSync('scratch/email-login-'),{}, {skipNotifications:true});
+  const server=http.createServer((req,res)=>auth.handler(req,res));
+  await new Promise(resolve=>server.listen(3019,'127.0.0.1',resolve));
+  try{
+    await page.route('**/api/auth/**',async route=>{
+      const request=route.request();const target=new URL(request.url());
+      const response=await route.fetch({url:`http://localhost:3019${target.pathname}${target.search}`,headers:{...request.headers(),host:'localhost:3019',origin:'http://localhost:3019','x-forwarded-for':'192.0.2.50'}});
+      await route.fulfill({response});
+    });
+    await page.goto('/register');
+    await page.getByLabel('Full name').fill('Email Registration Test');
+    await page.getByLabel('Email address').fill('Same-Credentials@Example.com');
+    await page.getByLabel('Password',{exact:true}).fill('Same-test-password-42');
+    await page.getByRole('checkbox').check();
+    await page.getByRole('button',{name:'Create account',exact:true}).click();
+    await expect(page.getByRole('status')).toContainText('Account created.');
+    await expect(page.getByLabel('Email address')).toHaveValue('same-credentials@example.com');
+    await page.getByLabel('Password',{exact:true}).fill('Same-test-password-42');
+    await page.locator('form').getByRole('button',{name:'Sign in',exact:true}).click();
+    await expect(page.getByRole('heading',{name:'Choose your next step.'})).toBeVisible();
+    await page.reload();
+    await expect(page.getByRole('heading',{name:'Choose your next step.'})).toBeVisible();
+    await page.getByRole('button',{name:'Sign out',exact:true}).click();
+    const duplicate=await page.request.post('http://localhost:3019/api/auth/sign-up/email',{headers:{Origin:'http://localhost:3019','x-forwarded-for':'192.0.2.50'},data:{name:'Duplicate',email:'same-credentials@example.com',password:'Replacement-password-42'}});
+    expect(duplicate.status()).toBe(409);
+    expect((await duplicate.json()).code).toBe('ACCOUNT_ALREADY_REGISTERED');
+    const wrong=await page.request.post('http://localhost:3019/api/auth/sign-in/email',{headers:{Origin:'http://localhost:3019','x-forwarded-for':'192.0.2.50'},data:{email:'same-credentials@example.com',password:'Replacement-password-42'}});
+    expect(wrong.status()).toBe(401);
+    await page.locator('.account-mode-switch').getByRole('button',{name:'Sign in',exact:true}).click();
+    await page.getByLabel('Email address').fill('Same-Credentials@Example.com');
+    await page.getByLabel('Password',{exact:true}).fill('Same-test-password-42');
+    await page.locator('form').getByRole('button',{name:'Sign in',exact:true}).click();
+    await expect(page.getByRole('heading',{name:'Choose your next step.'})).toBeVisible();
+  }finally{await new Promise(resolve=>server.close(resolve));await auth.close();}
 });

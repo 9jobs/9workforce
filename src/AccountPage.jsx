@@ -67,14 +67,21 @@ export default function AccountPage(){
       }
       const email=fields.email.trim().toLowerCase();
       const result=login?await accountClient.signIn.email({email,password:fields.password}):await accountClient.signUp.email({name:fields.name.trim(),email,password:fields.password});
-      if(result.error)setError(result.error.code==='INVALID_EMAIL_OR_PASSWORD'?'Email or password not recognised. Registered with Google? Use Google sign-in, or set a password using the email link below.':result.error.message||'Please check your details and try again.');
+      if(!login&&result.error?.code==='ACCOUNT_ALREADY_REGISTERED'){
+        // A repeat registration must never imply that an existing password changed.
+        const signedIn=await accountClient.signIn.email({email,password:fields.password});
+        if(!signedIn.error)return;
+        setSavedEmail(email);setLogin(true);setVisible(false);setNotice('');setResetRequested(false);
+        setError('This email is already registered. Use your existing password or Google sign-in. To add or reset a password, choose Forgot or set password.');
+      }
+      else if(result.error)setError(result.error.code==='INVALID_EMAIL_OR_PASSWORD'?'Email or password not recognised. Registered with Google? Use Google sign-in, or set a password using the email link above.':result.error.message||'Please check your details and try again.');
       else if(!login){
         setSavedEmail(email);setLogin(true);setVisible(false);
         if(next){
           const signedIn=await accountClient.signIn.email({email,password:fields.password});
           if(!signedIn.error)return;
         }
-        setNotice('Continue to sign in. If you already registered with Google, use Google sign-in or set a password via email.');
+        setNotice('Account created. Sign in with the same email and password you just registered with.');
       }
     }catch{setError('Unable to connect. Please try again.');}
     finally{setBusy(false);}

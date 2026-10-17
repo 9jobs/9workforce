@@ -39,7 +39,7 @@ test('register, persist a session, sign out, reject a wrong password and sign ba
   await page.getByLabel('Password',{exact:true}).fill(password);
   await page.getByRole('checkbox').check();
   await page.getByRole('button',{name:'Create account',exact:true}).click();
-  await expect(page.getByRole('status')).toContainText('Continue to sign in.');
+  await expect(page.getByRole('status')).toContainText('Account created.');
   await page.getByLabel('Password',{exact:true}).fill(password);
   await page.locator('.account-card form').getByRole('button',{name:'Sign in',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Choose your next step.'})).toBeVisible();
