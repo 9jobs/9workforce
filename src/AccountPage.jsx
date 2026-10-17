@@ -107,7 +107,7 @@ export default function AccountPage(){
     <section className="account-layout">
     <div className="account-card">
       <Link className="account-brand" to="/" aria-label="9Work Force home"><img src="/assets/9workforce-footer-logo.webp" alt="9Work Force" width="1542" height="117"/></Link>
-      {isPending?<p role="status">Loading your account…</p>:session?<AccountWelcome/>:<>
+      {isPending?<p role="status">Loading your account…</p>:session&&!resetting?<AccountWelcome/>:<>
         {!resetting&&<div className="account-mode-switch" aria-label="Account access"><button type="button" aria-pressed={!login} disabled={busy} onClick={()=>switchMode(false)}>Register</button><button type="button" aria-pressed={login} disabled={busy} onClick={()=>switchMode(true)}>Sign in</button></div>}
         <h1>{resetting?'Set your password.':login?'Welcome back.':'Create your account.'}</h1><p>{resetting?'Choose a password to sign in with your email.':login?'Sign in to find work or request workers.':'One account to find work or hire workers.'}</p>
         {notice&&<p className="account-notice" role="status">{notice}</p>}

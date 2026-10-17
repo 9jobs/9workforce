@@ -143,6 +143,8 @@ test('repeat Google registration never claims a password was saved, and email re
     const token=destination.searchParams.get('token');
     const reuse=await page.request.post('http://localhost:3019/api/auth/reset-password',{headers:{Origin:'http://localhost:3019'},data:{token,newPassword:'Another-test-password-42'}});
     expect(reuse.ok()).toBe(false);
+    await page.goto('/register?token=expired-test-token&mode=signin');
+    await expect(page.getByRole('heading',{name:'Set your password.'})).toBeVisible();
   }finally{db.close();await new Promise(resolve=>server.close(resolve));}
 });
 
