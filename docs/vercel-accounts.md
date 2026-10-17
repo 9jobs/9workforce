@@ -13,6 +13,8 @@ Configure these server-only Vercel Production environment variables:
 - Existing `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_TO`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` for registration emails/submission mirroring.
 - `CRON_SECRET` protects the optional notification-retry endpoint.
 
+Supabase PostgreSQL connections verify TLS using the public Supabase Root 2021 CA bundled in `lib/certs/supabase-prod-ca.crt`, downloaded from the certificate link in the project's Database Settings. The server keeps certificate and hostname verification enabled. Vercel's function configuration explicitly includes this public certificate.
+
 No secret belongs in a `VITE_` variable or Git. `.env`, `.env.production.local`, `data/` and `scratch/` are ignored by Git and deployment uploads.
 
 In the Google OAuth client, retain the localhost origin/callback and add:
@@ -40,3 +42,5 @@ Vercel `waitUntil` keeps the registration delivery task alive after the auth res
 Local SQLite test accounts are not copied to production automatically. Production accounts persist in PostgreSQL across deployments. Google users can sign in again to create their production account; local email/password test accounts need a separate migration if they must be preserved.
 
 Repeatable checks (no real emails): `node --input-type=module -e "await import('./tests/production-auth.test.js');await import('./tests/account-notifications.test.js');await import('./tests/google-oauth.test.js');"` and the isolated auth browser tests. The production-mode OAuth test uses a fixture database; it does not establish live PostgreSQL connectivity or complete a personal Google consent flow.
+
+Once production credentials are set locally, `node scripts/check-production-accounts.mjs` verifies registration, secure-cookie sign-in, session persistence across new database pools, the Google callback URL and sign-out against PostgreSQL. It disables notification sending and removes its own temporary account afterward.

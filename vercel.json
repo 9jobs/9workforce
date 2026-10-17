@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "functions": {"api/**/*.js": {"maxDuration": 60}},
+  "functions": {"api/**/*.js": {"maxDuration": 60,"includeFiles":"lib/certs/*.crt"}},
   "rewrites": [
     {
       "source": "/((?!api/).*)",
