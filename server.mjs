@@ -1,4 +1,6 @@
 import {searchVictoriaLocations} from './lib/victoriaLocations.js';
+import {createAccountAuth} from './lib/accountAuth.js';
+import {devServerIdentity} from './lib/devServerIdentity.js';
 import {validateRoleApplication, validateJoinTeam} from './lib/applicationValidation.js';
 import {registrationAttachments,validateWorkerRegistration,registrationEmailBody} from './lib/workerRegistration.js';
 import {validateContactEnquiry, formatContactEnquiry} from './lib/contactEnquiry.js';
@@ -14,8 +16,9 @@ import {validateWorkerRequest, formatWorkerRequest} from './lib/workerRequest.js
 const root = path.dirname(fileURLToPath(import.meta.url));
 const envPath = path.join(root, '.env');
 const env = loadEnv(envPath);
-const port = Number(process.env.PORT || env.PORT || 3000);
+const port = Number(process.env.PORT || env.PORT || 3001);
 const isDev = process.argv.includes('--dev');
+const accountAuth = await createAccountAuth(root, env);
 
 function loadEnv(file) {
   try {
@@ -165,6 +168,12 @@ async function handleApiRequest(req, res) {
     const input = JSON.parse(await readBody(req));
     const type = input.type === 'employer' ? 'employer' : 'contact';
     const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, ['resumeData', 'coverLetterData'].includes(key) ? 4200000 : 4000)]));
+    const protectedForm=type==='employer'||['workerRegistration','workerRequest','roleApplication','joinTeam'].includes(fields.applicationForm);
+    if(protectedForm){
+      const session=await accountAuth.getSession(req);
+      if(!session)return sendJson(res,401,{error:'Please sign in before submitting this form.',code:'SIGN_IN_REQUIRED'});
+      fields.accountUserId=session.user.id;
+    }
     if (fields.applicationForm === 'joinTeam') { const error=validateJoinTeam(fields); if(error) return sendJson(res,400,{error}); }
     if (!fields.email && type === 'contact') return sendJson(res, 400, {error: 'Email is required'});
     const isWorkerRegistration = fields.applicationForm === 'workerRegistration';
@@ -204,6 +213,10 @@ async function handleApiRequest(req, res) {
 
 const vite = isDev ? await createViteServer({server: {middlewareMode: true, ...(process.env.HMR_PORT ? {hmr: {port: Number(process.env.HMR_PORT)}} : {})}}) : null;
 const server = http.createServer((req, res) => {
+  if(isDev&&req.method==='GET'&&req.url?.split('?')[0]==='/api/dev/status')return sendJson(res,200,devServerIdentity(root));
+  if(req.method==='GET'&&req.url?.split('?')[0]==='/api/account/google')return accountAuth.startGoogle(req,res);
+  if (req.url?.split('?')[0] === '/api/account/config') return sendJson(res, 200, {googleEnabled:accountAuth.googleEnabled});
+  if (req.url?.startsWith('/api/auth/')) return accountAuth.handler(req, res);
   if (req.url?.startsWith('/api/')) return handleApiRequest(req, res);
   if (vite) return vite.middlewares(req, res, () => sendJson(res, 404, {error: 'Not found'}));
   return sendJson(res, 404, {error: 'Not found'});
@@ -211,14 +224,22 @@ const server = http.createServer((req, res) => {
 
 let listenPort = port;
 server.on('error', async error => {
-  if (isDev && error.code === 'EADDRINUSE' && listenPort < Math.min(port + 20, 65535)) {
-    console.log(`Port ${listenPort} is in use, trying ${listenPort + 1}...`);
-    server.listen(++listenPort);
-    return;
-  }
   console.error(`Unable to start server on port ${listenPort}: ${error.message}`);
   await vite?.close();
   process.exitCode = 1;
 });
-server.on('listening', () => console.log(`App and Form API listening on http://localhost:${server.address().port}`));
+server.on('listening', () => {
+  console.log(`App and Form API listening on http://localhost:${server.address().port}`);
+  // Keep Google's registered callback on 3001. Old 3000 bookmarks and routes
+  // always forward to this server instead of starting another auth instance.
+  if(isDev&&server.address().port===3001){
+    const alias=http.createServer((req,res)=>{
+      const target=new URL(req.url,'http://localhost:3001');
+      res.writeHead(307,{Location:`http://localhost:3001${target.pathname}${target.search}`,'Cache-Control':'no-store'});res.end();
+    });
+    alias.on('error',()=>console.error('Localhost alias port 3000 is occupied. Use http://localhost:3001.'));
+    alias.listen(3000,()=>console.log('http://localhost:3000 forwards to http://localhost:3001'));
+    server.on('close',()=>alias.close());
+  }
+});
 server.listen(listenPort);

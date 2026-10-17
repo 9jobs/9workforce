@@ -2,18 +2,18 @@
 #root .worker-benefits { background:#f2f6fd; }
 #root .worker-benefits .benefit-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:28px; margin-top:42px; }
 #root .worker-benefits .benefit-grid article { position:relative; isolation:isolate; padding:26px 22px 48px; border:0; border-left:5px solid #30497d; border-radius:0; background:#fff; box-shadow:0 14px 32px #30497d0b; text-align:left; }
-#root .worker-benefits .benefit-grid article:nth-child(even) { border-left-color:#ff9238; }
+#root .worker-benefits .benefit-grid article:nth-child(even) { border-left-color:#F2842F; }
 #root .worker-benefits .benefit-grid article { aspect-ratio:1; box-sizing:border-box; }
 #root .worker-benefits .benefit-grid article::before { content:''; position:absolute; top:0; right:0; width:62px; height:62px; border-top-right-radius:0; background:linear-gradient(45deg,transparent 49.5%,#edf2fa 50%); z-index:-1; }
 #root .worker-benefits .benefit-grid article:nth-child(even)::before { background:linear-gradient(45deg,transparent 49.5%,#fff0e4 50%); }
-#root .worker-benefits .benefit-grid article::after { content:''; position:absolute; left:22px; bottom:26px; width:44px; height:3px; border-radius:2px; background:#ff9238; }
+#root .worker-benefits .benefit-grid article::after { content:''; position:absolute; left:22px; bottom:26px; width:44px; height:3px; border-radius:2px; background:#F2842F; }
 #root .worker-benefits .worker-benefit-number { position:absolute; top:20px; right:18px; color:#d8e4f6; font-size:32px; font-weight:800; line-height:1.2; }
 #root .worker-benefits article:nth-child(even) .worker-benefit-number { color:#ffe0cc; }
 #root .worker-benefits .benefit-grid article>svg { display:block; width:54px; height:54px; padding:14px; margin:0 0 22px; border-radius:12px; background:#30497d; color:#fff; }
-#root .worker-benefits .benefit-grid article:nth-child(even)>svg { background:#ff9238; }
+#root .worker-benefits .benefit-grid article:nth-child(even)>svg { background:#F2842F; }
 #root .worker-benefits .benefit-grid h3 { margin:0 0 12px; font-size:17px; line-height:1.4; }
 #root .worker-benefits .benefit-grid p { margin:0; font-size:13px; line-height:1.65; }
-#root .worker-benefits .worker-benefit-connector { position:absolute; top:50%; right:-34px; transform:translateY(-50%); display:grid; place-items:center; width:34px; height:34px; border-radius:50%; border-top:1px solid #ff9238; background:#fff; color:#ff9238; z-index:2; box-shadow:0 6px 18px #30497d08; pointer-events:none; }
+#root .worker-benefits .worker-benefit-connector { position:absolute; top:50%; right:-34px; transform:translateY(-50%); display:grid; place-items:center; width:34px; height:34px; border-radius:50%; border-top:1px solid #F2842F; background:#fff; color:#F2842F; z-index:2; box-shadow:0 6px 18px #30497d08; pointer-events:none; }
 #root .worker-benefits .worker-benefit-connector svg { width:16px; height:16px; padding:0; margin:0; background:none; color:inherit; }
 @media(max-width:1280px) and (min-width:781px) {
   #root .worker-benefits .benefit-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }

@@ -4,25 +4,37 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node server.mjs --dev",
+    "dev": "node scripts/dev.mjs",
     "dev:client": "vite --port 3000",
     "build": "vite build",
     "preview": "vite preview --port 3000",
     "start": "node server.mjs",
-    "test:construction": "playwright test"
+    "test:construction": "playwright test",
+    "db:migrate:accounts": "node scripts/migrate-accounts.mjs"
   },
   "dependencies": {
+    "@vercel/functions": "^3.10.1",
     "@vitejs/plugin-react": "latest",
+    "better-auth": "^1.7.10",
+    "d3-geo": "^3.1.1",
     "framer-motion": "^13.4.0",
     "gsap": "^3.15.0",
+    "kysely": "^0.29.6",
     "lucide-react": "latest",
+    "nodemailer": "^10.1.2",
+    "pg": "^8.23.1",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
     "three": "^0.186.1",
-    "vite": "latest"
+    "topojson-client": "^3.1.0",
+    "vite": "latest",
+    "world-atlas": "^2.0.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.0"
+  },
+  "engines": {
+    "node": ">=22.16 <25"
   }
 }

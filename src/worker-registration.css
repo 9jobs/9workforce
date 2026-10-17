@@ -4,7 +4,7 @@
 .worker-registration-heading{border-bottom:1px solid #edf0f5;padding-bottom:15px;margin-bottom:17px}
 .worker-registration-heading>span{font-size:10px;font-weight:700;letter-spacing:2px;color:#8390a4}
 .worker-registration-heading h2{font-size:29px;line-height:1.2;letter-spacing:-.8px;margin:10px 0 12px;color:#30497d!important}
-.worker-registration-heading h2 em{color:#ff8e38!important}
+.worker-registration-heading h2 em{color:#F2842F!important}
 .worker-registration-heading p{font-size:13px;line-height:1.7;color:#748196}
 .worker-registration .worker-form{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;gap:0}
 .worker-registration .worker-form .form-row{gap:18px;margin:0}
@@ -13,9 +13,9 @@
 .worker-registration .worker-form :is(input,select,textarea){min-width:0;min-height:40px;margin-top:6px;border:1px solid #e5eaf2;border-radius:2px;background:#f7f9fc;color:#263b60;padding:9px 11px;font:14px Inter,Arial,sans-serif;box-shadow:none}
 .worker-registration .worker-form textarea{height:64px;min-height:64px;line-height:1.5}
 .worker-registration .worker-form input[type=file]{font-size:12px;max-width:100%}
-.worker-registration .worker-form :is(input,select,textarea):focus-visible{outline:2px solid #ff8e38;outline-offset:3px;background:#fff}
-.worker-registration .worker-form .btn{min-height:48px;margin-top:6px;border-radius:2px;background:linear-gradient(135deg,#ffa64f,#ff8e38);box-shadow:0 5px 16px #ff8e382f}
-.worker-registration-side{display:flex;align-items:center;padding:32px 0;min-width:0;background:linear-gradient(155deg,#ffb05b,#ff8e38);border-radius:0 3px 3px 0}
+.worker-registration .worker-form :is(input,select,textarea):focus-visible{outline:2px solid #F2842F;outline-offset:3px;background:#fff}
+.worker-registration .worker-form .btn{min-height:48px;margin-top:6px;border-radius:2px;background:linear-gradient(135deg,#ffa64f,#F2842F);box-shadow:0 5px 16px #ff8e382f}
+.worker-registration-side{display:flex;align-items:center;padding:32px 0;min-width:0;background:linear-gradient(155deg,#ffb05b,#F2842F);border-radius:0 3px 3px 0}
 .worker-registration-info{position:relative;flex-shrink:0;width:calc(100% + 140px);margin-left:-30px;min-height:400px;aspect-ratio:1;padding:26px 28px;color:#fff;background:#30497D;border:1px solid #ffffff14;border-radius:2px;box-shadow:0 22px 44px #10203938,0 5px 14px #1020391a}
 .worker-registration-info>span{display:block;font-size:9px;font-weight:700;letter-spacing:1.9px;color:#aabbd1}
 .worker-registration-info h3{font-size:25px;line-height:1.25;letter-spacing:-.7px;margin:14px 0 10px;color:#fff!important}

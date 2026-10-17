@@ -1,3 +1,4 @@
+import {redirectIfSignedOut} from './RequireAccount';
 import PremiumDatePicker from './PremiumDatePicker';
 import VictoriaAddressInput from './VictoriaAddressInput';
 import React, {useRef, useState} from 'react';
@@ -20,6 +21,7 @@ export default function RequestWorkers() {
     pending.current=true;setStatus('sending');setError('');
     try {
       const response=await fetch('/api/submissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'contact',fields})});
+      if(redirectIfSignedOut(response))return;
       const result=await response.json();
       if(!response.ok||!result.ok)throw new Error(result.error||'Unable to send your request. Please try again.');
       form.reset();setStatus('success');setStep(1);

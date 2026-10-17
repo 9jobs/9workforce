@@ -1,3 +1,6 @@
+import RequireAccount, {WorkerFormEntry,redirectIfSignedOut} from './RequireAccount';
+import AccountPage from './AccountPage';
+import {accountClient} from './accountClient';
 import VictoriaAddressInput from './VictoriaAddressInput';
 import {isValidEmail} from '../lib/applicationValidation';
 import WorkAreasPage from './WorkAreasPage';
@@ -10,11 +13,13 @@ import {ArrowRight, ArrowUpRight, Phone, PhoneCall, Mail, Menu, X, Check, Shield
 import {motion, MotionConfig, useReducedMotion} from 'framer-motion';
 import MotionObserver from './ScrollReveals';
 import './styles.css';
+import './brand-tokens.css';
 import HomeHero, {WorkSearchResults} from './HomeHero';
 import BlogPage, {BlogArticle} from './BlogPage';
 import HomeSolutions from './HomeSolutions';
 import ConstructionJourney from './ConstructionJourney';
 import RequestWorkers from './RequestWorkers';
+import HirePage from './HirePage';
 import './about-purpose.css';
 import {getWorkRolePath} from './workRolePaths';
 import WorkRoleDetails from './WorkRoleDetails';
@@ -36,6 +41,7 @@ import './contact-studio.css';
 import './worker-registration.css';
 import './worker-benefits.css';
 import './heading-colors.css';
+import './brand-ui.css';
 
 function VisionMission(){
   return <section className="section about-purpose" aria-label="Our vision and mission">
@@ -61,17 +67,18 @@ function VisionMission(){
 const A={home:'https://www.figma.com/api/mcp/asset/cb7b79ef-0fcb-4b13-a85c-f7e26bfd7e5c', labour:'https://www.figma.com/api/mcp/asset/80233759-7b24-40b8-bd59-014a80950ea6', employers:'https://www.figma.com/api/mcp/asset/ddf22ed2-6d19-4b97-8bed-d1ae0057a721', about:'https://www.figma.com/api/mcp/asset/3e1fbf9e-1027-46a9-abcb-93cc7c56a15a'};
 const imgs={logo:'/assets/9workforce-logo.webp', hero:'/assets/hero-clean-helmet-warehouse.webp', logistics:'/assets/work-logistics.webp', labourHero:'/assets/labour-site-team.webp', construction:'/assets/construction-worker.webp', trades:'/assets/traffic-control.webp', civil:'/assets/civil-excavation.webp', warehouse:'/assets/warehouse-pallets.webp', employerHero:'/assets/project-team.webp', employerLogistics:'/assets/materials-worker.webp', industryHero:'/assets/site-sunset.webp', tradeAssistant:'/assets/trade-team.webp', generalLabour:'/assets/general-labour.webp', findWorkHero:'/assets/toolbox-talk.webp', findWorkBanner:'/assets/find-work-materials.webp', aboutHero:'/assets/about-hero.webp', aboutStory:'/assets/about-story.webp', aboutVision:'/assets/about-vision-team.webp', aboutMission:'/assets/about-mission-warehouse.webp'};
 
-const nav=[['Home','/'],['Who We Are','/who-we-are'],['Work Areas','/industries'],['Looking for work','/find-work'],['Looking for Hire','/request-workers'],['Blog','/blog'],['Contact Us','/contact']];
+const nav=[['Home','/'],['Who We Are','/who-we-are'],['Work Areas','/industries'],['Looking for work','/find-work'],['Looking for Hire','/looking-for-hire'],['Blog','/blog'],['Contact Us','/contact']];
 const navIcons=[HomeIcon,Users,MapPin,UserRoundPlus,HardHat,BookOpen,Mail];
 const MotionLink=motion.create(Link);
 const MotionNavLink=motion.create(NavLink);
 function MotionMain({children}){const reduce=useReducedMotion();return <motion.main initial={reduce?false:{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{duration:reduce?0:.42,ease:[.22,1,.36,1]}}>{children}</motion.main>}
 function MotionPage({children}){const reduce=useReducedMotion();const {pathname}=useLocation();const root=useRef(null);return <motion.div className="motion-page" key={pathname} ref={root} initial={reduce?false:{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{duration:reduce?0:.42,ease:[.22,1,.36,1]}}><MotionObserver key={pathname} root={root}/>{children}</motion.div>}
 function Header(){
+  const {data:accountSession}=accountClient.useSession();
   const [open,setOpen]=useState(false);
   const {pathname}=useLocation();
   const isHomeHeader=pathname==='/';
-  const isBlueHeader=(['/labour-hire','/industries','/find-work'].includes(pathname)||pathname.startsWith('/find-work/'));
+  const isBlueHeader=(['/register','/labour-hire','/industries','/find-work','/looking-for-hire'].includes(pathname)||pathname.startsWith('/find-work/'));
   const whiteLogo=isBlueHeader||isHomeHeader;
   const logoSource=whiteLogo?'/assets/9workforce-logo-white-clean.webp':'/assets/9workforce-logo-updated.webp';
   const logoViewBox=whiteLogo?'346 818 1313 359':'546 877 911 250';
@@ -88,9 +95,9 @@ function Header(){
       <nav id="main-navigation" className={`nav-card${open?' open':''}`} aria-label="Main navigation">
         <div className="nav-card-heading"><div className="nav-card-brand"><svg viewBox="346 818 1313 359" role="img" aria-label="9Work Force"><image href="/assets/9workforce-logo-white-clean.webp" width="2000" height="2000"/></svg></div><div className="nav-card-dismiss"><button className="nav-card-close" type="button" aria-label="Close navigation" onClick={()=>setOpen(false)}><X size={18} aria-hidden="true"/></button></div></div>
         {nav.map(([n,p],i)=><MotionNavLink key={p} to={p} end className={({isActive})=>isActive?'active':''} onClick={()=>setOpen(false)} whileHover={{y:-1}} transition={{duration:.18}}><span className="nav-item-icon">{React.createElement(navIcons[i],{size:24,"aria-hidden":true})}</span><span className="nav-item-copy"><span>{n}</span><small className="nav-item-description">{descriptions[i]}</small></span></MotionNavLink>)}
-        <div className="nav-mobile-actions"><a className="nav-call" href="tel:+61422279428" onClick={()=>setOpen(false)}><span className="nav-action-icon"><PhoneCall size={22} aria-hidden="true"/></span><span className="nav-action-copy"><strong>Call Now</strong><small>Get instant support</small></span></a><Link className="nav-register" to="/find-work#register" onClick={()=>setOpen(false)}><span className="nav-action-icon"><ArrowUpRight size={24} aria-hidden="true"/></span><span className="nav-action-copy"><strong>Register for Work</strong><small>Start your journey</small></span></Link></div>
+        <div className="nav-mobile-actions"><a className="nav-call" href="tel:+61422279428" onClick={()=>setOpen(false)}><span className="nav-action-icon"><PhoneCall size={22} aria-hidden="true"/></span><span className="nav-action-copy"><strong>Call Now</strong><small>Get instant support</small></span></a><Link className="nav-register" to="/register" onClick={()=>setOpen(false)}><span className="nav-action-icon"><ArrowUpRight size={24} aria-hidden="true"/></span><span className="nav-action-copy"><strong>{accountSession?'My Account':'Register'}</strong><small>Start your journey</small></span></Link></div>
       </nav>
-      <div className="header-actions"><motion.a className="phone nav-call" href="tel:+61422279428" whileHover={{y:-2}} whileTap={{scale:.98}} transition={{duration:.18}}><PhoneCall size={19} aria-hidden="true"/>Call Now</motion.a><MotionLink className="phone nav-register" to="/find-work#register" whileHover={{y:-2}} whileTap={{scale:.98}} transition={{duration:.18}}><ArrowUpRight size={15} aria-hidden="true"/>Register for Work</MotionLink><motion.button className="menu-btn" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="main-navigation" onClick={()=>setOpen(!open)} whileTap={{scale:.94}} transition={{duration:.15}}>{open?<X/>:<Menu/>}</motion.button></div>
+      <div className="header-actions"><motion.a className="phone nav-call" href="tel:+61422279428" whileHover={{y:-2}} whileTap={{scale:.98}} transition={{duration:.18}}><PhoneCall size={19} aria-hidden="true"/>Call Now</motion.a><MotionLink className="phone nav-register" to="/register" whileHover={{y:-2}} whileTap={{scale:.98}} transition={{duration:.18}}><UserRoundPlus size={17} aria-hidden="true"/>{accountSession?'My Account':'Register'}</MotionLink><motion.button className="menu-btn" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="main-navigation" onClick={()=>setOpen(!open)} whileTap={{scale:.94}} transition={{duration:.15}}>{open?<X/>:<Menu/>}</motion.button></div>
     </div>
   </header>;
 }
@@ -120,12 +127,12 @@ const labourCards=[['General Construction Labourers','Workers supporting materia
 function LabourCards(){return <div className="labour-cards">{labourCards.map((x,i)=><motion.article key={x[0]} initial={{opacity:0,x:i%2?28:-28}} whileInView={{opacity:1,x:0}} viewport={{once:true,amount:.16}} transition={{duration:.58,delay:i*.08,ease:[.22,1,.36,1]}} whileHover={{y:-4}}><div><Badge>0{i+1} / WORK ROLE</Badge><h3><Link className="work-role-title" to={getWorkRolePath(x[0])}>{x[0]}</Link></h3><p>{x[1]}</p><ul><li><Check/> Work-ready workers</li><li><Check/> Safety focused</li></ul><Link to={`${getWorkRolePath(x[0])}/apply`}>Apply for this role <ArrowRight size={12}/></Link></div><motion.img src={x[2]} initial={{opacity:0,scale:1.04}} whileInView={{opacity:1,scale:1}} viewport={{once:true,amount:.2}} transition={{duration:.7,delay:i*.08}}/></motion.article>)}</div>}
 function Workflow(){return <section className="section workflow"><Badge>CONSTRUCTION LABOUR HIRE PROCESS</Badge><h2>Practical workforce coordination</h2><p>We support your workforce requirements through recruitment, credential checks, onboarding and site coordination.</p><div className="workflow-grid">{[['01','Recruitment & screening','We review experience, qualifications, tickets and availability against the roles your site needs.'],['02','Onboarding & verification','We check White Cards, licences, work rights and required safety inductions before work starts.'],['03','Attendance & site coordination','Our team coordinates daily attendance, timesheets and site communication during placements.'],['04','Payroll & safety compliance','We manage wages, superannuation, WorkCover and internal WHS requirements.']].map(x=><article key={x[0]}><b>{x[0]}</b><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</div></section>}
 
-async function submitLeadForm(event, type, setStatus){event.preventDefault();setStatus('sending');const form=event.currentTarget;const fields=Object.fromEntries(new FormData(form).entries());try{const response=await fetch('/api/submissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,fields})});const raw=await response.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{throw new Error('Form server returned an invalid response. Please restart the app with npm run dev.')}if(!response.ok)throw new Error(result.error||'Unable to send');form.reset();setStatus(result.message||'Thanks — your details have been sent.')}catch(error){setStatus(error.message||'Unable to send the form right now. Please try again.')}}
+async function submitLeadForm(event, type, setStatus){event.preventDefault();setStatus('sending');const form=event.currentTarget;const fields=Object.fromEntries(new FormData(form).entries());try{const response=await fetch('/api/submissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,fields})});if(redirectIfSignedOut(response))return;const raw=await response.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{throw new Error('Form server returned an invalid response. Please restart the app with npm run dev.')}if(!response.ok)throw new Error(result.error||'Unable to send');form.reset();setStatus(result.message||'Thanks — your details have been sent.')}catch(error){setStatus(error.message||'Unable to send the form right now. Please try again.')}}
 function FormStatusPopup({message,onClose}){useEffect(()=>{if(!message||message==='sending')return;const timer=window.setTimeout(onClose,5000);return()=>window.clearTimeout(timer)},[message,onClose]);if(!message||message==='sending')return null;const isError=/unable|invalid|required|failed|error/i.test(message);return createPortal(<div className={`form-status-popup${isError?' error':''}`} role="status" aria-live="polite"><span>{message}</span><button type="button" onClick={onClose} aria-label="Close message">×</button></div>,document.body)}
 function RequestForm(){
   const [status,setStatus]=useState('');
   const validateEmail=event=>{const field=event.currentTarget;field.setCustomValidity(field.value&&!isValidEmail(field.value)?'Enter a valid email address, e.g. name@example.com.':'');};
-  return <form className="request-form" aria-label="Worker application" onSubmit={e=>submitLeadForm(e,'employer',setStatus)}>
+  return <RequireAccount redirect={false} target="/find-work#register"><form className="request-form" aria-label="Worker application" onSubmit={e=>submitLeadForm(e,'employer',setStatus)}>
     <input type="hidden" name="applicationForm" value="joinTeam"/>
     <div className="form-head"><b>Join Our Team</b><span>WORKER APPLICATION</span></div><p className="hire-form-intro">Share your details for suitable construction work opportunities.</p>
     <label>What type of work are you interested in? *<select name="workType" required defaultValue="General Construction Labourers"><option>General Construction Labourers</option><option>Skilled Construction Labourers</option><option>Trade Assistants</option><option>Civil Construction Labourers</option><option>Formwork &amp; Concrete Labourers</option><option>Traffic Management Workers</option></select></label>
@@ -134,7 +141,7 @@ function RequestForm(){
     <label>Your email address *<input name="email" type="email" autoComplete="email" maxLength={254} placeholder="you@example.com" required onChange={validateEmail} onBlur={validateEmail}/></label>
     <button className="btn orange" type="submit" disabled={status==='sending'}>{status==='sending'?'SENDING...':'SUBMIT APPLICATION'} <ArrowRight size={16}/></button>
     <p className="hire-form-note"><LockKeyhole size={12} aria-hidden="true"/><span>Learn how we handle your details in our <Link to="/privacy-policy">Privacy Policy</Link>.</span></p><FormStatusPopup message={status} onClose={()=>setStatus('')}/>
-  </form>;
+  </form></RequireAccount>;
 }
 function RequestSection(){return <section className="request-section"><div><Badge>WORKER RECRUITMENT TEAM</Badge><h2>Ready to work on<br/><em>our Victorian projects?</em></h2><p>Register your details, experience and availability today. Our recruitment team reviews applications for suitable opportunities.</p><Btn to="/find-work#register">Apply for Work</Btn></div><div className="contact-card"><Phone/><b>Worker Enquiries</b><span>Recruitment &amp; Operations Support<br/>Victoria, Australia</span></div></section>}
 
@@ -172,7 +179,7 @@ function WorkRolePage({application=false}){
   const workArea=industryItems.find(item=>getWorkRolePath(item[0])===`/find-work/${roleSlug}`);
   if(index===-1&&!workArea)return <Navigate to="/find-work#opportunities" replace/>;
   const role=index>=0?labourCards[index]:[workArea[0].toLowerCase().replace(/\b\w/g,letter=>letter.toUpperCase()),workArea[1],workArea[2]];
-  if(application)return <RoleApplication key={roleSlug} role={role[0]} categories={workAreas.includes(role[0])?workAreas:[...workAreas,role[0]]} preferredLocation={preferredLocation} onClose={()=>navigate(`${getWorkRolePath(role[0])}${locationSearch}`)}/>;
+  if(application)return <RequireAccount><RoleApplication key={roleSlug} role={role[0]} categories={workAreas.includes(role[0])?workAreas:[...workAreas,role[0]]} preferredLocation={preferredLocation} onClose={()=>navigate(`${getWorkRolePath(role[0])}${locationSearch}`)}/></RequireAccount>;
   return <MotionPage key={roleSlug}><Header/><main><WorkRoleDetails role={role} index={index} contentOverride={additionalWorkRoleContent[roleSlug]} preferredLocation={preferredLocation} onApply={()=>navigate(`${getWorkRolePath(role[0])}/apply${locationSearch}`)}/><Footer/></main></MotionPage>;
 }
 function WorkerRegistration(){return <section id="register" className="registration worker-registration"><div className="worker-registration-card"><div className="worker-registration-body"><div className="worker-registration-heading"><span>WORKER REGISTRATION</span><h2>Register for <em>construction work.</em></h2><p>Register your construction experience, White Card, work rights, tickets, availability and preferred locations. Registration does not guarantee employment or placement.</p></div><WorkerForm/></div><aside className="worker-registration-side" aria-label="Registration team contact details"><div className="worker-registration-info"><span>9WORKFORCE · VICTORIA</span><h3>Your next step<br/><em>starts here.</em></h3><p>Speak with our team about registering for construction work.</p><ul><li><Mail size={21} aria-hidden="true"/><a href="mailto:support@9workforce.com.au">support@9workforce.com.au</a></li><li><Phone size={21} aria-hidden="true"/><a href="tel:+61422279428">+61 422 279 428</a></li><li><MapPin size={21} aria-hidden="true"/><span>Melbourne, Victoria,<br/>Australia</span></li></ul><div className="worker-registration-info-foot"><HardHat size={22} aria-hidden="true"/><span>Construction work.<br/>A team ready to help.</span></div></div></aside></div></section>}
@@ -193,13 +200,14 @@ async function submitWorkerRegistration(event, setStatus){
       fields[name+'Data']=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('Unable to read your file. Please choose it again.'));reader.readAsDataURL(file)});
     }
     const response=await fetch('/api/submissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'contact',fields})});
+    if(redirectIfSignedOut(response))return;
     const result=await response.json();
     if(!response.ok||!result.ok)throw new Error(result.error||'Unable to submit your registration. Please try again.');
     form.reset();
     setStatus('Thanks — your registration has been submitted.');
   }catch(error){setStatus(error.message||'Unable to submit your registration. Please try again.')}
 }
-function WorkerForm({role}){const [status,setStatus]=useState('');return <form className={`worker-form${role?' role-candidate-form':''}`} onSubmit={e=>submitWorkerRegistration(e,setStatus)}>
+function WorkerForm({role}){const [status,setStatus]=useState('');return <RequireAccount redirect={false} target="/find-work#register"><form className={`worker-form${role?' role-candidate-form':''}`} onSubmit={e=>submitWorkerRegistration(e,setStatus)}>
   {role && <div className="role-candidate-form-heading"><h3>Candidate Registration Form</h3><p>Please provide accurate information for experience and ticket verification.</p></div>}
   <div className="form-row"><label>Full Name{role && <i aria-hidden="true"> *</i>}<input name="fullName" required placeholder={role?'e.g. John Doe':undefined}/></label><label>Phone Number{role && <i aria-hidden="true"> *</i>}<input name="phone" type="tel" required placeholder={role?'e.g. 0400 000 000':undefined}/></label></div>
   <div className="form-row"><label>Email Address{role && <i aria-hidden="true"> *</i>}<input name="email" required type="email" placeholder={role?'e.g. john@example.com':undefined}/></label><label>Location in Victoria<input name="location" placeholder={role?'e.g. Melbourne CBD, Western Suburbs':undefined}/></label></div>
@@ -209,7 +217,7 @@ function WorkerForm({role}){const [status,setStatus]=useState('');return <form c
   <label>Message / Additional Information<textarea name="additionalInformation" rows="3" placeholder={role?'Share details about your relevant site experience, transport, or specific tickets...':undefined}/></label>
   <button className="btn orange" type="submit" disabled={status==='sending'}>{status==='sending'?'SUBMITTING…':'REGISTER FOR WORK'} <ArrowRight size={14}/></button>
   {role && <p className="role-candidate-form-note">Registration does not guarantee employment or placement.</p>}
-<FormStatusPopup message={status} onClose={()=>setStatus('')}/></form>;}
+<FormStatusPopup message={status} onClose={()=>setStatus('')}/></form></RequireAccount>;}
 
 function Contact(){
   return <>
@@ -252,7 +260,7 @@ function ContactForm(){
     <FormStatusPopup message={status} onClose={()=>setStatus('')}/>
   </form>;
 }
-function App(){return <Routes><Route path="/" element={<MotionPage><Home/></MotionPage>}/><Route path="/work-search" element={<MotionPage><Header/><main><WorkSearchResults roles={labourCards} notes={findWorkRoleNotes}/><Footer/></main></MotionPage>}/><Route path="/labour-hire" element={<MotionPage><Labour/></MotionPage>}/><Route path="/employers" element={<Navigate to="/" replace/>}/><Route path="/who-we-are" element={<MotionPage><WhoWeAre/></MotionPage>}/><Route path="/about" element={<MotionPage><WhoWeAre/></MotionPage>}/><Route path="/industries" element={<MotionPage><IndustriesPage/></MotionPage>}/><Route path="/find-work" element={<MotionPage><FindWork/></MotionPage>}/><Route path="/find-work/:roleSlug" element={<MotionPage><WorkRolePage/></MotionPage>}/><Route path="/find-work/:roleSlug/apply" element={<MotionPage><WorkRolePage application/></MotionPage>}/><Route path="/request-workers" element={<MotionPage><Header/><main><RequestWorkers/></main><Footer/></MotionPage>}/><Route path="/blog" element={<MotionPage><Header/><BlogPage/><Footer/></MotionPage>}/><Route path="/blog/:slug" element={<MotionPage><Header/><BlogArticle/><Footer/></MotionPage>}/><Route path="/contact" element={<MotionPage><Contact/></MotionPage>}/><Route path="/modern-slavery" element={<MotionPage><Header/><main><LegalPolicies initialTab="modern-slavery"/></main><Footer/></MotionPage>}/><Route path="/modern-slavery-statement" element={<MotionPage><Header/><main><LegalPolicies initialTab="modern-slavery"/></main><Footer/></MotionPage>}/><Route path="/privacy-policy" element={<MotionPage><Header/><main><LegalPolicies initialTab="privacy"/></main><Footer/></MotionPage>}/><Route path="/workcover-terms" element={<MotionPage><Header/><main><LegalPolicies initialTab="workcover"/></main><Footer/></MotionPage>}/><Route path="/legal" element={<MotionPage><Header/><main><LegalPolicies/></main><Footer/></MotionPage>}/></Routes>}
+function App(){return <Routes><Route path="/register" element={<MotionPage><Header/><AccountPage/><Footer/></MotionPage>}/><Route path="/" element={<MotionPage><Home/></MotionPage>}/><Route path="/work-search" element={<MotionPage><Header/><main><WorkSearchResults roles={labourCards} notes={findWorkRoleNotes}/><Footer/></main></MotionPage>}/><Route path="/labour-hire" element={<MotionPage><Labour/></MotionPage>}/><Route path="/employers" element={<Navigate to="/" replace/>}/><Route path="/who-we-are" element={<MotionPage><WhoWeAre/></MotionPage>}/><Route path="/about" element={<MotionPage><WhoWeAre/></MotionPage>}/><Route path="/industries" element={<MotionPage><IndustriesPage/></MotionPage>}/><Route path="/find-work" element={<MotionPage><WorkerFormEntry><FindWork/></WorkerFormEntry></MotionPage>}/><Route path="/find-work/:roleSlug" element={<MotionPage><WorkRolePage/></MotionPage>}/><Route path="/find-work/:roleSlug/apply" element={<MotionPage><WorkRolePage application/></MotionPage>}/><Route path="/looking-for-hire" element={<MotionPage><Header/><HirePage/><Footer/></MotionPage>}/><Route path="/request-workers" element={<MotionPage><Header/><main><RequireAccount><RequestWorkers/></RequireAccount></main><Footer/></MotionPage>}/><Route path="/blog" element={<MotionPage><Header/><BlogPage/><Footer/></MotionPage>}/><Route path="/blog/:slug" element={<MotionPage><Header/><BlogArticle/><Footer/></MotionPage>}/><Route path="/contact" element={<MotionPage><Contact/></MotionPage>}/><Route path="/modern-slavery" element={<MotionPage><Header/><main><LegalPolicies initialTab="modern-slavery"/></main><Footer/></MotionPage>}/><Route path="/modern-slavery-statement" element={<MotionPage><Header/><main><LegalPolicies initialTab="modern-slavery"/></main><Footer/></MotionPage>}/><Route path="/privacy-policy" element={<MotionPage><Header/><main><LegalPolicies initialTab="privacy"/></main><Footer/></MotionPage>}/><Route path="/workcover-terms" element={<MotionPage><Header/><main><LegalPolicies initialTab="workcover"/></main><Footer/></MotionPage>}/><Route path="/legal" element={<MotionPage><Header/><main><LegalPolicies/></main><Footer/></MotionPage>}/></Routes>}
 function ScrollToRoute(){
   const {pathname,search,hash}=useLocation();
   useLayoutEffect(()=>{

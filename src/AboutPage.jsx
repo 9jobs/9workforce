@@ -132,10 +132,10 @@ export default function AboutPage({footer}) {
     <section ref={coverageRef} className={`about-service-coverage${coverageVisible ? ' is-visible' : ''}`} aria-labelledby="about-project-title">
       <div className="about-coverage-site-photo" aria-hidden="true"/>
       <svg className="about-coverage-art" viewBox="0 0 1672 941" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="about-coverage-ribbon"><stop stopColor="#235b9a" stopOpacity=".4"/><stop offset="1" stopColor="#174773" stopOpacity=".08"/></linearGradient><linearGradient id="about-coverage-dot-colour"><stop stopColor="#1c5e9d" stopOpacity=".05"/><stop offset=".7" stopColor="#527bac"/><stop offset="1" stopColor="#ff9d35"/></linearGradient><pattern id="about-coverage-dot-pattern" width="21" height="20" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.7" fill="white"/></pattern><mask id="about-coverage-dot-mask"><rect width="1672" height="941" fill="url(#about-coverage-dot-pattern)"/></mask></defs>
+        <defs><linearGradient id="about-coverage-ribbon"><stop stopColor="#30497D" stopOpacity=".4"/><stop offset="1" stopColor="#30497D" stopOpacity=".08"/></linearGradient><linearGradient id="about-coverage-dot-colour"><stop stopColor="#30497D" stopOpacity=".05"/><stop offset=".7" stopColor="#30497D"/><stop offset="1" stopColor="#F2842F"/></linearGradient><pattern id="about-coverage-dot-pattern" width="21" height="20" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.7" fill="white"/></pattern><mask id="about-coverage-dot-mask"><rect width="1672" height="941" fill="url(#about-coverage-dot-pattern)"/></mask></defs>
         <path d="M1073 0H1148L1321 174H1245Z M0 468L310 777H630L795 941H698L536 777H135L0 642Z M1672 737V807L1537 941H1466Z" fill="url(#about-coverage-ribbon)"/>
-        <path d="M1073 0L1245 174 M0 576L78 655 M135 777H537L699 941" fill="none" stroke="#ff9b30" strokeWidth="1.4"/>
-        <path d="M0 718H72L135 777 M537 777H630L795 941 M1672 737L1466 941" fill="none" stroke="#2967a5" strokeWidth=".8"/>
+        <path d="M1073 0L1245 174 M0 576L78 655 M135 777H537L699 941" fill="none" stroke="#F2842F" strokeWidth="1.4"/>
+        <path d="M0 718H72L135 777 M537 777H630L795 941 M1672 737L1466 941" fill="none" stroke="#30497D" strokeWidth=".8"/>
         <g mask="url(#about-coverage-dot-mask)"><rect x="1295" y="44" width="325" height="98" fill="url(#about-coverage-dot-colour)"/><rect x="70" y="666" width="330" height="80" fill="url(#about-coverage-dot-colour)"/><rect x="1160" y="795" width="365" height="84" fill="url(#about-coverage-dot-colour)"/></g>
       </svg>
       <div className="about-service-coverage-inner">

@@ -1,3 +1,4 @@
+import {redirectIfSignedOut} from './RequireAccount';
 import React, {useEffect, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {ArrowLeft, ArrowRight, Check, Home, UploadCloud} from 'lucide-react';
@@ -97,7 +98,8 @@ export default function RoleApplication({role, categories, onClose, preferredLoc
           });
         }
         const response = await fetch('/api/submissions', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({type: 'contact', fields})});
-        const result = await response.json();
+        if(redirectIfSignedOut(response))return;
+      const result = await response.json();
         if (!response.ok || !result.ok) throw new Error(result.error || 'Unable to submit your application. Please try again.');
         setStatus('success');
       } catch (error) { setStatus(error.message || 'Unable to submit your application. Please try again.'); }

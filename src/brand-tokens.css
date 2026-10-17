@@ -1,0 +1,9 @@
+/* Official 9Work Force palette. All colored UI surfaces derive from these. */
+:root{
+  --brand-orange:#F2842F;
+  --brand-blue:#30497D;
+  --brand-orange-rgb:242,132,47;
+  --brand-blue-rgb:48,73,125;
+  --brand-surface:#f5f6f9;
+  --brand-ink:#17263f;
+}

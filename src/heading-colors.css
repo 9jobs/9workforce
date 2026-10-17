@@ -16,9 +16,9 @@
   .request-section,.about-cta,.simple-cta,.quick-path,.industry-image,.employer-tiles,
   .find-work-register-banner,.find-work-footer-cta,
   .worker-registration-info,.worker-request-info,.contact-studio-info,
-  .hire-hero,.hire-photo-card,.hire-next-step,
+  .hire-hero,.hire-photo-card,.hire-next-step,.hire-contact,
   .blog-cta,.blog-side-cta,.application-brand,.application-stage-heading,
-  .application-heading,.application-success,.application-stay-connected
+  .application-heading,.application-success,.application-stay-connected,.account-intro
 ) :is(h1,h2,h3,h4,h5,h6) {
   color:#fff!important;
 }

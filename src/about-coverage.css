@@ -1,43 +1,43 @@
 /* Reference-inspired coverage feature. */
-.about-service-coverage { position:relative; isolation:isolate; overflow:hidden; width:calc(100% - 64px); max-width:1600px; margin:64px auto; padding:clamp(36px,4.7vw,76px) clamp(28px,4vw,64px); color:#fff; background:radial-gradient(ellipse at 0 0,#164878,transparent 58%),#00162d; border:1px solid #244d73; box-shadow:0 22px 55px #102d5126; }
-.about-coverage-site-photo { position:absolute; z-index:-2; left:24%; top:0; width:39%; height:82%; background:linear-gradient(0deg,#00162d 0%,#00162d33 80%),linear-gradient(90deg,#05244099,#06243b55),url('/assets/construction-journey/site-wide.webp') 70% 20%/auto 120%; clip-path:polygon(0 0,55% 0,100% 45%,100% 100%,60% 100%); opacity:.68; }
+.about-service-coverage { position:relative; isolation:isolate; overflow:hidden; width:calc(100% - 64px); max-width:1600px; margin:64px auto; padding:clamp(36px,4.7vw,76px) clamp(28px,4vw,64px); color:#fff; background:radial-gradient(ellipse at 0 0,#30497D,transparent 58%),#30497D; border:1px solid #30497D; box-shadow:0 22px 55px #30497D26; }
+.about-coverage-site-photo { position:absolute; z-index:-2; left:24%; top:0; width:39%; height:82%; background:linear-gradient(0deg,#30497D 0%,#30497D33 80%),linear-gradient(90deg,#30497D99,#30497D55),url('/assets/construction-journey/site-wide.webp') 70% 20%/auto 120%; clip-path:polygon(0 0,55% 0,100% 45%,100% 100%,60% 100%); opacity:.68; }
 .about-coverage-art { position:absolute; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; opacity:.5; }
-.about-service-coverage::after { content:''; position:absolute; z-index:-1; inset:0; pointer-events:none; background:linear-gradient(45deg,transparent 11%,#21598726 11%,#21598726 15%,transparent 15%,transparent 38%,#2970a314 38%,#2970a314 39%,transparent 39%); }
+.about-service-coverage::after { content:''; position:absolute; z-index:-1; inset:0; pointer-events:none; background:linear-gradient(45deg,transparent 11%,#30497D26 11%,#30497D26 15%,transparent 15%,transparent 38%,#30497D14 38%,#30497D14 39%,transparent 39%); }
 .about-service-coverage-inner { display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.12fr); align-items:center; gap:clamp(32px,4vw,64px); }
 .about-service-coverage-copy { position:relative; }
-.about-coverage-eyebrow { display:flex; align-items:center; gap:16px; text-transform:uppercase; font-size:13px; font-weight:700; letter-spacing:2.5px; color:#ff9435; }
-.about-coverage-eyebrow::before { content:''; width:32px; height:2px; background:#ff9435; }
+.about-coverage-eyebrow { display:flex; align-items:center; gap:16px; text-transform:uppercase; font-size:13px; font-weight:700; letter-spacing:2.5px; color:#F2842F; }
+.about-coverage-eyebrow::before { content:''; width:32px; height:2px; background:#F2842F; }
 .about-page-wrap .about-service-coverage h2 { color:#fff!important; font-size:clamp(34px,3.05vw,50px); line-height:1.13; letter-spacing:-1.8px; margin:30px 0 26px; font-weight:800; }
-.about-page-wrap .about-service-coverage h2 em { color:#ff9435!important; font-style:normal; white-space:nowrap; }
+.about-page-wrap .about-service-coverage h2 em { color:#F2842F!important; font-style:normal; white-space:nowrap; }
 .about-page-wrap .about-service-coverage-copy p { color:#d7e3f3; font-size:clamp(15px,1.25vw,20px); line-height:1.65; margin:0; max-width:580px; }
-.about-service-coverage-copy::after { content:''; display:block; width:230px; max-width:70%; height:2px; margin-top:32px; background:linear-gradient(90deg,#ff9435 0 24%,#ff94355c 24%,#387bad22 75%,transparent); box-shadow:-16px 0 16px -6px #ff9435; }
+.about-service-coverage-copy::after { content:''; display:block; width:230px; max-width:70%; height:2px; margin-top:32px; background:linear-gradient(90deg,#F2842F 0 24%,#F2842F5c 24%,#30497D22 75%,transparent); box-shadow:-16px 0 16px -6px #F2842F; }
 
 .about-coverage-dashboard { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:142px auto 142px; gap:18px; }
-.about-coverage-dashboard article { position:relative; isolation:isolate; overflow:hidden; min-width:0; border:1px solid #4c8fb667; border-radius:14px; padding:24px; background:linear-gradient(125deg,#103653f5,#031e34fa); box-shadow:inset 0 1px 0 #c8ebff14,0 10px 24px #00112424; }
-.about-coverage-dashboard article::before { content:''; position:absolute; z-index:-1; inset:0; border-radius:inherit; pointer-events:none; background:radial-gradient(ellipse at 0 0,#4a9ed516,transparent 65%); }
-.about-coverage-dashboard strong { display:block; color:#ff9435; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:-1.5px; font-size:clamp(36px,3.2vw,52px); line-height:1.1; margin-bottom:9px; }
+.about-coverage-dashboard article { position:relative; isolation:isolate; overflow:hidden; min-width:0; border:1px solid #30497D67; border-radius:14px; padding:24px; background:linear-gradient(125deg,#30497Df5,#30497Dfa); box-shadow:inset 0 1px 0 #c8ebff14,0 10px 24px #30497D24; }
+.about-coverage-dashboard article::before { content:''; position:absolute; z-index:-1; inset:0; border-radius:inherit; pointer-events:none; background:radial-gradient(ellipse at 0 0,#30497D16,transparent 65%); }
+.about-coverage-dashboard strong { display:block; color:#F2842F; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-variant-numeric:tabular-nums; letter-spacing:-1.5px; font-size:clamp(36px,3.2vw,52px); line-height:1.1; margin-bottom:9px; }
 .about-coverage-caption { display:block; color:#c5d8e9; text-transform:uppercase; font-size:10px; line-height:1.5; font-weight:700; letter-spacing:1px; }
 .about-coverage-turnaround,.about-coverage-certification,.about-coverage-availability { display:flex; align-items:center; gap:18px; }
-.about-coverage-stat-copy,.about-coverage-certification>div { position:relative; min-width:0; z-index:1; border-left:1px solid #75a9c333; padding-left:18px; }
-.about-coverage-round-icon,.about-coverage-cert-icon { position:relative; flex-shrink:0; display:grid; place-items:center; width:58px; height:58px; border-radius:50%; color:#ff9435; border:1px solid #63b0de80; background:linear-gradient(145deg,#194464,#082a44); box-shadow:inset 0 0 0 5px #061f362e; }
+.about-coverage-stat-copy,.about-coverage-certification>div { position:relative; min-width:0; z-index:1; border-left:1px solid #30497D33; padding-left:18px; }
+.about-coverage-round-icon,.about-coverage-cert-icon { position:relative; flex-shrink:0; display:grid; place-items:center; width:58px; height:58px; border-radius:50%; color:#F2842F; border:1px solid #30497D80; background:linear-gradient(145deg,#30497D,#30497D); box-shadow:inset 0 0 0 5px #30497D2e; }
 .about-coverage-round-icon svg { width:28px; height:28px; }
 .about-coverage-cert-icon { color:#e1edff; }
 .about-coverage-cert-icon>svg:first-child { width:38px; height:42px; }
-.about-coverage-cert-icon>svg:last-child { position:absolute; width:22px; height:22px; left:17px; top:17px; color:#ff9435; background:#0e304b; }
-.about-coverage-dashboard .about-coverage-crew { grid-column:1/-1; padding:26px 24px; background:linear-gradient(120deg,#123954,#061f35); border-left:2px solid #ff9435b3; }
+.about-coverage-cert-icon>svg:last-child { position:absolute; width:22px; height:22px; left:17px; top:17px; color:#F2842F; background:#30497D; }
+.about-coverage-dashboard .about-coverage-crew { grid-column:1/-1; padding:26px 24px; background:linear-gradient(120deg,#30497D,#30497D); border-left:2px solid #F2842Fb3; }
 .about-coverage-crew-heading { display:flex; align-items:center; gap:18px; }
 .about-coverage-crew-heading>div { min-width:0; }
 .about-coverage-crew-heading strong { font-size:clamp(23px,2vw,30px); letter-spacing:-.7px; margin-bottom:6px; }
 .about-coverage-crew-scale { display:grid; grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr); align-items:center; gap:16px; margin-top:22px; }
-.about-coverage-crew-option { display:flex; align-items:center; gap:13px; min-width:0; padding:16px; border:1px solid #6199b92e; border-radius:9px; background:#021a2f66; }
-.about-coverage-crew-option>svg { flex-shrink:0; color:#ff9435; }
+.about-coverage-crew-option { display:flex; align-items:center; gap:13px; min-width:0; padding:16px; border:1px solid #30497D2e; border-radius:9px; background:#30497D66; }
+.about-coverage-crew-option>svg { flex-shrink:0; color:#F2842F; }
 .about-coverage-crew-option>div { min-width:0; }
 .about-coverage-crew-option span { display:block; margin-bottom:5px; color:#8daec7; font-size:9px; text-transform:uppercase; letter-spacing:1.2px; font-weight:600; }
 .about-coverage-crew-option b { display:block; color:#edf4fa; font-size:13px; font-weight:600; line-height:1.4; }
-.about-coverage-crew-arrow { color:#73a7c5; }
+.about-coverage-crew-arrow { color:#30497D; }
 .about-coverage-dashboard .about-coverage-availability { grid-column:1/-1; }
 .about-coverage-availability .about-coverage-round-icon { color:#e6eff7; }
-.about-coverage-availability::after { content:''; position:absolute; z-index:-1; inset:0 0 0 53%; background:linear-gradient(90deg,#041e34 0%,#041e3444 70%),url('/assets/construction-journey/site-wide.webp') 80% 30%/cover; clip-path:polygon(30% 0,100% 0,100% 100%,0 100%); opacity:.62; }
+.about-coverage-availability::after { content:''; position:absolute; z-index:-1; inset:0 0 0 53%; background:linear-gradient(90deg,#30497D 0%,#30497D44 70%),url('/assets/construction-journey/site-wide.webp') 80% 30%/cover; clip-path:polygon(30% 0,100% 0,100% 100%,0 100%); opacity:.62; }
 .about-service-coverage.is-visible .about-service-coverage-copy { animation:about-coverage-reveal .8s cubic-bezier(.22,1,.36,1) both; }
 @keyframes about-coverage-reveal { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
 @media(min-width:1101px) and (max-width:1350px) { .about-coverage-dashboard article { padding:22px 16px; } .about-coverage-round-icon,.about-coverage-cert-icon { width:48px; height:48px; } .about-coverage-cert-icon>svg:first-child { width:34px; height:37px; } .about-coverage-cert-icon>svg:last-child { left:13px; top:13px; width:20px; height:20px; } .about-coverage-turnaround,.about-coverage-certification { gap:12px; } .about-coverage-stat-copy,.about-coverage-certification>div { padding-left:12px; } .about-coverage-crew-option { padding:14px 12px; gap:10px; } .about-coverage-crew-scale { gap:12px; } }

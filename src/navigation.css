@@ -209,6 +209,15 @@
 }
 
 /* The Work Areas header keeps its blue backdrop after the hero is removed. */
+.site-header.shared-nav .header-actions .nav-work { padding-inline:12px; }
+@media(min-width:1401px) and (max-width:1650px) {
+  .site-header.shared-nav .header-inner{grid-template-columns:150px minmax(0,1fr) max-content;column-gap:8px}
+  .site-header.shared-nav .header-logo{width:150px}
+  .site-header.shared-nav nav{gap:0}
+  .site-header.shared-nav nav a{font-size:14px;padding-inline:7px}
+  .site-header.shared-nav .header-actions{gap:7px}
+  #root .site-header.shared-nav .header-actions .nav-call{padding-inline:12px;font-size:12px}
+}
 .site-header.shared-nav:has(+ .work-areas-page) {
   position:relative; top:0; background:#203d6d; padding-block:8px;
 }

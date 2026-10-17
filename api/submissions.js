@@ -4,6 +4,7 @@ import {validateContactEnquiry, formatContactEnquiry} from '../lib/contactEnquir
 import tls from 'node:tls';
 import {randomUUID} from 'node:crypto';
 import {validateWorkerRequest, formatWorkerRequest} from '../lib/workerRequest.js';
+import {productionAccountAuth} from '../lib/productionAccountAuth.js';
 
 const clean = (value, max = 4000) => String(value ?? '').trim().slice(0, max);
 const formatSubmission = data => Object.entries(data).filter(([key]) => !['resumeData', 'coverLetterData'].includes(key)).map(([key, value]) => `${key}: ${clean(value)}`).join('\n');
@@ -105,6 +106,11 @@ export default async function handler(req, res) {
     const input = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
     const type = input.type === 'employer' ? 'employer' : 'contact';
     const fields = Object.fromEntries(Object.entries(input.fields || {}).map(([key, value]) => [key, clean(value, ['resumeData', 'coverLetterData'].includes(key) ? 4200000 : 4000)]));
+    if(type==='employer'||['workerRegistration','workerRequest','roleApplication','joinTeam'].includes(fields.applicationForm)){
+      const session=await (await productionAccountAuth()).getSession(req);
+      if(!session?.user)return sendJson(res,401,{error:'Please sign in to submit this form.'});
+      fields.accountUserId=session.user.id;
+    }
     if (fields.applicationForm === 'joinTeam') { const error=validateJoinTeam(fields); if(error) return sendJson(res,400,{error}); }
     if (!fields.email && type === 'contact') return sendJson(res, 400, {error: 'Email is required'});
     const isWorkerRegistration = fields.applicationForm === 'workerRegistration';

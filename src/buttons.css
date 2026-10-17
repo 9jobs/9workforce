@@ -53,7 +53,7 @@
   cursor:pointer;transition:transform .2s,box-shadow .2s,filter .2s;
 }
 #root :is(.btn.orange,.home-hero-primary,.btn-find-work,.about-btn-primary,.contact-submit-btn,.find-work-register-button,.legal-pill-btn.primary,.site-footer-request > a,.nav-register,.wa-button,.about-quote-call,.worker-request-actions button[type="submit"],.worker-request-success button) {
-  --action-fill:#ff9238;
+  --action-fill:#F2842F;
   --action-edge:#ffa85b;
   --action-shadow:#ff8e3826;
 }
@@ -300,13 +300,13 @@
   --action-glow:transparent;
 }
 #root .homepage-hero .home-employer-panel .home-search-submit {
-  --action-fill:#ff9238;
+  --action-fill:#F2842F;
   --action-edge:#ffa85b;
   --action-shadow:#ff8e3826;
 }
 /* Apply screens are navy; the confirmation card stays white. */
 #root .application-received-card .application-home-link {
-  --action-fill:#ff9238;
+  --action-fill:#F2842F;
   --action-edge:#ffa85b;
   --action-shadow:#ff8e3826;
   --action-glow:transparent;
