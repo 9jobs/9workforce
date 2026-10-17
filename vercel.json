@@ -3,6 +3,10 @@
   "functions": {"api/**/*.js": {"maxDuration": 60,"includeFiles":"lib/certs/*.crt"}},
   "rewrites": [
     {
+      "source": "/api/auth/:path*",
+      "destination": "/api/auth-handler?__auth_path=:path*"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
