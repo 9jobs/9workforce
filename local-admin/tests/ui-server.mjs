@@ -1,0 +1,13 @@
+import {createServer} from 'vite';
+import {mkdtempSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {workspaceApi} from '../api.mjs';
+import {createWebsiteBridge} from '../website-bridge.mjs';
+import {startWebsite} from '../website-server.mjs';
+const directory=mkdtempSync(path.join(tmpdir(),'9workforce-ui-'));
+const bridge=await createWebsiteBridge({authRoot:path.join(directory,'website-auth'),workspaceDirectory:directory});
+await startWebsite({port:3015,bridge,cacheDirectory:path.join(directory,'vite-website-cache')});
+const server=await createServer({configFile:false,root:fileURLToPath(new URL('../',import.meta.url)),cacheDir:path.join(directory,'vite-panel-cache'),plugins:[{name:'test-api',configureServer(vite){vite.middlewares.use(workspaceApi(directory,{websiteBridge:bridge,websiteUrl:'http://127.0.0.1:3015'}));}}],server:{host:'127.0.0.1',port:3003,strictPort:true,fs:{deny:['.env','.env.*','**/*.sqlite*','**/data/**','**/auth-secret']},watch:{ignored:['**/data/**','**/proof/**','**/test-results/**','**/dist/**']}}});
+await server.listen();console.log('Isolated workspace test server: http://127.0.0.1:3003');

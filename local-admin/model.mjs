@@ -1,0 +1,13 @@
+export const statuses={employers:['Active','Inactive'],workers:['Available','Assigned','Unavailable','Inactive'],requests:['New','Reviewing','In Progress','Workers Assigned','Completed','Cancelled'],jobs:['Draft','Open','Closed','Filled'],applications:['Applied','Under Review','Shortlisted','Assigned','Not Selected','Withdrawn'],assignments:['Scheduled','Active','Completed','Cancelled'],users:['Active','Inactive','Suspended']};
+export const fields={
+ employers:['company','name','email','phone','location','abn'],
+ workers:['name','email','phone','location','workType','availability','experience','tickets','coverLetter','additionalInformation'],
+ requests:['employerId','contactName','company','contactEmail','contactPhone','position','quantity','location','startDate','description'],
+ jobs:['requestId','employerId','company','title','workType','location','quantity','rate','employmentType','skills','tickets','experience','startDate','endDate','description','requirements'],
+ applications:['workerId','jobId'],
+ assignments:['workerId','employerId','requestId','jobId','applicationId','location','startDate','endDate'],
+ users:['name','email','role'],
+};
+export const labels={contactName:'Submitted contact name',contactEmail:'Submitted email',contactPhone:'Submitted mobile',accountName:'Website account name',accountEmail:'Website account email',accountCreatedAt:'Website account created',websiteUserId:'Website account ID',source:'Source',sourceId:'Submission ID',updatedAt:'Last submitted',id:'ID',company:'Company',name:'Full name',email:'Email',phone:'Phone',location:'Location',abn:'ABN',workType:'Work type',availability:'Availability',experience:'Experience',tickets:'Tickets / licences',coverLetter:'Cover letter',additionalInformation:'Additional information',employerId:'Employer',workerId:'Worker',requestId:'Employer request',jobId:'Job',applicationId:'Application',position:'Position',quantity:'Workers required',startDate:'Start date',endDate:'End date',description:'Description',title:'Job title',rate:'Pay rate',employmentType:'Employment type',skills:'Required skills',requirements:'Requirements',role:'Role',status:'Status',createdAt:'Created date',lastLogin:'Last login',userId:'Account ID'};
+export const workTypes=['Construction Labourer','Skilled Labourer','Trade Assistant','Civil Labourer','Formwork Labourer','Concrete Labourer','Plant Operator','High Risk Licensed Worker','Construction Site Support','Other'];
+Object.assign(labels,{accountSignInMethod:'Sign-in method',accountEmailVerified:'Verified account email',locallyUpdatedAt:'Last panel update',reference:'Reference',signInMethod:'Sign-in method',emailVerified:'Email verified',lastLogin:'Last sign-in'});

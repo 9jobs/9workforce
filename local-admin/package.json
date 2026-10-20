@@ -1,0 +1,14 @@
+{
+  "name": "9workforce-local-panels",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node dev.mjs",
+    "build": "node ../node_modules/vite/bin/vite.js build",
+    "test": "node --test --experimental-test-isolation=none tests/store.test.mjs tests/website-bridge.test.mjs tests/live-submissions.test.mjs tests/job-posts.test.mjs",
+    "test:browser": "node ../node_modules/@playwright/test/cli.js test --config workflow.config.js",
+    "test:public": "node tests/public-smoke.mjs",
+    "test:worker": "node ../node_modules/@playwright/test/cli.js test --config worker-workflow.config.js",
+    "test:jobs": "node ../node_modules/@playwright/test/cli.js test --config jobs-workflow.config.js"
+  }
+}

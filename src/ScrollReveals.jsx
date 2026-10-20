@@ -11,7 +11,7 @@ export const revealVariants = {
 
 // These elements own their transforms/entrances. Keep their containers intact;
 // ordinary text inside an existing card can have its own additive entrance.
-const protectedScenes = '.account-card,.blog-insights-collage,.construction-journey,.labour-orbit,.about-coordination-scene,.about-service-coverage,.site-footer-bottom,.blog-cta';
+const protectedScenes = '.published-jobs,.account-card,.blog-insights-collage,.construction-journey,.labour-orbit,.about-coordination-scene,.about-service-coverage,.site-footer-bottom,.blog-cta';
 const existingReveals = [
   '.solutions-intro','.solution','.process > div:first-child',
   '.steps article','.labour-cards article','.workflow-grid article',
@@ -20,7 +20,7 @@ const existingReveals = [
   '.timeline-row article','.find-work-heading','.page-hero > img','.worker-hero > img',
 ].join(',');
 const excluded = `${protectedScenes},${existingReveals},.site-header,nav,form,[role="alert"],[role="status"],[role="dialog"],[hidden],[aria-hidden="true"],.application-progress,.application-panel,.application-brand-tagline,.application-received-page`;
-const textExcluded = '.account-card,.construction-journey,.about-coordination-scene,.about-service-coverage,.labour-orbit-display,.labour-orbit-sr,.site-footer-bottom,.blog-cta,.site-header,nav,form,[role="alert"],[role="status"],[role="dialog"],[hidden],[aria-hidden="true"],.application-progress,.application-panel,.application-brand-tagline,.application-received-page';
+const textExcluded = '.published-jobs,.account-card,.construction-journey,.about-coordination-scene,.about-service-coverage,.labour-orbit-display,.labour-orbit-sr,.site-footer-bottom,.blog-cta,.site-header,nav,form,[role="alert"],[role="status"],[role="dialog"],[hidden],[aria-hidden="true"],.application-progress,.application-panel,.application-brand-tagline,.application-received-page';
 const textTargets = 'h1,h2,h3,h4,p,[class*="eyebrow"],[class*="kicker"]';
 const columnLayouts = [
   '.about-brand-hero-inner','.about-company-story-inner','.coverage-content',

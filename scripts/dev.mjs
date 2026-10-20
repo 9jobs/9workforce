@@ -28,7 +28,7 @@ if(response){
   console.error(`Port ${port} is used by another or older server. Stop that process, then run npm run dev again.`);
   process.exit(1);
 }
-const child=spawn(process.execPath,['server.mjs','--dev'],{cwd:root,stdio:'inherit',env:process.env});
+const child=spawn(process.execPath,['local-admin/website-server.mjs'],{cwd:root,stdio:'inherit',env:process.env});
 child.once('error',error=>{console.error(`Unable to start dev server: ${error.message}`);process.exitCode=1;});
 child.once('exit',(code,signal)=>{process.exitCode=code??(signal?130:0);});
 for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>{child.kill(signal);});

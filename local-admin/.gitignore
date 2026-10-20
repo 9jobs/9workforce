@@ -1,0 +1,10 @@
+data/
+dist/
+test-results/
+proof/
+node_modules/
+*.log
+.env
+.env.*
+!.env.example
+*.sqlite*
