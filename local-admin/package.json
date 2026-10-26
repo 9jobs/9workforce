@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "node dev.mjs",
     "build": "node ../node_modules/vite/bin/vite.js build",
-    "test": "node --test --experimental-test-isolation=none tests/store.test.mjs tests/website-bridge.test.mjs tests/live-submissions.test.mjs tests/job-posts.test.mjs",
+    "test": "node --test --experimental-test-isolation=none tests/store.test.mjs tests/website-bridge.test.mjs tests/live-submissions.test.mjs tests/job-posts.test.mjs tests/cloud-workspace.test.mjs tests/settings.test.mjs tests/settings-dynamic.test.mjs tests/submission-notifications.test.mjs",
     "test:browser": "node ../node_modules/@playwright/test/cli.js test --config workflow.config.js",
     "test:public": "node tests/public-smoke.mjs",
     "test:worker": "node ../node_modules/@playwright/test/cli.js test --config worker-workflow.config.js",
-    "test:jobs": "node ../node_modules/@playwright/test/cli.js test --config jobs-workflow.config.js"
+    "test:jobs": "node ../node_modules/@playwright/test/cli.js test --config jobs-workflow.config.js",
+    "test:settings": "node --test --experimental-test-isolation=none tests/settings.test.mjs tests/settings-dynamic.test.mjs",
+    "test:settings:browser": "node ../node_modules/@playwright/test/cli.js test --config settings.config.js",
+    "test:settings:dynamic": "node ../node_modules/@playwright/test/cli.js test --config settings-dynamic.config.js",
+    "test:notifications": "node ../node_modules/@playwright/test/cli.js test --config notifications.config.js"
   }
 }

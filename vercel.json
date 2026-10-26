@@ -4,6 +4,26 @@
   "functions": {"api/**/*.js": {"maxDuration": 60,"includeFiles":"lib/certs/*.crt"}},
   "rewrites": [
     {
+      "source": "/api/workspace/:path*",
+      "destination": "/api/workspace-handler?__workspace_path=:path*"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/workspace/index.html"
+    },
+    {
+      "source": "/workspace",
+      "destination": "/workspace/index.html"
+    },
+    {
+      "source": "/workspace/",
+      "destination": "/workspace/index.html"
+    },
+    {
+      "source": "/workspace/settings/:path*",
+      "destination": "/workspace/index.html"
+    },
+    {
       "source": "/api/auth/:path*",
       "destination": "/api/auth-handler?__auth_path=:path*"
     },

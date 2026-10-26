@@ -2,13 +2,23 @@
 
 ## Repository and deployment scope
 
-The management workspace source, design source, assets and automated tests are versioned in Git. Runtime databases, uploaded documents, credentials, logs, screenshots and generated builds remain local and are ignored. `.vercelignore` excludes this entire directory from CLI deployments. The root Vercel build remains the public website, and Git-triggered Vercel deployments are disabled in `vercel.json`; publish the public website explicitly when needed. Do not deploy this unauthenticated local console.
+The management workspace source, design source, assets and automated tests are versioned in Git. Runtime databases, credentials, logs, screenshots and generated builds are ignored. The production build now includes a separate admin entry at `/admin` and `/workspace`. Only selected source and public assets are uploaded; local data, documents, keys and tests are excluded. Git-triggered Vercel deployments remain disabled; release explicitly.
+
+## Hosted admin
+
+The hosted API disables local registration, unauthenticated employer access and worker/employer previews. Existing password-authenticated administrators sign in with their existing credentials; MFA remains enforced. Cookies are Secure and HttpOnly, and cross-origin requests are rejected. Public website accounts and their credentials remain separate.
+
+`lib/cloudWorkspace.js` retains the existing tested SQLite operations inside an isolated temporary directory for each request. The durable source is an AES-GCM encrypted snapshot in the dedicated PostgreSQL `workforce_admin_state` table, with RLS and no anonymous/authenticated database grants. A row lock serializes operations across instances. The snapshot includes records, uploaded documents, authentication limits, settings and MFA state. Responses and session cookies are released only after the database commit succeeds. Temporary files are removed after each invocation. This design is intended for a small internal team; operations serialize and snapshot size grows with document storage. A larger deployment should move the workspace tables and document storage to dedicated relational/object stores.
+
+Provision once using `node scripts/configure-cloud-workspace.mjs`, then `node scripts/provision-cloud-workspace.mjs`. Configuration sends the generated server encryption key to the existing Vercel Production project using stdin. Keep the ignored `local-admin/data/cloud-key` backed up securely; losing it makes the encrypted hosted state unreadable. Provisioning copies existing local records and MFA encryption material but excludes browser sessions, and never replaces an existing hosted snapshot. No plaintext credential or database is committed or deployed as a static file.
+
+After provisioning, use the hosted panel as the management source. Local and hosted workspace edits are independent; both still sync source website submissions and publish job changes. The local panel remains available for development. Serverless email delivery has no always-running worker; existing explicit email tests/actions work, but unattended settings-email queue processing still requires a scheduled worker.
 
 Job posts now support company names, editable request/employer auto-fill, public listing updates and deletion synchronization. The separate public `api/jobs.js` endpoint exposes whitelisted job fields only; no Admin routes or local databases are deployed. Job publishing writes to the dedicated production job-post table. Website account and registration sync reads their source records without modifying authentication credentials. The older implementation notes below describe the earlier stages of this workspace.
 
 ## Run locally
 
-In the project root, run `npm run dev` to start the existing public website at http://127.0.0.1:3001. In `local-admin`, run `npm run dev` to start the management workspace at http://127.0.0.1:3002. All three local panels open without login, setup or website-session requirements. The public website UI, routes, Request Workers form, navigation, footer and production APIs/configuration are unchanged.
+In the project root, run `npm run dev` to start the existing public website at http://127.0.0.1:3001. In `local-admin`, run `npm run dev` to start the management workspace at http://127.0.0.1:3002. Admin requires local account setup or sign-in. Employer and Worker retain their local console access. The public website UI, routes, Request Workers form, navigation, footer and production APIs/configuration are unchanged.
 
 The root development launcher now uses `local-admin/website-server.mjs`. It serves the existing public React source and the existing Better Auth library with explicitly local SQLite storage, without loading production database, Supabase or SMTP credentials. Existing local website accounts in root `data/accounts.sqlite` are reused. Google configuration is read separately when present; no Google authorization or email was triggered during testing. Production `server.mjs`, serverless APIs and deployment files are unchanged.
 
@@ -37,7 +47,9 @@ The local employer console displays all submitted employers, requests and assign
 
 ## Local panel access
 
-Admin, Employer and Worker panels open directly without sign-in, account setup, password forms or logout controls. Panel login/register/password endpoints are disabled. The website retains its existing authentication before Request Workers submissions. This is an intentionally unauthenticated, loopback-only management console; it is not a public employer portal.
+The Admin workspace now uses actual local admin accounts and server-backed sessions. First-time setup collects a name, email and password, persists a hashed credential, and signs in. Subsequent logins load that administrator's own saved name, email, phone and photo automatically. The header and sidebar account menus offer Manage Profile and Logout. Profile email edits also update the local login email transactionally. Logout revokes the server session; refreshing or calling the preview endpoint does not reopen Admin access. Admin session cookies are HttpOnly, SameSite=Strict, scoped to the workspace API, and expire after 12 hours. Passwords and credential hashes are never sent back to the browser. Existing placeholder console profiles do not count as configured admin accounts.
+
+Employer and Worker retain their existing local-console/preview behavior. Their profiles and operational flows are unchanged. All panels remain loopback-only and must not be deployed. Public website authentication is separate and unchanged. The welcome dashboard is shown only after Admin sign-in (or restoring a valid saved session). Signed-out visits to the root show the login/setup screen. The header always shows the signed-in account menu, with profile edit and logout controls. The theme uses a navy sidebar, orange accents, a locally stored construction banner, and actual workspace counts. Activity charts count current snapshot records by their actual creation dates over the last seven local calendar days, excluding future, invalid and archived rows; they show a flat empty state when no records were added. They do not imply historical changes in operational status, and fixed decorative trend lines/bars have been removed. Totals display a loading placeholder until the first snapshot arrives. Header search and sidebar read-only panels use existing local snapshot data. Messages shows an honest disconnected state; no external messaging service or production write is added.
 
 Worker uses a separate automatic local preview profile. Existing job/application/assignment operations remain connected. Employer views exclude private worker documents. Database files and stored credentials are denied as static assets.
 
@@ -173,3 +185,135 @@ The public opportunities section no longer renders the six fixed role cards. It 
 The reported Failed to fetch was reproduced as ECONNREFUSED: the localhost Admin server was not running, so no DELETE reached the backend. It is now started through a hidden detached Windows process with logs in local-admin/data/admin-server-stdout.log and admin-server-stderr.log. The local API client gives a specific connection message; a successful retry clears the old error. Idle PostgreSQL pool errors are handled, and pending job publication/deletion retries every five seconds in the running local server even with the browser closed. Reopen with npm run dev --prefix local-admin after a computer restart.
 
 Checks: 33 data/sync/publisher tests, both job browser scenarios (including forced network failure, retry and website disappearance), both builds, and read-only production listing checks. Automatic approval review rejected creating/deleting a temporary production job, so live data was not mutated for verification. Admin remains excluded from Vercel deployment, backend website files remain unchanged, and no Git push occurred. Production deployment: dpl_uDiQiGzn5o9BHFjvPYc7E21RErhk.
+
+
+## Figma Admin home
+
+The signed-in Admin home follows frame `21:2326` in Figma file `VUFF5gQo8q9Gb9R6l3jKPc`: 260 px navy sidebar, 64 px header, compact welcome strip, three workspace cards, four KPI cards, workforce activity/recent activity, and three secondary analytics cards. Static SVG icons and the hero watermark are downloaded into `public/assets/figma-home/`; temporary Figma URLs are not used at runtime. The earlier construction-photo banner is no longer part of this home screen.
+
+The existing local login, profile editing, logout, data fetching and operational routes are retained. Chart range controls use current records and actual creation dates (7/30/90 days); this is not a historical status audit. Workforce distribution uses registered work types. Compliance verification is shown as unavailable until a verified source exists, rather than presenting the design's sample percentages as actual audit results. Employer and Worker workspace screens and public website sources are not redesigned.
+
+Validation: isolated browser checks cover the Figma-size desktop frame, mobile navigation, exact intrinsic SVG geometry and successful loading of every rendered design asset, live-data counts, chart ranges, profile persistence and logout.
+
+## Integrated Settings system
+
+Settings now expands within all four existing sidebars and opens dedicated pages. Existing operational menu items and routes are preserved. All work runs in the local panel; no website deployment is part of this change.
+
+### Routes and behavior
+
+| Workspace | Routes (relative to the prefix) | Prefix |
+| --- | --- | --- |
+| Home | `profile`, `security`, `notifications`, `preferences`, `privacy` | `/settings/` |
+| Admin | `account`, `platform`, `roles`, `approvals`, `notifications`, `audit-logs`, `security` | `/admin/settings/` |
+| Employer | `account`, `company`, `hiring`, `assignments`, `notifications`, `privacy` | `/employer/settings/` |
+| Worker | `account`, `jobs`, `availability`, `notifications`, `documents`, `privacy` | `/worker/settings/` |
+
+Base Settings URLs open the first section. Invalid subroutes show a recovery page. Expanded state follows active routes; refresh, history navigation and mobile navigation are supported. Editable forms provide dirty-state save/reset controls, errors that preserve edits, and confirmation before leaving unsaved work.
+
+### Shared and role-specific data
+
+- Home and Admin use the same administrator profile, credentials and preference record. Updating either profile updates the same user. The existing compact profile modal also uses the shared server validation.
+- Each account has one `workspace_preferences` row, keyed by server-resolved user ID. Notification and application preferences are shared account values; worker job/availability/document groups and employer company/hiring/assignment groups are role-specific within that same row.
+- Platform configuration uses the reserved `__platform` owner. Only an authenticated administrator can write it. There is no super-admin tier in the existing model; no new role escalation or permission-grant API was added.
+- Names, Australian phone numbers and validated PNG/JPEG/WebP uploads update the existing user record. Email changes for credentialed accounts require the current password. The local provider has no email-verification delivery workflow.
+- Password changes reuse the existing scrypt credentials, revoke previous sessions, then establish a replacement session for the requesting browser. Session lists show actual expiry and current-session status, without inventing device/IP metadata. Revoke-other-sessions requires the password.
+- Time zone and date format affect local Home clocks, recent activity dates, settings/audit dates and operational record date rendering. Platform display name changes sidebar branding and Home welcome text. Support email is used by Home Help & Support. English (Australia) and the existing light theme are the supported presentation modes.
+- In-app notification preferences filter `/settings/feed`. Critical account security events remain included. Document reminders use only the requesting worker's linked documents with an explicit expiry date. They do not invent White Card expiry dates or send background/email messages.
+- Worker job preferences filter the matching-open-jobs panel. Availability status updates the existing linked worker record using existing validation, transactionally with preferences. Days, shifts and radius are stored preferences, not automatic scheduling or geolocation.
+- Exports are real JSON downloads of the requesting account's profile, preferences and linked records. Passwords, session tokens and document binary content are excluded. Admin exports also remain own-account exports rather than unrestricted database dumps.
+- Deactivation submissions create actual `Pending` account requests. They do not delete or deactivate accounts. Admin Audit Logs displays pending requests for review; existing User Accounts status controls remain the mechanism for supported account changes.
+
+### Persistence / migration
+
+Startup idempotently creates two SQLite tables in the existing `local-admin/data/workspace.sqlite` database:
+
+- `workspace_preferences(owner_id, data, updated_at)`
+- `workspace_audit(id, actor_id, actor_name, action, target, status, details, created_at)`, with time and actor indexes.
+
+Deactivation requests reuse the existing JSON `records` table with kind `accountRequests`. No production database migration or destructive migration is required. Existing records and credentials are retained. Nested store operations use SQLite savepoints so availability changes and preference writes remain atomic.
+
+Audit history begins when this feature is installed: profile/settings changes, successful sign-ins, password/session changes, own-data exports, deactivation requests, and subsequent workforce/document mutations. No old events are fabricated. Audit responses exclude passwords, credential hashes and session tokens.
+
+### API
+
+All paths below are under `/api/workspace/`. Settings endpoints require a valid role-matched session, use the existing localhost/origin checks, and never accept a client-supplied owner ID.
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| GET | `settings` | Own profile, preferences, platform defaults, capabilities and owned-record options |
+| PATCH | `settings/preferences/:group` | Whitelisted, validated role-compatible settings |
+| PATCH | `settings/profile` | Shared profile update; reauthenticate login-email changes |
+| POST | `settings/password` | Verify current password and rotate credentials/sessions |
+| GET | `settings/sessions` | Own active sessions, without tokens |
+| POST | `settings/sessions/revoke-others` | Password-confirmed revocation |
+| POST | `settings/export` | Password/confirmation-checked own-data export |
+| POST | `settings/deactivation` | Confirmation-checked pending request |
+| GET | `settings/audit` | Admin-only filtered, paginated actual audit history |
+| GET | `settings/feed` | Own notification feed with saved preferences |
+
+The existing `PATCH profile` endpoint uses the same profile validation and now requires a role-matched session. The Employer console obtains an explicit scoped local session through the existing session/preview flow instead of letting Settings write anonymously.
+
+### Current capability boundaries
+
+The current Employer workspace is a **shared local operator console**, and Worker can open a **local preview identity**. These are not production tenant-authenticated portals. Their operational access to imported website records is deliberately preserved. Settings scopes new preferences, options, feeds and exports to the actual local session identity and does not treat an arbitrary displayed company/worker as the signed-in account.
+
+- Company/hiring/assignment defaults are disabled in the shared Employer console because it has no authenticated company ownership link. The backend validates role and linked ownership for those groups; it will not copy another company's contacts or sites into the options. Connecting website identity and using those defaults in the website's request/job forms requires a separate integration.
+- Website passwords, Google login, verification and production account settings remain with the website's existing authentication provider. Local preview profiles cannot change website credentials.
+- Password-authenticated local accounts support authenticator TOTP, single-use recovery codes, configurable 1/4/12-hour sessions and session revocation. Preview identities have no password login to enrol. Editable role-permission grants, email templates and scheduled assignment reminders are still outside the existing provider.
+- Profile/contact visibility applies to the authenticated local workspace directory. It does not publish profiles to the public website. Deactivation requests can be withdrawn or reviewed by an administrator; approval disables the local account and its sessions, with protection for the last active administrator.
+- Notification preferences filter the live in-app feed and, for password-authenticated accounts that explicitly opt in, SMTP email. The feed refreshes every 10 seconds, supports persistent read/unread state and keeps security events enabled. Email uses the existing server SMTP configuration, processes new events every 30 seconds and records accepted/retrying/failed delivery states. No external push provider is configured. Worker document reminders require owned documents with recorded expiry dates; Documents & Tickets remains the upload source.
+- This integration does not claim that the pre-existing shared management consoles are production multi-tenant access boundaries.
+
+### Files
+
+New implementation: `settings-model.mjs`, `settings-service.mjs`, `settings-security.mjs`, `settings-delivery.mjs`, `settings-activity.mjs`, `src/SettingsNavigation.jsx`, `src/SettingsPage.jsx`, `src/SettingsInteractions.jsx`, `src/settings.css`.
+
+Integrated existing files: `api.mjs`, `store.mjs`, `src/Operations.jsx`, `src/Sidebar.jsx`, `src/AdminHomeSidebar.jsx`, `src/WorkspaceWelcome.jsx`, `src/ProfileManager.jsx`, `package.json`.
+
+Tests/config: `settings.config.js`, `settings-dynamic.config.js`, `tests/settings.test.mjs`, `tests/settings-dynamic.test.mjs`, `tests/settings.spec.js`, `tests/settings-dynamic.spec.js`; profile regression checks in `tests/profile.spec.js`.
+
+### Verification and manual checks
+
+Commands:
+
+- `npm test --prefix local-admin` — existing store/sync/job tests plus Settings security/persistence tests.
+- `npm run test:settings:browser --prefix local-admin` — all four Settings dropdowns and account flows, using a disposable database and server on port 3003.
+- From `local-admin`: `node ../node_modules/@playwright/test/cli.js test --config profile.config.js` — existing profile/dashboard regression checks.
+- `npm run build --prefix local-admin` — production bundle check. This JavaScript project has no configured lint or typecheck script.
+
+Manual verification on `http://127.0.0.1:3002`:
+
+1. Sign in as the existing Admin; expand Home Settings, update My Profile, reload and confirm it matches Admin / Settings / My Account.
+2. Change App Preferences, save, and check Home's clock. Try navigating with unsaved edits, then choose to keep or discard them.
+3. In Security & Login, review sessions; change a password only if intended, then verify a fresh login with the new password.
+4. In Admin Settings, save a platform display name/support email, inspect the read-only role/approval rules, filter Audit Logs and review recorded changes.
+5. In Employer Settings, confirm company-specific fields explain the missing ownership link, notification choices persist, and Account Details remains the existing operational page.
+6. In Worker Settings, save trades/work preferences, review matching jobs, update availability, and choose document reminder windows. Check the in-app feed.
+7. In Privacy, confirm an own-data export and inspect the downloaded JSON. Submit a deactivation request only if desired; it appears as pending in Admin audit review.
+8. At a narrow/mobile viewport, open the sidebar and navigate every Settings subsection. Inputs stack, tables scroll within their cards, and the page has no horizontal overflow.
+
+
+### Dynamic Settings follow-up (24 October 2026)
+
+All five Home Settings pages now use persistent local API state:
+
+- My Profile edits/photo changes use the shared signed-in identity; email changes require the current password. Reset restores the last saved values.
+- Security supports actual authenticator enrolment and login challenges, eight single-use recovery codes, device/session activity, individual/other-session revocation and a saved session-duration policy. Enabling/disabling 2FA ends other sessions. Password changes invalidate previous sessions and outstanding login challenges. Expired sessions are never extended by a preference change.
+- Notifications include accessible switches, a polling feed, persistent read/unread controls and optional SMTP delivery to the saved account address. Email is off by default; enabling it starts from new events rather than mailing old history. Connection checks send no message; the explicit Send test email action does. Accepted means SMTP acceptance, not confirmed inbox delivery. Failures retry up to five times and remain visible.
+- App Preferences apply language locale (English AU/UK/US), IANA time zone, date/time format and comfortable/compact layout. Saving updates the local interface and Home clock; changes persist after reload and login.
+- Privacy choices actually filter the shared directory API. Contact sharing is separate from profile visibility. Own-data export excludes credentials, MFA secrets, recovery codes and session tokens. Deactivation requests persist, can be withdrawn, and can be approved/rejected in Admin Settings / Audit Logs.
+
+MFA secrets use AES-256-GCM. The random local key is stored in `data/settings-key`; keep it with private database backups and out of source control. Vite denies the complete data directory and private key filenames. Losing that key prevents use of existing authenticator secrets. Recovery codes are stored as hashes; login challenges are hashed, short-lived, attempt-limited and consumed once. No real account was enrolled or password changed during automated checks.
+
+SMTP is read server-side from the existing `SMTP_USER`, `SMTP_PASS`, `SMTP_HOST`, `SMTP_PORT` and `SMTP_SECURE` configuration. These values never enter Settings responses or the browser bundle. Test suites inject a mock transport and do not email real recipients. Shared preview/operator identities cannot opt into email because they do not have password-authenticated mail identities.
+
+Validation: 46 backend tests, 6 Settings navigation/account browser tests, 3 dynamic Settings browser tests, 4 profile/dashboard browser regressions, and the local-admin production build passed. Screenshots are available in the ignored `proof/` directory. The implementation is local on `http://127.0.0.1:3002`; no deployment was performed.
+
+
+### Admin submission bell
+
+The existing Home header bell now lists actual worker registration and employer request forms, including the submitted contact name, company (for employers), date/time and unread count. It uses the existing five-second Admin snapshot refresh after website sync. A form keeps one stable notification across repeat syncs and profile/status edits; a new submission by the same person receives a new notification. Worker registration history preserves each submitted name. Reading one item opens the corresponding existing Admin section; Mark all read and per-admin read state persist in SQLite. Recent Activity retains its existing separate behavior.
+
+Only the local Admin implementation changed. The public form UI, submission/validation logic, website ingestion and operational permissions are preserved. New authenticated admin-only routes: `GET /api/workspace/submission-notifications` and `POST /api/workspace/submission-notifications/read`. Returned data excludes email addresses, phone numbers and attachments. Old known form submissions appear in the initial history; deleted records and local preview/manual profiles without a source form are omitted.
+
+Validation: `node --test --experimental-test-isolation=none local-admin/tests/submission-notifications.test.mjs` (4 tests), `npm run test:notifications --prefix local-admin` (isolated website form submission through API to the live Admin bell), profile/dashboard browser regressions, and the local-admin build. No real website test form was submitted. Desktop/mobile proof images are in the ignored `proof/admin-form-notifications-*.png` files.

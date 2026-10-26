@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "dev:client": "vite --port 3000",
-    "build": "vite build",
+    "build": "node scripts/build-all.mjs",
     "preview": "vite preview --port 3000",
     "start": "node server.mjs",
     "test:construction": "playwright test",

@@ -8,6 +8,18 @@ import {publicJobs} from '../public-jobs.mjs';
 import {createLiveJobPublisher} from '../live-job-posts.mjs';
 const admin={role:'admin'};
 function fixture(t){const store=new WorkspaceStore(mkdtempSync(path.join(tmpdir(),'jobs-test-')));t.after(()=>store.db.close());return store;}
+
+test('role sections survive saving, public filtering and live publication, including edits',async t=>{
+ const store=fixture(t),writes=[],publisher=createLiveJobPublisher({env:{},database:{query:async(sql,values)=>writes.push(values),end:async()=>{}}});
+ const job=store.save('jobs',null,{title:'Site Labourer',location:'Melbourne',quantity:'1',status:'Open',aboutRole:'Support site crews.\nWork across Melbourne.',keyResponsibilities:'Move materials.\nKeep the site tidy.'},admin);
+ await publisher.flush(store);
+ for(const visible of [publicJobs(store)[0],JSON.parse(writes.at(-1)[1])]){
+  assert.equal(visible.aboutRole,job.aboutRole);assert.equal(visible.keyResponsibilities,job.keyResponsibilities);
+ }
+ store.save('jobs',job.id,{keyResponsibilities:'Follow site safety procedures.'},admin);await publisher.flush(store);
+ assert.equal(JSON.parse(writes.at(-1)[1]).keyResponsibilities,'Follow site safety procedures.');
+ assert.equal(publicJobs(store)[0].aboutRole,job.aboutRole);
+});
 test('only published jobs expose whitelisted vacancy fields; edits, closing and deletion update publication',async t=>{
  const store=fixture(t),writes=[],database={query:async(sql,values)=>{writes.push(values);},end:async()=>{}},publisher=createLiveJobPublisher({env:{},database});
  const job=store.save('jobs',null,{title:'Site Crew',location:'Melbourne',quantity:'2',description:'Private-safe vacancy'},admin);assert.equal(publicJobs(store).length,0);

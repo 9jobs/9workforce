@@ -3,23 +3,21 @@ import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {devServerIdentity} from '../lib/devServerIdentity.js';
+import {devServerStatus} from './dev-server-status.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 let filePort;
 try{filePort=readFileSync(path.join(root,'.env'),'utf8').match(/^PORT\s*=\s*['"]?(\d+)/m)?.[1];}catch{}
 const port=Number(process.env.PORT||filePort||3001);
 const identity=devServerIdentity(root);
-const url=`http://localhost:${port}`;
-let response;
-try{response=await fetch(`${url}/api/dev/status`,{signal:AbortSignal.timeout(1800),redirect:'manual'});}catch(error){
-  if(error.name==='TimeoutError'){
-    console.error(`Port ${port} is occupied but is not responding. Stop the existing process, then run npm run dev again.`);
-    process.exit(1);
-  }
+const url=`http://127.0.0.1:${port}`;
+let response,status;
+try{({response,status}=await devServerStatus(url));}catch(error){
+  console.error(`Unable to check ${url} after 3 attempts (${error.message}).`);
+  console.error(`If an existing server is stuck, stop its terminal with Ctrl+C, then run npm run dev again.`);
+  process.exit(1);
 }
 if(response){
-  let status;
-  try{status=await response.json();}catch{}
   if(response.ok&&status?.app===identity.app&&status?.workspace===identity.workspace){
     console.log(`9Work Force is already running at ${url}`);
     console.log('Use the existing server. No second server was started.');

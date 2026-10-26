@@ -9,7 +9,7 @@ export async function api(route,method='GET',data){
 }
 
 export function Badge({children}){return <span className={'op-badge '+(/^(Active|Enabled|Available|Open|Assigned|Completed|Complete|Shortlisted|Workers Assigned)$/.test(children)?'positive':/Cancelled|Inactive|Suspended|Not Selected|Unavailable/.test(children)?'negative':'')}>{children}</span>}
-export function Dialog({title,children,onClose,wide=false}){const ref=useRef(null);useEffect(()=>{const previous=document.activeElement;ref.current.showModal();return()=>previous?.focus?.()},[]);return <dialog ref={ref} className={'panel-dialog op-dialog '+(wide?'wide':'')} onCancel={onClose}><div className="dialog-top"><div><small>9WORKFORCE · LOCAL WORKSPACE</small><h2>{title}</h2></div><button type="button" className="dialog-close" aria-label="Close dialog" onClick={onClose}>×</button></div>{children}</dialog>}
+export function Dialog({title,children,onClose,wide=false,className=''}){const ref=useRef(null);useEffect(()=>{const previous=document.activeElement;ref.current.showModal();return()=>previous?.focus?.()},[]);return <dialog ref={ref} className={'panel-dialog op-dialog '+(wide?'wide ':'')+className} onCancel={onClose}><div className="dialog-top"><div><small>9WORKFORCE · LOCAL WORKSPACE</small><h2>{title}</h2></div><button type="button" className="dialog-close" aria-label="Close dialog" onClick={onClose}>×</button></div>{children}</dialog>}
 export function Auth({setup,initialize,onInitialize,onBack,onLogin}){
  const [error,setError]=useState(''),[busy,setBusy]=useState(false),[showPassword,setShowPassword]=useState(false);
  return <section className="op-auth auth-layout" aria-label="Administrator access">

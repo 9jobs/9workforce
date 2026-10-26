@@ -4,6 +4,12 @@ import {ArrowRight,BriefcaseBusiness,MapPin,Wallet,ShieldCheck,ChevronDown} from
 import {formatHourlyJobPay,formatJobDate} from './jobPresentation';
 import './published-jobs.css';
 
+function JobBulletSection({title,value,paragraph=false}){
+ const points=String(value??'').split(/\r?\n/).map(line=>line.trim().replace(/^(?:[•●▪*-]|\d+[.)])\s+/, '').trim()).filter(Boolean);
+ if(!points.length)return null;
+ return <section className="job-opening-requirements"><h4>{title}</h4>{paragraph?<p>{points.join(' ')}</p>:<ul>{points.map((point,index)=><li key={index}>{point}</li>)}</ul>}</section>;
+}
+
 function JobCard({job,index}){
  const [expanded,setExpanded]=useState(false);
  return <article className="job-opening" data-job-reference={job.reference}>
@@ -12,7 +18,7 @@ function JobCard({job,index}){
    <div className="job-opening-actions"><Link className="job-opening-apply" to="/find-work#register">Apply now <ArrowRight size={14} aria-hidden="true"/></Link><button type="button" className="job-opening-view" aria-expanded={expanded} aria-controls={'job-details-'+job.id} onClick={()=>setExpanded(value=>!value)}>{expanded?'Hide details':'Job details'} <ChevronDown size={14} aria-hidden="true"/></button></div>
   </div></div>
   <div className="job-opening-meta"><span><MapPin size={16} aria-hidden="true"/><b>{job.location}</b><small>Project location</small></span><span><BriefcaseBusiness size={16} aria-hidden="true"/><b>{job.employmentType||'Labour-hire role'}</b><small>Work opportunity</small></span><span className="job-opening-pay"><Wallet size={16} aria-hidden="true"/><b>Pay rate</b><small>{formatHourlyJobPay(job.rate)}</small></span><div className="job-opening-tickets"><ShieldCheck size={15} aria-hidden="true"/>{job.tickets||'Relevant experience and site requirements apply.'}</div></div>
-  <div id={'job-details-'+job.id} className="job-opening-expanded" hidden={!expanded}><dl className="job-opening-facts">{[['Work type',job.workType],['Workers required',job.quantity],['Start date',formatJobDate(job.startDate)],['End date',formatJobDate(job.endDate)],['Experience',job.experience]].filter(([,value])=>value).map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></div>
+  <div id={'job-details-'+job.id} className="job-opening-expanded" hidden={!expanded}><dl className="job-opening-facts">{[['Work type',job.workType],['Workers required',job.quantity],['Start date',formatJobDate(job.startDate)],['End date',formatJobDate(job.endDate)],['Experience',job.experience]].filter(([,value])=>value).map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl><JobBulletSection title="About role" value={job.aboutRole} paragraph/><JobBulletSection title="Key responsibilities" value={job.keyResponsibilities}/></div>
  </article>;
 }
 

@@ -12,6 +12,8 @@ export class WorkspaceStore{
    CREATE TABLE IF NOT EXISTS credentials (user_id TEXT PRIMARY KEY, email TEXT UNIQUE NOT NULL, hash TEXT NOT NULL, salt TEXT NOT NULL);
    CREATE TABLE IF NOT EXISTS record_references (kind TEXT NOT NULL, record_id TEXT NOT NULL, number INTEGER NOT NULL, PRIMARY KEY(kind,record_id), UNIQUE(kind,number));
    CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY,user_id TEXT NOT NULL,expires INTEGER NOT NULL);`);
+  const sessionColumns=new Set(this.db.prepare('PRAGMA table_info(sessions)').all().map(column=>column.name));
+  for(const [name,type] of [['created_at','INTEGER'],['last_seen','INTEGER'],['device',"TEXT NOT NULL DEFAULT 'Unknown browser'"]])if(!sessionColumns.has(name))this.db.exec(`ALTER TABLE sessions ADD COLUMN ${name} ${type}`);
   // Backfill readable references once; filtering, sorting and refresh never renumber them.
   for(const {kind,data} of this.db.prepare("SELECT kind,data FROM records WHERE kind IN ('employers','requests','users','workers','jobs','applications','assignments') ORDER BY json_extract(data,'$.createdAt'),id").all()){
    const row=JSON.parse(data);if(!row.reference)this.put(kind,row);
@@ -45,11 +47,18 @@ export class WorkspaceStore{
   }
   this.db.prepare('INSERT INTO records VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data').run(row.id,kind,JSON.stringify(row));return row;
  }
- transaction(fn){this.db.exec('BEGIN IMMEDIATE');try{const r=fn();this.db.exec('COMMIT');return r;}catch(e){this.db.exec('ROLLBACK');throw e;}}
+ transaction(fn){
+  const depth=this.transactionDepth||0,savepoint=`workspace_tx_${depth}`;
+  this.db.exec(depth?`SAVEPOINT ${savepoint}`:'BEGIN IMMEDIATE');this.transactionDepth=depth+1;
+  try{const result=fn();this.db.exec(depth?`RELEASE SAVEPOINT ${savepoint}`:'COMMIT');return result;}
+  catch(error){this.db.exec(depth?`ROLLBACK TO SAVEPOINT ${savepoint}`:'ROLLBACK');if(depth)this.db.exec(`RELEASE SAVEPOINT ${savepoint}`);throw error;}
+  finally{this.transactionDepth=depth;}
+ }
  fail(message,status=400){throw Object.assign(new Error(message),{status});}
- publicUser(user){const {id,reference,name,email,role,accountRoles,status,createdAt,lastLogin,source,websiteUserId,signInMethod,emailVerified}=user;return {id,reference,name,email,role,accountRoles,status,createdAt,lastLogin,source,websiteUserId,signInMethod,emailVerified};}
+ publicUser(user){const {id,reference,name,email,role,accountRoles,status,createdAt,lastLogin,source,websiteUserId,signInMethod,emailVerified,phone,avatar}=user;return {id,reference,name,email,role,accountRoles,status,createdAt,lastLogin,source,websiteUserId,signInMethod,emailVerified,phone,avatar};}
+ hasAdmin(){return Boolean(this.db.prepare("SELECT 1 FROM credentials c JOIN records r ON r.id=c.user_id WHERE r.kind='users' AND json_extract(r.data,'$.role')='admin' LIMIT 1").get());}
  register(body,admin){return this.transaction(()=>{
-  const first=!this.list('users').some(u=>u.role==='admin');
+  const first=!this.hasAdmin();
   const role=first?'admin':body.role;
   if(!['admin','employer','worker'].includes(role)||(!first&&role==='admin'&&admin?.role!=='admin'))this.fail('Only an administrator can create another admin.',403);
   const email=String(body.email||'').trim().toLowerCase(),name=String(body.name||'').trim();
@@ -64,16 +73,19 @@ export class WorkspaceStore{
   }
   return user;
  });}
- login(body){const credential=this.db.prepare('SELECT * FROM credentials WHERE email=?').get(String(body.email||'').trim().toLowerCase());
+ authenticate(body){if(typeof body.password!=='string'||body.password.length>128)this.fail('Email or password is incorrect.',401);const credential=this.db.prepare('SELECT * FROM credentials WHERE email=?').get(String(body.email||'').trim().toLowerCase());
   const computed=scryptSync(String(body.password||''),credential?.salt||'invalid-login-salt',64);
   if(!credential||!timingSafeEqual(computed,Buffer.from(credential.hash,'hex')))this.fail('Email or password is incorrect.',401);
   const user=this.get('users',credential.user_id);if(user.deletedAt||user.status!=='Active')this.fail('Account is not active.',403);
   if(body.role&&body.role!==user.role)this.fail('Use an administrator account to sign in here.',403);
-  user.lastLogin=new Date().toISOString();this.put('users',user);
-  return this.createSession(user);
+  return user;
  }
- createSession(user){const token=randomBytes(32).toString('hex');this.db.prepare('INSERT INTO sessions VALUES(?,?,?)').run(this.digest(token),user.id,Date.now()+12*3600000);return {token,user:this.publicUser(user)};}
- preview(role){
+ login(body){const user=this.authenticate(body);if(this.db.prepare("SELECT name FROM sqlite_master WHERE name='workspace_factors'").get()&&this.db.prepare('SELECT enabled FROM workspace_factors WHERE user_id=?').get(user.id)?.enabled)this.fail('Two-factor verification is required.',401);user.lastLogin=new Date().toISOString();this.put('users',user);return this.createSession(user);
+ }
+ sessionHours(userId){if(!this.db.prepare("SELECT name FROM sqlite_master WHERE name='workspace_preferences'").get())return 12;const row=this.db.prepare('SELECT data FROM workspace_preferences WHERE owner_id=?').get(userId);const hours=Number(row?JSON.parse(row.data).security?.sessionHours||12:12);return [1,4,12].includes(hours)?hours:12;}
+ createSession(user,metadata={}){const token=randomBytes(32).toString('hex'),now=Date.now();this.db.prepare('INSERT INTO sessions(token,user_id,expires,created_at,last_seen,device) VALUES(?,?,?,?,?,?)').run(this.digest(token),user.id,now+this.sessionHours(user.id)*3600000,now,now,String(metadata.userAgent||'Unknown browser').slice(0,200));return {token,user:this.publicUser(user)};}
+
+ preview(role,metadata={}){
   if(!['worker','employer'].includes(role))this.fail('Unknown preview workspace.');
   const user=this.transaction(()=>{
    let user=this.list('users').find(u=>u.role===role&&u.source==='local-preview');
@@ -81,10 +93,10 @@ export class WorkspaceStore{
    const createdAt=new Date().toISOString(),name=role==='worker'?'Local Preview Worker':'Local Preview Employer';
    user={id:randomUUID(),name,email:`preview-${role}@9workforce.local`,role,status:'Active',source:'local-preview',createdAt};this.put('users',user);
    this.put(role==='worker'?'workers':'employers',{id:randomUUID(),userId:user.id,name,email:user.email,...(role==='employer'?{company:'Local Preview Company'}:{}),status:role==='worker'?'Available':'Active',source:'local-preview',createdAt});return user;
-  });return this.createSession(user);
+  });return this.createSession(user,metadata);
  }
  digest(token){return createHash('sha256').update(token).digest('hex');}
- session(token){if(!token)return null;const s=this.db.prepare('SELECT * FROM sessions WHERE token=? AND expires>?').get(this.digest(token),Date.now());if(!s)return null;try{const u=this.get('users',s.user_id);return !u.deletedAt&&u.status==='Active'?this.publicUser(u):null;}catch{return null;}}
+ session(token){if(!token)return null;const s=this.db.prepare('SELECT * FROM sessions WHERE token=? AND expires>?').get(this.digest(token),Date.now());if(!s)return null;try{const u=this.get('users',s.user_id);if(u.deletedAt||u.status!=='Active')return null;this.db.prepare('UPDATE sessions SET last_seen=? WHERE token=?').run(Date.now(),s.token);return this.publicUser(u);}catch{return null;}}
  logout(token){this.db.prepare('DELETE FROM sessions WHERE token=?').run(this.digest(token||''));}
  changePassword(user,body){return this.transaction(()=>{
   const credential=this.db.prepare('SELECT * FROM credentials WHERE user_id=?').get(user.id);
