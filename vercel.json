@@ -24,6 +24,10 @@
       "destination": "/workspace/index.html"
     },
     {
+      "source": "/settings/:path*",
+      "destination": "/workspace/index.html"
+    },
+    {
       "source": "/api/auth/:path*",
       "destination": "/api/auth-handler?__auth_path=:path*"
     },

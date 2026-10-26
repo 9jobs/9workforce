@@ -4,7 +4,9 @@ local-admin/*
 !local-admin/package.json
 !local-admin/index.html
 !local-admin/src/
+!local-admin/src/**
 !local-admin/public/
+!local-admin/public/**
 local-admin/data/
 local-admin/proof/
 local-admin/tests/
