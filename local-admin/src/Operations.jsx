@@ -49,7 +49,7 @@ function App(){
   addEventListener('focus',update);const timer=setInterval(update,5000);
   return()=>{removeEventListener('focus',update);clearInterval(timer)};
  },[user,ready,role]);
- async function openWorkspace(id){if(!discardChanges())return;dirtyRef.current=false;if(id==='admin'&&!user){navigate('/admin');return;}try{await api('preview','POST',{role:id});navigate('/'+id);if(id===role){const result=await api('session');setUser(result.user)}}catch(e){setToast(e.message)}}
+ async function openWorkspace(id){if(!discardChanges())return;dirtyRef.current=false;if(import.meta.env.VITE_HOSTED_WORKSPACE){navigate(id==='admin'?'/admin':id==='employer'?'/admin/employers':'/admin/workers');return;}if(id==='admin'&&!user){navigate('/admin');return;}try{await api('preview','POST',{role:id});navigate('/'+id);if(id===role){const result=await api('session');setUser(result.user)}}catch(e){setToast(e.message)}}
  async function logout(){if(!discardChanges())return;dirtyRef.current=false;try{await api('logout','POST');setUser(null);setData(blanks);setModal(null);setMobile(false);setToast('Logged out.');if(selection||role==='admin')navigate('/admin')}catch(e){setToast(e.message)}}
  function requestOnWebsite(){window.location.assign(websiteUrl+(role==='worker'||section==='Workers'?'/find-work#register':'/request-workers'))}
  function chooseItem(id,title){navigate('/'+id+(title==='Dashboard'?'':'/'+slug(title)))}
